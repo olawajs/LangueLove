@@ -17,11 +17,8 @@ class PriceController extends Controller
 {
     public function showPrices()
     {
-        //10zł;
-        // $suma_zamowienia = 10*100 ; //wartość musi być podana w groszach
-        // $token = PaymentController::getToken($suma_zamowienia,'TestoweZamowienie');
-        // return new RedirectResponse('https://sandbox.przelewy24.pl/trnRequest/'.$token);
-        //
+
+        
         $packet = DiscountPacket::all();
         $language = Language::all();
         $duration2 =  DB::table('lesson_durations')->join('prices', 'lesson_durations.id', '=', 'prices.duration_id')->take(3)->get();

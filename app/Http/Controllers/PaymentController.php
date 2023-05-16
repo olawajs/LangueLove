@@ -21,7 +21,7 @@ class PaymentController extends Controller
    }
 
 
-   
+
 
 
     public function status(){
@@ -29,29 +29,34 @@ class PaymentController extends Controller
     }
 
     public function  transaction(){
-        // dd( '\o/' );
-        $payment = new Payment();
-        // $payment -> order_id = ss; uzupełniamy model
-// 100 to price
-        $this->transfers24->setEmail(Auth::user()->email)->setAmount(100);
-        try{
-            // dd($this->transfers24);
-             $response = $this->transfers24->init();
-             dd($response);
-            if($response->isSuccess())
-            {
+    
+        $suma_zamowienia = 10*100 ; //wartość musi być podana w groszach
+        $token = PaymentController::getToken($suma_zamowienia,'TestoweZamowienie');
+        return new RedirectResponse('https://sandbox.przelewy24.pl/trnRequest/'.$token);
+
+        // // dd( '\o/' );
+        // $payment = new Payment();
+        // // $payment -> order_id = ss; uzupełniamy model
+        //     // 100 to price
+        // $this->transfers24->setEmail(Auth::user()->email)->setAmount(100);
+        // try{
+        //     // dd($this->transfers24);
+        //      $response = $this->transfers24->init();
+        //      dd($response);
+        //     if($response->isSuccess())
+        //     {
                 
-                $payment->session_id = $response->getSessionId();
-                // save registration parameters in payment object
+        //         $payment->session_id = $response->getSessionId();
+        //         // save registration parameters in payment object
                 
-                return redirect($this->transfers24->execute($response->getToken()));
-            }
-            else{
-                dd('tu error itp');
-            }
-        }catch(RequestException $e){
-            return back()->with('warning','Ups... Coś poszło nie tak');
-        }
+        //         return redirect($this->transfers24->execute($response->getToken()));
+        //     }
+        //     else{
+        //         dd('tu error itp');
+        //     }
+        // }catch(RequestException $e){
+        //     return back()->with('warning','Ups... Coś poszło nie tak');
+        // }
       
 
     }
