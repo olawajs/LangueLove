@@ -31,7 +31,7 @@ class PaymentController extends Controller
     public function  transaction(){
     
         $suma_zamowienia = 10*100 ; //wartość musi być podana w groszach
-        $token = PaymentController::getToken($suma_zamowienia,'TestoweZamowienie');
+        $token = $this->getToken($suma_zamowienia,'TestoweZamowienie');
         return new RedirectResponse('https://sandbox.przelewy24.pl/trnRequest/'.$token);
 
         // // dd( '\o/' );
@@ -98,15 +98,50 @@ class PaymentController extends Controller
         $email = 'olawjs@gmail.com';
         $curl = curl_init();
        $name = 'Testowy klient';
+        // curl_setopt_array($curl, array(
+        // CURLOPT_URL => 'https://sandbox.przelewy24.pl/api/v1/transaction/register',
+        // CURLOPT_RETURNTRANSFER => true,
+        // CURLOPT_ENCODING => '',
+        // CURLOPT_MAXREDIRS => 10,
+        // CURLOPT_TIMEOUT => 0,
+        // CURLOPT_FOLLOWLOCATION => true,
+        // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        // CURLOPT_CUSTOMREQUEST => 'POST',
+        // CURLOPT_POSTFIELDS =>'{
+        //     "merchantId": '.$merchant_id.',
+        //     "posId": '.$merchant_id.',
+        //     "sessionId": "'.$session_id.'",
+        //     "amount": '.$kwota.',
+        //     "currency": "PLN",
+        //     "description": "'.$zamowienie.'",
+        //     "email": "'.$email.'",
+        //     "client": "'. $name.'",
+        //     "country": "PL",
+        //     "language": "pl",
+        //     "method": 0,
+        //     "urlReturn": "http://127.0.0.1:8000/getReturn",
+        //     "urlStatus": "http://127.0.0.1:8000/getReturn",
+        //     "timeLimit": 0,
+        //     "channel": 7,
+        //     "waitForResult": true,
+        //     "transferLabel": "Platnosc z LangueLove",
+        //     "sign": "'.$sign.'" 
+        // }',
+        // CURLOPT_HTTPHEADER => array(
+        //     'Authorization: Basic MTcyOTQ3OjQzN2RiYjVkYjJjYjdhZjhjNmQ5YjUxNzY1OTYwMjY0',
+        //     'Content-Type: application/json',
+        // ),
+        // ));
+  
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://sandbox.przelewy24.pl/api/v1/transaction/register',
+        CURLOPT_URL => 'https://sandbox.przelewy24.pl/api/v1/testAccess',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_POSTFIELDS =>'{
             "merchantId": '.$merchant_id.',
             "posId": '.$merchant_id.',
@@ -135,7 +170,7 @@ class PaymentController extends Controller
   
         $response = json_decode(curl_exec($curl));
         curl_close($curl);
-        
+        echo '?';
         dd($response);
         return $response->data->token;
     }
