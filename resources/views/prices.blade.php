@@ -153,7 +153,7 @@
     <div>
       <p class="ButtonsLabel">Jakiego języka chcesz się uczyć?</p>
       <select class="form-select pinkSelect" id="lang" onchange="language(event)">
-        <option selected value="0">Wybierz język</option>
+        <option selected value="0/0/0">Wybierz język</option>
         @foreach($languages as $l)
           <option value="{{$l->price_type}}/{{$l->id}}/języka {{$l->name}}ego">Języka {{$l->name}}ego</option>
         @endforeach
@@ -297,8 +297,8 @@
   letdesc['2,90,0,5']=[849,979,'Za pakiet 5 lekcji 90-minutowych w parze z [LANG]o zapłacisz [CENA] zł.','pakiet 5 lekcji 90-minutowych w parze z języka angielskiego'];
   letdesc['2,90,0,10']=[1649,1899,'Za pakiet 10 lekcji 90-minutowych w parze z[LANG] zapłacisz [CENA] zł.','pakiet 10 lekcji 90-minutowych w parze z języka angielskiego'];
   letdesc['1,90,0,30']=[4799,5399,'Za pakiet 30 lekcji 90-minutowych w parze z [LANG] zapłacisz [CENA] zł.','pakiet 30 lekcji 90-minutowych w parze z języka angielskiego'];
-  letdesc['3,1']=[0,'Sprawdź dostępne kursy grupowe przygotowujące do certyfikatu z [LANG] <a onclick="showGroup([ID])"><b>&nbsptutaj!</b></a>',''];
-  letdesc['3,0']=[0,'Sprawdź dostępne kursy grupowe z [LANG] <a onclick="showGroup([ID])"><b>&nbsptutaj!</b></a>',''];
+  letdesc['3,1']=[0,'Sprawdź dostępne kursy grupowe przygotowujące do certyfikatu z [LANG] <a onclick="showGroup([ID])"><b class="second">&nbsptutaj!</b></a>',''];
+  letdesc['3,0']=[0,'Sprawdź dostępne kursy grupowe z [LANG] <a onclick="showGroup([ID])"><b class="second">&nbsptutaj!</b></a>',''];
 
 
   function kurs(e,id){
@@ -350,16 +350,18 @@
   function language(e){
     WriteDescription();
   }
-  function showGroup(id){
+  function showGroup(idLan){
     let form = document.createElement('form');
       form.setAttribute('method','POST');
       form.setAttribute('action',"{{ route('search') }}");
     let type = document.createElement('input');
       type.setAttribute('name','type[]');
+      type.setAttribute('type','hidden');
       type.value = 3;
     let lang = document.createElement('input');
       lang.setAttribute('name','lang[]');
-      lang.value = id;
+      lang.setAttribute('type','hidden');
+      lang.value = idLan;
     form.appendChild(type);
     form.innerHTML ='@csrf';
     form.appendChild(lang);

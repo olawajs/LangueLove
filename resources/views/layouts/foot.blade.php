@@ -2,14 +2,14 @@
 <footer class="footer">
 <div class="footCE">
     <div>© Langue Love Spółka Cywilna </div>
-    <div>Polityka prywatności</div>
+    <div><a class="footLink" href="{{ asset('files/Polityka prywatności LangueLove.pdf') }}">Polityka prywatności</a></div>
 </div>
 <div class="footLinks">
     <div>
         <ul class="">
             <li class="list-group-item listTitle"><b>Pomoc</b></li>
             <li class="list-group-item">Kontakt</li>
-            <li class="list-group-item">FAQ</li>
+            <li class="list-group-item"><a class="footLink" href="{{ asset('files/FAQ LangueLove.pdf') }}">FAQ</a></li>
         </ul>
     </div>
     <div>
