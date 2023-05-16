@@ -91,14 +91,14 @@
   :root {
     scroll-behavior: smooth;
   }
-}
+}  
 .second{
   color: var(--bs-secondary);
-}
+} 
 .footLink{
   color: white;
   text-decoration: none;
-}
+} 
 .footLink:hover{
   color: white;
   font-weight: bold;
