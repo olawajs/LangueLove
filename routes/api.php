@@ -2,6 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\LanguageController;
+use App\Http\Controllers\Api\LessonTypeController;
+use App\Http\Controllers\Api\PriceTypeController;
+use App\Http\Controllers\Api\PriceController;
+use App\Http\Controllers\Api\LessonDurationController;
+use App\Http\Controllers\Api\DiscountPacketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +23,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::resource('languages', LanguageController::class);
+Route::resource('lesson_types', LessonTypeController::class);
+Route::resource('price_types', PriceTypeController::class);
+Route::resource('prices', PriceController::class);
+Route::resource('lesson_durations', LessonDurationController::class);
+Route::resource('packets', DiscountPacketController::class);
+
+Route::post('count', [App\Http\Controllers\MainController::class, 'count'])->name('count');
+Route::post('validTermins', [App\Http\Controllers\MainController::class, 'validTermins'])->name('validTermins');
