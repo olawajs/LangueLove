@@ -135,13 +135,15 @@ h2{
     </div>
     <div class="row justify-content-center classic">
         <h2>Założycielki</h2>
-                <p style="margin-left: 25px">
+        <div style="padding: 0 40px">  
+             <p>
                 Cześć! Z tej strony <b>Wiktoria i Weronika</b> . Jesteśmy dwiema italianistkami z Krakowa. 
                 Nasza długoletnia przyjaźń i wspólna miłość do języków zaprowadziła nas do założenia LangueLove! 
                 Wspólnie przeszłyśmy przez wszystkie etapy zdobycia dyplomu filologa na Uniwersytecie Jagiellońskim i
                 zwiedziłyśmy razem wiele zakątków Europy. 
                 </p>
     </div>
+        </div>       
     <div class="row justify-content-center classic">
         
         <div class="TwoSide WhiteBack">
