@@ -9,61 +9,28 @@ use GuzzleHttp\Client;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Http;
 use App\Models\Payment;
-use \Devpark\Transfers24\Requests\Transfers24;
+use Illuminate\Support\Facades\Session;
 use Auth;
 
 class PaymentController extends Controller
 {
-    private Transfers24 $transfers24;
-
-   public function __construct(Transfers24 $transfers24){
-        $this->transfers24 = $transfers24;
-   }
-
-
-
-
-
-    public function status(){
-
-    }
 
     public function  transaction(){
     
         $suma_zamowienia = 10*100 ; //wartość musi być podana w groszach
-        $token = $this->getToken($suma_zamowienia,'TestoweZamowienie');
+        $tytul = "płatność za zajęcia";
+        $token = $this->getToken($suma_zamowienia,$tytul);
         return new RedirectResponse('https://sandbox.przelewy24.pl/trnRequest/'.$token);
-
-        // // dd( '\o/' );
-        // $payment = new Payment();
-        // // $payment -> order_id = ss; uzupełniamy model
-        //     // 100 to price
-        // $this->transfers24->setEmail(Auth::user()->email)->setAmount(100);
-        // try{
-        //     // dd($this->transfers24);
-        //      $response = $this->transfers24->init();
-        //      dd($response);
-        //     if($response->isSuccess())
-        //     {
-                
-        //         $payment->session_id = $response->getSessionId();
-        //         // save registration parameters in payment object
-                
-        //         return redirect($this->transfers24->execute($response->getToken()));
-        //     }
-        //     else{
-        //         dd('tu error itp');
-        //     }
-        // }catch(RequestException $e){
-        //     return back()->with('warning','Ups... Coś poszło nie tak');
-        // }
-      
 
     }
     
+    public function  status(){
+        dd('status');
+    }
     
     public function getReturn(){
         //naprawianie
+        dd('return');
         $response = json_decode( $this->getOrderId());
         // dd($response);
         $kwota = $response->data->amount;
@@ -92,13 +59,13 @@ class PaymentController extends Controller
     public static function getToken($kwota,$zamowienie){
         $merchant_id = 207228;
         $crc_code = '53567c4b2d150c3d';
-        $session_id = 'Testowasejsa';
+        $session_id = Session::getId();
         $sign = '{"sessionId":"'.$session_id.'","merchantId":'.$merchant_id.',"amount":'.$kwota.',"currency":"PLN","crc":"'.$crc_code.'"}';
         $sign = hash('sha384', $sign);
-        $email = 'olawjs@gmail.com';
+        $email = Auth::user()->email;
         $curl = curl_init();
-       $name = 'Testowy klient';
-       $basicAuth = base64_encode($merchant_id.':'.'fba1a0238b6ea8982053bbef3915c12b');
+        $name = 'Testowy klient';
+        $basicAuth = base64_encode($merchant_id.':'.'fba1a0238b6ea8982053bbef3915c12b');
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://sandbox.przelewy24.pl/api/v1/transaction/register',
         CURLOPT_RETURNTRANSFER => true,
@@ -120,8 +87,8 @@ class PaymentController extends Controller
             "country": "PL",
             "language": "pl",
             "method": 0,
-            "urlReturn": "http://127.0.0.1:8000/getReturn",
-            "urlStatus": "http://127.0.0.1:8000/getReturn",
+            "urlReturn": "https://languelove.pl/payment/validate",
+            "urlStatus": "https://languelove.pl/payment/status",
             "timeLimit": 0,
             "channel": 7,
             "waitForResult": true,
@@ -138,8 +105,6 @@ class PaymentController extends Controller
   
         $response = json_decode(curl_exec($curl));
         curl_close($curl);
-        echo '?';
-        dd($response);
         return $response->data->token;
     }
     public static function getOrderId(){

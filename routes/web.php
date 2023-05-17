@@ -55,5 +55,6 @@ Route::POST('admin/addLessonDB', [App\Http\Controllers\LessonController::class, 
 
 
 Route::POST('lector/AddSetup', [App\Http\Controllers\CalendarController::class, 'AddSetup'])->name('AddSetup');
-Route::post('/payment/status', [App\Http\Controllers\PaymentController::class, 'status'])->name('payment'); 
+Route::post('/payment/validate', [App\Http\Controllers\PaymentController::class, 'getReturn'])->name('payment'); 
+Route::post('/payment/status', [App\Http\Controllers\PaymentController::class, 'status'])->name('status'); 
 Route::get('/payment/make', [App\Http\Controllers\PaymentController::class, 'transaction'])->name('transaction'); 
