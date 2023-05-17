@@ -98,7 +98,7 @@ class PaymentController extends Controller
         $email = 'olawjs@gmail.com';
         $curl = curl_init();
        $name = 'Testowy klient';
-       $basicAuth = base64_encode($merchant_id.':'.'bc839088e33f425cd818e56eac59d080');
+       $basicAuth = base64_encode($merchant_id.':'.'fba1a0238b6ea8982053bbef3915c12b');
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://sandbox.przelewy24.pl/api/v1/transaction/register',
         CURLOPT_RETURNTRANSFER => true,
