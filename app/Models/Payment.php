@@ -10,11 +10,14 @@ class Payment extends Model
     protected $fillable = [
         'price', 
         'quantity',
-        'user_id',
+        'id_user',
         'description',
         'error_code',
         'error_desc',
         'status',
         'session_id',
+        'id_lesson',
+        'id_language',
+        'invoice'
     ];
 }

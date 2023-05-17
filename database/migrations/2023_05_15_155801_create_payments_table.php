@@ -18,20 +18,21 @@ class CreatePaymentsTable extends Migration
             $table->string('error_desc',2000)->nullable();
             $table->string('session_id',100)->nullable();
             $table->string('description',500);
+            $table->string('invoice',500)->nullable();
             $table->integer('error_code')->nullable();
             $table->integer('status')->default(1);
-            $table->integer('quantity');
+            $table->float('quantity');
             $table->float('price');
 
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
-            $table->unsignedBigInteger('id_lesson');
-            $table->foreign('id_lesson')->references('id')->on('lessons');
-            $table->unsignedBigInteger('id_language');
-            $table->foreign('id_language')->references('id')->on('languages');
+            
+            $table->integer('id_lesson')->nullable();
+            $table->integer('id_language')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
