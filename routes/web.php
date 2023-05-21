@@ -28,7 +28,7 @@ Route::get('/about', function () {
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
 Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
-Route::post('/sendConsultation', [App\Http\Controllers\HomeController::class, 'sendConsultationMail'])->name('sendConsultation'); 
+Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'sendConsultationMail'])->name('sendConsultation'); 
 Route::get('consultation', [App\Http\Controllers\MainController::class, 'showForm'])->name('consultation'); 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

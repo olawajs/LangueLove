@@ -27,6 +27,22 @@ class MainController extends Controller
             'languages' => $language
         ]);
     }
+    
+    public function sendConsultationMail(Request $request)
+    {
+        try {
+           $mailData=[
+            'name' => $request->name,
+            'email' => $request->email,
+            'language_id' => $request->language_id,
+            'message' => $request->message
+           ]; 
+           Mail::to('kontakt@languelove.pl')->send(new FreeConsultation($mailData));
+           return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+        }
+    }
     public function home()
     {
         $langs = Language::where('active',1)->get();
