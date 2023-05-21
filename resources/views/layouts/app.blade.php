@@ -60,6 +60,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('about') }}">O nas</a>
                             </li>
+                            <li class="nav-item consultation">
+                                <a class="nav-link" style="color: var(--bs-primary);" href="{{ route('consultation') }}">Darmowa konsultacja</a>
+                            </li>
                             <!-- Authentication Links -->
                             @guest
                                 @if (Route::has('login'))

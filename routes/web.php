@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/about', function () {
     return view('aboutUs');
 })->name('about');
+
+
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
 Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
@@ -58,3 +61,11 @@ Route::POST('lector/AddSetup', [App\Http\Controllers\CalendarController::class, 
 Route::get('/payment/validate', [App\Http\Controllers\PaymentController::class, 'getReturn'])->name('payment'); 
 Route::post('/payment/status', [App\Http\Controllers\PaymentController::class, 'status'])->name('status'); 
 Route::post('/payment/make', [App\Http\Controllers\PaymentController::class, 'transaction'])->name('transaction'); 
+Route::post('/sendConsultation', [App\Http\Controllers\HomeController::class, 'sendConsultationMail'])->name('sendConsultation'); 
+Route::get('/consultation', [App\Http\Controllers\HomeController::class, 'showForm'])->name('consultation'); 
+
+//dla maili
+Route::get('/email', function () {
+    Mail::to('olawjs@gmail.com')->send(new WelcomeMail());
+    return new WelcomeMail();
+});

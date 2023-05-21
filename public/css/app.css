@@ -10848,13 +10848,23 @@ textarea.form-control-lg {
 }
 .classic{
   background-color: #f0ede9;
-  border-radius: 0px !important;
+  /* border-radius: 0px !important; */
   border: none;
   display: flex;
   min-height: 200px;
   align-items: center;
   gap:30px;
   padding: 30px 0;
+}
+.classic2{
+  background-color: #f0ede9;
+  /* border-radius: 0px !important; */
+  border: none;
+  min-height: 200px;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+  padding: 50px;
 }
 .classicWhite{
   /* background-color: #f0ede9; */
@@ -10874,9 +10884,15 @@ option{
   flex-grow: 1;
   max-width: 45%;
 }
-.classicThree{
+.classicTwoFlex{
   flex-grow: 1;
-  max-width: 25%;
+  max-width: 45%;
+  display: flex;
+  flex-flow: column;
+}
+
+.radius{
+  border-radius: 20px;
 }
 .buttonImg{
   height: 50%;
@@ -10893,6 +10909,11 @@ option{
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas: 
     "foto text buttons"
+}
+.consultation{
+  border: 2px solid var(--bs-primary);
+  border-radius: 6px;
+  font-weight: bold;
 }
 .colorButtonMagenta{
   height: 100px;

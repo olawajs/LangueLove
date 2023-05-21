@@ -17,8 +17,7 @@ class PriceController extends Controller
 {
     public function showPrices()
     {
-
-        
+  
         $packet = DiscountPacket::all();
         $language = Language::all();
         $duration2 =  DB::table('lesson_durations')->join('prices', 'lesson_durations.id', '=', 'prices.duration_id')->take(3)->get();
