@@ -11068,6 +11068,7 @@ option{
 .logLabel{
   text-align: center;
   font-size: xx-large;
+  margin-top: 22px;
 }
 .animation{
   width: 100vw;

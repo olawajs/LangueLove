@@ -23,6 +23,9 @@ use App\Mail\WelcomeMail;
 Route::get('/about', function () {
     return view('aboutUs');
 })->name('about');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 
 
