@@ -143,7 +143,7 @@
 <div class="container">
   <div class="row justify-content-center classic">
     <div class="classicTwo">
-      <img src="{{ asset('images/logo512.png') }}" height="100" alt="">
+      <img src="{{ asset('images/logo/logo1 2x.png') }}" height="100" alt="">
     </div>
     <div class="classicTwo">
       <h4><b>Wybierz jak chcesz się uczyć i sprawdź cenę Twojego kursu.</b></h4>
