@@ -20,6 +20,13 @@ use Carbon\Carbon;
 
 class MainController extends Controller
 {
+    public function showForm()
+    {
+        $language = Language::all();
+        return view('consultation',[
+            'languages' => $language
+        ]);
+    }
     public function home()
     {
         $langs = Language::where('active',1)->get();

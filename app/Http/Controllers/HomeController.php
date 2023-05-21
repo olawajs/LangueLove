@@ -29,13 +29,7 @@ class HomeController extends Controller
         return view('home');
     }
    
-    public function showForm()
-    {
-        $language = Language::all();
-        return view('consultation',[
-            'languages' => $language
-        ]);
-    }
+
     public function sendConsultationMail(Request $request)
     {
         try {

@@ -17,7 +17,7 @@
             <li class="list-group-item listTitle"><b>LangueLove</b></li>
             <li class="list-group-item">O nas</li>
             <li class="list-group-item">Oferta dla firm</li>
-            <li class="list-group-item">Bezpłatne konsultacje</li>
+            <li class="list-group-item"><a class="footLink" href="{{ route('consultation') }}">Bezpłatne konsultacje</a></li>
         </ul>
     </div>
     <div>
