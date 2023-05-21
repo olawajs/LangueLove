@@ -10913,7 +10913,7 @@ option{
 .consultation{
   border: 2px solid var(--bs-primary);
   border-radius: 6px;
-  font-weight: bold;
+  font-weight: bold; 
 }
 .colorButtonMagenta{
   height: 100px;
