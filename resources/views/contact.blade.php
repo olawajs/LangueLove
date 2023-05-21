@@ -139,7 +139,7 @@ LABEL.indented-checkbox-text
             mail na adres: kontakt@languelove.pl
           </p>
           <p>
-            Możesz również skontaktować się z nami na <b><a>Facebooku</a></b> lub na <b><a>Instagramie</a></b>. 
+            Możesz również skontaktować się z nami na <b><a href="https://www.facebook.com/LangueLove.szkola">Facebooku</a></b> lub na <b><a href="https://www.instagram.com/languelove">Instagramie</a></b>. 
           
           </p>
           <p><b>Zapisy na zajęcia</b></p>
