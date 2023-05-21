@@ -127,7 +127,7 @@ h2{
                 Nie wiesz który kurs wybrać? Odezwij się do nas! Chętnie pomożemy i już podczas tej luźnej rozmowy zobaczysz, że nadajemy na tych samych falach!
                 <br>
                 </p>
-                <button class="btn btn-primary">NAPISZ DO NAS</button>
+                <button class="btn btn-primary"><a class="footLink" href="{{ route('consultation') }}">NAPISZ DO NAS</a></button>
         </div>
         <div class="TwoSide">
             <img src="{{asset('images/aboutUs/team.gif')}}" width="80%"  alt="">
