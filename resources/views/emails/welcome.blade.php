@@ -1,5 +1,5 @@
 @component('mail::message')
-<img src="http://languelove.pl/{{public_path('images/logo/logo1 2x.png')}}"/>
+
 
 # Witamy w LangueLove!
 
