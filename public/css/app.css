@@ -10911,9 +10911,9 @@ option{
     "foto text buttons"
 }
 .consultation{
-  border: 2px solid var(--bs-primary);
   border-radius: 6px;
-  font-weight: bold; 
+  font-weight: bold;
+  margin-top: 5px;
 }
 .colorButtonMagenta{
   height: 100px;
