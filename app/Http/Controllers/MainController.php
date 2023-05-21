@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Language;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FreeConsultation;
 use App\Models\PriceType;
 use App\Models\LessonDuration;
 use App\Models\LessonType;

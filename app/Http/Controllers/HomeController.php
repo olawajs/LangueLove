@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Language;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\FreeConsultation;
+
 
 class HomeController extends Controller
 {
