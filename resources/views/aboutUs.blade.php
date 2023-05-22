@@ -96,7 +96,7 @@ h2{
                     <br><b>Rozpocznij z nami przygodę i osiągnij swój cel! </b>
                     <br>
                 </p>
-                <button class="btn btn-secondary"><a class="footLink" href="http://127.0.0.1:8000/priceList/search/1/1"></a>ZAPISUJĘ SIĘ!</button>
+                <button class="btn btn-secondary"><a class="footLink" href="http://127.0.0.1:8000/priceList/search/1/1" >ZAPISUJĘ SIĘ!</a></button>
         </div> 
         <div class="TwoSide">
             <img src="{{ asset('images/aboutUs/aoutUs2.jpg') }}"  width="100%" alt="">
