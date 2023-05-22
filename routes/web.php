@@ -42,6 +42,7 @@ Route::get('login/{provider}/callback', [App\Http\Controllers\Auth\LoginControll
 //navbar pages
 Route::get('priceList', [App\Http\Controllers\PriceController::class, 'showPrices'])->name('priceList');
 Route::post('search', [App\Http\Controllers\MainController::class, 'search'])->name('search');
+Route::get('priceList/search/{lang}/{type}', [App\Http\Controllers\MainController::class, 'searchPricelist'])->name('searchPricelist');
 
 Route::GET('lesson/{id}', [App\Http\Controllers\LessonController::class, 'showLesson'])->name('showLesson');
 Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLector'])->name('showLector');

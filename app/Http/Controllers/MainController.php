@@ -152,4 +152,24 @@ class MainController extends Controller
         ]);
     }
 
+    public function searchPricelist(Request $request)
+    {
+        $language = $request->lang;
+        $type = $request->type;
+        $lessons = Lesson::where('language_id',  $language)
+                            ->where('type_id', $type)
+                            ->where('start', '>', Carbon::today())
+                            ->get();
+        $languageT = LanguageLevel::where('language_id',$request->lang)->pluck('lector_id')->toArray();
+        $lectors = Lector::whereIn('id',$languageT)->get();
+        $langs = Language::where('active',1)->get();
+        $types = LessonType::where('active',1)->get();
+        return view('filteredLessons',[
+            'lessons' => $lessons,
+            'lectors' => $lectors,
+            'languages' => $langs,
+            'types' => $types
+        ]);
+    }
+
 }

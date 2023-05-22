@@ -92,7 +92,8 @@ class PaymentController extends Controller
         
         curl_close($curl);
 
-
+        $sign2 = '{"sessionId":"'.$session_id.'","orderId":'.$OrderId.',"amount":'.$kwota.',"currency":"PLN","crc":"'.$crc_code.'"}';
+        $sign2 = hash('sha384', $sign2);
         $curl2 = curl_init();
         curl_setopt_array($curl2, array(
         CURLOPT_URL => $link.'api/v1/transaction/verify',
@@ -110,7 +111,7 @@ class PaymentController extends Controller
             "amount": '.$kwota.',
             "currency": "PLN",
             "orderId": '.$OrderId.',
-            "sign": "'.$sign.'" 
+            "sign": "'.$sign2.'" 
         }',
         CURLOPT_HTTPHEADER => array(
             'Authorization: Basic '.$basicAuth,
@@ -120,8 +121,11 @@ class PaymentController extends Controller
 
         $response2 = json_decode(curl_exec($curl2));
         // curl_close($curl2);
-        echo "response2";
-        dd($response2);
+        if($response->data->status == 'success'){
+            dd('jakiś ekran z podziękowaniem + email');
+        }else{
+            dd('cofka + error');
+        }
     
   
     }

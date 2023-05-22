@@ -258,6 +258,12 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
+
+function searchFor(type)
+  {
+    window.location.href = `https://languelove.pl/priceList/search/${languageI}/${type}`;
+  }
+
   let typeV = 0;
   let certyficateV = 0;
   let timeV = 0;
@@ -268,41 +274,42 @@
   let price = 0;
   let letdesc = [];
   let desc = '';
-  letdesc['1,60,1,1']=[0.1,0.2,'Za pojedynczą indywidualną 60-minutową lekcję z [LANG] przygotowującą do certyfikatu zapłacisz [CENA] zł.','60-minutowa lekcja indywidualna z [LANG] przygotowująca do certyfikatu'];
+  letdesc['1,60,1,1']=['119','139',`Za pojedynczą indywidualną 60-minutową lekcję z [LANG] przygotowującą do certyfikatu zapłacisz [CENA] zł.<br> By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick='searchFor(1)'><b class="second">&nbsptutaj!</b> </a>`,''];
   // letdesc['1,60,1,1']=[119,139,'Za pojedynczą indywidualną 60-minutową lekcję z [LANG] przygotowującą do certyfikatu zapłacisz [CENA] zł.','60-minutowa lekcja indywidualna z [LANG] przygotowująca do certyfikatu'];
   letdesc['1,60,1,5']=[585,685,'Za pakiet 5 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu zapłacisz [CENA] zł.','pakiet 5 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu'];
   letdesc['1,60,1,10']=[1149,1349,'Za pakiet 10 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu zapłacisz [CENA] zł.','pakiet 10 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu'];
   letdesc['1,60,1,30']=[3299,3959,'Za pakiet 30 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu, zapłacisz [CENA] zł.','pakiet 30 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu'];
-  letdesc['1,60,0,1']=[99,109,'Za pojedynczą indywidualną 60-minutową lekcję z [LANG] zapłacisz [CENA] zł.','60-minutowa lekcja indywidualna z [LANG] '];
+  letdesc['1,60,0,1']=[99,109,`Za pojedynczą indywidualną 60-minutową lekcję z [LANG] zapłacisz [CENA] zł.<br> By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick='searchFor(1)'><b class="second">&nbsptutaj!</b> </a>`,'60-minutowa lekcja indywidualna z [LANG] '];
   letdesc['1,60,0,5']=[489,535,'Za pakiet 5 lekcji indywidualnych 60-minutowych z [LANG] zapłacisz [CENA] zł.','pakiet 5 lekcji indywidualnych 60-minutowych z [LANG]'];
   letdesc['1,60,0,10']=[949,1049,'Za pakiet 10 lekcji indywidualnych 60-minutowych z [LANG] zapłacisz [CENA] zł.','pakiet 10 lekcji indywidualnych 60-minutowych z [LANG]'];
   letdesc['1,60,0,30']=[2699,3059,'Za pakiet 30 lekcji indywidualnych 60-minutowych z [LANG] zapłacisz [CENA] zł.','pakiet 30 lekcji indywidualnych 60-minutowych z [LANG]'];
-  letdesc['1,90,1,1']=[175,179,'Za pojedynczą indywidualną 90-minutową lekcję z [LANG] przygotowującą do certyfikatu zapłacisz [CENA] zł.','90-minutowa lekcja indywidualna z [LANG] przygotowująca do certyfikatu'];
+  letdesc['1,90,1,1']=[175,179,  `Za pojedynczą indywidualną 90-minutową lekcję z [LANG] przygotowującą do certyfikatu zapłacisz [CENA] zł. <br>By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick='searchFor(1)'> <b class="second">&nbsptutaj!</b> </a>`,'90-minutowa lekcja indywidualna z [LANG] przygotowująca do certyfikatu'];
   letdesc['1,90,1,5']=[865,885,'Za pakiet 5 lekcji indywidualnych 90-minutowych z [LANG], przygotowujących do certyfikatu zapłacisz [CENA] zł.','pakiet 5 lekcji indywidualnych 90-minutowych z [LANG], przygotowujących do certyfikatu'];
   letdesc['1,90,1,10']=[1699,1749,'Za pakiet 10 lekcji indywidualnych 90-minutowych z [LANG], przygotowujących do certyfikatu zapłacisz [CENA] zł.','pakiet 10 lekcji indywidualnych 90-minutowych z [LANG], przygotowujących do certyfikatu'];
   letdesc['1,90,1,30']=[4949,5159,'Za pakiet 30 lekcji indywidualnych 90-minutowych z [LANG], przygotowujących do certyfikatu zapłacisz [CENA] zł.','pakiet 30 lekcji indywidualnych 90-minutowych z [LANG], przygotowujących do certyfikatu'];
-  letdesc['1,90,0,1']=[145,159,'Za pojedynczą indywidualną 90-minutową lekcję z [LANG] zapłacisz [CENA] zł.','90-minutowa lekcja indywidualna z [LANG] '];
+  letdesc['1,90,0,1']=[145,159,'Za pojedynczą indywidualną 90-minutową lekcję z [LANG] zapłacisz [CENA] zł. <br>By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick="searchFor(1)"> <b class="second">&nbsptutaj!</b> </a>','90-minutowa lekcja indywidualna z [LANG] '];
   letdesc['1,90,0,5']=[699,785,'Za pakiet 5 lekcji indywidualnych 90-minutowych z [LANG] zapłacisz [CENA] zł.','pakiet 5 lekcji indywidualnych 90-minutowych z [LANG]'];
   letdesc['1,90,0,10']=[1349,1549,'Za pakiet 10 lekcji indywidualnych 90-minutowych z [LANG] zapłacisz [CENA] zł.','pakiet 10 lekcji indywidualnych 90-minutowych z [LANG]'];
   letdesc['1,90,0,30']=[3899,4559,'Za pakiet 30 lekcji indywidualnych 90-minutowych z [LANG]o zapłacisz [CENA] zł.','pakiet 30 lekcji indywidualnych 90-minutowych z [LANG]'];
-  letdesc['2,60,1,1']=[169,179,'Za pojedynczą 60-minutową lekcję w parze z [LANG], przygotowującą do certyfikatu, zapłacisz [CENA] zł.','60-minutowa lekcja w parze z [LANG] przygotowująca do certyfikatu'];
+  letdesc['2,60,1,1']=[169,179,'Za pojedynczą 60-minutową lekcję w parze z [LANG], przygotowującą do certyfikatu, zapłacisz [CENA] zł.  <br>By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick="searchFor(4)"> <b class="second">&nbsptutaj!</b> </a>','60-minutowa lekcja w parze z [LANG] przygotowująca do certyfikatu'];
   letdesc['2,60,1,5']=[819,885,'Za pakiet 5 lekcji 60-minutowych w parze z [LANG], przygotowujących do certyfikatu, zapłacisz [CENA] zł.','pakiet 5 lekcji  60-minutowych w parze z [LANG], przygotowujących do certyfikatu'];
   letdesc['2,60,1,10']=[1599,1749,'Za pakiet 10 lekcji 60-minutowych w parze z [LANG], przygotowujących do certyfikatu, zapłacisz [CENA] zł.','pakiet 10 lekcji 60-minutowych w parze z [LANG], przygotowujących do certyfikatu'];
   letdesc['2,60,1,30']=[4619,5159,'Za pakiet 30 lekcji 60-minutowych w parze z [LANG], przygotowujących do certyfikatu, zapłacisz [CENA] zł.','pakiet 30 lekcji 60-minutowych w parze z [LANG], przygotowujących do certyfikatu'];
-  letdesc['2,60,0,1']=[119,159,'Za pojedynczą 60-minutową lekcję w parze z [LANG] zapłacisz [CENA] zł.','60-minutowa lekcja w parze z [LANG] '];
+  letdesc['2,60,0,1']=[119,159,'Za pojedynczą 60-minutową lekcję w parze z [LANG] zapłacisz [CENA] zł.  <br>By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick="searchFor(4)"> <b class="second">&nbsptutaj!</b></a>','60-minutowa lekcja w parze z [LANG] '];
   letdesc['2,60,0,5']=[569,769,'Za pakiet 5 lekcji 60-minutowych w parze z [LANG] zapłacisz [CENA] zł.','pakiet 5 lekcji 60-minutowych w parze z [LANG]'];
   letdesc['2,60,0,10']=[1099,1499,'Za pakiet 10 lekcji 60-minutowych w parze z [LANG] zapłacisz [CENA] zł.','pakiet 10 lekcji 60-minutowych w parze z [LANG]'];
   letdesc['2,60,0,30']=[3119,4319,'Za pakiet 30 lekcji 60-minutowych w parze z [LANG] zapłacisz [CENA] zł.','pakiet 30 lekcji 60-minutowych w parze z [LANG]'];
-  letdesc['2,90,1,1']=[199,239,'Za pojedynczą 90-minutową lekcję w parze z [LANG], przygotowującą do certyfikatu, zapłacisz [CENA] zł.','90-minutowa lekcja w parze z [LANG] przygotowująca do certyfikatu'];
+  letdesc['2,90,1,1']=[199,239,'Za pojedynczą 90-minutową lekcję w parze z [LANG], przygotowującą do certyfikatu, zapłacisz [CENA] zł.  <br>By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick="searchFor(4)"><b class="second">&nbsptutaj!</b> </a>','90-minutowa lekcja w parze z [LANG] przygotowująca do certyfikatu'];
   letdesc['2,90,1,5']=[975,1185,'Za pakiet 5 lekcji 90-minutowych w parze z [LANG], przygotowujących do certyfikatu, zapłacisz [CENA] zł.','pakiet 5 lekcji 90-minutowych w parze z [LANG], przygotowujących do certyfikatu'];
   letdesc['2,90,1,10']=[1899,2349,'Za pakiet 10 lekcji 90-minutowych w parze z [LANG], przygotowujących do certyfikatu, zapłacisz [CENA] zł.','pakiet 10 lekcji 90-minutowych w parze z [LANG], przygotowujących do certyfikatu'];
   letdesc['2,90,1,30']=[5549,6899,'Za pakiet 30 lekcji 90-minutowych w parze z [LANG], przygotowujących do certyfikatu, zapłacisz [CENA] zł.','pakiet 30 lekcji 90-minutowych w parze z [LANG], przygotowujących do certyfikatu'];
-  letdesc['2,90,0,1']=[175,199,'Za pojedynczą 90-minutową lekcję w parze z [LANG] zapłacisz [CENA] zł.','90-minutowa lekcja w parze z [LANG] '];
+  letdesc['2,90,0,1']=[175,199,'Za pojedynczą 90-minutową lekcję w parze z [LANG] zapłacisz [CENA] zł. <br> By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick="searchFor(1)"><b class="second">&nbsptutaj!</b> </a>','90-minutowa lekcja w parze z [LANG] '];
   letdesc['2,90,0,5']=[849,979,'Za pakiet 5 lekcji 90-minutowych w parze z [LANG]o zapłacisz [CENA] zł.','pakiet 5 lekcji 90-minutowych w parze z [LANG]'];
   letdesc['2,90,0,10']=[1649,1899,'Za pakiet 10 lekcji 90-minutowych w parze z[LANG] zapłacisz [CENA] zł.','pakiet 10 lekcji 90-minutowych w parze z [LANG]'];
   letdesc['1,90,0,30']=[4799,5399,'Za pakiet 30 lekcji 90-minutowych w parze z [LANG] zapłacisz [CENA] zł.','pakiet 30 lekcji 90-minutowych w parze z [LANG]'];
   letdesc['3,1']=[0,'Sprawdź dostępne kursy grupowe przygotowujące do certyfikatu z [LANG] <a onclick="showGroup([ID])"><b class="second">&nbsptutaj!</b></a>',''];
   letdesc['3,0']=[0,'Sprawdź dostępne kursy grupowe z [LANG] <a onclick="showGroup([ID])"><b class="second">&nbsptutaj!</b></a>',''];
+
 
 
   function kurs(e,id){
@@ -381,11 +388,12 @@
     languageN = lan[2];
       if(timeV != 0 && amountV != 0 && languageV != 0){
         let tab = letdesc[typeV+','+timeV+','+certyficateV+','+amountV];
+        let opis='';
         if(languageV == 1){
-          document.getElementById('descriptionBox').innerHTML = tab[2].replaceAll('[CENA]', tab[0]).replaceAll('[LANG]', languageN);
+          document.getElementById('descriptionBox').innerHTML =  '<div style="text-align: center;">'+tab[2].replaceAll('[CENA]', tab[0]).replaceAll('[LANG]', languageN)+'</div>';
           price = tab[0];
         }else{
-           document.getElementById('descriptionBox').innerHTML = tab[2].replaceAll('[CENA]', tab[1]).replaceAll('[LANG]', languageN);
+           document.getElementById('descriptionBox').innerHTML =  '<div style="text-align: center;">'+tab[2].replaceAll('[CENA]', tab[1]).replaceAll('[LANG]', languageN)+'</div>';
            price = tab[1];
         }
           desc = tab[3].replaceAll('[LANG]', languageN);
@@ -400,9 +408,9 @@
     languageN = lan[2];
     let tab = letdesc[typeV+','+certyficateV];
         if(certyficateV == 1){
-          document.getElementById('descriptionBox').innerHTML = tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI);
+          document.getElementById('descriptionBox').innerHTML = '<div style="text-align: center;">'+tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI)+'</div>';
         }else{
-           document.getElementById('descriptionBox').innerHTML = tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI);
+           document.getElementById('descriptionBox').innerHTML = '<div style="text-align: center;">'+tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI)+'</div>';
         }
        box.style.display = 'flex';
    }
