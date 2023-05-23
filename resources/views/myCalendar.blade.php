@@ -26,7 +26,7 @@
     <div class="content" id="content">
     
             <div class="row justify-content-center lessonDIV">
-
+                        <div>Lekcji do wykorzystania: {{$to_use}}</div>
                         <div id="calendar" style="width: 800px"></div>
             </div>
     

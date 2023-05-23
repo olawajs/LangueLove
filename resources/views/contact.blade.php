@@ -134,7 +134,7 @@ LABEL.indented-checkbox-text
         <div class="row justify-content-center classic2 radius" style="padding: 20px 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; text-align: center;">
           <h3><b>Skontaktuj się z nami </b></h3>
           <p>
-            Jeśli masz pytania odnośnie kursów, płatności lub potrzebujesz informacji, których nie <br>
+            Jeśli masz pytania odnośnie do kursów, płatności lub potrzebujesz informacji, których nie <br>
             znalazłeś/aś na stronie zadzwoń pod numer <b>+48 516 632 063</b> lub <b>+48 790 617 937</b> <br>lub napisz 
             mail na adres: kontakt@languelove.pl
           </p>
@@ -143,7 +143,7 @@ LABEL.indented-checkbox-text
           
           </p>
           <p><b>Zapisy na zajęcia</b></p>
-          <p>Możesz zapisać się na kurs klikając w ten <b><a>link</a></b></p>
+          <p>Możesz zapisać się na kurs klikając w ten <b><a href="https://languelove.pl/priceList/search/1/1">link</a></b></p>
         <div>
     </div>  
   </div>

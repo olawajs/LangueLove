@@ -15,12 +15,15 @@ use App\Models\LessonDuration;
 use App\Models\Language;
 use App\Models\CalendarEvent;
 use App\Models\EventUsers;
+use App\Models\LessonsBank;
 use App\Models\Price;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ThankYou;
 use Auth;
+use Carbon\Carbon;
+
 
 class PaymentController extends Controller
 {   
@@ -159,6 +162,16 @@ class PaymentController extends Controller
         $payment->status = 1;
         $payment->save();
         
+        $pakiet = $request->packet;
+        for($i=1; $i<=$pakiet; $i++){
+              $bank = new LessonsBank;
+                $bank->user_id = Auth::user()->id;
+                $bank->payment_id = $payment->id;
+                $bank->overdue_date = Carbon::now()->addWeeks($pakiet);
+                $bank->type_id = $request->typeA;
+                $bank->save();
+        }
+      
 
         $suma_zamowienia = $request->price*100 ; //wartość musi być podana w groszach
         $tytul = $request->desc;
@@ -278,8 +291,8 @@ class PaymentController extends Controller
                 "country": "PL",
                 "language": "pl",
                 "method": 0,
-                "urlReturn": "https://languelove.pl/payment/validate",
-                "urlStatus": "https://languelove.pl/payment/status",
+                "urlReturn": "http://127.0.0.1:8000/payment/validate",
+                "urlStatus": "http://127.0.0.1:8000/payment/status",
                 "timeLimit": 0,
                 "channel": 7,
                 "waitForResult": true,

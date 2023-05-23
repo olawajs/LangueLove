@@ -31,15 +31,15 @@ Route::get('/thankYou', function () {
     return view('thankYou');
 })->name('thankYou');
 
-Route::get('/myCalendar', function () {
-    return view('myCalendar');
-})->name('myCalendar');
 
 
+Route::get('myCalendar', [App\Http\Controllers\MainController::class, 'myCalendar'])->name('myCalendar'); 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
 Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
 Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'sendConsultationMail'])->name('sendConsultation'); 
+Route::post('sendCompany', [App\Http\Controllers\MainController::class, 'sendCompanyMail'])->name('sendCompany'); 
 Route::get('consultation', [App\Http\Controllers\MainController::class, 'showForm'])->name('consultation'); 
+Route::get('forCompanies', [App\Http\Controllers\MainController::class, 'showForm2'])->name('forCompanies'); 
 Route::get('getCalendar', [App\Http\Controllers\CalendarController::class, 'myCalendar'])->name('getCalendar'); 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

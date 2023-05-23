@@ -55,7 +55,7 @@
                                 <a class="nav-link" href="{{ route('priceList') }}">Cennik</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Dla firm</a>
+                                <a class="nav-link" href="{{ route('forCompanies') }}">Dla firm</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('about') }}">O nas</a>
@@ -103,6 +103,10 @@
                                                 {{ __('Lekcje') }}
                                             </a> 
                                         @endif
+                                        
+                                        <a class="dropdown-item disabled" disabled>
+                                           Lekcji do wykorzystania:  {{App\Models\LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',\Carbon\Carbon::today())->count()}}
+                                        </a> 
                                         <a class="dropdown-item" href="{{ route('myCalendar') }}">
                                             {{ __('Mój kalendarz') }}
                                         </a> 

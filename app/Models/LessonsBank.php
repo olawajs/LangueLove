@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class LessonsBank extends Model
 {
     protected $fillable = [
-        'id_user', 
-        'id_payment',
+        'user_id', 
+        'payment_id',
         'use_date',
-        'overdue_date'
+        'overdue_date',
+        'type_id'
     ];
 }

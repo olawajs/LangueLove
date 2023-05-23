@@ -464,11 +464,23 @@ function searchFor(type)
       priceA.setAttribute('type','hidden');
       priceA.value = price;
 
+    let packet = document.createElement('input');
+      packet.setAttribute('name','packet');
+      packet.setAttribute('type','hidden');
+      packet.value = amountV;
+
+    let typeA = document.createElement('input');
+      typeA.setAttribute('name','typeA');
+      typeA.setAttribute('type','hidden');
+      typeA.value = typeV;
+
     
     form.innerHTML ='@csrf';
     form.appendChild(lang);
     form.appendChild(descR);
     form.appendChild(priceA);
+    form.appendChild(packet);
+    form.appendChild(typeA);
     document.getElementById('formDiv2').appendChild(form);
     form.submit();
   }

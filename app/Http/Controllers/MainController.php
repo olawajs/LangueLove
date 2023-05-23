@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Language;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FreeConsultation;
+use App\Mail\CompanyConsultation;
 use App\Models\PriceType;
 use App\Models\LessonDuration;
 use App\Models\LessonType;
+use App\Models\LessonsBank;
 use App\Models\Price;
 use App\Models\DiscountPacket;
 use App\Models\CalendarEvent;
@@ -18,6 +20,7 @@ use App\Models\Lesson;
 use App\Models\Lector;
 use App\Models\LanguageLevel;
 use DB;
+use Auth;
 use Carbon\Carbon;
 
 class MainController extends Controller
@@ -26,6 +29,13 @@ class MainController extends Controller
     {
         $language = Language::all();
         return view('consultation',[
+            'languages' => $language
+        ]);
+    }
+    public function showForm2()
+    {
+        $language = Language::all();
+        return view('forCompanies',[
             'languages' => $language
         ]);
     }
@@ -44,6 +54,29 @@ class MainController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error','UPS...Coś poszło nie tak');
         }
+    }
+    public function sendCompanyMail(Request $request)
+    {
+        try {
+           $mailData=[
+            'name' => $request->name,
+            'email' => $request->email,
+            'language_id' => $request->language_id,
+            'kurs' => $request->kurs,
+            'miasto' => $request->miasto,
+            'message' => $request->message
+           ]; 
+           Mail::to('olawjs@gmail.com')->send(new CompanyConsultation($mailData));
+           return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+        }
+    }
+    public function myCalendar(){
+        $lessons = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->count();
+        return view('myCalendar',[
+            'to_use'=>$lessons
+        ]);
     }
     public function home()
     {
