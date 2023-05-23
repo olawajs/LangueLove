@@ -18,6 +18,11 @@ class CreatePaymentsTable extends Migration
             $table->string('error_desc',2000)->nullable();
             $table->string('session_id',100)->nullable();
             $table->string('description',500);
+            $table->string('name',500)->nullable();
+            $table->string('street',500)->nullable();
+            $table->string('postcode',500)->nullable();
+            $table->string('nip',500)->nullable();
+            $table->string('city',500)->nullable();
             $table->string('invoice',500)->nullable();
             $table->integer('error_code')->nullable();
             $table->integer('status')->default(1);

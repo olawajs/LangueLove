@@ -26,6 +26,9 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+Route::get('/thankYou', function () {
+    return view('thankYou');
+})->name('thankYou');
 
 
 
@@ -35,7 +38,10 @@ Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'se
 Route::get('consultation', [App\Http\Controllers\MainController::class, 'showForm'])->name('consultation'); 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Auth::routes(
+   
+);
+Route::get('admin/languages', [App\Http\Controllers\Admin\EditInfo::class, 'getLanguages'])->name('languages');
 Route::get('login/{provider}', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider']);
 Route::get('login/{provider}/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback']);
 
@@ -49,7 +55,7 @@ Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLe
 
 
 // form admin only
-Route::get('admin/languages', [App\Http\Controllers\Admin\EditInfo::class, 'getLanguages'])->name('languages');
+
 Route::get('admin/lessons', [App\Http\Controllers\Admin\EditInfo::class, 'getLessons'])->name('lessons');
 Route::get('admin/prices', [App\Http\Controllers\Admin\EditInfo::class, 'getPrices'])->name('prices');
 Route::get('admin/lectors', [App\Http\Controllers\LectorController::class, 'showLectors'])->name('lectors');
@@ -65,7 +71,10 @@ Route::POST('admin/addLessonDB', [App\Http\Controllers\LessonController::class, 
 Route::POST('lector/AddSetup', [App\Http\Controllers\CalendarController::class, 'AddSetup'])->name('AddSetup');
 Route::get('/payment/validate', [App\Http\Controllers\PaymentController::class, 'getReturn'])->name('payment'); 
 Route::post('/payment/status', [App\Http\Controllers\PaymentController::class, 'status'])->name('status'); 
+
 Route::post('/payment/make', [App\Http\Controllers\PaymentController::class, 'transaction'])->name('transaction'); 
+
+Route::post('/payment/buy', [App\Http\Controllers\PaymentController::class, 'buyLesson'])->name('buyLesson'); 
 
 
 //dla maili

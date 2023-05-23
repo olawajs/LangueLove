@@ -6,11 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Redirect;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Http;
 use App\Models\Payment;
+use App\Models\Lesson;
+use App\Models\LessonDuration;
+use App\Models\Language;
+use App\Models\CalendarEvent;
+use App\Models\EventUsers;
+use App\Models\Price;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ThankYou;
 use Auth;
 
 class PaymentController extends Controller
@@ -26,12 +35,110 @@ class PaymentController extends Controller
     // $crc_code = '53567c4b2d150c3d';
     // $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
 
+    public function  buyLesson(Request $request){
+        $start = $request->data;
+        $hour = $request->godzina;
+        $duration_id = $request->duration_id;
+        $language_id = $request->jezyk;
+        $type_id = $request->rodzaj;
+        $lectorId = $request->lectorId;
+
+        $cykliczne = isset($request->cykliczne) ? 1 : 0;
+        $cert = isset($request->cert) ? 1 : 0;
+        $ile = isset($request->ile) ? $request->ile : 1;
+
+        
+        $l = Language::where('id',$language_id)->first();
+        $type = $l->price_type;
+        $lName = $l->name;
+        $price = Price::where('type_id',$type_id)
+                        ->where('price_type_id',$type)
+                        ->where('duration_id',$duration_id)
+                        ->where('certification',$cert)
+                        ->first()
+                        ->price;
+        
+        $kwota = $price*$ile;
+
+
+        $lesson = new Lesson;
+        $lesson->type_id = $type_id;
+        $lesson->duration_id = $duration_id;
+        $lesson->amount_of_lessons = $ile;
+        if($type_id == 1){
+            $studentow = 1;
+            $desc = 'Lekcja indywidualna z języka'.$lName;
+        }
+        else{
+            $studentow = 2;
+            $desc = 'Lekcja w parze z języka'.$lName;
+        }
+        $lesson->amount_of_students = $studentow;
+        $lesson->price = $kwota;
+
+        $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
+        $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
+        $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+      
+
+        $lesson->start = $start2;
+        $lesson->lector_id = $lectorId;
+        $lesson->language_id = $language_id;
+        $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
+        $lesson->status = 0;
+        $lesson->certificat = $cert;
+        $lesson ->save();
+        
+        $event = new CalendarEvent;
+        $event->start = $start2;
+        $event->end = $end;
+        $event->lector_id = $lectorId;
+        $event->type = $type_id;
+        $event->lesson_id = $lesson->id;
+        $event->save();
+
+        $calendar = new EventUsers;
+        $calendar->calendar_id = $event->id;
+        $calendar->user_id = Auth::user()->id;
+        $calendar->comment = '';
+        $calendar->status = 1;
+        $calendar->lector_accept = 0;
+        $calendar->student_accept = 1;
+        $calendar->save();
+        
+
+        $link = 'https://sandbox.przelewy24.pl/';
+        $merchant_id = 207228;
+        $crc_code = '53567c4b2d150c3d';
+        $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
+
+        $payment = new Payment;
+        $payment->price = $kwota;
+        $payment->description =  $desc;
+        $payment->id_language = $language_id;
+        $payment->id_user = Auth::user()->id;
+        $session_id = Session::getId().date('YmdHis');
+        Session::put('payment_session', $session_id);
+        $payment->session_id = $session_id;
+        $payment->quantity = 1;
+        $payment->status = 1;
+        $payment->save();
+        
+
+        $suma_zamowienia = $kwota*100 ; //wartość musi być podana w groszach
+        $tytul = $desc ;
+        
+        $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
+        return new RedirectResponse($link.'trnRequest/'.$token);
+
+    }
     public function  transaction(Request $request)
     {
-           $link = 'https://sandbox.przelewy24.pl/';
-    $merchant_id = 207228;
-    $crc_code = '53567c4b2d150c3d';
-    $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
+       
+        $link = 'https://sandbox.przelewy24.pl/';
+        $merchant_id = 207228;
+        $crc_code = '53567c4b2d150c3d';
+        $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
 
         $payment = new Payment;
         $payment->price = $request->price;
@@ -48,8 +155,8 @@ class PaymentController extends Controller
 
         $suma_zamowienia = $request->price*100 ; //wartość musi być podana w groszach
         $tytul = $request->desc;
-        $token = $this->getToken($suma_zamowienia,$tytul,$session_id); 
-
+        
+        $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
         return new RedirectResponse($link.'trnRequest/'.$token);
 
     }
@@ -121,10 +228,11 @@ class PaymentController extends Controller
 
         $response2 = json_decode(curl_exec($curl2));
         // curl_close($curl2);
-        if($response->data->status == 'success'){
-            dd('jakiś ekran z podziękowaniem + email');
+        if($response2->data->status == 'success'){
+            Mail::to(Auth::user()->email)->send(new ThankYou());
+            return view('thankYou');
         }else{
-            dd('cofka + error');
+            dd('Wystąpił niespodziewany błąd');
         }
     
   
@@ -163,8 +271,8 @@ class PaymentController extends Controller
                 "country": "PL",
                 "language": "pl",
                 "method": 0,
-                "urlReturn": "http://127.0.0.1:8000/payment/validate",
-                "urlStatus": "http://127.0.0.1:8000/payment/status",
+                "urlReturn": "https://languelove.pl/payment/validate",
+                "urlStatus": "https://languelove.pl/payment/status",
                 "timeLimit": 0,
                 "channel": 7,
                 "waitForResult": true,

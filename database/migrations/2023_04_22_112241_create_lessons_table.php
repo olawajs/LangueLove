@@ -33,7 +33,7 @@ class CreateLessonsTable extends Migration
             $table->longText('draft')->nullable();
             $table->unsignedBigInteger('language_id');
             $table->foreign('language_id')->references('id')->on('languages');
-
+            $table->boolean('certificat')->default(false);
             $table->timestamps();
         });
       

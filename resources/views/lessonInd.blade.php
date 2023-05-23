@@ -26,13 +26,13 @@
     <div class="content" id="content">
     
             <div class="row justify-content-center lessonDIV">
-                <h2>{{$lector->name}} {{$lector->surname}}</h2>
+                <h2>{{$lector->name}} </h2>
                 <span class="SType">  {{ App\Models\LessonDuration::find($lesson->duration_id)->duration }} min / {{ App\Models\LessonType::find($lesson->type_id)->name }} / Język {{ App\Models\Language::find($lesson->language_id)->name}} <i class="flag flag-{{ App\Models\Language::find($lesson->language_id)->short}}"></i>  </span>
                 <div class="lectorDesc">
                     <div>
                         <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
                         <div>
-                            <div><b>{{$lector->name}} {{$lector->surname}}</b></div>
+                            <div><b>{{$lector->name}}</b></div>
                             <div>{{$lector->description}}</div>
                         
                         </div> 

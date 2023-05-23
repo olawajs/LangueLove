@@ -93,7 +93,7 @@
                         <div class="SType">{{ App\Models\LessonDuration::find($lesson->duration_id)->duration }} min / {{ App\Models\LessonType::find($lesson->type_id)->name }}</div>
                     </div>
                     <div>
-                        <div><b>Lektor: </b>{{ App\Models\Lector::find($lesson->lector_id)->name}} {{ App\Models\Lector::find($lesson->lector_id)->surname}}<br></div>
+                        <div><b>Lektor: </b>{{ App\Models\Lector::find($lesson->lector_id)->name}}<br></div>
                         <div><b>Maksymalna ilość osób: </b>{{$lesson->amount_of_students}}</div>
                     </div>
                     <div>
@@ -122,7 +122,7 @@
                 <div class="searchFoto"><img src="/images/lectors/{{$l->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
                 <div class="searchFText">
                     <div>
-                        <div class="STitle" style="gap: 15px;"><b>{{$l->name}} {{$l->surname}}</b> </div>
+                        <div class="STitle" style="gap: 15px;"><b>{{$l->name}}</b> </div>
                         <div class="SType">
                             @foreach (App\Models\LanguageLevel::where('lector_id',$l->id)->get() as $d)
                                     <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>

@@ -120,12 +120,14 @@ class MainController extends Controller
             $lessons = Lesson::whereIn('language_id', $request->lang)
                                 ->whereIn('type_id', $request->type)
                                 ->where('start', '>', Carbon::today())
+                                ->where('status','<>',0)
                                 ->get();
             $languageT = LanguageLevel::where('language_id',$request->lang)->pluck('lector_id')->toArray();
             $lectors = Lector::whereIn('id',$languageT)->get();
         }else if(!is_null($request->lang)  && (is_null($request->type)||$request->type[0] == '0') && $request->lang[0] != '0'){
             $lessons = Lesson::whereIn('language_id', $request->lang)
-                            ->where('start', '>', Carbon::today())                        
+                            ->where('start', '>', Carbon::today())   
+                            ->where('status','<>',0)                    
                             ->get();
             $languageT = LanguageLevel::where('language_id',$request->lang)->pluck('lector_id')->toArray();
             $lectors = Lector::whereIn('id',$languageT)->get();
@@ -133,11 +135,12 @@ class MainController extends Controller
         else if((is_null($request->lang)|| $request->lang[0] == '0')  && !is_null($request->type) && $request->type[0] != '0'){
             $lessons = Lesson::whereIn('type_id', $request->type)
                             ->where('start', '>', Carbon::today())
+                            ->where('status','<>',0)
                             ->get();
              $lectors = Lector::all();
         }
         else{
-            $lessons = Lesson::where('start', '>', Carbon::today())->get();
+            $lessons = Lesson::where('start', '>', Carbon::today())->where('status','<>',0)->get();
             $lectors = Lector::all();
         }
         $langs = Language::where('active',1)->get();

@@ -26,7 +26,7 @@
     <div class="content" id="content">
     
             <div class="row justify-content-center lessonDIV">
-                <h2>{{$lector->name}} {{$lector->surname}}</h2>
+                <h2>{{$lector->name}}</h2>
                 <div class="lectorDesc">
                     <div>
                         <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
@@ -58,17 +58,19 @@
 </div>
 
 <!-- Language modal -->
-<form class="Custom_modal" style="display: none; z-index: 3;" id="BuyModal">
+<form class="Custom_modal" style="display: none; z-index: 3;" id="BuyModal" method='POST' action="{{ route('buyLesson') }}">
+    @csrf
       <h2 class="Tcenter">SZCZEGÓŁY ZAKUPU: </h2>
       <hr>
        <div id="addNewLanguage" class="ModalFlex">
+        <input type="hidden" value="{{$lector->id}}" name="lectorId"> 
             <div class="box">
                 <span class="napis">Data: </span>
-                <input type="date" class="form-control" name="data" id="data"  disabled readonly>
+                <input type="date" class="form-control" name="data" id="data"  readonly>
             </div>
             <div class="box">
                 <span class="napis" for="godzina">Godzina rozpoczęcia: </span>
-                <input type="time" class="form-control timepicker" name="godzina" id="godzina" disabled readonly>
+                <input type="time" class="form-control timepicker" name="godzina" id="godzina" readonly>
             </div>
             <div class="box">
                 <span class="napis" for="data">Długość zajęć: </span>
@@ -107,7 +109,7 @@
             </div>
            <p class="cena1">Do zapłaty: <b id='kwota'></b></p>
 
-          <button class="btn btn-secondary  mb-3" id="buyButton">ZAPŁAĆ TERAZ</button>
+          <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
           <input type="button" class="btn btn-primary mb-3" onclick="CloseModal('BuyModal')" value="ANULUJ">
         </div>
     </form>

@@ -20,6 +20,7 @@ class Lesson extends Model
         'lector_id',
         'language_id',
         'title',
-        'status'
+        'status',
+        'certificat'
     ];
 }
