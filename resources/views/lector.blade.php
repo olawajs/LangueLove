@@ -186,7 +186,14 @@
                 if(!AuthUser){
                     window.location.href = "{{ route('login')}}";
                 }else{
-                   if(info.jsEvent.explicitOriginalTarget.innerText == 'Wolny termin'){
+                    let text = '';
+                    if(typeof info.jsEvent.explicitOriginalTarget === "undefined"){
+                        text=info.jsEvent.toElement.innerText;
+                    }
+                    else{
+                        text=info.jsEvent.explicitOriginalTarget.textContent;
+                    }
+                   if(text == 'Wolny termin' ){
                         let data = info.date;
                         document.getElementById('data').value = data.getFullYear() + "-" +((data.getMonth()).length != 2 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" + data.getDate();
                         document.getElementById('godzina').value = data.getHours() + ":" +((data.getMinutes()) <= 9 ? "0" + (data.getMinutes()) : (data.getMinutes()));
