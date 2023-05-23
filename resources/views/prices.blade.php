@@ -250,11 +250,28 @@
   <div class="Description" id="descriptionBox">
    
   </div>
-  <button class="BuyButton" id="sign" onClick="buy()"> Zapisz się na zajęcia </button>
+  <button class="BuyButton" id="sign" onClick="OpenModal('BuyModal')"> Zapisz się na zajęcia </button>
   <div id='formDiv'></div>
   <div id='formDiv2'></div>
 </div>
 
+
+<div class="Custom_modal" style="display: none;z-index: 3;" id="BuyModal">
+      <h2 class="Tcenter">Podsumowanie</h2>
+      <hr>
+       <div id="addNewLanguage" class="ModalFlex">
+        <p style="text-align: center">
+          Cześć!<br>
+          Przypominamy, że pakiet możesz wykorzystać w przeciągu <b><span id='ile_tyg'></span></b> tygodni od daty pierwszej lekcji. <br>
+          Na umówienie się na pierwszą lekcję masz 30 dni od daty zakupu pakietu.
+        </p>
+        <p id='opisPlatnosci'>
+
+        </p>
+          <button class="btn btn-secondary  mb-3" onclick="buy()">Przejdź do płatności</button>
+          <button class="btn btn-primary  mb-3" onclick="CloseModal('BuyModal')">ANULUJ</button>
+        </div>
+</div>
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
@@ -274,6 +291,7 @@ function searchFor(type)
   let price = 0;
   let letdesc = [];
   let desc = '';
+  let opisPlatosc = '';
   letdesc['1,60,1,1']=['119','139',`Za pojedynczą indywidualną 60-minutową lekcję z [LANG] przygotowującą do certyfikatu zapłacisz [CENA] zł.<br> By zapisać się na lekcje indywidualne z [LANG] kliknij <a onclick='searchFor(1)'><b class="second">&nbsptutaj!</b> </a>`,''];
   // letdesc['1,60,1,1']=[119,139,'Za pojedynczą indywidualną 60-minutową lekcję z [LANG] przygotowującą do certyfikatu zapłacisz [CENA] zł.','60-minutowa lekcja indywidualna z [LANG] przygotowująca do certyfikatu'];
   letdesc['1,60,1,5']=[585,685,'Za pakiet 5 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu zapłacisz [CENA] zł.','pakiet 5 lekcji indywidualnych 60-minutowych z [LANG], przygotowujących do certyfikatu'];
@@ -392,13 +410,18 @@ function searchFor(type)
         if(languageV == 1){
           document.getElementById('descriptionBox').innerHTML =  '<div style="text-align: center;">'+tab[2].replaceAll('[CENA]', tab[0]).replaceAll('[LANG]', languageN)+'</div>';
           price = tab[0];
+          opisPlatosc =  '<div style="text-align: center;">'+tab[2].replaceAll('[CENA]', tab[0]).replaceAll('[LANG]', languageN)+'</div>';
         }else{
            document.getElementById('descriptionBox').innerHTML =  '<div style="text-align: center;">'+tab[2].replaceAll('[CENA]', tab[1]).replaceAll('[LANG]', languageN)+'</div>';
            price = tab[1];
+           opisPlatosc =  '<div style="text-align: center;">'+tab[2].replaceAll('[CENA]', tab[1]).replaceAll('[LANG]', languageN)+'</div>';;
         }
           desc = tab[3].replaceAll('[LANG]', languageN);
           box.style.display = 'flex';
-          b.style.display = 'flex';
+          if(amountV>1){
+            b.style.display = 'flex';
+          }
+          
       }
    }
    else if( typeV == 3){
@@ -409,9 +432,11 @@ function searchFor(type)
     let tab = letdesc[typeV+','+certyficateV];
         if(certyficateV == 1){
           document.getElementById('descriptionBox').innerHTML = '<div style="text-align: center;">'+tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI)+'</div>';
+          opisPlatosc = '<div style="text-align: center;">'+tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI)+'</div>';
         }else{
            document.getElementById('descriptionBox').innerHTML = '<div style="text-align: center;">'+tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI)+'</div>';
-        }
+           opisPlatosc = '<div style="text-align: center;">'+tab[1].replaceAll('[LANG]', languageN).replaceAll('[ID]', languageI)+'</div>';
+          }
        box.style.display = 'flex';
    }
    else{
@@ -447,4 +472,17 @@ function searchFor(type)
     document.getElementById('formDiv2').appendChild(form);
     form.submit();
   }
+  function OpenModal(id){
+    document.getElementById('opisPlatnosci').innerHTML = opisPlatosc;
+    document.getElementById('ile_tyg').innerText = amountV;
+    
+        document.getElementById(id).style.display = 'block';
+        document.getElementById('topper').style.pointerEvents = "none";
+        document.getElementById('topper').style.opacity = "0.5";
+    }
+    function CloseModal(id){
+        document.getElementById(id).style.display = 'none';
+        document.getElementById('topper').style.pointerEvents = "";
+        document.getElementById('topper').style.opacity = "1";
+    }
 </script>

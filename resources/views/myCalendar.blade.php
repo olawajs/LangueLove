@@ -65,7 +65,7 @@
 
             selectConstraint: "businessHours",
             eventClick: function(info) {
-                
+                alert('Tu pojawi się okienko z informacjami: imię lektora, język oraz link do skype :)');
             },
             dateClick: function(info) {
                 var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
