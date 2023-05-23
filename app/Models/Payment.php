@@ -18,6 +18,11 @@ class Payment extends Model
         'session_id',
         'id_lesson',
         'id_language',
-        'invoice'
+        'invoice',
+        'name',
+        'street',
+        'postcode',
+        'city',
+        'nip'
     ];
 }

@@ -108,7 +108,28 @@
                 <input type="number" class="form-control CountCost" name="ile" id="ile" step="1" min="1" placeholder="Ilość lekcji">
             </div>
            <p class="cena1">Do zapłaty: <b id='kwota'></b></p>
-
+           <hr>
+           <h2 class="Tcenter">Dane do faktury: </h2>
+           <div class="box">
+                <span class="napis">Imię i nazwisko: </span>
+                <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <div class="box">
+                <span class="napis">Ulica i numer domu: </span>
+                <input type="text" class="form-control" name="street" id="street" required>
+            </div>
+            <div class="box">
+                <span class="postcode">Kod Pocztowy: </span>
+                <input type="text" class="form-control" name="postcode" id="postcode" required>
+            </div>
+            <div class="box">
+                <span class="napis">Miasto: </span>
+                <input type="text" class="form-control" name="city" id="city" required>
+            </div>
+            <div class="box">
+                <span class="napis">NIP: </span>
+                <input type="text" class="form-control" name="nip" id="nip">
+            </div>
           <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
           <input type="button" class="btn btn-primary mb-3" onclick="CloseModal('BuyModal')" value="ANULUJ">
         </div>

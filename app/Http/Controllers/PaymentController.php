@@ -43,6 +43,7 @@ class PaymentController extends Controller
         $type_id = $request->rodzaj;
         $lectorId = $request->lectorId;
 
+
         $cykliczne = isset($request->cykliczne) ? 1 : 0;
         $cert = isset($request->cert) ? 1 : 0;
         $ile = isset($request->ile) ? $request->ile : 1;
@@ -122,6 +123,12 @@ class PaymentController extends Controller
         $payment->session_id = $session_id;
         $payment->quantity = 1;
         $payment->status = 1;
+
+        $payment->name = $request->name;
+        $payment->street = $request->street;
+        $payment->postcode = $request->postcode;
+        $payment->city = $request->city;
+        $payment->nip = isset($request->nip) ? $request->nip : '';
         $payment->save();
         
 

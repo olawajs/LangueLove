@@ -4,11 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\CalendarSetup;
 use App\Models\CalendarEvent;
+use App\Models\Lesson;
+use App\Models\Language;
+use App\Models\EventUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 
 class CalendarController extends Controller
 {
+    public function myCalendar(){
+        $events = EventUsers::where('user_id',Auth::user()->id)->pluck('calendar_id')->toArray();
+        $calendar = CalendarEvent::whereIn('id',$events)->get();
+       
+        foreach($calendar as $setup){
+                $color = 'var(--bs-secondary)';
+               
+                $lesson = Lesson::where('id',$setup->lesson_id)->first()->language_id; 
+                $language = Language::where('id',$lesson)->first()->name; 
+                $title = 'Zajęcia z język '.$language;
+            $tabSetup[] = [
+                'title' => $title,
+                'start' => $setup->start,
+                'end'  =>$setup->end,
+                'editable'=> false,
+                'type' => $setup->type,
+                'color' => $color
+            ];
+        }
+        return $tabSetup;
+    }
     public function AddSetup(Request $request)
     {
         $startDate = $request->date_from;

@@ -103,6 +103,9 @@
                                                 {{ __('Lekcje') }}
                                             </a> 
                                         @endif
+                                        <a class="dropdown-item" href="{{ route('myCalendar') }}">
+                                            {{ __('Mój kalendarz') }}
+                                        </a> 
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
