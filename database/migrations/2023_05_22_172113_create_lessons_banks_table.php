@@ -22,7 +22,7 @@ class CreateLessonsBanksTable extends Migration
             $table->unsignedBigInteger('payment_id');
             $table->foreign('payment_id')->references('id')->on('payments');  
 
-            table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('lesson_types');  
 
             $table->dateTime('use_date', $precision = 0)->nullable();

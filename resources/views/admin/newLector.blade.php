@@ -184,6 +184,9 @@ h2{
     plugins: 'lists, link, image, media',
     toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
     menubar: true,
+    setup: function(ed) {
+        ed.on('submit', function(e) { ed.save(); });
+    }
   });
 </script>
 
