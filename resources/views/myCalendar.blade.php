@@ -59,7 +59,7 @@
                 start: new Date(),
             },
             events:{
-                url: '/getCalendar',
+                url: '/getMyCalendar',
                 method: 'GET',
             } ,
 

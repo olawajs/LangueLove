@@ -145,6 +145,10 @@
                 <span class="napis">Miasto: </span>
                 <input type="text" class="form-control" name="city" id="city" required>
             </div>
+            <div class="box">
+                <span class="napis">NIP: </span>
+                <input type="text" class="form-control" name="nip" id="nip">
+            </div>
           <button class="btn btn-secondary  mb-3" id="buyButton">ZAPŁAĆ TERAZ!</button>
           <input type="button" class="btn btn-primary mb-3" onclick="CloseModal('BuyModal')" value="ANULUJ">
         </div>

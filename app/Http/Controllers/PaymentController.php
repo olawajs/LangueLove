@@ -50,65 +50,108 @@ class PaymentController extends Controller
         $cykliczne = isset($request->cykliczne) ? 1 : 0;
         $cert = isset($request->cert) ? 1 : 0;
         $ile = isset($request->ile) ? $request->ile : 1;
+        $zajecia = isset($request->zajecia) ? 1 : 0;
+        $priceG = isset($request->price) ? $request->price : 0;
 
         
         $l = Language::where('id',$language_id)->first();
         $type = $l->price_type;
         $lName = $l->name;
-        $price = Price::where('type_id',$type_id)
+        if($zajecia == 1){
+            $price = $priceG;
+            $kwota = $price;
+        }else{
+            $price = Price::where('type_id',$type_id)
                         ->where('price_type_id',$type)
                         ->where('duration_id',$duration_id)
                         ->where('certification',$cert)
                         ->first()
-                        ->price;
-        
-        $kwota = $price*$ile;
-
-
-        $lesson = new Lesson;
-        $lesson->type_id = $type_id;
-        $lesson->duration_id = $duration_id;
-        $lesson->amount_of_lessons = $ile;
-        if($type_id == 1){
-            $studentow = 1;
-            $desc = 'Lekcja indywidualna z języka'.$lName;
+                        ->price; 
+                        $kwota = $price*$ile;
         }
-        else{
-            $studentow = 2;
-            $desc = 'Lekcja w parze z języka'.$lName;
-        }
-        $lesson->amount_of_students = $studentow;
-        $lesson->price = $kwota;
-
-        $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
+       
+         $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
         $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
         $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
-      
-
-        $lesson->start = $start2;
-        $lesson->lector_id = $lectorId;
-        $lesson->language_id = $language_id;
-        $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
-        $lesson->status = 0;
-        $lesson->certificat = $cert;
-        $lesson ->save();
         
-        $event = new CalendarEvent;
-        $event->start = $start2;
-        $event->end = $end;
-        $event->lector_id = $lectorId;
-        $event->type = $type_id;
-        $event->lesson_id = $lesson->id;
-        $event->save();
+       
 
-        $calendar = new EventUsers;
-        $calendar->calendar_id = $event->id;
-        $calendar->user_id = Auth::user()->id;
-        $calendar->comment = '';
-        $calendar->status = 1;
-        $calendar->lector_accept = 0;
-        $calendar->student_accept = 1;
-        $calendar->save();
+        if($zajecia != 1){
+            $lesson = new Lesson;
+            $lesson->type_id = $type_id;
+            $lesson->duration_id = $duration_id;
+            $lesson->amount_of_lessons = $ile;
+            if($type_id == 1){
+                $studentow = 1;
+                $desc = 'Lekcja indywidualna z języka'.$lName;
+            }
+            else{
+                $studentow = 2;
+                $desc = 'Lekcja w parze z języka'.$lName;
+            }
+            $lesson->amount_of_students = $studentow;
+            $lesson->price = $kwota;
+            $lesson->start = $start2;
+            $lesson->lector_id = $lectorId;
+            $lesson->language_id = $language_id;
+            $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
+            $lesson->status = 0;
+            $lesson->certificat = $cert;
+            $lesson->save();
+            $lessonId = $lesson->id;
+        }else{
+            $lessonId = $request->lessonId;
+            $desc = $request->title;
+        }
+
+        if($zajecia == 1){
+            for($i=0; $i<=$ile; $i++){
+                $event = new CalendarEvent;
+                $event->start = $start2;
+                $event->end = $end;
+                $event->lector_id = $lectorId;
+                $event->type = $type_id;
+                $event->lesson_id =  $lessonId;
+                $event->save();
+
+
+                $calendar = new EventUsers;
+                $calendar->calendar_id = $event->id;
+                $calendar->user_id = Auth::user()->id;
+                $calendar->comment = '';
+                $calendar->status = 1;
+                $calendar->lector_accept = 0;
+                $calendar->student_accept = 1;
+                $calendar->save();
+                
+                $start2 = date('Y-m-d', strtotime($start2. ' + 1 week'));
+                $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+            }
+        }else{
+            $events = CalendarEvent::where('lesson_id',$lessonId)->get();
+            foreach($events as $event){
+
+                $calendar = new EventUsers;
+                $calendar->calendar_id = $event->id;
+                $calendar->user_id = Auth::user()->id;
+                $calendar->comment = '';
+                $calendar->status = 1;
+                $calendar->lector_accept = 0;
+                $calendar->student_accept = 1;
+                $calendar->save();
+            }
+            // $eventId =  $request->calendarId;
+        }
+       
+
+        // $calendar = new EventUsers;
+        // $calendar->calendar_id = $eventId;
+        // $calendar->user_id = Auth::user()->id;
+        // $calendar->comment = '';
+        // $calendar->status = 1;
+        // $calendar->lector_accept = 0;
+        // $calendar->student_accept = 1;
+        // $calendar->save();
         
 
         $link = 'https://sandbox.przelewy24.pl/';
@@ -291,8 +334,8 @@ class PaymentController extends Controller
                 "country": "PL",
                 "language": "pl",
                 "method": 0,
-                "urlReturn": "http://languelove.pl/payment/validate",
-                "urlStatus": "http://languelove.pl/payment/status",
+                "urlReturn": "http://127.0.0.1:8000/payment/validate",
+                "urlStatus": "http://127.0.0.1:8000/payment/status",
                 "timeLimit": 0,
                 "channel": 7,
                 "waitForResult": true,

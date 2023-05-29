@@ -1,3 +1,5 @@
+
+<!DOCTYPE HTML>
 @extends('layouts.app')
 <style>
 .inputDIV {
@@ -53,6 +55,7 @@ h2{
 }
 </style>
 @section('content')
+
 <div class="container">
     <div class="justify-content-center classicDIV" id="topper">
         <h2>Karta lektora</h2>
@@ -173,6 +176,18 @@ h2{
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> 
     <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.tiny.cloud/1/r7yvsqva0lmrh081yjb12u1yyn51cak9j4frujmxqj8ihg31/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea#description',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: true,
+  });
+</script>
+
 <script>
 let lanDiv = ' <div style="display: flex; gap: 7px; margin-left: 3px;">'+
              '               <div class="col-md-5">'+

@@ -11,6 +11,18 @@
         padding: 5px;
         margin: auto;
     }
+    .floatForm{
+        position: fixed;
+        background-color: var(--bs-sandy);
+        margin: auto;
+        width: 70%;
+        z-index: 2;
+        display: none;
+    }
+    #buyButton{
+        width: 100%;
+        margin-top: 10px;
+    }
 </style>
 <div class="container">
 
@@ -22,7 +34,7 @@
                 <div class="lectorDesc">
                     <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
                     <div>
-                        <div><b>{{$lector->name}} {{$lector->surname}}</b></div>
+                        <div><b>{{$lector->name}}</b></div>
                         <div>{{$lector->description}}</div>
                        
                     </div> 
@@ -62,7 +74,46 @@
                     <!-- <div><b>Opis</b>{{$lesson->description}}</div> -->
                    
                 </div>
-                    <a class="btn btn-secondary SButton" href="{{ route('showLesson',$lesson->id) }}">Zarezerwuj i zapłać</a>
+                <form class="floatForm" id="buyForm" method='POST' action="{{ route('buyLesson') }}">
+                @csrf
+                <h2 class="Tcenter"> Podsumowanie płatności:</h2>
+                    <h3 class="Tcenter">Do zapłaty: <b>{{$lesson->price*$lesson->amount_of_lessons}} zł</b></h3>
+                    
+                    <h2 class="Tcenter">Dane do faktury: </h2>
+                        <div class="box">
+                            <span class="napis">Imię i nazwisko: </span>
+                            <input type="text" class="form-control" name="name" id="name" required>
+                        </div>
+                        <div class="box">
+                            <span class="napis">Ulica i numer domu: </span>
+                            <input type="text" class="form-control" name="street" id="street" required>
+                        </div>
+                        <div class="box">
+                            <span class="postcode">Kod Pocztowy: </span>
+                            <input type="text" class="form-control" name="postcode" id="postcode" required>
+                        </div>
+                        <div class="box">
+                            <span class="napis">Miasto: </span>
+                            <input type="text" class="form-control" name="city" id="city" required>
+                        </div>
+                        <div class="box">
+                            <span class="napis">NIP: </span>
+                            <input type="text" class="form-control" name="nip" id="nip">
+                        </div>
+
+                    <input type="hidden" name="duration_id" value="{{$lesson->duration_id}}">
+                    <input type="hidden" name="jezyk" value="{{$lesson->language_id}}">
+                    <input type="hidden" name="rodzaj" value="{{$lesson->type_id}}">
+                    <input type="hidden" name="lectorId" value="{{$lector->id}}">
+                    <input type="hidden" name="ile" value="{{$lesson->amount_of_lessons}}">
+                    <input type="hidden" name="zajecia" value="1">
+                    <input type="hidden" name="price" value="{{$lesson->price*$lesson->amount_of_lessons}}">
+                    <input type="hidden" name="lessonId" value="{{$lesson->id}}">
+                    <input type="hidden" name="title" value="{{$lesson->title}}">
+                    <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
+                    <input type="button" class="btn btn-primary mb-3 close" id="buyButton" value="ANULUJ">
+                </form>
+                    <button class="btn btn-secondary SButton open">Zarezerwuj i zapłać</a>
             </div>
     
     </div>
@@ -72,15 +123,22 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 
 <script>
+
     $(document).ready(function () {
         
         $('.langInp').click(function() {
             check(event,1);
         });
+        $('.close').click(function() {
+            document.getElementById('buyForm').style.display="none";
+        });
+        $('.open').click(function() {
+            document.getElementById('buyForm').style.display="block";
+        });
         $('.typeInp').click(function() {
             check(event,2);
         });
-
+       
         function check(e,type) {
             let id ='';
             let class1 = '';

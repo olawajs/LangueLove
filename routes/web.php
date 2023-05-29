@@ -40,7 +40,7 @@ Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'se
 Route::post('sendCompany', [App\Http\Controllers\MainController::class, 'sendCompanyMail'])->name('sendCompany'); 
 Route::get('consultation', [App\Http\Controllers\MainController::class, 'showForm'])->name('consultation'); 
 Route::get('forCompanies', [App\Http\Controllers\MainController::class, 'showForm2'])->name('forCompanies'); 
-Route::get('getCalendar', [App\Http\Controllers\CalendarController::class, 'myCalendar'])->name('getCalendar'); 
+Route::get('getMyCalendar', [App\Http\Controllers\CalendarController::class, 'myCalendar'])->name('getMyCalendar'); 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes(
