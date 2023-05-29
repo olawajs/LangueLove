@@ -1,4 +1,3 @@
-<!doctype html>
 <footer class="footer">
 <div class="footCE">
     <div>© Langue Love Spółka Cywilna </div>
