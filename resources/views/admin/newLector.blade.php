@@ -1,5 +1,4 @@
-
-<!DOCTYPE HTML>
+<!DOCTYPE HTML> 
 @extends('layouts.app')
 <style>
 .inputDIV {
