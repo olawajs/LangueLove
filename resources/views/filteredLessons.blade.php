@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     <div>
-                        <div>{{$l->description}}</div>
+                        <div>{!! $l->description !!}</div>
 
                     </div>
                     <div>
