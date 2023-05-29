@@ -128,7 +128,7 @@ h2{
                     </div>
                     <div class="form-group col-md-12">
                         <label for="description">Opis</label>
-                        <textarea class="form-control" id="description" name="description" required></textarea>
+                        <textarea class="form-control" id="description" name="description"></textarea>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="style">Styl nauczania</label>
