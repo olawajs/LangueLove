@@ -218,7 +218,7 @@ var fileInput = document.getElementById('file_input');
 fileInput.addEventListener("change", () => {
 
 div = document.createElement("div");
-
+ 
 for(let file of fileInput.files) {
     var image = file
     if (image) {
