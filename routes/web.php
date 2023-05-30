@@ -66,6 +66,7 @@ Route::get('admin/prices', [App\Http\Controllers\Admin\EditInfo::class, 'getPric
 Route::get('admin/lectors', [App\Http\Controllers\LectorController::class, 'showLectors'])->name('lectors');
 Route::get('admin/newLector', [App\Http\Controllers\LectorController::class, 'NewLector'])->name('newLector');
 Route::POST('admin/addLector', [App\Http\Controllers\LectorController::class, 'AddLector'])->name('addLector');
+Route::POST('admin/editLector', [App\Http\Controllers\LectorController::class, 'EditLector'])->name('editLector');
 Route::GET('admin/lectorData/{id}', [App\Http\Controllers\LectorController::class, 'getLector'])->name('getLector');
 Route::GET('admin/getSetup/{id}', [App\Http\Controllers\CalendarController::class, 'GetSetup'])->name('getSetup');
 Route::GET('getCalendar/{id}', [App\Http\Controllers\CalendarController::class, 'GetCalendar'])->name('getCalendar');

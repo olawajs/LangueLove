@@ -137,11 +137,11 @@ input[type=time] {
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <div class="justify-content-center classicDIV" id="topper">
             <h2>Karta lektora</h2>
-            <form method="POST" action="{{ route('addLector') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('editLector') }}" enctype="multipart/form-data">
             @csrf
                 <div class="FormContainer">
                     <div class="inputDIV">
-                        <input type="file" name="photo" id="file_input" class="file_upload" required>
+                        <input type="file" name="photo" id="file_input" value="" class="file_upload">
                         <div id="gallery">
                             <div>
                                 <img src="<?php echo asset("images/lectors/{$lector[0]->photo}")?>" width="200">

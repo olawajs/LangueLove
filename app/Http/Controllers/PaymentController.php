@@ -104,7 +104,7 @@ class PaymentController extends Controller
             $desc = $request->title;
         }
 
-        if($zajecia == 1){
+        if($zajecia != 1){
             for($i=0; $i<=$ile; $i++){
                 $event = new CalendarEvent;
                 $event->start = $start2;
