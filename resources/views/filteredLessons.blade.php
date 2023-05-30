@@ -86,7 +86,7 @@
     <div class="content">
         @foreach ($lessons as $lesson)
             <div class="row justify-content-center searchedDIV">
-                <div class="searchFoto"><img src="/images/lessons/{{$lesson->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
+                <div class="searchFoto"><img src="/images/lessons/{{$lesson->photo}}" onerror="this.onerror=null;this.src='/images/lectors/{{ App\Models\Lector::find($lesson->lector_id)->photo}}';" style='width:190px; height: 190px; object-fit: cover;'></div>
                 <div class="searchFText">
                     <div>
                         <div class="STitle" style="gap: 15px;"><b>{{$lesson->title}}</b> <span>Język {{ App\Models\Language::find($lesson->language_id)->name}} <i class="flag flag-{{ App\Models\Language::find($lesson->language_id)->short}}"></i></span></div>
@@ -109,7 +109,7 @@
                         do: {{ \Carbon\Carbon::parse(App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->first()->start)->format('d.m')}}
                     </div>
                     <div>
-                        @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->get() as $date)
+                        @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->take(5)->get() as $date)
                             <div class="SdateDiv">{{ \Carbon\Carbon::parse($date->start)->locale('pl')->dayName}} {{ \Carbon\Carbon::parse($date->start)->format('H:i')}}</div>
                         @endforeach
                     </div>

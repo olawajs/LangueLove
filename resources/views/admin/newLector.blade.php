@@ -126,18 +126,7 @@ h2{
                         <label for="education">Wykształcenie</label>
                         <textarea class="form-control" id="education" name="education" required></textarea>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="description">Opis</label>
-                        <textarea class="form-control" id="description" name="description"></textarea>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="style">Styl nauczania</label>
-                        <textarea class="form-control" id="style" name="style"></textarea>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="levels">Levele: </label>
-                        <textarea class="form-control" id="levels" name="levels" required></textarea>
-                    </div>
+
                     <div class="form-group col-md-12">
                         <label for="street">Ulica i numer domu</label>
                         <input class="form-control" id="street" name="street" required placeholder="Ulica i numer domu">
@@ -155,6 +144,20 @@ h2{
                 </div>
                 
             </div>  
+            <div class="FormContainer">
+                <div class="form-group col-md-12">
+                        <label for="description">Opis</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="style">Styl nauczania</label>
+                        <textarea class="form-control" id="style" name="style"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="levels">Levele: </label>
+                        <textarea class="form-control" id="levels" name="levels"></textarea>
+                    </div>
+            </div>
             <input type="hidden" name="languageAmount" id="languageAmount" value="1">
             <button type="submit" class="btn btn-primary col-md-12">Zapisz</button>
         </form>
@@ -180,6 +183,26 @@ h2{
 <script>
   tinymce.init({
     selector: 'textarea#description', 
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: true,
+    setup: function(ed) {
+        ed.on('submit', function(e) { ed.save(); });
+    }
+  });
+  tinymce.init({
+    selector: 'textarea#levels', 
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: true,
+    setup: function(ed) {
+        ed.on('submit', function(e) { ed.save(); });
+    }
+  });
+  tinymce.init({
+    selector: 'textarea#style', 
     skin: 'bootstrap',
     plugins: 'lists, link, image, media',
     toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',

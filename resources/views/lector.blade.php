@@ -31,12 +31,12 @@
                     <div>
                         <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
                         <div>
-                        <div class="SType" style="margin: 10px;">
-                            @foreach ($levels as $d)
-                                    <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
-                            @endforeach
-                        </div>
-                            <div>{{$lector->description}}</div>
+                            <div class="SType" style="margin: 10px;">
+                                @foreach ($levels as $d)
+                                        <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
+                                @endforeach
+                            </div>
+                           
                         
                         </div> 
                     </div>
@@ -45,9 +45,15 @@
                         <div id="calendar" style="width: 800px"></div>
                     </div>
                 </div>
-                
                 <div class="LessonText">
+                    <p>Opis: </p>
+                    <div>{!! $lector->description !!}</div>
 
+                    <p>Poziomy nauki: </p>
+                    <div>{!! $lector->levele !!}</div>
+
+                    <p>Styl nauczania: </p>
+                    <div>{!! $lector->style !!}</div>
                    
                 </div>
                     <!-- <a class="btn btn-secondary SButton" onclick="">Zarezerwuj i zapłać</a> -->
