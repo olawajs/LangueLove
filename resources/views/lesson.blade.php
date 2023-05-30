@@ -35,7 +35,7 @@
                     <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
                     <div>
                         <div><b>{{$lector->name}}</b></div>
-                        <div>{{$lector->description}}</div>
+                        <div>{!!$lector->description!!}</div>
                        
                     </div> 
                     <div>
