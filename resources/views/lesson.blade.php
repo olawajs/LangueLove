@@ -60,14 +60,14 @@
                     <hr>
                     <div>
                         <h6><b>Opis:</b></h6>
-                        <span>{{$lesson->description}}</span>
+                        <span>{!!$lesson->description!!}</span>
                     </div>
                     @endif
                     @if($lesson->draft != '')
                     <hr>
                     <div>
                         <h6><b>Plan zajęć:</b></h6>
-                        <span>{{$lesson->draft}}</span>
+                        <span>{!!$lesson->draft!!}</span>
                     </div>
                     @endif
                    
