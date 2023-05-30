@@ -85,7 +85,7 @@ Route::post('/payment/buy', [App\Http\Controllers\PaymentController::class, 'buy
 
 //dla maili
 Route::get('/email', function () {
-    Mail::to('olawjs@gmail.com')->send(new WelcomeMail());
+    // Mail::to('olawjs@gmail.com')->send(new WelcomeMail());
     return new WelcomeMail();
 });
 
