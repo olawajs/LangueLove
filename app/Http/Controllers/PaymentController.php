@@ -110,7 +110,7 @@ class PaymentController extends Controller
                 $event->start = $start2;
                 $event->end = $end;
                 $event->lector_id = $lectorId;
-                $event->type = $type_id;
+                $event->type = 3;
                 $event->lesson_id =  $lessonId;
                 $event->save();
 
@@ -135,12 +135,12 @@ class PaymentController extends Controller
                 $calendar->calendar_id = $event->id;
                 $calendar->user_id = Auth::user()->id;
                 $calendar->comment = '';
-                $calendar->status = 1;
+                $calendar->status = 3;
                 $calendar->lector_accept = 0;
                 $calendar->student_accept = 1;
                 $calendar->save();
             }
-            // $eventId =  $request->calendarId;
+            $eventId =  $request->calendarId;
         }
        
 
@@ -152,7 +152,6 @@ class PaymentController extends Controller
         // $calendar->lector_accept = 0;
         // $calendar->student_accept = 1;
         // $calendar->save();
-        
 
         $link = 'https://sandbox.przelewy24.pl/';
         $merchant_id = 207228;

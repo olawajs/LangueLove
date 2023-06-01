@@ -194,16 +194,16 @@
                 }else{
                     let text = '';
                     if(typeof info.jsEvent.explicitOriginalTarget === "undefined"){
-                        text=info.jsEvent.toElement.innerText;
+                        text=info.jsEvent.target.textContent;
                     }
                     else{
                         text=info.jsEvent.explicitOriginalTarget.textContent;
                     }
                    if(text == 'Wolny termin' ){
-                        let data = info.date;
-                        document.getElementById('data').value = data.getFullYear() + "-" +((data.getMonth()).length != 2 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" + data.getDate();
+                   
+                        let data = info.date; 
+                        document.getElementById('data').value = data.getFullYear() + "-" +((data.getMonth()).length != 2 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" + ((data.getDate()).length != 2 ? "0" + (data.getDate()) : (data.getDate())) ;
                         document.getElementById('godzina').value = data.getHours() + ":" +((data.getMinutes()) <= 9 ? "0" + (data.getMinutes()) : (data.getMinutes()));
-                        // console.log('date: ' + Date.parse(info.dateStr).toISOString());
                         OpenModal('BuyModal');
                     } 
                 }
