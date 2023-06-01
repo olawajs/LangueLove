@@ -46,6 +46,7 @@ Route::get('getMyCalendar', [App\Http\Controllers\CalendarController::class, 'my
 Auth::routes(
    
 );
+Route::get('test', [App\Http\Controllers\Admin\EditInfo::class, 'Test'])->name('test');
 Route::get('admin/languages', [App\Http\Controllers\Admin\EditInfo::class, 'getLanguages'])->name('languages');
 Route::get('login/{provider}', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider']);
 Route::get('login/{provider}/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback']);
