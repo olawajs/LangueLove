@@ -82,9 +82,11 @@ class MainController extends Controller
     {
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
+        $lectors = Lector::all();
         return view('home',[
                 'languages' => $langs,
                 'types' => $types,
+                'lectors' => $lectors,
             ]);
     }
     public function count(Request $request)

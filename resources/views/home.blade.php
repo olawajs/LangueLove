@@ -1,4 +1,9 @@
 @extends('layouts.app')
+<!DOCTYPE html>
+<!-- <link rel="stylesheet" href="owlCarousel/owl.carousel.min.css">
+<link rel="stylesheet" href="owlCarousel/owl.theme.default.min.css"> -->
+<link href="{{ asset('css/owlCarousel/owl.carousel.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/owlCarousel/owl.theme.default.min.css') }}" rel="stylesheet">
 
 @section('content')
 <style>
@@ -12,6 +17,85 @@
         padding: 5px;
         margin: auto;
     }
+    .smallText{
+        color: #969696;
+    }
+    .video-mask{
+    width: 320px;
+    border-radius: 10px; 
+    overflow: hidden; 
+    }
+    .lectorTab{
+        border: 1px solid grey;
+    }
+    /*Magic card*/
+.card {
+ width: 220px;
+ height: 254px;
+ background: #f5f5f5;
+ overflow: visible;
+ box-shadow: 0 5px 20px 2px rgba(0,0,0,0.1);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.card-info {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 2em;
+ padding: 0 1rem;
+ width: 100%;
+ height: 190px;
+
+}
+
+.card-img {
+ --size: 100px;
+ width: var(--size);
+ height: var(--size);
+ border-radius: 50%;
+ transform: translateY(-50%);
+ position: relative;
+ transition: all .3s ease-in-out;
+ margin-bottom: -40px;
+}
+
+.card-img::before {
+ content: "";
+ border-radius: inherit;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 90%;
+ height: 90%;
+ transform: translate(-50%, -50%);
+
+}
+
+/*Text*/
+.text-title {
+ text-transform: uppercase;
+ font-size: 0.75em;
+ color: #42caff;
+ letter-spacing: 0.05rem;
+}
+
+.text-body {
+ font-size: .8em;
+ text-align: center;
+ color: #6f6d78;
+ font-weight: 400;
+ font-style: italic;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+
+.owl-stage-outer{
+    padding: 50px;
+}
+
 </style>
 <div class="container">
     <div class="row justify-content-center classicDIV">
@@ -85,7 +169,74 @@
         
     </div>
     <div class="content">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+    <!--  -->
+    <div class="row justify-content-center classicDIV p-5 mt-3 mb-3">
+        <div>
+            <h6 class="text-center smallText">OFERTA</h6>
+        </div>
+        <div class="mb-2">
+            <h2 class="text-center">Ucz się języków i <span class="underline-magenta">odkrywaj świa na nowo</span></h2>
+        </div>
+        <div class="d-flex p-2 justify-content-around flex-wrap">
+            <div class="col-md-5 d-flex p-2 justify-content-around align-items-center videoDot videoContainer" >
+                <div class="video-mask">
+                    <video width="320" height="170" class="rounded" autoplay muted>
+                        <source src="/video/homePage.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <!-- <div class="circle-magenta" id="circle" style="bottom: -79px; right: -37px;"></div> -->
+                <!-- <div class="circle-magenta" style="bottom: -79px; right: -37px;"></div> -->
+            </div>
+            <div class="col-md-5" style="text-align: center;">
+               <p>
+                    W jaki sposób uczysz się najefektywniej? <br><br>
+                    Prowadzimy zarówno zajęcia indywidualne, w parach, jak i kursy w małych grupach (max. 6 osób). 
+                    Dzięki temu lektor poświęci Ci wystarczającą ilość <b>czasu</b>, abyś faktycznie wyniósł wiele z każdej lekcji. 
+                    Formę zajęć dostosowujemy do <b>Twojego celu</b>. <br>
+                    Korzystamy także z <b>autentycznych tekstów</b> (z prasy, wiadomości, literatury, blogów, social mediów, podcastów). 
+                    Będziesz mieć na bieżąco kontakt nie tylko z wiedzą teoretyczną, ale także z <b>codziennym językiem</b> i często stosowanym słownictwem.
+               </p>
+                <div class="col-md-4">
+                <button class="btn btn-primary"><a class="footLink" href="https://languelove.pl/priceList/search/1/1" >Zapisz się na kurs</a></button>
+                </div>
+            </div>
+        </div>
+      
+                
+   
+    </div>
+    <!--  -->
+    <div id="arrows">
+
+    </div>
+    <div class="owl-carousel">
+    @foreach ($lectors as $lector)
+        <div class="card">
+            <div class="card-img" style="background: url('/images/lectors/{{$lector->photo}}'); background-position: center;background-size: 105px;background-repeat: no-repeat;"></div>
+            <div class="card-info">
+                <span class="text-body">
+                {!!  \Illuminate\Support\Str::limit(strip_tags($lector->description), 200,'.....')  !!}
+                </span>
+                <p class="text-title">Poznaj mnie -></p>
+            </div>
+        </div>
+
+        <!-- <div class="lectorTab">
+            <div class="photo">
+                <img  src="/images/lectors/{{$lector->photo}}">
+            </div>
+            <div>{{$lector->name}}</div>
+            <div class="lectorText">{!! $lector->description !!}</div>
+        </div> -->
+    @endforeach
+       
+    </div>
+
+
+
+    <!--  -->
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
                 <div class="col">
                     <div class="card h-100" style="background-color: var(--bs-primary);color: white; border: none;">
                         <div class="card-body">
@@ -129,7 +280,7 @@
                                 kolejnym krokiem w stronę <b>płynności językowej</b>.
                             </p>
                         </div> 
-                        <div class="circle-magenta" style="bottom: -79px; right: -37px;"></div>
+                        <div class="circle-magenta" id="circle" style="bottom: -79px; right: -37px;"></div>
                     </div>
                 </div>
             </div>
@@ -138,9 +289,32 @@
 </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+<script src="{{ asset('js/owlCarousel/owl.carousel.min.js') }}" defer></script>
+
 <script>
     $(document).ready(function () {
-        
+     
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                loop:true,
+                margin:10,
+                center:true,
+                nav:true,
+                navContainer: document.getElementById('arrows'),
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:4
+                    }
+                }
+            });
+        });
+
         $('.langInp').click(function() {
             check(event,1);
         });
@@ -187,5 +361,5 @@
 
         }
     })
-   
+
 </script>
