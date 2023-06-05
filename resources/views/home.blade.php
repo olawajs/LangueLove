@@ -93,7 +93,7 @@
 }
 
 .owl-stage-outer{
-    padding: 50px;
+    padding: 50px 0px;
 }
 .owl-prev,.owl-next{
     background: none;
@@ -104,6 +104,10 @@
     margin-right: 0;
     width: fit-content;
     margin-top: -32px;
+}
+#carousel1{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
 }
 
 </style>
@@ -198,12 +202,12 @@
                 <!-- <div class="circle-magenta" id="circle" style="bottom: -79px; right: -37px;"></div> -->
                 <!-- <div class="circle-magenta" style="bottom: -79px; right: -37px;"></div> -->
             </div>
-            <div class="col-md-5" style="text-align: center;">
+            <div class="col-md-5" style="text-align: justify;">
                <p>
-                    W jaki sposób uczysz się najefektywniej? <br><br>
+                    W jaki sposób uczysz się najefektywniej? <br>
                     Prowadzimy zarówno zajęcia indywidualne, w parach, jak i kursy w małych grupach (max. 6 osób). 
                     Dzięki temu lektor poświęci Ci wystarczającą ilość <b>czasu</b>, abyś faktycznie wyniósł wiele z każdej lekcji. 
-                    Formę zajęć dostosowujemy do <b>Twojego celu</b>. <br>
+                    Formę zajęć dostosowujemy do <b>Twojego celu</b>.
                     Korzystamy także z <b>autentycznych tekstów</b> (z prasy, wiadomości, literatury, blogów, social mediów, podcastów). 
                     Będziesz mieć na bieżąco kontakt nie tylko z wiedzą teoretyczną, ale także z <b>codziennym językiem</b> i często stosowanym słownictwem.
                </p>
@@ -215,33 +219,7 @@
    
     </div>
     <!--  -->
-    <div>
-        <div>
-            <h6 class="text-center smallText">NASI PROWADZĄCY</h6>
-        </div>
-        <div class="mb-2">
-            <h2 class="text-center">Poznaj naszych prowadzących</h2>
-        </div>
-        <div id="arrows"></div>
-        <div class="owl-carousel">
-        @foreach ($lectors as $lector)
-            <div class="card cardLector">
-                <div class="card-img" style="background: url('/images/lectors/{{$lector->photo}}'); background-position: center;background-size: 105px;background-repeat: no-repeat;"></div>
-                <div class="card-info">
-                    <span class="text-body">
-                    {!!  \Illuminate\Support\Str::limit(strip_tags($lector->description), 200,'.....')  !!}
-                    </span>
-                    <p class="text-title"><a href="{{ route('showLector',$lector->id) }}">Poznaj mnie &#8594;</a></p>
-                </div>
-            </div>
-        @endforeach
-        </div>
-    </div>
-    
-
-
-    <!--  -->
-        <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
                 <div class="col">
                     <div class="card h-100" style="background-color: var(--bs-primary);color: white; border: none;">
                         <div class="card-body">
@@ -289,9 +267,190 @@
                     </div>
                 </div>
             </div>
+    <!--  -->
+
+    <div class="row justify-content-center classicDIV pt-5 pb-5  mt-3 mb-3">
+        <div>
+            <h6 class="text-center smallText">NASI PROWADZĄCY</h6>
+        </div>
+        <div class="mb-2">
+            <h2 class="text-center">Poznaj naszych prowadzących</h2>
+        </div>
+        <div id="arrows"></div>
+        <div class="owl-carousel" id="carousel1">
+        @foreach ($lectors as $lector)
+            <div class="card cardLector">
+                <div class="card-img" style="background: url('/images/lectors/{{$lector->photo}}'); background-position: center;background-size: 105px;background-repeat: no-repeat;"></div>
+                <div class="card-info">
+                    <span class="text-body">
+                    {!!  \Illuminate\Support\Str::limit(strip_tags($lector->description), 200,'.....')  !!}
+                    </span>
+                    <p class="text-title"><a href="{{ route('showLector',$lector->id) }}">Poznaj mnie &#8594;</a></p>
+                </div>
+            </div>
+        @endforeach
+        </div>
+    </div>
+    
+
+
+    <!--  -->
+    <div class="pb-5 pt-5 mt-3 mb-3">
+        <div>
+            <h6 class="text-center smallText">OPINIE</h6>
+        </div>
+        <div class="mb-2">
+            <h2 class="text-center">Sprawdź <span class="underline-blue">co mówią </span>o nas studenci</h2>
+        </div>
+        <div id="arrows2"></div>
+        <div class="owl-carousel owl-theme" id="carousel2">
+            <!-- 1 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+                <div class="col-md-5 TextComment">
+                    <p>
+                    Jestem totalnie zadowolona. 😃 Szkoła była moim wybawieniem. 
+                    Po pierwsze właścicielki - wyrozumiałe i zawsze skore do pomocy. 
+                    Tryska od nich energia i aż chce się uczyć, dlatego moja motywacja nie maleje. 
+                    Po drugie szkoła uczy aż 10 języków, co rzadko się zdarza. 
+                    Mogę się tutaj uczyć kilku języków. Obecnie uczę się angielskiego z lektorką Anią, 
+                    w przyszłości planuję także powrócić do hiszpańskiego i może rozpocząć naukę kolejnego języka... kto wie. 
+                    Na pewno Ania zaraziła mnie motywacją, bo chyba pierwszy raz w mojej 10-letniej nauce angielskiego, czuję,
+                    że te zajęcia to prawdziwy challenge. Totalnie dopasowane do moich potrzeb. 
+                    Sporo się uczę i z zajęć na zajęcia podnoszę swój poziom. A taki właśnie był mój cel! 
+                    Po trzecie social media, które są skarbnicą wiedzy, inspiracji i humoru na temat nauki języków. 
+                    Polecam LangueLove wszystkim! 💜
+                    </p>
+                    <p><i>Wiktoria</i></p>
+                 </div> 
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia2.jpg">
+                    </div>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia1.jpg">
+                    </div>
+                </div>
+                <div class="col-md-5 TextComment">
+                    <p>
+                         I started learning Polish with LangueLove and so far so good! Highly recommended.
+                    </p>
+                    <p><i>Furkan</i></p>
+                 </div> 
+            </div>
+            <!-- 3 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+                <div class="col-md-5 TextComment">
+                    <p>
+                    The best school and teacher ever had. All perfect. Lessons are always interested and fully personalised.
+                     Amazing atmosphere throughout the time of lessons and (what’s the most important) the real language skills improvement. 
+                    I do recommend to everybody!
+                    </p>
+                    <p><i>Alicja</i></p>
+                 </div> 
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia3.jpg">
+                    </div>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia6.jpg">
+                    </div>
+                </div>
+                <div class="col-md-5 TextComment">
+                    <p>
+                    I stongly recommend the school as it distinguish itself by adapting classes to personal interests, 
+                    a lot of time dedicated for conversations, unconventional exercises. 
+                    Last but not least, stuff is really friendly and supportive 😉
+                    <p><i>Rafał</i></p>
+                 </div> 
+            </div>
+            <!-- 5 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+                <div class="col-md-5 TextComment">
+                    <p>
+                    Moja przyjaciółka znalazła Wiktorię na instagramie i od tego zaczęła się wspólna przygoda
+                     - chciałyśmy odświeżyć podstawy i kontynuować naukę. 
+                     Odbywa się to w przesympatycznej atmosferze a w tym samym czasie niesamowicie profesjonalnie - 
+                     każda lekcja jest w pełni przygotowana i przemyślana.
+                     Dziękuję za wszystko i czekam na więcej! Grazie!
+                    </p>
+                    <p><i>Ola</i></p>
+                 </div> 
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia7.jpg">
+                    </div>
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia1.jpg">
+                    </div>
+                </div>
+                <div class="col-md-5 TextComment">
+                    <p>
+                    Bardzo polecam, Weronika jest świetną nauczycielką. 
+                    Lekcje nie są nudne a wręcz przeciwnie, fajne podejście i luźna atmosfera.
+                    <p><i>Konrad</i></p>
+                 </div> 
+            </div>
+            <!-- 7 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+            <div class="col-md-5 TextComment">
+                    <p>
+                    Już od kilku miesięcy uczę się włoskiego z Wiktorią. Jestem bardzo zadowolona ze sposobu prowadzenia lekcji. 
+                    Zajęcia nie są monotonne, Wiktoria często robi lekcje tematyczne, 
+                    a materiały są estetycznie przygotowane i przede wszystkim dużo mówimy po włosku! 
+                    Oczywiście to wszystko odbywa się w bardzo miłej i przyjaznej atmosferze, bez żadnego stresu.
+                     Dla mnie efekty są zadowalające bo z każdym kolejnym wyjazdem do Włoch coraz częściej używam tego języka zamiast angielskiego.
+                    </p>
+                    <p><i>Natalia</i></p>
+                 </div> 
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia5.jpg">
+                    </div>
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="item d-flex p-2 justify-content-around flex-wrap">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                    <div class="video-mask">
+                        <img class="rounded"  src="/images/opinions/opinia8.jpg">
+                    </div>
+                </div>
+                <div class="col-md-5 TextComment">
+                    <p>
+                    Bardzo polecam tę szkołę językową. Uczę się języka włoskiego. Zajęcia mam z lektorką Adą- 
+                    lekcje z nią to sama przyjemność. Jest bardzo kompetentna i potrafi bardzo dobrze wytłumaczyć gramatykę.
+                     Jeśli ktoś już próbował różnych sposobów nauki języka włoskiego, to tutaj się nie zawiedzie. Serdecznie polecam :)
+                    <p><i>Sylwia</i></p>
+                 </div> 
+            </div>
+            <!-- 9 -->
+            <!-- 10 -->
+            <!-- 11 -->
+            <!-- 12 -->
+            <!-- 13 -->
+
+        </div>
+    <!--  -->
+       
     </div>
     
 </div>
+<div class="circle-blue" id="circle2" ></div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 <script src="{{ asset('js/owlCarousel/owl.carousel.min.js') }}" defer></script>
@@ -300,7 +459,7 @@
     $(document).ready(function () {
      
         $(document).ready(function(){
-            $(".owl-carousel").owlCarousel({
+            $("#carousel1").owlCarousel({
                 loop:true,
                 margin:10,
                 center:true,
@@ -316,6 +475,27 @@
                     },
                     1000:{
                         items:4
+                    }
+                }
+            });
+            $("#carousel2").owlCarousel({
+                loop:true,
+                margin:10,
+                center:true,
+                nav:true,
+                navText:['&#8592;','&#8594;'],
+                navContainer: document.getElementById('arrows2'),
+                autoplay: true,
+                autoplayTimeout: 5000,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:1
+                    },
+                    1000:{
+                        items:1
                     }
                 }
             });

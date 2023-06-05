@@ -11207,6 +11207,14 @@ footer{
   border-radius: 50%;
   position: absolute;
 }
+.circle-blue{
+  background: var(--bs-primary);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: fixed;
+  top: -1000px;
+}
 .videoContainer{
   width: 400px;
   height: 220px;
@@ -11215,6 +11223,23 @@ footer{
   background: -moz-element(#circle);
   background-repeat: no-repeat;
   background-position: bottom 10px right;
+  background-size: 140px;
+}
+.imgDotRed{
+  background: -moz-element(#circle);
+  background-repeat: no-repeat;
+  background-position: bottom 10px right;
+  background-size: 140px;
+}
+.TextComment{
+  display: flex;
+  text-align: center;flex-flow: column;
+  justify-content: center;
+}
+.imgDotBlue{
+  background: -moz-element(#circle2);
+  background-repeat: no-repeat;
+  background-position: bottom 1px left;
   background-size: 140px;
 }
 .circle-blue{
