@@ -19,6 +19,8 @@ class Lector extends Model
         'street',
         'post_code',
         'id_user',
-        'id_language'
+        'id_language',
+        'phone',
+        'skype'
     ];
 }

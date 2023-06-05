@@ -141,6 +141,16 @@ h2{
                             <input type="text" class="form-control" id="city" name="city" placeholder="Miasto" required>
                         </div>
                     </div>
+                    <div class="TwoColumns">
+                        <div class="form-group col-md-5">
+                            <label for="phone">Telefon</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefon">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="skype">Skype</label>
+                            <input type="text" class="form-control" id="skype" name="skype" placeholder="Skype link" required>
+                        </div>
+                    </div>
                 </div>
                 
             </div>  

@@ -50,7 +50,10 @@
                         </ul>
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ms-auto">
+                        <ul class="navbar-nav ms-auto">  
+                            <li class="nav-item consultation">
+                                <a class="nav-link" style="color: var(--bs-primary); border: 2px solid var(--bs-primary); padding: 1px; border-radius: 6px;" href="{{ route('consultation') }}">Darmowa konsultacja</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('priceList') }}">Cennik</a>
                             </li>
@@ -59,9 +62,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('about') }}">O nas</a>
-                            </li>
-                            <li class="nav-item consultation">
-                                <a class="nav-link" style="color: var(--bs-primary); border: 2px solid var(--bs-primary); padding: 1px; border-radius: 6px;" href="{{ route('consultation') }}">Darmowa konsultacja</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact') }}">Kontakt</a>

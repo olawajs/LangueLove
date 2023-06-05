@@ -27,6 +27,8 @@ class CreateLectorsTable extends Migration
             $table->string('street');
             $table->integer('id_user');
             $table->string('post_code');
+            $table->string('phone')->nullable();
+            $table->string('skype');
             $table->longText('style')->nullable();
             $table->longText('levels')->nullable();
             $table->boolean('active')->default(true);

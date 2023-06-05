@@ -29,7 +29,7 @@
         border: 1px solid grey;
     }
     /*Magic card*/
-.card {
+.cardLector {
  width: 220px;
  height: 254px;
  background: #f5f5f5;
@@ -94,6 +94,16 @@
 
 .owl-stage-outer{
     padding: 50px;
+}
+.owl-prev,.owl-next{
+    background: none;
+    border: none;
+}
+#arrows{
+    margin-left: auto;
+    margin-right: 0;
+    width: fit-content;
+    margin-top: -32px;
 }
 
 </style>
@@ -175,7 +185,7 @@
             <h6 class="text-center smallText">OFERTA</h6>
         </div>
         <div class="mb-2">
-            <h2 class="text-center">Ucz się języków i <span class="underline-magenta">odkrywaj świa na nowo</span></h2>
+            <h2 class="text-center">Ucz się języków i <span class="underline-magenta">odkrywaj świat na nowo</span></h2>
         </div>
         <div class="d-flex p-2 justify-content-around flex-wrap">
             <div class="col-md-5 d-flex p-2 justify-content-around align-items-center videoDot videoContainer" >
@@ -197,9 +207,7 @@
                     Korzystamy także z <b>autentycznych tekstów</b> (z prasy, wiadomości, literatury, blogów, social mediów, podcastów). 
                     Będziesz mieć na bieżąco kontakt nie tylko z wiedzą teoretyczną, ale także z <b>codziennym językiem</b> i często stosowanym słownictwem.
                </p>
-                <div class="col-md-4">
                 <button class="btn btn-primary"><a class="footLink" href="https://languelove.pl/priceList/search/1/1" >Zapisz się na kurs</a></button>
-                </div>
             </div>
         </div>
       
@@ -207,32 +215,29 @@
    
     </div>
     <!--  -->
-    <div id="arrows">
-
-    </div>
-    <div class="owl-carousel">
-    @foreach ($lectors as $lector)
-        <div class="card">
-            <div class="card-img" style="background: url('/images/lectors/{{$lector->photo}}'); background-position: center;background-size: 105px;background-repeat: no-repeat;"></div>
-            <div class="card-info">
-                <span class="text-body">
-                {!!  \Illuminate\Support\Str::limit(strip_tags($lector->description), 200,'.....')  !!}
-                </span>
-                <p class="text-title">Poznaj mnie -></p>
-            </div>
+    <div>
+        <div>
+            <h6 class="text-center smallText">NASI PROWADZĄCY</h6>
         </div>
-
-        <!-- <div class="lectorTab">
-            <div class="photo">
-                <img  src="/images/lectors/{{$lector->photo}}">
+        <div class="mb-2">
+            <h2 class="text-center">Poznaj naszych prowadzących</h2>
+        </div>
+        <div id="arrows"></div>
+        <div class="owl-carousel">
+        @foreach ($lectors as $lector)
+            <div class="card cardLector">
+                <div class="card-img" style="background: url('/images/lectors/{{$lector->photo}}'); background-position: center;background-size: 105px;background-repeat: no-repeat;"></div>
+                <div class="card-info">
+                    <span class="text-body">
+                    {!!  \Illuminate\Support\Str::limit(strip_tags($lector->description), 200,'.....')  !!}
+                    </span>
+                    <p class="text-title"><a href="{{ route('showLector',$lector->id) }}">Poznaj mnie &#8594;</a></p>
+                </div>
             </div>
-            <div>{{$lector->name}}</div>
-            <div class="lectorText">{!! $lector->description !!}</div>
-        </div> -->
-    @endforeach
-       
+        @endforeach
+        </div>
     </div>
-
+    
 
 
     <!--  -->
@@ -300,6 +305,7 @@
                 margin:10,
                 center:true,
                 nav:true,
+                navText:['&#8592;','&#8594;'],
                 navContainer: document.getElementById('arrows'),
                 responsive:{
                     0:{
