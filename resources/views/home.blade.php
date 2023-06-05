@@ -109,6 +109,9 @@
     padding-right: 0px !important;
     padding-left: 0px !important;
 }
+.fotoContiner{
+    max-width: 550px;
+}
 
 </style>
 <div class="container">
@@ -322,7 +325,7 @@
                     </p>
                     <p><i>Wiktoria</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia2.jpg">
                     </div>
@@ -330,7 +333,7 @@
             </div>
             <!-- 2 -->
             <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia1.jpg">
                     </div>
@@ -352,7 +355,7 @@
                     </p>
                     <p><i>Alicja</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia3.jpg">
                     </div>
@@ -360,7 +363,7 @@
             </div>
             <!-- 4 -->
             <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia6.jpg">
                     </div>
@@ -385,7 +388,7 @@
                     </p>
                     <p><i>Ola</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia7.jpg">
                     </div>
@@ -393,7 +396,7 @@
             </div>
             <!-- 6 -->
             <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia1.jpg">
                     </div>
@@ -417,7 +420,7 @@
                     </p>
                     <p><i>Natalia</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia5.jpg">
                     </div>
@@ -425,7 +428,7 @@
             </div>
             <!-- 8 -->
             <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue" >
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
                     <div class="video-mask">
                         <img class="rounded"  src="/images/opinions/opinia8.jpg">
                     </div>

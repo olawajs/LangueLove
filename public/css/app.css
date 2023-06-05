@@ -11263,7 +11263,7 @@ footer{
   transform: scale(var(--ggs,1));
   width: 20px;
   height: 20px;
-  background-color: white;
+  background-color: white; 
   color: #3c0079;
   border-radius: 5px;
   padding: 1px;
