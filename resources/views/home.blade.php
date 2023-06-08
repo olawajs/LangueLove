@@ -282,7 +282,20 @@
         <div id="arrows"></div>
         <div class="owl-carousel" id="carousel1">
         @foreach ($lectors as $lector)
-            <div class="card cardLector">
+        <div class="card LectorCard">
+         <div class="LectorPhotoCard" style="background: url('/images/lectors/{{$lector->photo}}');
+  background-position: center;
+  background-size: 220px;
+  background-repeat: no-repeat;"></div>
+         <div style="margin: 24px 0px;"><h4 class="text-center"><b>{{$lector->name}}</b></h4></div>   
+         <div style="padding-left: 18px;">
+            @foreach (App\Models\LanguageLevel::where('lector_id',$lector->id)->get() as $d)
+                    <span><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>Język {{ App\Models\Language::find($d->language_id)->name}}</span><br>
+            @endforeach
+         </div>  
+         <div class="CardButton"><a href="{{ route('showLector',$lector->id) }}">Poznaj &#8594;</a></div> 
+        </div>
+            <!-- <div class="card cardLector">
                 <div class="card-img" style="background: url('/images/lectors/{{$lector->photo}}'); background-position: center;background-size: 105px;background-repeat: no-repeat;"></div>
                 <div class="card-info">
                     <span class="text-body">
@@ -290,7 +303,7 @@
                     </span>
                     <p class="text-title"><a href="{{ route('showLector',$lector->id) }}">Poznaj mnie &#8594;</a></p>
                 </div>
-            </div>
+            </div> -->
         @endforeach
         </div>
     </div>
@@ -474,9 +487,12 @@
                         items:1
                     },
                     600:{
-                        items:3
+                        items:2
                     },
                     1000:{
+                        items:3
+                    },
+                    1400:{
                         items:4
                     }
                 }

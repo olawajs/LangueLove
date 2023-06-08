@@ -110,7 +110,7 @@
                         do: {{ \Carbon\Carbon::parse(App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->first()->start)->format('d.m')}}
                     </div>
                     <div>
-                        @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->take(5)->get() as $date)
+                        @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->take(1)->get() as $date)
                             <div class="SdateDiv">{{ \Carbon\Carbon::parse($date->start)->locale('pl')->dayName}} {{ \Carbon\Carbon::parse($date->start)->format('H:i')}}</div>
                         @endforeach
                     </div>
