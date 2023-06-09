@@ -11022,6 +11022,11 @@ option{
   color: gray;
   font-size: smaller;
   margin-top: -4px;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 .SPrice{
   background-color: #EBEBEB;

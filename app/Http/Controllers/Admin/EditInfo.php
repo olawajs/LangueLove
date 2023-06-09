@@ -8,6 +8,7 @@ use App\Models\Language;
 use App\Models\PriceType;
 use App\Models\LessonDuration;
 use App\Models\LessonType;
+use App\Models\LanguageLevel;
 use App\Models\Price;
 use App\Models\DiscountPacket;
 use App\Models\CalendarEvent;
@@ -17,14 +18,10 @@ class EditInfo extends Controller
 {
     public function Test()
     {
-        $lesson = 3;
-        // $calendar = CalendarEvent::where('lesson_id',$lesson)->pluck('id')->toArray();
-        // $kupioneLekcje = EventUsers::whereIn('calendar_id',$calendar)->get();
-        $kupioneLekcje = App\Models\EventUsers::whereIn('calendar_id',App\Models\CalendarEvent::where('lesson_id',$lesson)->pluck('id')->toArray())
-        ->distinct('user_id')
-        ->pluck('user_id')->count();
+        $levels = LanguageLevel::where('lector_id',6)->distinct('language_id')->pluck('language_id');
+        
 
-       dd($kupioneLekcje);
+       dd($levels);
     }
     public function getLanguages()
     {

@@ -125,8 +125,12 @@
                     <div>
                         <div class="STitle" style="gap: 15px;"><b>{{$l->name}}</b> </div>
                         <div class="SType">
-                            @foreach (App\Models\LanguageLevel::where('lector_id',$l->id)->get() as $d)
-                                    <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
+                            @foreach (App\Models\LanguageLevel::where('lector_id',$l->id)->distinct('level')->pluck('level') as $d)
+                                <span class="SPrice">
+                                @foreach (App\Models\LanguageLevel::where('lector_id',$l->id)->where('level',$d)->get() as $f)
+                                    <i class="flag flag-{{ App\Models\Language::find($f->language_id)->short}}"></i>
+                                @endforeach
+                                  {{ $d}}</span>
                             @endforeach
                         </div>
                     </div>

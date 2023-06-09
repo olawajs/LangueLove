@@ -196,7 +196,7 @@
             <div class="col-md-5 d-flex p-2 justify-content-around align-items-center  videoContainer" style="position: relative;">
                 <div class="video-mask">
                     <video width="420" height="220" class="rounded" autoplay muted>
-                        <source src="/video/homePage.mp4" type="video/mp4">
+                        <source src="/video/homePage2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -226,7 +226,7 @@
     <!--  -->
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
                 <div class="col">
-                    <div class="card h-100" style="background-color: var(--bs-primary);color: white; border: none;">
+                    <div class="card " style="background-color: var(--bs-primary);color: white; border: none; hight: 660; width: 440px}">
                         <div class="card-body">
                             <h2 class="card-title">Nowoczesność</h2>
                             <p class="card-text">
@@ -241,7 +241,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card h-100" style="background-color: var(--bs-secondary); color: white;border: none;" >
+                    <div class="card" style="background-color: var(--bs-secondary); color: white;border: none;  aspect-ratio: 3/4; max-width: 440px" >
                         <div class="card-body">
                             <h2 class="card-title">Elastyczność</h2>
                             <p class="card-text">
@@ -256,7 +256,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card h-100" style="background-color: var(--bs-sandy);border: none; overflow: hidden">
+                    <div class="card" style="background-color: var(--bs-sandy);border: none; overflow: hidden;  aspect-ratio: 3/4; max-width: 440px">
                         <div class="card-body" style="z-index: 2">
                             <h2 class="card-title">Efekty i postępy</h2>
                             <p class="card-text">
@@ -291,8 +291,8 @@
   background-repeat: no-repeat;"></div>
          <div style="margin: 24px 0px;"><h4 class="text-center"><b>{{$lector->name}}</b></h4></div>   
          <div style="padding-left: 18px;">
-            @foreach (App\Models\LanguageLevel::where('lector_id',$lector->id)->get() as $d)
-                    <span><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>Język {{ App\Models\Language::find($d->language_id)->name}}</span><br>
+            @foreach (App\Models\LanguageLevel::where('lector_id',$lector->id)->distinct('language_id')->pluck('language_id') as $d)
+                    <span><i class="flag flag-{{ App\Models\Language::find($d)->short}}"></i>Język {{ App\Models\Language::find($d)->name}}</span><br>
             @endforeach
          </div>  
          <div class="CardButton"><a href="{{ route('showLector',$lector->id) }}">Poznaj &#8594;</a></div> 

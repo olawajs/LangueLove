@@ -110,7 +110,32 @@ h2{
                                             <option value="B2">B2</option>
                                             <option value="C1">C1</option>
                                             <option value="C2">C2</option>
+                                            <option value="A1 - A2">A1 - A2</option>
+                                            <option value="A1 - C1">A1 - C1</option>
+                                            <option value="A2 - C1">A2 - C1 </option>
+                                            <option value="A1 - B1">A1 - B1</option>
+                                            <option value="A1 - C2">A1 - C2</option>
+                                            <option value="A1 - B2">A1 - B2</option>
+                                            <option value="Business English">Business English</option>
+                                            <option value="Przygotowanie do egzaminu/ matury">Przygotowanie do egzaminu/ matury</option>
+                                            <option value="Konwersacje">Konwersacje</option>
+                                            <option value="Języki specjalistyczne">Języki specjalistyczne</option>
+                                            <option value="Dialekt">Dialekt</option>
+                                            <option value="Italiano al lavoro">Italiano al lavoro</option>
+                                            <option value="Kultura krajów portugalskojęzycznych">Kultura krajów portugalskojęzycznych</option>
+                                            <option value="Nauka o dialektach">Nauka o dialektach</option>
+                                            <option value="Português no turismo">Português no turismo</option>
+                                            <option value="Polish for foreigners">Polish for foreigners</option>
+                                            <option value="NATIVE SPEAKER">NATIVE SPEAKER</option>
+                                            <option value="Language for Specific Purposes">Language for Specific Purposes</option>
+                                            <option value="Français au travail">Français au travail</option>
+                                            <option value="Deutsch bei der Arbeit">Deutsch bei der Arbeit</option>
+                                            <option value="Chiński w pracy">Chiński w pracy</option>
+                                            <option value="Kultura Chin">Kultura Chin</option>
+                                            <option value="Turecki w pracy">Turecki w pracy</option>
+                                            <option value="Kultura Turcji">Kultura Turcji</option>
                                             <option value="Inne">Inne</option>
+                                            <option value="Español en el trabajo">Español en el trabajo</option>
                                         </select>
                                 </div>
                                 <div class="col-md-1">
