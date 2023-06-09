@@ -11041,6 +11041,14 @@ option{
   flex-direction: column;
   justify-content: center;
 }
+.pinkHome-bubble{
+  top: 71px;
+  overflow: unset;
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 200px;
+}
 .AboutUsContainer{
   display: flex;
   margin-top: 20px;
@@ -11072,10 +11080,10 @@ option{
 }
 .animation{
   width: 100vw;
-  height: 30vh;
+  height: 584px;
 	background: url("/images/animation.png");
 	background-repeat: repeat-y;
-	background-size: 200px;
+	background-size: 250px;
 	animation: flow 60s linear infinite;
   display: flex;
   flex-direction: column;
@@ -11084,10 +11092,12 @@ option{
 }
 .underline-blue{
   background-image: url("/images/LiniaFiolet.png");
-  background-position: 0 1.06em;
-  background-size: 100% auto;
+  background-position: 0 42px;
+  background-size: 100% 13px;
   background-repeat: no-repeat;
   padding: 2px;
+  height: 58px;
+  display: inline-block;
 }
 .underline-magenta{
   background-image: url("/images/LiniaMagenta.png");
@@ -11216,14 +11226,14 @@ footer{
   top: -1000px;
 }
 .videoContainer{
-  width: 400px;
+  width: 500px;
   height: 220px;
 }
 .videoDot{
   background: -moz-element(#circle);
   background-repeat: no-repeat;
   background-position: bottom 10px right;
-  background-size: 140px;
+  background-size: 180px;
 }
 .imgDotRed{
   background: -moz-element(#circle);

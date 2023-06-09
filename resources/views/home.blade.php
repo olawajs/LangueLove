@@ -21,9 +21,11 @@
         color: #969696;
     }
     .video-mask{
-    width: 320px;
+    width: 414px;
     border-radius: 10px; 
     overflow: hidden; 
+    height: 220px;
+    z-index: 2;
     }
     .lectorTab{
         border: 1px solid grey;
@@ -118,71 +120,67 @@
     <div class="row justify-content-center classicDIV">
         <div class="col-md-8 animation">
             <div>
-                <h1>Ucz się języków i <span class="underline-blue">odkrywaj świat</span></h1>
-            </div>
-            <div>
-                <h3>Gdzie chcesz i kiedy chcesz! Zacznij już dzisiaj!</h3>
-            </div>
-            <div class="col-md-8"> 
-                <form method="POST" action="{{ route('search') }}">
-                    @csrf
-                    <div class="col-md-4 input-group mb-3 InputSearch">
-                        <button class="btn col-md-4" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="iconsButton">
-                                <span class="material-symbols-outlined">language</span>
-                                <div class="ButtonTexts">
-                                    <span>Język</span><br>
-                                    <span id="langText">Dowolny</span> 
-                                </div>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="language">
-                            <div class="row checkRow">
-                                <div class="col-sm-5 col-md-6">
-                                    <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
-                                </div>
-                                @foreach ($languages as $language)
-                                    <div class="col-sm-5 col-md-6">
-                                        <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
-                                    </div>
-                                @endforeach
-                            </div>                        
-                        </ul>
-                        <button class="btn col-md-4" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false">
-                            <div class="iconsButton">
-                                <span class="material-symbols-outlined">school</span>
-                                <div class="ButtonTexts">
-                                    <span>Rodzaj kursu</span><br>
-                                    <span id="typeText">Dowolny</span> 
-                                </div>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="course" style="width: 300px;">
-                            <div class="row checkRow">
-                                <div class="col-sm-5 col-md-6">
-                                    <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
-                                </div>
-                                @foreach ($types as $type)
-                                    <div class="col-sm-5 col-md-6">
-                                        <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
-                                    </div>
-                                @endforeach
-                            </div>      
-                        </ul>
-                        <div class="col-md-4">
-                            <button class="btn btn-primary" type="submit" style="width: 100%">Szukaj zajęć</button>
-                        </div>
-                    </form>
-                </div>  
-            </div>
-            
-        </div> 
-        
-            <!-- <div class="card">
-                <div class="card-body">
-                    
+                <div class="m-3">
+                    <h1>Ucz się języków i <span class="underline-blue">odkrywaj świat</span></h1>
                 </div>
-            </div> -->
+                <div class="m-3 mb-4">
+                    <h3>Gdzie chcesz i kiedy chcesz! Zacznij już dzisiaj!</h3>
+                </div>
+                <div class="col-md-8 m-3"> 
+                    <form method="POST" action="{{ route('search') }}">
+                        @csrf
+                        <div class="col-md-4 input-group mb-3 InputSearch">
+                            <button class="btn col-md-4" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="iconsButton">
+                                    <span class="material-symbols-outlined">language</span>
+                                    <div class="ButtonTexts">
+                                        <span>Język</span><br>
+                                        <span id="langText">Dowolny</span> 
+                                    </div>
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="language">
+                                <div class="row checkRow">
+                                    <div class="col-sm-5 col-md-6">
+                                        <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
+                                    </div>
+                                    @foreach ($languages as $language)
+                                        <div class="col-sm-5 col-md-6">
+                                            <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
+                                        </div>
+                                    @endforeach
+                                </div>                        
+                            </ul>
+                            <button class="btn col-md-4" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false">
+                                <div class="iconsButton">
+                                    <span class="material-symbols-outlined">school</span>
+                                    <div class="ButtonTexts">
+                                        <span>Rodzaj kursu</span><br>
+                                        <span id="typeText">Dowolny</span> 
+                                    </div>
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="course" style="width: 300px;">
+                                <div class="row checkRow">
+                                    <div class="col-sm-5 col-md-6">
+                                        <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
+                                    </div>
+                                    @foreach ($types as $type)
+                                        <div class="col-sm-5 col-md-6">
+                                            <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
+                                        </div>
+                                    @endforeach
+                                </div>      
+                            </ul>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" type="submit" style="width: 100%">Szukaj zajęć</button>
+                            </div>
+                        </form>
+                    </div>  
+                </div>
+            </div>
+        </div> 
+
         
     </div>
     <div class="content">
@@ -195,14 +193,18 @@
             <h2 class="text-center">Ucz się języków i <span class="underline-magenta">odkrywaj świat na nowo</span></h2>
         </div>
         <div class="d-flex p-2 justify-content-around flex-wrap">
-            <div class="col-md-5 d-flex p-2 justify-content-around align-items-center videoDot videoContainer" >
+            <div class="col-md-5 d-flex p-2 justify-content-around align-items-center  videoContainer" style="position: relative;">
                 <div class="video-mask">
-                    <video width="320" height="170" class="rounded" autoplay muted>
+                    <video width="420" height="220" class="rounded" autoplay muted>
                         <source src="/video/homePage.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <!-- <div class="circle-magenta" id="circle" style="bottom: -79px; right: -37px;"></div> -->
+                <div class="pinkHome-bubble">
+                    <svg height="200" width="200">
+                        <circle cx="100" cy="100" r="100" fill=" var(--bs-secondary)" />
+                    </svg> 
+                </div>
                 <!-- <div class="circle-magenta" style="bottom: -79px; right: -37px;"></div> -->
             </div>
             <div class="col-md-5" style="text-align: justify;">
