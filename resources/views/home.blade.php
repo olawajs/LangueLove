@@ -320,7 +320,7 @@
         <div class="mb-2">
             <h2 class="text-center">Sprawdź <span class="underline-blue">co mówią </span>o nas studenci</h2>
         </div>
-        <div id="arrows2"></div>
+        
         <div class="owl-carousel owl-theme" id="carousel2">
             <!-- 1 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
@@ -499,6 +499,8 @@
                 nav:true,
                 navText:['&#8592;','&#8594;'],
                 navContainer: document.getElementById('arrows'),
+                autoplay: true,
+                autoplayTimeout: 5000,
                 responsive:{
                     0:{
                         items:1
@@ -519,10 +521,10 @@
                 margin:10,
                 center:true,
                 nav:true,
-                navText:['&#8592;','&#8594;'],
+                navText:['<span style="font-size: x-large;">&#8592;</span>','<span style="font-size: x-large;">&#8594;</span>'],
                 navContainer: document.getElementById('arrows2'),
-                // autoplay: true,
-                // autoplayTimeout: 5000,
+                autoplay: true,
+                autoplayTimeout: 5000,
                 responsive:{
                     0:{
                         items:1
