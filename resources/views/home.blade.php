@@ -324,7 +324,7 @@
         <div class="owl-carousel owl-theme" id="carousel2">
             <!-- 1 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div><img src="/images/Dynks.png"></div>
+                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Jestem totalnie zadowolona. 😃 Szkoła była moim wybawieniem. 
@@ -367,7 +367,7 @@
             </div>
             <!-- 3 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div><img src="/images/Dynks.png"></div>
+                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     The best school and teacher ever had. All perfect. Lessons are always interested and fully personalised.
@@ -404,7 +404,7 @@
             </div>
             <!-- 5 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div><img src="/images/Dynks.png"></div>
+                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Moja przyjaciółka znalazła Wiktorię na instagramie i od tego zaczęła się wspólna przygoda
@@ -442,7 +442,7 @@
             </div>
             <!-- 7 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div><img src="/images/Dynks.png"></div>
+                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Już od kilku miesięcy uczę się włoskiego z Wiktorią. Jestem bardzo zadowolona ze sposobu prowadzenia lekcji. 
