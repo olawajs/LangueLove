@@ -193,7 +193,7 @@
     </div>
     <div class="content">
     <!--  -->
-    <div class="row justify-content-center classicDIV p-5 mt-3 mb-3">
+    <div class="row justify-content-center classicDIV mt-3 mb-3" style="padding: 80px 10px;">
         <div>
             <h6 class="text-center smallText">OFERTA</h6>
         </div>
@@ -204,7 +204,7 @@
             <div class="col-md-5 d-flex p-2 justify-content-around align-items-center  videoContainer" style="position: relative;">
                 <div class="video-mask">
                     <video width="420" height="220" class="rounded" autoplay muted>
-                        <source src="/video/homePage2.mp4" type="video/mp4">
+                        <source src="/video/homePage.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -232,54 +232,57 @@
    
     </div>
     <!--  -->
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-2" style="justify-content: space-evenly;">
-                <!-- <div class="col"> -->
-                    <div class="card " style="background-color: var(--bs-primary);color: white; border: none; aspect-ratio: 3/4; max-width: 350px">
-                        <div class="card-body">
-                            <h2 class="card-title">Nowoczesność</h2>
-                            <p class="card-text">
-                                <br>
-                                Na indywidualnych i grupowych kursach językowych wykorzystujemy wszystkie dostępne
-                                zasoby internetu, takie jak <b>prezentacje multimedialne, filmy, artykuły, gry, pracę w grupach
-                                i inne.</b> 
-                                <br><br>Orientacja na nowoczesne rozwiązania to najważniejsza cecha naszej szkoły
-                                języków obcych online.
-                            </p>
-                        </div>
-                    </div>
-                <!-- </div> -->
-                <!-- <div class="col"> -->
-                    <div class="card" style="background-color: var(--bs-secondary); color: white;border: none;  aspect-ratio: 3/4; max-width: 350px" >
-                        <div class="card-body">
-                            <h2 class="card-title">Elastyczność</h2>
-                            <p class="card-text">
-                                <br>
-                                <b>Ucz się, gdzie chcesz, kiedy chcesz i ile chcesz. </b>
-                                <br><br>
-                                To Ty decydujesz o liczbie, częstotliwości i formie zajęć. Nasz <b>kalendarz</b> pomoże Ci w planowaniu nauki i szybkim umawianiu się na
-                                zajęcia. Dzięki niemu możesz zobaczyć <b>dostępność lektora</b> i wybrać najbardziej
-                                <b>odpowiadający Ci termin</b>.
-                            </p>
-                        </div>
-                    </div>
-                <!-- </div> -->
-                <!-- <div class="col"> -->
-                    <div class="card" style="background-color: var(--bs-sandy);border: none; overflow: hidden;  aspect-ratio: 3/4; max-width: 350px">
-                        <div class="card-body" style="z-index: 2">
-                            <h2 class="card-title">Efekty i postępy</h2>
-                            <p class="card-text">
-                            <br>
-                                Każdy grupowy, a także indywidualny kurs językowy przewiduje <b>lekcje powtórzeniowe</b>,
-                                dzięki którym będziesz mógł/mogła lepiej przyswoić materiał.
-                                <br><br>
-                                Dodatkowo, wykorzystując metodę <b>gamifikacji</b>, będziesz w stanie monitorować swoje postępy i cieszyć się każdym
-                                kolejnym krokiem w stronę <b>płynności językowej</b>.
-                            </p>
-                        </div> 
-                        <div class="circle-magenta" id="circle" style="bottom: -79px; right: -37px;"></div>
-                    </div>
-                <!-- </div> -->
+    <div class="row justify-content-center mt-3 mb-3" style="padding: 80px 10px;">
+        <div>
+            <h6 class="text-center smallText">NASI PODEJŚCIE</h6>
+        </div>
+        <div class="mb-2">
+            <h2 class="text-center">Nauka nigdy nie była łatwiejsza</h2>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-2" style="justify-content: space-evenly;">
+            <div class="card " style="background-color: var(--bs-primary);color: white; border: none; aspect-ratio: 3/4; max-width: 350px">
+                <div class="card-body">
+                    <h2 class="card-title">Nowoczesność</h2>
+                    <p class="card-text">
+                        <br>
+                        Na indywidualnych i grupowych kursach językowych wykorzystujemy wszystkie dostępne
+                        zasoby internetu, takie jak <b>prezentacje multimedialne, filmy, artykuły, gry, pracę w grupach
+                        i inne.</b> 
+                        <br><br>Orientacja na nowoczesne rozwiązania to najważniejsza cecha naszej szkoły
+                        języków obcych online.
+                    </p>
+                </div>
             </div>
+            <div class="card" style="background-color: var(--bs-secondary); color: white;border: none;  aspect-ratio: 3/4; max-width: 350px" >
+                <div class="card-body">
+                    <h2 class="card-title">Elastyczność</h2>
+                    <p class="card-text">
+                        <br>
+                        <b>Ucz się, gdzie chcesz, kiedy chcesz i ile chcesz. </b>
+                        <br><br>
+                        To Ty decydujesz o liczbie, częstotliwości i formie zajęć. Nasz <b>kalendarz</b> pomoże Ci w planowaniu nauki i szybkim umawianiu się na
+                        zajęcia. Dzięki niemu możesz zobaczyć <b>dostępność lektora</b> i wybrać najbardziej
+                        <b>odpowiadający Ci termin</b>.
+                    </p>
+                </div>
+            </div>
+            <div class="card" style="background-color: var(--bs-sandy);border: none; overflow: hidden;  aspect-ratio: 3/4; max-width: 350px">
+                <div class="card-body" style="z-index: 2">
+                    <h2 class="card-title">Efekty i postępy</h2>
+                    <p class="card-text">
+                    <br>
+                        Każdy grupowy, a także indywidualny kurs językowy przewiduje <b>lekcje powtórzeniowe</b>,
+                        dzięki którym będziesz mógł/mogła lepiej przyswoić materiał.
+                        <br><br>
+                        Dodatkowo, wykorzystując metodę <b>gamifikacji</b>, będziesz w stanie monitorować swoje postępy i cieszyć się każdym
+                        kolejnym krokiem w stronę <b>płynności językowej</b>.
+                    </p>
+                </div> 
+                <div class="circle-magenta" id="circle" style="bottom: -79px; right: -37px;"></div>
+            </div>
+        </div>
+    </div>
+
     <!--  -->
 
     <div class="row justify-content-center classicDIV pt-5 pb-5  mt-3 mb-3">
