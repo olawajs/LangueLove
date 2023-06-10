@@ -11227,8 +11227,7 @@ footer{
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  position: fixed;
-  top: -1000px;
+  position: absolute;
 }
 .videoContainer{
   width: 500px;
@@ -11248,8 +11247,10 @@ footer{
 }
 .TextComment{
   display: flex;
-  text-align: center;flex-flow: column;
+  flex-flow: column;
   justify-content: center;
+  text-align: justify;
+
 }
 .imgDotBlue{
   background: -moz-element(#circle2);

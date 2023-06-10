@@ -21,11 +21,18 @@
         color: #969696;
     }
     .video-mask{
-    width: 414px;
-    border-radius: 10px; 
-    overflow: hidden; 
-    height: 220px;
-    z-index: 2;
+        width: 414px;
+        border-radius: 10px; 
+        overflow: hidden; 
+        height: 220px;
+        z-index: 2;
+    }
+    .video-mask2{
+        width: 380px;
+        border-radius: 10px; 
+        overflow: hidden; 
+        height: 300px;
+        z-index: 2;
     }
     .lectorTab{
         border: 1px solid grey;
@@ -113,6 +120,7 @@
 }
 .fotoContiner{
     max-width: 550px;
+    position: relative;
 }
 
 </style>
@@ -224,9 +232,9 @@
    
     </div>
     <!--  -->
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
-                <div class="col">
-                    <div class="card " style="background-color: var(--bs-primary);color: white; border: none; hight: 660; width: 440px}">
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-2" style="justify-content: space-evenly;">
+                <!-- <div class="col"> -->
+                    <div class="card " style="background-color: var(--bs-primary);color: white; border: none; aspect-ratio: 3/4; max-width: 350px">
                         <div class="card-body">
                             <h2 class="card-title">Nowoczesność</h2>
                             <p class="card-text">
@@ -239,9 +247,9 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="background-color: var(--bs-secondary); color: white;border: none;  aspect-ratio: 3/4; max-width: 440px" >
+                <!-- </div> -->
+                <!-- <div class="col"> -->
+                    <div class="card" style="background-color: var(--bs-secondary); color: white;border: none;  aspect-ratio: 3/4; max-width: 350px" >
                         <div class="card-body">
                             <h2 class="card-title">Elastyczność</h2>
                             <p class="card-text">
@@ -254,9 +262,9 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="background-color: var(--bs-sandy);border: none; overflow: hidden;  aspect-ratio: 3/4; max-width: 440px">
+                <!-- </div> -->
+                <!-- <div class="col"> -->
+                    <div class="card" style="background-color: var(--bs-sandy);border: none; overflow: hidden;  aspect-ratio: 3/4; max-width: 350px">
                         <div class="card-body" style="z-index: 2">
                             <h2 class="card-title">Efekty i postępy</h2>
                             <p class="card-text">
@@ -270,7 +278,7 @@
                         </div> 
                         <div class="circle-magenta" id="circle" style="bottom: -79px; right: -37px;"></div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
     <!--  -->
 
@@ -286,9 +294,9 @@
         @foreach ($lectors as $lector)
         <div class="card LectorCard">
          <div class="LectorPhotoCard" style="background: url('/images/lectors/{{$lector->photo}}');
-  background-position: center;
-  background-size: 220px;
-  background-repeat: no-repeat;"></div>
+            background-position: center;
+            background-size: 220px;
+            background-repeat: no-repeat;"></div>
          <div style="margin: 24px 0px;"><h4 class="text-center"><b>{{$lector->name}}</b></h4></div>   
          <div style="padding-left: 18px;">
             @foreach (App\Models\LanguageLevel::where('lector_id',$lector->id)->distinct('language_id')->pluck('language_id') as $d)
@@ -297,15 +305,7 @@
          </div>  
          <div class="CardButton"><a href="{{ route('showLector',$lector->id) }}">Poznaj &#8594;</a></div> 
         </div>
-            <!-- <div class="card cardLector">
-                <div class="card-img" style="background: url('/images/lectors/{{$lector->photo}}'); background-position: center;background-size: 105px;background-repeat: no-repeat;"></div>
-                <div class="card-info">
-                    <span class="text-body">
-                    {!!  \Illuminate\Support\Str::limit(strip_tags($lector->description), 200,'.....')  !!}
-                    </span>
-                    <p class="text-title"><a href="{{ route('showLector',$lector->id) }}">Poznaj mnie &#8594;</a></p>
-                </div>
-            </div> -->
+
         @endforeach
         </div>
     </div>
@@ -323,7 +323,8 @@
         <div id="arrows2"></div>
         <div class="owl-carousel owl-theme" id="carousel2">
             <!-- 1 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Jestem totalnie zadowolona. 😃 Szkoła była moim wybawieniem. 
@@ -340,28 +341,33 @@
                     </p>
                     <p><i>Wiktoria</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
-                    <div class="video-mask">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
                         <img class="rounded"  src="/images/opinions/opinia2.jpg">
                     </div>
+                    <div class="circle-magenta" id="circle" style="bottom: -20px; right: -2px;"></div>
                 </div>
             </div>
             <!-- 2 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
-                    <div class="video-mask">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
                         <img class="rounded"  src="/images/opinions/opinia1.jpg">
                     </div>
+                    <div class="circle-blue" id="circle" style="bottom: -20px; left: -2px;"></div>
                 </div>
+                
                 <div class="col-md-5 TextComment">
                     <p>
-                         I started learning Polish with LangueLove and so far so good! Highly recommended.
+                    I started learning Polish with LangueLove and so far so good! Highly recommended.
                     </p>
                     <p><i>Furkan</i></p>
                  </div> 
+                <div><img src="/images/Dynks.png"></div>
             </div>
             <!-- 3 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     The best school and teacher ever had. All perfect. Lessons are always interested and fully personalised.
@@ -370,29 +376,35 @@
                     </p>
                     <p><i>Alicja</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
-                    <div class="video-mask">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
                         <img class="rounded"  src="/images/opinions/opinia3.jpg">
                     </div>
+                    <div class="circle-magenta" id="circle" style="bottom: -20px; right: -2px;"></div>
                 </div>
             </div>
             <!-- 4 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
-                    <div class="video-mask">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
                         <img class="rounded"  src="/images/opinions/opinia6.jpg">
                     </div>
+                    <div class="circle-blue" id="circle" style="bottom: -20px; left: -2px;"></div>
                 </div>
+                
                 <div class="col-md-5 TextComment">
                     <p>
                     I stongly recommend the school as it distinguish itself by adapting classes to personal interests, 
                     a lot of time dedicated for conversations, unconventional exercises. 
                     Last but not least, stuff is really friendly and supportive 😉
+                    </p>
                     <p><i>Rafał</i></p>
                  </div> 
+                <div><img src="/images/Dynks.png"></div>
             </div>
             <!-- 5 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Moja przyjaciółka znalazła Wiktorię na instagramie i od tego zaczęła się wspólna przygoda
@@ -403,29 +415,35 @@
                     </p>
                     <p><i>Ola</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
-                    <div class="video-mask">
-                        <img class="rounded"  src="/images/opinions/opinia7.jpg">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
+                        <img class="rounded"  src="/images/opinions/opinia5.jpg">
                     </div>
+                    <div class="circle-magenta" id="circle" style="bottom: -20px; right: -2px;"></div>
                 </div>
-            </div>
+            </div>           
             <!-- 6 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
-                    <div class="video-mask">
-                        <img class="rounded"  src="/images/opinions/opinia1.jpg">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
+                        <img class="rounded"  src="/images/opinions/opinia6.jpg">
                     </div>
+                    <div class="circle-blue" id="circle" style="bottom: -20px; left: -2px;"></div>
                 </div>
+                
                 <div class="col-md-5 TextComment">
                     <p>
                     Bardzo polecam, Weronika jest świetną nauczycielką. 
                     Lekcje nie są nudne a wręcz przeciwnie, fajne podejście i luźna atmosfera.
+                    </p>
                     <p><i>Konrad</i></p>
                  </div> 
+                <div><img src="/images/Dynks.png"></div>
             </div>
             <!-- 7 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
-            <div class="col-md-5 TextComment">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div><img src="/images/Dynks.png"></div>
+                <div class="col-md-5 TextComment">
                     <p>
                     Już od kilku miesięcy uczę się włoskiego z Wiktorią. Jestem bardzo zadowolona ze sposobu prowadzenia lekcji. 
                     Zajęcia nie są monotonne, Wiktoria często robi lekcje tematyczne, 
@@ -435,40 +453,37 @@
                     </p>
                     <p><i>Natalia</i></p>
                  </div> 
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotRed fotoContiner" >
-                    <div class="video-mask">
-                        <img class="rounded"  src="/images/opinions/opinia5.jpg">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
+                        <img class="rounded"  src="/images/opinions/opinia7.jpg">
                     </div>
+                    <div class="circle-magenta" id="circle" style="bottom: -20px; right: -2px;"></div>
                 </div>
             </div>
             <!-- 8 -->
-            <div class="item d-flex p-2 justify-content-around flex-wrap">
-                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center imgDotBlue fotoContiner" >
-                    <div class="video-mask">
+            <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
+                <div class="col-md-5 d-flex p-2 justify-content-around align-items-center fotoContiner" >
+                    <div class="video-mask2">
                         <img class="rounded"  src="/images/opinions/opinia8.jpg">
                     </div>
+                    <div class="circle-blue" id="circle" style="bottom: -20px; left: -2px;"></div>
                 </div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Bardzo polecam tę szkołę językową. Uczę się języka włoskiego. Zajęcia mam z lektorką Adą- 
                     lekcje z nią to sama przyjemność. Jest bardzo kompetentna i potrafi bardzo dobrze wytłumaczyć gramatykę.
                      Jeśli ktoś już próbował różnych sposobów nauki języka włoskiego, to tutaj się nie zawiedzie. Serdecznie polecam :)
+                    </p>
                     <p><i>Sylwia</i></p>
                  </div> 
+                <div><img src="/images/Dynks.png"></div>
             </div>
-            <!-- 9 -->
-            <!-- 10 -->
-            <!-- 11 -->
-            <!-- 12 -->
-            <!-- 13 -->
-
         </div>
     <!--  -->
        
     </div>
     
 </div>
-<div class="circle-blue" id="circle2" ></div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 <script src="{{ asset('js/owlCarousel/owl.carousel.min.js') }}" defer></script>
@@ -506,8 +521,8 @@
                 nav:true,
                 navText:['&#8592;','&#8594;'],
                 navContainer: document.getElementById('arrows2'),
-                autoplay: true,
-                autoplayTimeout: 5000,
+                // autoplay: true,
+                // autoplayTimeout: 5000,
                 responsive:{
                     0:{
                         items:1
