@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                Oświadczam że zapoznałem się z <a href="{{ asset('files/Polityka prywatności LangueLove.pdf') }}" >Regulaminem</a> i <a>Polityką prywatności</a>
+                                Oświadczam że zapoznałem się z <a href="{{ asset('files/LangueLove Regulamin.pdf') }}" >Regulaminem</a> i <a  href="{{ asset('files/Polityka prywatności LangueLove.pdf') }}">Polityką prywatności</a>
                             </div>
                         </div>
 

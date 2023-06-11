@@ -156,9 +156,14 @@
             <p>Języki azjatyckie</p>
         </div>   
     </div>
-    
+   
 </div>
-
+ @if($newsletter)
+        <button>Zapisz się do newslettera</button>
+    @else
+        <button>Wypisz się z newslettera</button>
+    @endif
+    <button>Usuń konto</button>
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 

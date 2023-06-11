@@ -52,13 +52,13 @@ class MainController extends Controller
         $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('priceType',1)->count();
         $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('priceType',2)->count();
         $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('priceType',2)->count();
-        $newslettter = Newsletter::where('email',Auth::user()->email)->count();
+        $newsletter = Newsletter::where('email',Auth::user()->email)->count();
         return view('myAccount',[
             'IndEur'=>$lessonsIndEu,
             'IndAzj'=>$lessonsIndAz,
             'ParEur'=>$lessonsParEu,
             'ParAzj'=>$lessonsParAz,
-            'newslettter'=>$newslettter
+            'newsletter'=>$newsletter
         ]);
     }
 

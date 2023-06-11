@@ -9,6 +9,7 @@
             <li class="list-group-item listTitle"><b>Pomoc</b></li>
             <li class="list-group-item"><a class="footLink" href="{{ route('contact') }}">Kontakt</a></li>
             <li class="list-group-item"><a class="footLink" href="{{ asset('files/FAQ LangueLove.pdf') }}">FAQ</a></li>
+            <li class="list-group-item"><a class="footLink" href="{{ asset('files/LangueLove Regulamin.pdf') }}">Regulamin</a></li>
         </ul>
     </div>
     <div>
