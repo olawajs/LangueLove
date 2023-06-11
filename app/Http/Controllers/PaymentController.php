@@ -211,6 +211,7 @@ class PaymentController extends Controller
                 $bank->payment_id = $payment->id;
                 $bank->overdue_date = Carbon::now()->addWeeks($pakiet);
                 $bank->type_id = $request->typeA;
+                $bank->priceType = $type;
                 $bank->save();
         }
       

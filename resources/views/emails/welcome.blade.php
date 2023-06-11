@@ -5,6 +5,8 @@
 
 Cześć!<br>
 Witamy Cię na naszej stronie, rozgość się 😊<br>
+Już teraz potwierdź swoje konto klikając <a href="https://languelove.pl/activate/{{$mailData['email']}}">tutaj!</a>
+<br>
 Poznaj naszych fantastycznych lektorów i dostępne <a href="https://languelove.pl/priceList/search/1/1">kursy</a> tutaj!
 W ofercie znajdziesz zajęcia indywidualne, w parach lub grupowe. Do wyboru jest aż 10 różnych języków!<br>
 

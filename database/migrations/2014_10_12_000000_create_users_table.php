@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('user_type')->default(2);
             $table->boolean('active')->default(1);
             $table->boolean('newsletter')->default(0);
+            $table->boolean('confirmed')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -27,6 +27,8 @@ class CreateLessonsBanksTable extends Migration
 
             $table->dateTime('use_date', $precision = 0)->nullable();
             $table->dateTime('overdue_date', $precision = 0);
+            $table->integer('priceType');
+            
             $table->timestamps();
         });
     }

@@ -135,10 +135,7 @@ LABEL.indented-checkbox-text
           <h3><b>Dziękujemy!</b></h3>
           <p>
             Cześć!<br>
-            Dziękujemy za zakup lekcji w naszej szkole!<br>
-            Już nie możemy się doczekać!<br>
-            Terminy swoich lekcji możesz sprawdzić w kalendarzu w swoim profilu, tam też znajdziesz linki do skype swoich lektorów.<br>
-            Pamiętaj, aby potwierdzić rejestrację za pomocą linku który znajdziesz w mailu.
+            Dziękujemy za potwierdzenie konta!
             <br><br>
             Owocnej pracy!<br>
             Zespół LangueLove 💜

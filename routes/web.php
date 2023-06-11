@@ -34,6 +34,7 @@ Route::get('/thankYou', function () {
 
 
 Route::get('myCalendar', [App\Http\Controllers\MainController::class, 'myCalendar'])->name('myCalendar'); 
+Route::get('myAccount', [App\Http\Controllers\MainController::class, 'myAccount'])->name('myAccount'); 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
 Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
 Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'sendConsultationMail'])->name('sendConsultation'); 
@@ -58,7 +59,7 @@ Route::get('priceList/search/{lang}/{type}', [App\Http\Controllers\MainControlle
 
 Route::GET('lesson/{id}', [App\Http\Controllers\LessonController::class, 'showLesson'])->name('showLesson');
 Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLector'])->name('showLector');
-
+Route::GET('activate/{mail}', [App\Http\Controllers\MainController::class, 'activate'])->name('activate');
 
 // form admin only
 

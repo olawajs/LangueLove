@@ -16,9 +16,9 @@ class WelcomeMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($mailData)
     {
-        //
+        $this->mailData = $mailData;
     }
 
     /**
@@ -28,6 +28,8 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcome');
+        return $this->markdown('emails.welcome')->with([
+            'mailData' => $this->mailData
+        ]);
     }
 }

@@ -14,66 +14,67 @@
 </style>
 <div class="container">
     <div class="row justify-content-center classicDIV">
-        <div class="col-md-8 animation">
+    <div class="col-md-8 animation">
             <div>
-                <h1>Ucz się języków i <span class="underline-blue">odkrywaj świat</span></h1>
-            </div>
-            <div>
-                <h3>Gdzie chcesz i kiedy chcesz! Zacznij już dzisiaj!</h3>
-            </div>
-            <div class="col-md-8"> 
-                <form method="POST" action="{{ route('search') }}">
-                    @csrf
-                    <div class="col-md-4 input-group mb-3 InputSearch">
-                        <button class="btn col-md-4" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="iconsButton">
-                                <span class="material-symbols-outlined">language</span>
-                                <div class="ButtonTexts">
-                                    <span>Język</span><br>
-                                    <span id="langText">Dowolny</span> 
-                                </div>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="language">
-                            <div class="row checkRow">
-                                <div class="col-sm-5 col-md-6">
-                                    <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
-                                </div>
-                                @foreach ($languages as $language)
-                                    <div class="col-sm-5 col-md-6">
-                                        <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
+                <div class="m-3">
+                    <h1>Ucz się języków i <span class="underline-blue">odkrywaj świat</span></h1>
+                </div>
+                <div class="m-3 mb-4">
+                    <h3>Gdzie chcesz i kiedy chcesz! Zacznij już dzisiaj!</h3>
+                </div>
+                <div class="col-md-8 m-3"> 
+                    <form method="POST" action="{{ route('search') }}">
+                        @csrf
+                        <div class="col-md-4 input-group mb-3 InputSearch">
+                            <button class="btn col-md-4" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="iconsButton">
+                                    <span class="material-symbols-outlined">language</span>
+                                    <div class="ButtonTexts">
+                                        <span>Język</span><br>
+                                        <span id="langText">Dowolny</span> 
                                     </div>
-                                @endforeach
-                            </div>                        
-                        </ul>
-                        <button class="btn col-md-4" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false">
-                            <div class="iconsButton">
-                                <span class="material-symbols-outlined">school</span>
-                                <div class="ButtonTexts">
-                                    <span>Rodzaj kursu</span><br>
-                                    <span id="typeText">Dowolny</span> 
                                 </div>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="course" style="width: 300px;">
-                            <div class="row checkRow">
-                                <div class="col-sm-5 col-md-6">
-                                    <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
-                                </div>
-                                @foreach ($types as $type)
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="language">
+                                <div class="row checkRow">
                                     <div class="col-sm-5 col-md-6">
-                                        <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
+                                        <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
                                     </div>
-                                @endforeach
-                            </div>      
-                        </ul>
-                        <div class="col-md-4">
-                            <button class="btn btn-primary" type="submit" style="width: 100%">Szukaj zajęć</button>
-                        </div>
-                    </form>
-                </div>  
+                                    @foreach ($languages as $language)
+                                        <div class="col-sm-5 col-md-6">
+                                            <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
+                                        </div>
+                                    @endforeach
+                                </div>                        
+                            </ul>
+                            <button class="btn col-md-4" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false">
+                                <div class="iconsButton">
+                                    <span class="material-symbols-outlined">school</span>
+                                    <div class="ButtonTexts">
+                                        <span>Rodzaj kursu</span><br>
+                                        <span id="typeText">Dowolny</span> 
+                                    </div>
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="course" style="width: 300px;">
+                                <div class="row checkRow">
+                                    <div class="col-sm-5 col-md-6">
+                                        <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
+                                    </div>
+                                    @foreach ($types as $type)
+                                        <div class="col-sm-5 col-md-6">
+                                            <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
+                                        </div>
+                                    @endforeach
+                                </div>      
+                            </ul>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" type="submit" style="width: 100%">Szukaj zajęć</button>
+                            </div>
+                        </form>
+                    </div>  
+                </div>
             </div>
-            
         </div> 
         
             <!-- <div class="card">

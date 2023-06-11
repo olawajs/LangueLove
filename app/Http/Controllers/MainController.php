@@ -19,6 +19,8 @@ use App\Models\CalendarSetup;
 use App\Models\Lesson;
 use App\Models\Lector;
 use App\Models\LanguageLevel;
+use App\Models\User;
+use App\Models\Newsletter;
 use DB;
 use Auth;
 use Carbon\Carbon;
@@ -40,6 +42,26 @@ class MainController extends Controller
         ]);
     }
     
+    public function activate(Request $request){
+        User::where('email', $request->mail)->update(['confirmed'=>1]);
+            return view('ThankYouForRegistration');
+    }
+
+    public function myAccount(){
+        $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('priceType',1)->count();
+        $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('priceType',1)->count();
+        $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('priceType',2)->count();
+        $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('priceType',2)->count();
+        $newslettter = Newsletter::where('email',Auth::user()->email)->count();
+        return view('myAccount',[
+            'IndEur'=>$lessonsIndEu,
+            'IndAzj'=>$lessonsIndAz,
+            'ParEur'=>$lessonsParEu,
+            'ParAzj'=>$lessonsParAz,
+            'newslettter'=>$newslettter
+        ]);
+    }
+
     public function sendConsultationMail(Request $request)
     {
         try {
