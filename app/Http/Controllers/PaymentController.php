@@ -153,10 +153,10 @@ class PaymentController extends Controller
         // $calendar->student_accept = 1;
         // $calendar->save();
 
-        $link = 'https://sandbox.przelewy24.pl/';
+        $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
-        $crc_code = '53567c4b2d150c3d';
-        $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
+        $crc_code = '89cb17cc0941683b';
+        $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
         $payment = new Payment;
         $payment->price = $kwota;
@@ -187,10 +187,10 @@ class PaymentController extends Controller
     public function  transaction(Request $request)
     {
        
-        $link = 'https://sandbox.przelewy24.pl/';
+        $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
-        $crc_code = '53567c4b2d150c3d';
-        $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
+        $crc_code = '89cb17cc0941683b';
+        $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
         $payment = new Payment;
         $payment->price = $request->price;
@@ -225,15 +225,15 @@ class PaymentController extends Controller
     }
     
     public function  status(){
-        dd('status');
+        // dd('status');
     }
     
     public function getReturn(){
         
-            $link = 'https://sandbox.przelewy24.pl/';
+        $link = 'https://secure.przelewy24.pl/';
     $merchant_id = 207228;
-    $crc_code = '53567c4b2d150c3d';
-    $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
+    $crc_code = '89cb17cc0941683b';
+    $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
         $session_id = Session::get('payment_session', 'default');
         $payment = Payment::where('session_id',$session_id)->first();
@@ -302,10 +302,10 @@ class PaymentController extends Controller
     }
     public static function getToken($kwota,$zamowienie,$session_id){
         
-            $link = 'https://sandbox.przelewy24.pl/';
-    $merchant_id = 207228;
-    $crc_code = '53567c4b2d150c3d';
-    $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
+        $link = 'https://secure.przelewy24.pl/';
+        $merchant_id = 207228;
+        $crc_code = '89cb17cc0941683b';
+        $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
         $sign = '{"sessionId":"'.$session_id.'","merchantId":'.$merchant_id.',"amount":'.$kwota.',"currency":"PLN","crc":"'.$crc_code.'"}';
         $sign = hash('sha384', $sign);
