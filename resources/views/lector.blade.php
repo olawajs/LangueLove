@@ -56,7 +56,7 @@
                 <div>{!! $lector->style !!}</div>
                 @endif
             </div>
-            <div class="d-flex justify-content-center flex-column align-items-center fotoContainer" style="flex-grow: 1;max-height: 400px;">
+            <div class="d-flex justify-content-center flex-column align-items-center fotoContainer" style="flex-grow: 1;max-height: 450px;">
                 <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:280px; height: 280px; object-fit: cover;'></div>
                 <h4>{{$lector->name}}</h4>
                 <div class="SType" style="margin: 10px;">
