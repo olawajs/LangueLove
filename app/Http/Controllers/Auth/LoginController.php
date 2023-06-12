@@ -41,6 +41,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
+
     /**
 * @param  $provider
 * @return \Illuminate\Http\Response

@@ -20,45 +20,56 @@
     .box{
         margin: 5px 0;
     }
+    .px-a{
+        padding-right: 100px;
+        padding-left: 100px;
+        padding-bottom: 50px;
+    }
+    .fotoContainer{
+        border-radius: 10px !important;
+        border: 2px solid #EBEBEB;
+        min-height: 200px;
+        margin: 10px;
+        padding: 10px;
+    }
+    p{
+        text-align: justify;
+    }
 </style>
-<div class="container">
+<div class="container px-a">
 
     <div class="content" id="content">
-    
-            <div class="row justify-content-center lessonDIV">
-                <h2>{{$lector->name}}</h2>
-                <div class="lectorDesc">
-                    <div>
-                        <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:190px; height: 190px; object-fit: cover;'></div>
-                        <div>
-                            <div class="SType" style="margin: 10px;">
-                                @foreach ($levels as $d)
-                                        <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
-                                @endforeach
-                            </div>
-                           
-                        
-                        </div> 
-                    </div>
-                    
-                    <div>
-                        <div id="calendar" style="width: 800px"></div>
-                    </div>
+        <div class="d-flex" style="gap:20px;">
+            <div class="d-flex flex-column" style="flex-grow: 3; gap:20px;">
+                <h2>O lektorze</h2>
+                <h3><b>{{$lector->name}}</b></h3>
+                <div>{!! $lector->description !!}</div>
+                <h2>Poziomy nauczania</h2>
+                <div class="SType" style="margin: 10px;">
+                    @foreach ($levels as $d)
+                        <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
+                    @endforeach
                 </div>
-                <div class="LessonText">
-                    <p>Opis: </p>
-                    <div>{!! $lector->description !!}</div>
-
-                    <p>Poziomy nauki: </p>
-                    <div>{!! $lector->levele !!}</div>
-
-                    <p>Styl nauczania: </p>
-                    <div>{!! $lector->style !!}</div>
-                   
-                </div>
-                    <!-- <a class="btn btn-secondary SButton" onclick="">Zarezerwuj i zapłać</a> -->
+                <div>{!! $lector->levele !!}</div>
+                @if($lector->style != '')
+                <h2>Styl nauczania:</h2>
+                <div>{!! $lector->style !!}</div>
+                @endif
             </div>
-    
+            <div class="d-flex justify-content-center flex-column align-items-center fotoContainer" style="flex-grow: 1;max-height: 400px;">
+                <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:280px; height: 280px; object-fit: cover;'></div>
+                <h4>{{$lector->name}}</h4>
+                <div class="SType" style="margin: 10px;">
+                    @foreach (App\Models\LanguageLevel::where('lector_id',$lector->id)->distinct('language_id')->pluck('language_id') as $d)
+                        <span><i class="flag flag-{{ App\Models\Language::find($d)->short}}"></i>Język {{ App\Models\Language::find($d)->name}}</span><br>
+                    @endforeach
+                </div>
+                <button class="btn btn-primary mb-3" onclick="przejdzDo()">Zobacz terminarz</button>
+            </div>
+        </div>
+                <div>
+                    <div id="calendar"></div>
+                </div>
     </div>
     
 </div>
@@ -253,6 +264,7 @@
             alert( "error" );
         });
     }
+    
     function validTermins(){
         $.ajax({
             type: "POST",
@@ -296,5 +308,9 @@
             document.getElementById(id).style.display = 'none';
             document.getElementById('content').style.pointerEvents = "";
             document.getElementById('content').style.opacity = "1";
+        }
+        function przejdzDo(){
+            const element = document.getElementById("calendar");
+            element.scrollIntoView();
         }
 </script>

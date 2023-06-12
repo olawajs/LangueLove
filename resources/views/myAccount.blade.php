@@ -4,8 +4,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.css">
 <style>
 .wallet {
-  --bg-color: #ceb2fc;
-  --bg-color-light: #f0e7ff;
+  --bg-color: var(--bs-primary);
+  --bg-color-light: #753ab2;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(206, 178, 252, 0.48);
+}
+.wallet2 {
+  --bg-color: var(--bs-secondary);
+  --bg-color-light: #e595a8;
   --text-color-hover: #fff;
   --box-shadow-color: rgba(206, 178, 252, 0.48);
 }
@@ -110,10 +116,27 @@
     justify-content: space-around;
     padding: 50px 0;
 }
+a{
+  text-decoration: none;
+}
+.content{
+  background-color: #f7f9fb;
+  border: none;
+}
 </style>
 <div class="container2">
-
-    <div class="content" id="content" >
+    <form method="POST" action="{{ route('search') }}">
+      @csrf
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="1" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="2" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="3" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="4" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="5" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="6" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="9" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="10" checked>
+      <input style="display: none" type="checkbox" class="inputs typeInp" name="type[]" value="1" checked>
+      <button class="content" id="content">
         <div class="card wallet">
             <div class="overlay"></div>
             <div class="circle">
@@ -122,9 +145,22 @@
             <p>Lekcje indywidualne</p>
             <p>Języki europejskie</p>
         </div>   
-    </div>
+      </button>
+    </form>
+     
     <!--  -->
-    <div class="content" id="content">
+    <form method="POST" action="{{ route('search') }}">
+      @csrf
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="1" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="2" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="3" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="4" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="5" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="6" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="9" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="10" checked>
+      <input style="display: none" type="checkbox" class="inputs typeInp" name="type[]" value="4" checked>
+      <button class="content" id="content">
         <div class="card wallet">
             <div class="overlay"></div>
             <div class="circle">
@@ -133,10 +169,16 @@
             <p>Lekcje w parze</p>
             <p>Języki europejskie</p>
         </div>   
-    </div>
+      </button>
+    </form>
     <!--  -->
-    <div class="content" id="content">
-        <div class="card wallet">
+    <form method="POST" action="{{ route('search') }}">
+      @csrf
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="7" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="8" checked>
+      <input style="display: none" type="checkbox" class="inputs typeInp" name="type[]" value="1" checked>
+      <button class="content" id="content">
+        <div class="card wallet2">
             <div class="overlay"></div>
             <div class="circle">
                 <div class="number">{{$ParEur}}</div>
@@ -144,10 +186,16 @@
             <p>Lekcje indywidualne</p>
             <p>Języki azjatyckie</p>
         </div>   
-    </div>
+      </button>
+    </form>
     <!--  -->
-    <div class="content" id="content">
-        <div class="card wallet">
+    <form method="POST" action="{{ route('search') }}">
+      @csrf
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="7" checked>
+      <input style="display: none" type="checkbox" class="inputs langInp" name="lang[]" value="8" checked>
+      <input style="display: none" type="checkbox" class="inputs typeInp" name="type[]" value="4" checked>
+      <button class="content" id="content">
+        <div class="card wallet2">
             <div class="overlay"></div>
             <div class="circle">
                 <div class="number">{{$ParAzj}}</div>
@@ -155,15 +203,19 @@
             <p>Lekcje w parze</p>
             <p>Języki azjatyckie</p>
         </div>   
-    </div>
+      </button>
+    </form>
    
 </div>
- @if($newsletter)
-        <button>Zapisz się do newslettera</button>
+<div class="d-flex p-2 justify-content-around align-items-center"style="flex-direction: column">
+    <!-- @if($newsletter == 0)
+        <a class="btn btn-secondary mb-3">Zapisz się do newslettera</a>
     @else
-        <button>Wypisz się z newslettera</button>
-    @endif
-    <button>Usuń konto</button>
+        <a class="btn btn-primary mb-3">Wypisz się z newslettera</a>
+    @endif -->
+    <a class="btn btn-danger mb-3" href="{{ route('deleteAccount') }}">Usuń konto</a>
+</div>
+ 
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 

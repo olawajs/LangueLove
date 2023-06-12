@@ -43,7 +43,7 @@ Route::get('consultation', [App\Http\Controllers\MainController::class, 'showFor
 Route::get('forCompanies', [App\Http\Controllers\MainController::class, 'showForm2'])->name('forCompanies'); 
 Route::get('getMyCalendar', [App\Http\Controllers\CalendarController::class, 'myCalendar'])->name('getMyCalendar'); 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::GET('deleteAccount', [App\Http\Controllers\MainController::class, 'deleteAccount'])->name('deleteAccount');
 Auth::routes(
    
 );

@@ -22,6 +22,7 @@ use App\Models\LanguageLevel;
 use App\Models\User;
 use App\Models\Newsletter;
 use DB;
+use Session;
 use Auth;
 use Carbon\Carbon;
 
@@ -45,6 +46,12 @@ class MainController extends Controller
     public function activate(Request $request){
         User::where('email', $request->mail)->update(['confirmed'=>1]);
             return view('ThankYouForRegistration');
+    }
+    public function deleteAccount(){
+        User::where('id', Auth::user()->id)->update(['active'=>0]);
+        Auth::logout();
+        Session::flush();
+        return redirect('/');
     }
 
     public function myAccount(){
@@ -102,14 +109,22 @@ class MainController extends Controller
     }
     public function home()
     {
-        $langs = Language::where('active',1)->get();
-        $types = LessonType::where('active',1)->get();
-        $lectors = Lector::all();
-        return view('home',[
+        if(Auth::user()  && Auth::user()->active == 0){
+            Auth::logout();
+            Session::flush();
+            return redirect('/login');
+        }
+        else{
+             $langs = Language::where('active',1)->get();
+            $types = LessonType::where('active',1)->get();
+            $lectors = Lector::all();
+            return view('home',[
                 'languages' => $langs,
                 'types' => $types,
                 'lectors' => $lectors,
             ]);
+        }
+       
     }
     public function count(Request $request)
     {
@@ -171,21 +186,22 @@ class MainController extends Controller
     }
     public function search(Request $request)
     {
-
+        
         if(!is_null($request->lang)  && !is_null($request->type) && $request->type[0] != '0' && $request->lang[0] != '0'){
             $lessons = Lesson::whereIn('language_id', $request->lang)
                                 ->whereIn('type_id', $request->type)
                                 ->where('start', '>', Carbon::today())
                                 ->where('status','<>',0)
                                 ->get();
-            $languageT = LanguageLevel::where('language_id',$request->lang)->pluck('lector_id')->toArray();
+            
+            $languageT = LanguageLevel::whereIn('language_id',$request->lang)->pluck('lector_id')->toArray();
             $lectors = Lector::whereIn('id',$languageT)->get();
         }else if(!is_null($request->lang)  && (is_null($request->type)||$request->type[0] == '0') && $request->lang[0] != '0'){
             $lessons = Lesson::whereIn('language_id', $request->lang)
                             ->where('start', '>', Carbon::today())   
                             ->where('status','<>',0)                    
                             ->get();
-            $languageT = LanguageLevel::where('language_id',$request->lang)->pluck('lector_id')->toArray();
+            $languageT = LanguageLevel::whereIn('language_id',$request->lang)->pluck('lector_id')->toArray();
             $lectors = Lector::whereIn('id',$languageT)->get();
         }
         else if((is_null($request->lang)|| $request->lang[0] == '0')  && !is_null($request->type) && $request->type[0] != '0'){
@@ -201,8 +217,7 @@ class MainController extends Controller
         }
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
-        // $a = CalendarEvent::where('lesson_id',1)->where('start', '>=', Carbon::today())->orderBy('start', 'desc')->get();
-        // dd($a);
+
         return view('filteredLessons',[
             'lessons' => $lessons,
             'lectors' => $lectors,

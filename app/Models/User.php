@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password', 
         'google_id',
         'type',
+        'active',
         'confirmed'
     ];
 
