@@ -133,7 +133,12 @@
             document.getElementById('buyForm').style.display="none";
         });
         $('.open').click(function() {
-            document.getElementById('buyForm').style.display="block";
+            var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+            if(!AuthUser){
+                window.location.href = "{{ route('login')}}";
+            }else{
+                document.getElementById('buyForm').style.display="block";
+            }
         });
         $('.typeInp').click(function() {
             check(event,2);

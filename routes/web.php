@@ -32,7 +32,7 @@ Route::get('/thankYou', function () {
 })->name('thankYou');
 
 
-
+Route::post('/payment/useLessons', [App\Http\Controllers\PaymentController::class, 'useLessons'])->name('useLessons'); 
 Route::get('myCalendar', [App\Http\Controllers\MainController::class, 'myCalendar'])->name('myCalendar'); 
 Route::get('myAccount', [App\Http\Controllers\MainController::class, 'myAccount'])->name('myAccount'); 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
@@ -44,9 +44,11 @@ Route::get('forCompanies', [App\Http\Controllers\MainController::class, 'showFor
 Route::get('getMyCalendar', [App\Http\Controllers\CalendarController::class, 'myCalendar'])->name('getMyCalendar'); 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::GET('deleteAccount', [App\Http\Controllers\MainController::class, 'deleteAccount'])->name('deleteAccount');
-Auth::routes(
-   
-);
+
+
+Auth::routes();
+
+
 Route::get('test', [App\Http\Controllers\Admin\EditInfo::class, 'Test'])->name('test');
 Route::get('admin/languages', [App\Http\Controllers\Admin\EditInfo::class, 'getLanguages'])->name('languages');
 Route::get('login/{provider}', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider']);

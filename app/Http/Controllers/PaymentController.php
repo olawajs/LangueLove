@@ -45,6 +45,7 @@ class PaymentController extends Controller
         $language_id = $request->jezyk;
         $type_id = $request->rodzaj;
         $lectorId = $request->lectorId;
+        $ileFaktura = 1;
 
 
         $cykliczne = isset($request->cykliczne) ? 1 : 0;
@@ -83,11 +84,11 @@ class PaymentController extends Controller
             $lesson->amount_of_lessons = $ile;
             if($type_id == 1){
                 $studentow = 1;
-                $desc = 'Lekcja indywidualna z języka'.$lName;
+                $desc = 'Lekcja indywidualna z języka '.$lName.'ego';
             }
             else{
                 $studentow = 2;
-                $desc = 'Lekcja w parze z języka'.$lName;
+                $desc = 'Lekcja w parze z języka '.$lName.'ego';
             }
             $lesson->amount_of_students = $studentow;
             $lesson->price = $kwota;
@@ -99,6 +100,7 @@ class PaymentController extends Controller
             $lesson->certificat = $cert;
             $lesson->save();
             $lessonId = $lesson->id;
+            $ileFaktura = $ile;
         }else{
             $lessonId = $request->lessonId;
             $desc = $request->title;
@@ -144,19 +146,86 @@ class PaymentController extends Controller
         }
        
 
-        // $calendar = new EventUsers;
-        // $calendar->calendar_id = $eventId;
-        // $calendar->user_id = Auth::user()->id;
-        // $calendar->comment = '';
-        // $calendar->status = 1;
-        // $calendar->lector_accept = 0;
-        // $calendar->student_accept = 1;
-        // $calendar->save();
-
         $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
+
+    // Dodawanie faktury
+    $api = array();
+    $api["api_id"] = "deeff9e22df4f2135e00ad03d29ccda7";
+    $api["api_zadanie"] = "1";
+    $api["dokument_dostep"] = "1";
+    // $api["dokument_miejsce"] = "Kraków";
+
+    $api["dokument_rodzaj"] = "0";
+    $api["dokument_marza"] = "0";
+    $api["dokument_drugi_jezyk"] = "2";
+    $api["dokument_zaplata"] = "20";
+    $api["dokument_pokaz_zaplata"] = "1";
+    $api["dokument_zaplacono"] = $kwota;
+    $api["dokument_status"] = "1";
+    $api["dokument_rodzaj_podstawa_zw"] = "3";
+    $api["dokument_podstawa_zw"] = "Zgodnie z art. 43 ust. 1 pkt 1 ustawy o podatku od towarów i usług, szkoły językowe są zwolnione z podatku VAT.";
+    $api["dokument_fp"] = "0";
+
+
+    $api["sprzedawca_nazwa"] = "LangueLove Wiktoria Skrzypczak i Weronika Cieślak spółka cywilna";
+    $api["sprzedawca_nip"] = "9452266907";
+    $api["sprzedawca_miasto"] = "Kraków";
+    $api["sprzedawca_kod"] = "31-445";
+    $api["sprzedawca_ulica"] = "Łaszkiewicza";
+    $api["sprzedawca_budynek"] = "4";
+    $api["sprzedawca_lokal"] = "39";
+
+
+    if(isset($request->nip)){
+        $api["nabywca_osoba"] = 0;
+         $api["nabywca_nazwa"] = $request->name;
+        $api["nabywca_nip"] = isset($request->nip) ? $request->nip : '';
+    }else{
+        $dane = explode(" ",$request->name);
+        $api["nabywca_osoba"] = 1;
+        $api["nabywca_imie"] = $dane[0];
+        $api["nabywca_nazwisko"] = $dane[1];
+    }
+   
+    
+    $api["nabywca_miasto"] = $request->city;
+    $api["nabywca_kod"] = $request->postcode;
+    $api["nabywca_ulica"] = $request->street;
+
+
+    $api["produkt_nazwa"] = $desc;
+    $api["produkt_ilosc"] = $ileFaktura;
+    $api["produkt_jm"] = "2";
+    $api["produkt_stawka_vat"] = "zw";
+    $api["produkt_wartosc_brutto"] = $kwota;
+    
+    $curl = curl_init();
+    curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
+    curl_setopt($curl,CURLOPT_POST,1);
+    curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
+    curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
+
+    $faktura = '';
+    $result = explode("\n",$result);
+    if ($result[0]==1)
+    {
+     $faktura = $result[3];   
+     echo "OK: ".$result[1];
+     echo "\nAdres URL pobrania dokumentu: ".$result[2];
+     echo "\nAdres URL podglądu dokumentu: ".$result[3];
+     echo "\nNazwa pliku PDF: ".$result[4];
+    }
+    else
+    {
+        $faktura = "ERROR: ".$result[1];
+    }
 
         $payment = new Payment;
         $payment->price = $kwota;
@@ -168,6 +237,7 @@ class PaymentController extends Controller
         $payment->session_id = $session_id;
         $payment->quantity = 1;
         $payment->status = 1;
+        $payment->invoice = $faktura;
 
         $payment->name = $request->name;
         $payment->street = $request->street;
@@ -177,12 +247,16 @@ class PaymentController extends Controller
         $payment->save();
         
 
+
         $suma_zamowienia = $kwota*100 ; //wartość musi być podana w groszach
         $tytul = $desc ;
         
         $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
         return new RedirectResponse($link.'trnRequest/'.$token);
 
+    }
+    public function  useLessons(Request $request){
+        dd('juuuż prawie');
     }
     public function  transaction(Request $request)
     {
@@ -191,6 +265,85 @@ class PaymentController extends Controller
         $merchant_id = 207228;
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
+
+
+        // end faktura
+        
+            // Dodawanie faktury
+    $api = array();
+    $api["api_id"] = "deeff9e22df4f2135e00ad03d29ccda7";
+    $api["api_zadanie"] = "1";
+    $api["dokument_dostep"] = "1";
+    // $api["dokument_miejsce"] = "Kraków";
+
+    $api["dokument_rodzaj"] = "0";
+    $api["dokument_marza"] = "0";
+    $api["dokument_drugi_jezyk"] = "2";
+    $api["dokument_zaplata"] = "20";
+    $api["dokument_pokaz_zaplata"] = "1";
+    $api["dokument_zaplacono"] = $request->price;
+    $api["dokument_status"] = "1";
+    $api["dokument_rodzaj_podstawa_zw"] = "3";
+    $api["dokument_podstawa_zw"] = "Zgodnie z art. 43 ust. 1 pkt 1 ustawy o podatku od towarów i usług, szkoły językowe są zwolnione z podatku VAT.";
+    $api["dokument_fp"] = "0";
+
+
+    $api["sprzedawca_nazwa"] = "LangueLove Wiktoria Skrzypczak i Weronika Cieślak spółka cywilna";
+    $api["sprzedawca_nip"] = "9452266907";
+    $api["sprzedawca_miasto"] = "Kraków";
+    $api["sprzedawca_kod"] = "31-445";
+    $api["sprzedawca_ulica"] = "Łaszkiewicza";
+    $api["sprzedawca_budynek"] = "4";
+    $api["sprzedawca_lokal"] = "39";
+
+
+    if(isset($request->nip)){
+        $api["nabywca_osoba"] = 0;
+         $api["nabywca_nazwa"] = $request->name;
+        $api["nabywca_nip"] = isset($request->nip) ? $request->nip : '';
+    }else{
+        $dane = explode(" ",$request->name);
+        $api["nabywca_osoba"] = 1;
+        $api["nabywca_imie"] = $dane[0];
+        $api["nabywca_nazwisko"] = $dane[1];
+    }
+   
+    
+    $api["nabywca_miasto"] = $request->city;
+    $api["nabywca_kod"] = $request->postcode;
+    $api["nabywca_ulica"] = $request->street;
+
+
+    $api["produkt_nazwa"] = $request->desc;
+    $api["produkt_ilosc"] = "1";
+    $api["produkt_jm"] = "2";
+    $api["produkt_stawka_vat"] = "zw";
+    $api["produkt_wartosc_brutto"] = $request->price;
+    
+    $curl = curl_init();
+    curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
+    curl_setopt($curl,CURLOPT_POST,1);
+    curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
+    curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
+
+    $faktura = '';
+    $result = explode("\n",$result);
+    if ($result[0]==1)
+    {
+     $faktura = $result[3];   
+     echo "OK: ".$result[1];
+     echo "\nAdres URL pobrania dokumentu: ".$result[2];
+     echo "\nAdres URL podglądu dokumentu: ".$result[3];
+     echo "\nNazwa pliku PDF: ".$result[4];
+    }
+    else
+    {
+        $faktura = "ERROR: ".$result[1];
+    }
 
         $payment = new Payment;
         $payment->price = $request->price;
@@ -202,6 +355,12 @@ class PaymentController extends Controller
         $payment->session_id = $session_id;
         $payment->quantity = 1;
         $payment->status = 1;
+        $payment->name = $request->name;
+        $payment->street = $request->street;
+        $payment->postcode = $request->postcode;
+        $payment->city = $request->city;
+        $payment->invoice = $faktura;
+        $payment->nip = isset($request->nip) ? $request->nip : '';
         $payment->save();
         
         $pakiet = $request->packet;
@@ -212,6 +371,7 @@ class PaymentController extends Controller
                 $bank->overdue_date = Carbon::now()->addWeeks($pakiet);
                 $bank->type_id = $request->typeA;
                 $bank->priceType = $type;
+                $bank->certificat = $request->certyficate;
                 $bank->save();
         }
       

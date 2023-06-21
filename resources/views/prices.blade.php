@@ -268,6 +268,27 @@
         <p id='opisPlatnosci'>
 
         </p>
+        <h2 class="Tcenter">Dane do faktury: </h2>
+           <div class="box">
+                <span class="napis">Imię i nazwisko: </span>
+                <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <div class="box">
+                <span class="napis">Ulica: </span>
+                <input type="text" class="form-control" name="street" id="street" required>
+            </div>
+            <div class="box">
+                <span class="postcode">Kod Pocztowy: </span>
+                <input type="text" class="form-control" name="postcode" id="postcode" required>
+            </div>
+            <div class="box">
+                <span class="napis">Miasto: </span>
+                <input type="text" class="form-control" name="city" id="city" required>
+            </div>
+            <div class="box">
+                <span class="napis">NIP: </span>
+                <input type="text" class="form-control" name="nip" id="nip">
+            </div>
           <button class="btn btn-secondary  mb-3" onclick="buy()">Przejdź do płatności</button>
           <button class="btn btn-primary  mb-3" onclick="CloseModal('BuyModal')">ANULUJ</button>
         </div>
@@ -445,44 +466,84 @@ function searchFor(type)
    }
   }
   function buy(){
-    let form = document.createElement('form');
-      form.setAttribute('method','POST');
-      form.setAttribute('action',"{{ route('transaction') }}");
+    var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+    if(!AuthUser){
+        window.location.href = "{{ route('login')}}";
+    }else{
+      let form = document.createElement('form');
+        form.setAttribute('method','POST');
+        form.setAttribute('action',"{{ route('transaction') }}");
 
-    let descR = document.createElement('input');
-      descR.setAttribute('name','desc');
-      descR.setAttribute('type','hidden');
-      descR.value = desc;
+      let descR = document.createElement('input');
+        descR.setAttribute('name','desc');
+        descR.setAttribute('type','hidden');
+        descR.value = desc;
 
-    let lang = document.createElement('input');
-      lang.setAttribute('name','langDesc');
-      lang.setAttribute('type','hidden');
-      lang.value = languageI;
+      let lang = document.createElement('input');
+        lang.setAttribute('name','langDesc');
+        lang.setAttribute('type','hidden');
+        lang.value = languageI;
 
-    let priceA = document.createElement('input');
-      priceA.setAttribute('name','price');
-      priceA.setAttribute('type','hidden');
-      priceA.value = price;
+      let priceA = document.createElement('input');
+        priceA.setAttribute('name','price');
+        priceA.setAttribute('type','hidden');
+        priceA.value = price;
 
-    let packet = document.createElement('input');
-      packet.setAttribute('name','packet');
-      packet.setAttribute('type','hidden');
-      packet.value = amountV;
+      let packet = document.createElement('input');
+        packet.setAttribute('name','packet');
+        packet.setAttribute('type','hidden');
+        packet.value = amountV;
 
-    let typeA = document.createElement('input');
-      typeA.setAttribute('name','typeA');
-      typeA.setAttribute('type','hidden');
-      typeA.value = typeV;
+      let typeA = document.createElement('input');
+        typeA.setAttribute('name','typeA');
+        typeA.setAttribute('type','hidden');
+        typeA.value = typeV;
+       
+      let certyficate = document.createElement('input');
+          certyficate.setAttribute('name','certyficate');
+          certyficate.setAttribute('type','hidden');
+          certyficate.value = certyficateV;
+      // dane do faktury
+      let name = document.createElement('input');
+          name.setAttribute('name','name');
+          name.setAttribute('type','hidden');
+          name.value = document.getElementById('name').value;
 
-    
-    form.innerHTML ='@csrf';
-    form.appendChild(lang);
-    form.appendChild(descR);
-    form.appendChild(priceA);
-    form.appendChild(packet);
-    form.appendChild(typeA);
-    document.getElementById('formDiv2').appendChild(form);
-    form.submit();
+      let street = document.createElement('input');
+          street.setAttribute('name','street');
+          street.setAttribute('type','hidden');
+          street.value = document.getElementById('street').value;
+      
+      let postcode = document.createElement('input');
+          postcode.setAttribute('name','postcode');
+          postcode.setAttribute('type','hidden');
+          postcode.value = document.getElementById('postcode').value;
+      
+      let city = document.createElement('input');
+          city.setAttribute('name','city');
+          city.setAttribute('type','hidden');
+          city.value = document.getElementById('city').value;
+
+      let nip = document.createElement('input');
+          nip.setAttribute('name','nip');
+          nip.setAttribute('type','hidden');
+          nip.value = document.getElementById('nip').value;
+      
+      form.innerHTML ='@csrf';
+      form.appendChild(lang);
+      form.appendChild(descR);
+      form.appendChild(priceA);
+      form.appendChild(certyficate);
+      form.appendChild(packet);
+      form.appendChild(typeA);
+      form.appendChild(name);
+      form.appendChild(street);
+      form.appendChild(postcode);
+      form.appendChild(city);
+      form.appendChild(nip);
+      document.getElementById('formDiv2').appendChild(form);
+      form.submit();
+    }
   }
   function OpenModal(id){
     document.getElementById('opisPlatnosci').innerHTML = opisPlatosc;

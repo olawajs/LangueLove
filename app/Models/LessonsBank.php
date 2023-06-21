@@ -13,6 +13,7 @@ class LessonsBank extends Model
         'use_date',
         'overdue_date',
         'type_id',
-        'priceType'
+        'priceType',
+        'certificat'
     ];
 }

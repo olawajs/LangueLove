@@ -11,6 +11,9 @@ use App\Models\Lesson;
 use App\Models\CalendarEvent;
 use App\Models\CalendarSetup;
 use App\Models\LanguageLevel;
+use App\Models\LessonsBank;
+use Auth;
+use Carbon\Carbon;
 
 class LessonController extends Controller
 {
@@ -37,7 +40,42 @@ class LessonController extends Controller
         $languageT = LanguageLevel::where('lector_id',$lesson->lector_id)->pluck('language_id')->toArray();
         $languages = Language::whereIn('id',$languageT)->get();
         $calendarEvents = CalendarSetup::where('lector_id',$lesson->lector_id)->get(); // czy potrzebne teraz? tylko widok lektora? i indywidualne zajęcia?
+       
         if($lesson->type_id != 2){
+
+            if(Auth::check()){
+                $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',1)->count();
+                $lessonsIndEuC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',1)->count();
+
+                $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',1)->count();
+                $lessonsParEuC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',1)->count();
+
+                $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',2)->count();
+                $lessonsIndAzC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',2)->count();
+
+                $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',2)->count();
+                $lessonsParAzC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',2)->count();
+
+                // typ;typJezyka;certyfikat
+                // 1 - ind; 4-para
+                $wykupioneLekcje['1']['1']['0']= $lessonsIndEu;
+                $wykupioneLekcje['1']['1']['1']= $lessonsIndEuC;
+                $wykupioneLekcje['1']['2']['0']= $lessonsIndAz;
+                $wykupioneLekcje['1']['2']['1']= $lessonsIndAzC;
+                $wykupioneLekcje['4']['1']['0']= $lessonsParEu;
+                $wykupioneLekcje['4']['1']['1']= $lessonsParEuC;
+                $wykupioneLekcje['4']['2']['0']= $lessonsParAz;
+                $wykupioneLekcje['4']['2']['1']= $lessonsParAzC;
+            }else{
+                $wykupioneLekcje['1']['1']['0']= 0;
+                $wykupioneLekcje['1']['1']['1']= 0;
+                $wykupioneLekcje['1']['2']['0']= 0;
+                $wykupioneLekcje['1']['2']['1']= 0;
+                $wykupioneLekcje['4']['1']['0']= 0;
+                $wykupioneLekcje['4']['1']['1']= 0;
+                $wykupioneLekcje['4']['2']['0']= 0;
+                $wykupioneLekcje['4']['2']['1']= 0;
+            }
             return view('lessonInd',[
                 'lesson' => $lesson,
                 'durations' => $duratons,
@@ -67,11 +105,45 @@ class LessonController extends Controller
         $languages = Language::whereIn('id',$languageT)->get();
         // $calendarEvents = CalendarSetup::where('lector_id',$request->id)->get(); // czy potrzebne teraz? tylko widok lektora? i indywidualne zajęcia?
       
+        if(Auth::check()){
+            $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',1)->count();
+            $lessonsIndEuC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',1)->count();
+
+            $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',1)->count();
+            $lessonsParEuC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',1)->count();
+
+            $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',2)->count();
+            $lessonsIndAzC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',2)->count();
+
+            $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',2)->count();
+            $lessonsParAzC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',2)->count();
+
+            // typ;typJezyka;certyfikat
+            // 1 - ind; 4-para
+            $wykupioneLekcje['1']['1']['0']= $lessonsIndEu;
+            $wykupioneLekcje['1']['1']['1']= $lessonsIndEuC;
+            $wykupioneLekcje['1']['2']['0']= $lessonsIndAz;
+            $wykupioneLekcje['1']['2']['1']= $lessonsIndAzC;
+            $wykupioneLekcje['4']['1']['0']= $lessonsParEu;
+            $wykupioneLekcje['4']['1']['1']= $lessonsParEuC;
+            $wykupioneLekcje['4']['2']['0']= $lessonsParAz;
+            $wykupioneLekcje['4']['2']['1']= $lessonsParAzC;
+        }else{
+            $wykupioneLekcje['1']['1']['0']= 0;
+            $wykupioneLekcje['1']['1']['1']= 0;
+            $wykupioneLekcje['1']['2']['0']= 0;
+            $wykupioneLekcje['1']['2']['1']= 0;
+            $wykupioneLekcje['4']['1']['0']= 0;
+            $wykupioneLekcje['4']['1']['1']= 0;
+            $wykupioneLekcje['4']['2']['0']= 0;
+            $wykupioneLekcje['4']['2']['1']= 0;
+        }
              return view('lector',[
                 'durations' => $duratons,
                 'levels' => $languageTypes,
                 'lector' => $lector,
-                'languages' => $languages
+                'languages' => $languages,
+                'lessonAmount' => $wykupioneLekcje
             ]);
     }
     public function addLesson(Request $request)

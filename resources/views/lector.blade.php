@@ -124,30 +124,34 @@
                 <span class="napis" for="ile">Ilość: </span>
                 <input type="number" class="form-control CountCost" name="ile" id="ile" step="1" min="1" placeholder="Ilość lekcji">
             </div>
-           <p class="cena1">Do zapłaty: <b id='kwota'></b></p>
+           <p class="cena1" id="cena1">Do zapłaty: <b id='kwota'></b></p>
            <hr>
-           <h2 class="Tcenter">Dane do faktury: </h2>
-           <div class="box">
-                <span class="napis">Imię i nazwisko: </span>
-                <input type="text" class="form-control" name="name" id="name" required>
-            </div>
-            <div class="box">
-                <span class="napis">Ulica i numer domu: </span>
-                <input type="text" class="form-control" name="street" id="street" required>
-            </div>
-            <div class="box">
-                <span class="postcode">Kod Pocztowy: </span>
-                <input type="text" class="form-control" name="postcode" id="postcode" required>
-            </div>
-            <div class="box">
-                <span class="napis">Miasto: </span>
-                <input type="text" class="form-control" name="city" id="city" required>
-            </div>
-            <div class="box">
-                <span class="napis">NIP: </span>
-                <input type="text" class="form-control" name="nip" id="nip">
-            </div>
+           <div id="daneFaktura">
+                <h2 class="Tcenter">Dane do faktury: </h2>
+                <div class="box">
+                    <span class="napis">Imię i nazwisko: </span>
+                    <input type="text" class="form-control" name="name" id="name" required>
+                </div>
+                <div class="box">
+                    <span class="napis">Ulica i numer domu: </span>
+                    <input type="text" class="form-control" name="street" id="street" required>
+                </div>
+                <div class="box">
+                    <span class="postcode">Kod Pocztowy: </span>
+                    <input type="text" class="form-control" name="postcode" id="postcode" required>
+                </div>
+                <div class="box">
+                    <span class="napis">Miasto: </span>
+                    <input type="text" class="form-control" name="city" id="city" required>
+                </div>
+                <div class="box">
+                    <span class="napis">NIP: </span>
+                    <input type="text" class="form-control" name="nip" id="nip">
+                </div>
+           </div>
+          
           <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
+          <button class="btn btn-secondary  mb-3" id="buyButton2" onclick="UseLessons(event)" >WYKORZYSTAJ ZAKUPIONE LEKCJE</button>
           <input type="button" class="btn btn-primary mb-3" onclick="CloseModal('BuyModal')" value="ANULUJ">
         </div>
     </form>
@@ -158,6 +162,9 @@
 
 
 <script>
+    let LessonAmount = {!! json_encode($lessonAmount) !!};
+   
+    // console.log(Languages);
     let kwota = 0;
     let ok = true;
     $(document).ready(function () {
@@ -225,17 +232,18 @@
         });
         calendar.render();
 
-           function OpenModal(id){
+        function OpenModal(id){
             document.getElementById(id).style.display = 'block';
             document.getElementById('content').style.pointerEvents = "none";
             document.getElementById('content').style.opacity = "0.2";
+           
             Cost();
             var anchors = document.getElementsByClassName('CountCost');
             for(var i = 0; i < anchors.length; i++) {
                 var anchor = anchors[i];
                 anchor.onchange = function(){Cost();  validTermins();};
             }
-            validTermins();
+            validTermins(); checkAmount();
         }
     })
     function Cost(){
@@ -264,8 +272,37 @@
         .fail(function() {
             alert( "error" );
         });
+        checkAmount();
     }
-    
+    function checkAmount(){
+        let typ = document.getElementById('rodzaj').value; //ind i par
+        let typJ = document.getElementById('jezyk').value;  //trzeba poszukać jaki typ platnosci
+        let ile = document.getElementById('ile').value;  
+        let Languages = {!! json_encode($languages) !!};
+        let priceT = -1;
+            for (const [key, value] of Object.entries(Languages)) {
+                if(value.id==typJ){
+                    priceT = value.price_type;
+                }
+            }
+
+        if(document.getElementById('cert').checked){
+            cert = 1;
+        }else{
+            cert=0;
+        }
+        if(LessonAmount[typ][priceT][cert] >0 && LessonAmount[typ][priceT][cert]>=ile){
+            document.getElementById('daneFaktura').style.display = 'none'; 
+            document.getElementById('cena1').style.display = 'none'; 
+            document.getElementById('buyButton2').style.display = 'block'; 
+            document.getElementById('buyButton').style.display = 'none'; 
+        } else{
+            document.getElementById('daneFaktura').style.display = 'block'; 
+            document.getElementById('cena1').style.display = 'block'; 
+            document.getElementById('buyButton2').style.display = 'none'; 
+            document.getElementById('buyButton').style.display = 'block'; 
+        }
+    }
     function validTermins(){
         $.ajax({
             type: "POST",
@@ -309,6 +346,12 @@
             document.getElementById(id).style.display = 'none';
             document.getElementById('content').style.pointerEvents = "";
             document.getElementById('content').style.opacity = "1";
+        }
+        function UseLessons(e){
+            e.preventDefault();
+            alert('?');
+            document.getElementById('BuyModal').action ="{{ route('useLessons') }}";
+            // document.getElementById('BuyModal').submit();
         }
         function przejdzDo(){
             const element = document.getElementById("calendar");
