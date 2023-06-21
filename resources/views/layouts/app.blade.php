@@ -107,7 +107,7 @@
                                             {{ __('Moje konto') }}
                                         </a> 
                                         <a class="dropdown-item disabled" disabled>
-                                           Lekcji do wykorzystania:  {{App\Models\LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',\Carbon\Carbon::today())->count()}}
+                                           Lekcji do wykorzystania:  {{App\Models\LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',\Carbon\Carbon::today())->count()}}
                                         </a> 
                                         <a class="dropdown-item" href="{{ route('myCalendar') }}">
                                             {{ __('Mój kalendarz') }}

@@ -24,7 +24,6 @@ use App\Mail\ThankYou;
 use Auth;
 use Carbon\Carbon;
 
-
 class PaymentController extends Controller
 {   
     // $link = 'https://secure.przelewy24.pl/';
@@ -226,7 +225,6 @@ class PaymentController extends Controller
     {
         $faktura = "ERROR: ".$result[1];
     }
-
         $payment = new Payment;
         $payment->price = $kwota;
         $payment->description =  $desc;
@@ -256,7 +254,83 @@ class PaymentController extends Controller
 
     }
     public function  useLessons(Request $request){
-        dd('juuuż prawie');
+        $start = $request->data;
+        $hour = $request->godzina;
+        $duration_id = $request->duration_id;
+        $language_id = $request->jezyk;
+        $type_id = $request->rodzaj;
+        $lectorId = $request->lectorId;
+
+
+        $cykliczne = isset($request->cykliczne) ? 1 : 0;
+        $cert = isset($request->cert) ? 1 : 0;
+        $ile = isset($request->ile) ? $request->ile : 1;
+        $zajecia = isset($request->zajecia) ? 1 : 0;
+        $priceG = isset($request->price) ? $request->price : 0;
+
+        
+        $l = Language::where('id',$language_id)->first();
+        $type = $l->price_type;
+        $lName = $l->name;
+       
+         $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
+        $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
+        $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+
+            $lesson = new Lesson;
+            $lesson->type_id = $type_id;
+            $lesson->duration_id = $duration_id;
+            $lesson->amount_of_lessons = $ile;
+            if($type_id == 1){
+                $studentow = 1;
+            }
+            else{
+                $studentow = 2;
+            }
+            $lesson->amount_of_students = $studentow;
+            $lesson->price = '0';
+            $lesson->start = $start2;
+            $lesson->lector_id = $lectorId;
+            $lesson->language_id = $language_id;
+            $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
+            $lesson->status = 0;
+            $lesson->certificat = $cert;
+            $lesson->save();
+            $lessonId = $lesson->id;
+
+            for($i=0; $i<=$ile; $i++){
+                $event = new CalendarEvent;
+                $event->start = $start2;
+                $event->end = $end;
+                $event->lector_id = $lectorId;
+                $event->type = 3;
+                $event->lesson_id =  $lessonId;
+                $event->save();
+
+                $calendar = new EventUsers;
+                $calendar->calendar_id = $event->id;
+                $calendar->user_id = Auth::user()->id;
+                $calendar->comment = '';
+                $calendar->status = 1;
+                $calendar->lector_accept = 0;
+                $calendar->student_accept = 1;
+                $calendar->save();
+                // 
+                LessonsBank::where(['user_id' => Auth::user()->id, 
+                                    'priceType' => $type,
+                                    'certificat' => $cert,
+                                    'type_id' => $type_id
+                                    ])
+                            ->where('overdue_date','>=',Carbon::now())
+                            ->first()
+                            ->update(['use_date' => Carbon::now()]);
+
+                $start2 = date('Y-m-d', strtotime($start2. ' + 1 week'));
+                $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+            }
+            
+
+            return Redirect::to('https://languelove.pl/priceList/search/1/1');
     }
     public function  transaction(Request $request)
     {
@@ -295,6 +369,7 @@ class PaymentController extends Controller
     $api["sprzedawca_ulica"] = "Łaszkiewicza";
     $api["sprzedawca_budynek"] = "4";
     $api["sprzedawca_lokal"] = "39";
+
 
 
     if(isset($request->nip)){

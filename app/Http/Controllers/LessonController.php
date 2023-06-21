@@ -44,17 +44,17 @@ class LessonController extends Controller
         if($lesson->type_id != 2){
 
             if(Auth::check()){
-                $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',1)->count();
-                $lessonsIndEuC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',1)->count();
+                $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',1)->count();
+                $lessonsIndEuC = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',1)->count();
 
-                $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',1)->count();
-                $lessonsParEuC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',1)->count();
+                $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',1)->count();
+                $lessonsParEuC = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',1)->count();
 
-                $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',2)->count();
-                $lessonsIndAzC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',2)->count();
+                $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',2)->count();
+                $lessonsIndAzC = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',2)->count();
 
-                $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',2)->count();
-                $lessonsParAzC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',2)->count();
+                $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',0)->where('priceType',2)->count();
+                $lessonsParAzC = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('certificat',1)->where('priceType',2)->count();
 
                 // typ;typJezyka;certyfikat
                 // 1 - ind; 4-para

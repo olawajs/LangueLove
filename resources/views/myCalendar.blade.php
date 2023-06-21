@@ -48,7 +48,7 @@
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek',
             slotMinTime:"07:00",
-            slotDuration: '00:15:00',
+            slotDuration: '01:00:00',
             slotMaxTime:"23:00",
             allDaySlot: false,
             hiddenDays: [ 0 ], //wyłączenie niedzieli

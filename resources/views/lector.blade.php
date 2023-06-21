@@ -351,7 +351,7 @@
             e.preventDefault();
             alert('?');
             document.getElementById('BuyModal').action ="{{ route('useLessons') }}";
-            // document.getElementById('BuyModal').submit();
+            document.getElementById('BuyModal').submit();
         }
         function przejdzDo(){
             const element = document.getElementById("calendar");

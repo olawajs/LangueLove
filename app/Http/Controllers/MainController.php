@@ -55,10 +55,10 @@ class MainController extends Controller
     }
 
     public function myAccount(){
-        $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('priceType',1)->count();
-        $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('priceType',1)->count();
-        $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('priceType',2)->count();
-        $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',4)->where('priceType',2)->count();
+        $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->where('type_id',1)->where('priceType',1)->count();
+        $lessonsParEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->where('type_id',4)->where('priceType',1)->count();
+        $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->where('type_id',1)->where('priceType',2)->count();
+        $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->where('type_id',4)->where('priceType',2)->count();
         $newsletter = Newsletter::where('email',Auth::user()->email)->count();
         return view('myAccount',[
             'IndEur'=>$lessonsIndEu,
@@ -102,7 +102,7 @@ class MainController extends Controller
         }
     }
     public function myCalendar(){
-        $lessons = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->count();
+        $lessons = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->count();
         return view('myCalendar',[
             'to_use'=>$lessons
         ]);

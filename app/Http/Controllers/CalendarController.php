@@ -16,7 +16,6 @@ class CalendarController extends Controller
     public function myCalendar(){
         $events = EventUsers::where('user_id',Auth::user()->id)->pluck('calendar_id')->toArray();
         $calendar = CalendarEvent::whereIn('id',$events)->get();
-       
         foreach($calendar as $setup){
                 $color = 'var(--bs-secondary)';
                
