@@ -395,31 +395,31 @@ class PaymentController extends Controller
     $api["produkt_stawka_vat"] = "zw";
     $api["produkt_wartosc_brutto"] = $request->price;
     
-    $curl = curl_init();
-    curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
-    curl_setopt($curl,CURLOPT_POST,1);
-    curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
-    curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
-    curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
-    $result = curl_exec($curl);
-    curl_close($curl);
+    // $curl = curl_init();
+    // curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
+    // curl_setopt($curl,CURLOPT_POST,1);
+    // curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
+    // curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+    // curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
+    // $result = curl_exec($curl);
+    // curl_close($curl);
     //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
 
     $faktura = '';
-    $result = explode("\n",$result);
-    if ($result[0]==1)
-    {
-     $faktura = $result[3];   
-     echo "OK: ".$result[1];
-     echo "\nAdres URL pobrania dokumentu: ".$result[2];
-     echo "\nAdres URL podglądu dokumentu: ".$result[3];
-     echo "\nNazwa pliku PDF: ".$result[4];
-    }
-    else
-    {
-        $faktura = "ERROR: ".$result[1];
-    }
-
+    // $result = explode("\n",$result);
+    // if ($result[0]==1)
+    // {
+    //  $faktura = $result[3];   
+    //  echo "OK: ".$result[1];
+    //  echo "\nAdres URL pobrania dokumentu: ".$result[2];
+    //  echo "\nAdres URL podglądu dokumentu: ".$result[3];
+    //  echo "\nNazwa pliku PDF: ".$result[4];
+    // }
+    // else
+    // {
+    //     $faktura = "ERROR: ".$result[1];
+    // }
+        dd($request);
         $payment = new Payment;
         $payment->price = $request->price;
         $payment->description = $request->desc;
@@ -438,6 +438,10 @@ class PaymentController extends Controller
         $payment->nip = isset($request->nip) ? $request->nip : '';
         $payment->save();
         
+        $language_id = $request->langDesc;
+        $l = Language::where('id',$language_id)->first();
+        $type = $l->price_type;
+
         $pakiet = $request->packet;
         for($i=1; $i<=$pakiet; $i++){
               $bank = new LessonsBank;
@@ -445,12 +449,12 @@ class PaymentController extends Controller
                 $bank->payment_id = $payment->id;
                 $bank->overdue_date = Carbon::now()->addWeeks($pakiet);
                 $bank->type_id = $request->typeA;
+                
                 $bank->priceType = $type;
                 $bank->certificat = $request->certyficate;
                 $bank->save();
         }
       
-
         $suma_zamowienia = $request->price*100 ; //wartość musi być podana w groszach
         $tytul = $request->desc;
         

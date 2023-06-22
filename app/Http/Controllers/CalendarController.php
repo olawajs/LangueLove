@@ -10,6 +10,7 @@ use App\Models\EventUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class CalendarController extends Controller
 {
@@ -134,4 +135,28 @@ class CalendarController extends Controller
        
         return $tabSetup;
     }
+    public function acceptLessons(){
+        $events =  DB::table('event_users')
+        ->join('calendar_events', 'event_users.calendar_id', '=', 'calendar_events.id')
+        ->join('lessons', 'lessons.id', '=', 'calendar_events.lesson_id')
+        ->join('lectors', 'lectors.id', '=', 'calendar_events.lector_id')
+        ->select(
+            'event_users.*',
+            'calendar_events.lector_id', 
+            'lessons.title',
+            'event_users.lector_accept',
+            'event_users.student_accept',
+            'lectors.name',
+            'lectors.surname'
+            )
+        ->where('lessons.type_id','!=',2)
+        ->where('lessons.type_id','!=',3)
+        ->where('event_users.user_id',Auth::user()->id)
+        ->orWhere('calendar_events.lector_id',Auth::user()->id)
+        ->where('event_users.student_accept',0)
+        ->orWhere('event_users.lector_accept',0)
+        ->get();
+        dd($events);
+    }
+
 }

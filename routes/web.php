@@ -45,7 +45,10 @@ Route::get('getMyCalendar', [App\Http\Controllers\CalendarController::class, 'my
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::GET('deleteAccount', [App\Http\Controllers\MainController::class, 'deleteAccount'])->name('deleteAccount');
 
+// Strony dla lektorów
+Route::get('toAccept', [App\Http\Controllers\CalendarController::class, 'acceptLessons'])->name('toAccept'); 
 
+// 
 Auth::routes();
 
 
