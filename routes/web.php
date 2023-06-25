@@ -47,6 +47,7 @@ Route::GET('deleteAccount', [App\Http\Controllers\MainController::class, 'delete
 
 // Strony dla lektorów
 Route::get('toAccept', [App\Http\Controllers\CalendarController::class, 'acceptLessons'])->name('toAccept'); 
+Route::get('accept/{id}', [App\Http\Controllers\CalendarController::class, 'accept'])->name('accept'); 
 
 // 
 Auth::routes();

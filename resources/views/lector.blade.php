@@ -349,7 +349,6 @@
         }
         function UseLessons(e){
             e.preventDefault();
-            alert('?');
             document.getElementById('BuyModal').action ="{{ route('useLessons') }}";
             document.getElementById('BuyModal').submit();
         }

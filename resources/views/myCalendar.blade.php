@@ -48,7 +48,7 @@
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek',
             slotMinTime:"07:00",
-            slotDuration: '01:00:00',
+            slotDuration: '00:30:00',
             slotMaxTime:"23:00",
             allDaySlot: false,
             hiddenDays: [ 0 ], //wyłączenie niedzieli
@@ -65,6 +65,9 @@
 
             selectConstraint: "businessHours",
             eventClick: function(info) {
+                let id = info.event._def.publicId;
+                // console.log(calendar.getEvents());
+                console.log(calendar.getEventById( id )._def.extendedProps.opis);
                 alert('Tu pojawi się okienko z informacjami: imię lektora, język oraz link do skype :)');
             },
             dateClick: function(info) {

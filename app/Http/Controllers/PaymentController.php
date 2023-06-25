@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ThankYou;
+use App\Mail\AcceptTermin;
 use Auth;
 use Carbon\Carbon;
 
@@ -100,6 +101,7 @@ class PaymentController extends Controller
             $lesson->save();
             $lessonId = $lesson->id;
             $ileFaktura = $ile;
+            Mail::to('olawjs@gmail.com')->send(new AcceptTermin());
         }else{
             $lessonId = $request->lessonId;
             $desc = $request->title;
@@ -329,7 +331,7 @@ class PaymentController extends Controller
                 $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
             }
             
-
+            Mail::to('olawjs@gmail.com')->send(new AcceptTermin());
             return Redirect::to('https://languelove.pl/priceList/search/1/1');
     }
     public function  transaction(Request $request)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CalendarSetup;
 use App\Models\CalendarEvent;
 use App\Models\Lesson;
+use App\Models\Lector;
 use App\Models\Language;
 use App\Models\EventUsers;
 use Illuminate\Http\Request;
@@ -15,21 +16,70 @@ use Illuminate\Support\Facades\DB;
 class CalendarController extends Controller
 {
     public function myCalendar(){
-        $events = EventUsers::where('user_id',Auth::user()->id)->pluck('calendar_id')->toArray();
-        $calendar = CalendarEvent::whereIn('id',$events)->get();
+        $id_lektor = Lector::where('id_user',Auth::user()->id)->first();
+        if($id_lektor){
+            $id = $id_lektor->id;
+        }else{
+            $id = 0;
+        }
+        $now = Carbon::now()->format('Y-m-d');
+        $calendar =  DB::table('event_users')
+        ->join('calendar_events', 'event_users.calendar_id', '=', 'calendar_events.id')
+        ->join('lessons', 'lessons.id', '=', 'calendar_events.lesson_id')
+        ->join('lectors', 'lectors.id', '=', 'calendar_events.lector_id')
+        ->join('languages', 'languages.id', '=', 'lessons.language_id')
+        ->select(
+            'event_users.*',
+            'calendar_events.start',
+            'lessons.type_id',
+            'calendar_events.end',
+            'calendar_events.lector_id', 
+            'lessons.title',
+            'lessons.language_id',
+            'event_users.lector_accept',
+            'event_users.student_accept',
+            'lectors.name',
+            'lectors.surname',
+            'lectors.photo',
+            'languages.name'
+            )
+        ->where('calendar_events.start','>',$now)
+        ->where(function ($query) use ($id) {
+            $query->where('event_users.user_id',Auth::user()->id)
+                  ->orWhere('calendar_events.lector_id',$id);
+        })
+        ->get();
         foreach($calendar as $setup){
+            $editable = false;
+            if(Auth::user()->id == $setup->user_id &&  $setup->lector_accept == 0 && $setup->type_id != 2 && $setup->type_id != 3){
+                $color = 'gray';
+                $opis = 'Termin nie potwierdzony';
+            }
+            else if(Auth::user()->id != $setup->user_id &&  $setup->lector_accept == 0 ){
+                $color = 'var(--bs-primary)';
+                $opis = 'Do zaakceptowania';
+                $editable = true;
+            }
+            else{
                 $color = 'var(--bs-secondary)';
+                $opis = '';
+            }
+                
                
-                $lesson = Lesson::where('id',$setup->lesson_id)->first()->language_id; 
-                $language = Language::where('id',$lesson)->first()->name; 
-                $title = 'Zajęcia z język '.$language;
+            if(Auth::user()->id == $setup->user_id && $setup->type_id != 2 && $setup->type_id != 3){
+                $title = 'Zajęcia z języka '.$setup->name.'ego';
+            }else{
+                $title = $setup->title;
+            }
             $tabSetup[] = [
+                'id'=>$setup->id,
                 'title' => $title,
                 'start' => $setup->start,
                 'end'  =>$setup->end,
-                'editable'=> false,
-                'type' => $setup->type,
-                'color' => $color
+                'editable'=> $editable,
+                'type' => $setup->type_id,
+                'color' => $color,
+                'opis' => $opis
             ];
         }
         return $tabSetup;
@@ -120,6 +170,7 @@ class CalendarController extends Controller
                 'type' => $setup->type,
                 'color' => $color
             ];
+            
         }
     
         $now= Carbon::now()->subHours(480);
@@ -135,28 +186,56 @@ class CalendarController extends Controller
        
         return $tabSetup;
     }
+    public function accept(Request $request){
+        $CE = EventUsers::where('id',$request->id)->first();
+        if($CE->user_id == Auth::user()->id){
+            $CE->student_accept = 1;
+        }
+        else{
+            $CE->lector_accept = 1;
+        }
+        if($CE->save()){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        
+    }
     public function acceptLessons(){
+        $id_lektor = Lector::where('id_user',Auth::user()->id)->first();
+        if($id_lektor){
+            $id = $id_lektor->id;
+        }else{
+            $id = 0;
+        }
         $events =  DB::table('event_users')
         ->join('calendar_events', 'event_users.calendar_id', '=', 'calendar_events.id')
         ->join('lessons', 'lessons.id', '=', 'calendar_events.lesson_id')
         ->join('lectors', 'lectors.id', '=', 'calendar_events.lector_id')
         ->select(
             'event_users.*',
+            'calendar_events.start',
+            'calendar_events.end',
             'calendar_events.lector_id', 
             'lessons.title',
             'event_users.lector_accept',
             'event_users.student_accept',
             'lectors.name',
-            'lectors.surname'
+            'lectors.surname',
+            'lectors.photo'
             )
         ->where('lessons.type_id','!=',2)
         ->where('lessons.type_id','!=',3)
-        ->where('event_users.user_id',Auth::user()->id)
-        ->orWhere('calendar_events.lector_id',Auth::user()->id)
-        ->where('event_users.student_accept',0)
-        ->orWhere('event_users.lector_accept',0)
+        ->where('calendar_events.start','>',Carbon::now())
+        ->whereRaw('event_users.lector_accept + event_users.student_accept < 2')
+        ->where(function ($query) use ($id) {
+            $query->where('event_users.user_id',Auth::user()->id)
+                  ->orWhere('calendar_events.lector_id',$id);
+        })
         ->get();
-        dd($events);
+        return view('myLessons',['lessons' => $events]);
+        
     }
 
 }

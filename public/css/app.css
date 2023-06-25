@@ -10875,6 +10875,11 @@ textarea.form-control-lg {
   align-items: center;
   gap:30px;
 }
+.CardContainer{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
 option{
   font-family: 'Montserrat';
   font-size: var(--bs-body-font-size);

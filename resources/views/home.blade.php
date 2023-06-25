@@ -224,7 +224,8 @@
                     Korzystamy także z <b>autentycznych tekstów</b> (z prasy, wiadomości, literatury, blogów, social mediów, podcastów). 
                     Będziesz mieć na bieżąco kontakt nie tylko z wiedzą teoretyczną, ale także z <b>codziennym językiem</b> i często stosowanym słownictwem.
                </p>
-                <button class="btn btn-primary"><a class="footLink" href="https://languelove.pl/priceList/search/1/1" >Zapisz się na kurs</a></button>
+               
+                <button class="btn btn-primary"><a class="footLink" href="{{ route('searchPricelist', ['lang' => 1,'type' => 1]) }}" >Zapisz się na kurs</a></button>
             </div>
         </div>
       
