@@ -39,7 +39,7 @@ class LectorController extends Controller
     public function EditLector(Request $request)
     {
 
-        $imageName = time().'.'.$request->name.$request->surname.'_'.$request->file('photo')->getClientOriginalName();    
+        $imageName = time().'.'.$request->name.'_'.$request->file('photo')->getClientOriginalName();    
         $validated = $request->validate([
             'name' => 'required', 
             'surname' => 'required', 

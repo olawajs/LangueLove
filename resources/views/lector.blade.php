@@ -220,9 +220,8 @@
                    if(text == 'Wolny termin' ){
                    
                         let data = info.date; 
-                        // console.log((data.getDate()).length );
-                        document.getElementById('data').value = data.getFullYear() + "-" +((data.getMonth()).length != 2 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" +data.getDate() ;
-                        document.getElementById('godzina').value = data.getHours() + ":" +((data.getMinutes()) <= 9 ? "0" + (data.getMinutes()) : (data.getMinutes()));
+                        document.getElementById('data').value = data.getFullYear() + "-" +((data.getMonth()).length != 2 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" +((data.getDate()) <= 9 ? "0" + (data.getDate()) : (data.getDate())) ;
+                        document.getElementById('godzina').value = ((data.getHours()) <= 9 ? "0" + (data.getHours()) : (data.getHours())) + ":" +((data.getMinutes()) <= 9 ? "0" + (data.getMinutes()) : (data.getMinutes()));
                         OpenModal('BuyModal');
                     } 
                 }

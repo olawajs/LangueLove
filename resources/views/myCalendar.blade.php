@@ -21,7 +21,7 @@
         margin: 5px 0;
     }
 </style>
-<div class="container">
+<div class="container" id="container">
 
     <div class="content" id="content">
     
@@ -35,6 +35,16 @@
 </div>
 
 @endsection
+<div id="infoPOP" style="display: none">
+    <span class="closeButton" onclick="closePop()">X</span>
+    <h2>Szczegóły zajęć:</h2>
+    <p><b>Lektor: </b><span id="le"></span></p>
+    <p><b>Język: </b><span id="je"></span></p>
+    <p><b>Typ zajęć: </b><span id="ty"></span></p>
+    <p><b>Link do spotkania: </b><span id="li"></span></p>
+    <p><b id="op"></b></p>
+    
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 
 
@@ -67,8 +77,14 @@
             eventClick: function(info) {
                 let id = info.event._def.publicId;
                 // console.log(calendar.getEvents());
-                console.log(calendar.getEventById( id )._def.extendedProps.opis);
-                alert('Tu pojawi się okienko z informacjami: imię lektora, język oraz link do skype :)');
+                document.getElementById('op').innerHTML = calendar.getEventById( id )._def.extendedProps.opis;
+                document.getElementById('li').innerText = calendar.getEventById( id )._def.extendedProps.skype;
+                document.getElementById('le').innerText = calendar.getEventById( id )._def.extendedProps.lektor;
+                document.getElementById('ty').innerText = calendar.getEventById( id )._def.extendedProps.typeL;
+                document.getElementById('je').innerText = calendar.getEventById( id )._def.extendedProps.typeJ;
+                document.getElementById('infoPOP').style.display = 'block';
+                document.getElementById('container').style.filter = 'blur(4px)';
+                // alert('Tu pojawi się okienko z informacjami: imię lektora, język oraz link do skype :)');
             },
             dateClick: function(info) {
                 var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
@@ -91,5 +107,10 @@
 
 
     })
+    function closePop()
+    {
+        document.getElementById('infoPOP').style.display = 'none';
+        document.getElementById('container').style.filter = 'none';
+    }
 
 </script>

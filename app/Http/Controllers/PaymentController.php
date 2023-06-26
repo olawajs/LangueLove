@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Lesson;
 use App\Models\LessonDuration;
 use App\Models\Language;
+use App\Models\Lector;
 use App\Models\CalendarEvent;
 use App\Models\EventUsers;
 use App\Models\LessonsBank;
@@ -101,6 +102,7 @@ class PaymentController extends Controller
             $lesson->save();
             $lessonId = $lesson->id;
             $ileFaktura = $ile;
+            $lecMail = Lector::where('id', $lectorId)->first();
             Mail::to('olawjs@gmail.com')->send(new AcceptTermin());
         }else{
             $lessonId = $request->lessonId;
@@ -108,7 +110,7 @@ class PaymentController extends Controller
         }
 
         if($zajecia != 1){
-            for($i=0; $i<=$ile; $i++){
+            for($i=0; $i<$ile; $i++){
                 $event = new CalendarEvent;
                 $event->start = $start2;
                 $event->end = $end;
@@ -300,7 +302,7 @@ class PaymentController extends Controller
             $lesson->save();
             $lessonId = $lesson->id;
 
-            for($i=0; $i<=$ile; $i++){
+            for($i=0; $i<$ile; $i++){
                 $event = new CalendarEvent;
                 $event->start = $start2;
                 $event->end = $end;
@@ -330,8 +332,8 @@ class PaymentController extends Controller
                 $start2 = date('Y-m-d', strtotime($start2. ' + 1 week'));
                 $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
             }
-            
-            Mail::to('olawjs@gmail.com')->send(new AcceptTermin());
+            $lecMail = Lector::where('id', $lectorId)->first();
+            Mail::to($lecMail->email)->send(new AcceptTermin());
             return Redirect::to('https://languelove.pl/priceList/search/1/1');
     }
     public function  transaction(Request $request)

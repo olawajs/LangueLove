@@ -28,6 +28,7 @@ class CalendarController extends Controller
         ->join('lessons', 'lessons.id', '=', 'calendar_events.lesson_id')
         ->join('lectors', 'lectors.id', '=', 'calendar_events.lector_id')
         ->join('languages', 'languages.id', '=', 'lessons.language_id')
+        ->join('lesson_types', 'lesson_types.id', '=', 'lessons.type_id')
         ->select(
             'event_users.*',
             'calendar_events.start',
@@ -38,10 +39,12 @@ class CalendarController extends Controller
             'lessons.language_id',
             'event_users.lector_accept',
             'event_users.student_accept',
-            'lectors.name',
+            'lectors.name as LectorName',
             'lectors.surname',
             'lectors.photo',
-            'languages.name'
+            'lectors.skype',
+            'languages.name',
+            'lesson_types.name as typeName'
             )
         ->where('calendar_events.start','>',$now)
         ->where(function ($query) use ($id) {
@@ -49,20 +52,21 @@ class CalendarController extends Controller
                   ->orWhere('calendar_events.lector_id',$id);
         })
         ->get();
+        // dd($calendar);
         foreach($calendar as $setup){
             $editable = false;
             if(Auth::user()->id == $setup->user_id &&  $setup->lector_accept == 0 && $setup->type_id != 2 && $setup->type_id != 3){
                 $color = 'gray';
-                $opis = 'Termin nie potwierdzony';
+                $opis = '<span style="color: red">Termin niepotwierdzony</span>';
             }
             else if(Auth::user()->id != $setup->user_id &&  $setup->lector_accept == 0 ){
                 $color = 'var(--bs-primary)';
-                $opis = 'Do zaakceptowania';
+                $opis = '<span style="color: orange">Do zaakceptowania</span>';
                 $editable = true;
             }
             else{
                 $color = 'var(--bs-secondary)';
-                $opis = '';
+                $opis = '<span style="color: green">Termin potwierdzony</span>';
             }
                 
                
@@ -79,7 +83,11 @@ class CalendarController extends Controller
                 'editable'=> $editable,
                 'type' => $setup->type_id,
                 'color' => $color,
-                'opis' => $opis
+                'opis' => $opis,
+                'lektor' => $setup->LectorName,
+                'skype' => $setup->skype,
+                'typeL' => $setup->typeName,
+                'typeJ' => $setup->name,
             ];
         }
         return $tabSetup;

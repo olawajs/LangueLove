@@ -10885,6 +10885,24 @@ option{
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
 }
+.closeButton{
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  cursor: pointer;
+}
+#infoPop{
+  background-color: var(--bs-sandy);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  padding: 25px;
+  text-align: center;
+}
+
 .classicTwo{
   flex-grow: 1;
   max-width: 45%;
