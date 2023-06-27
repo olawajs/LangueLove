@@ -211,6 +211,9 @@ class CalendarController extends Controller
         
     }
     public function acceptLessons(){
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $id_lektor = Lector::where('id_user',Auth::user()->id)->first();
         if($id_lektor){
             $id = $id_lektor->id;

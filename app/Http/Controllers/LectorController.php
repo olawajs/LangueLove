@@ -51,7 +51,7 @@ class LectorController extends Controller
             'levels' => 'nullable',
             'style' => 'nullable',
             'street' => 'required',
-            'post_code' => 'required'
+            'post_code' => 'required',
         ]);
         $ile = $request->languageAmount;
         if($request->file('photo') !=''){
@@ -86,7 +86,7 @@ class LectorController extends Controller
     }
     public function AddLector(Request $request)
     {
-        $imageName = time().'.'.$request->name.$request->surname.'_'.$request->file('photo')->getClientOriginalName();    
+        $imageName = time().'.'.$request->name.'_'.$request->file('photo')->getClientOriginalName();    
         $validated = $request->validate([
             'name' => 'required', 
             'surname' => 'required', 
@@ -97,6 +97,8 @@ class LectorController extends Controller
             'city' => 'required',
             'levels' => 'nullable',
             'style' => 'nullable',
+            'skype' => 'nullable',
+            'phone' => 'nullable',
             'street' => 'required',
             'post_code' => 'required'
         ]);

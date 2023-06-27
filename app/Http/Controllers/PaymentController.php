@@ -103,7 +103,8 @@ class PaymentController extends Controller
             $lessonId = $lesson->id;
             $ileFaktura = $ile;
             $lecMail = Lector::where('id', $lectorId)->first();
-            Mail::to('olawjs@gmail.com')->send(new AcceptTermin());
+            Mail::to('kontakt@languelove.pl')->send(new AcceptTermin());
+            Mail::to($lecMail->email)->send(new AcceptTermin());
         }else{
             $lessonId = $request->lessonId;
             $desc = $request->title;
@@ -333,6 +334,7 @@ class PaymentController extends Controller
                 $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
             }
             $lecMail = Lector::where('id', $lectorId)->first();
+            Mail::to('kontakt@languelove.pl')->send(new AcceptTermin());
             Mail::to($lecMail->email)->send(new AcceptTermin());
             return Redirect::to('https://languelove.pl/priceList/search/1/1');
     }
