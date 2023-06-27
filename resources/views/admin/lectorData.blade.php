@@ -363,7 +363,7 @@ input[type=time] {
 
         let now= dateToYMD(new Date().addHours(-120));
         let now2= new Date().addHours(12);
-        let end = dateToYMD(new Date().addWeeks(10));
+        let end = dateToYMD(new Date().addWeeks(30));
         var calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek',

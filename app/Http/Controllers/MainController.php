@@ -95,7 +95,7 @@ class MainController extends Controller
             'miasto' => $request->miasto,
             'message' => $request->message
            ]; 
-           Mail::to('olawjs@gmail.com')->send(new CompanyConsultation($mailData));
+           Mail::to('kontakt@languelove.pl')->send(new CompanyConsultation($mailData));
            return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error','UPS...Coś poszło nie tak');

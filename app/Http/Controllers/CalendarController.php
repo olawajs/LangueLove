@@ -29,6 +29,7 @@ class CalendarController extends Controller
         ->join('lectors', 'lectors.id', '=', 'calendar_events.lector_id')
         ->join('languages', 'languages.id', '=', 'lessons.language_id')
         ->join('lesson_types', 'lesson_types.id', '=', 'lessons.type_id')
+        ->join('users', 'users.id', '=', 'event_users.user_id')
         ->select(
             'event_users.*',
             'calendar_events.start',
@@ -42,9 +43,11 @@ class CalendarController extends Controller
             'lectors.name as LectorName',
             'lectors.surname',
             'lectors.photo',
+            'lectors.email',
             'lectors.skype',
             'languages.name',
-            'lesson_types.name as typeName'
+            'lesson_types.name as typeName',
+            'users.email as Uemail'
             )
         ->where('calendar_events.start','>',$now)
         ->where(function ($query) use ($id) {
@@ -72,8 +75,14 @@ class CalendarController extends Controller
                
             if(Auth::user()->id == $setup->user_id && $setup->type_id != 2 && $setup->type_id != 3){
                 $title = 'Zajęcia z języka '.$setup->name.'ego';
+                
             }else{
                 $title = $setup->title;
+            }
+            if(Auth::user()->id == $setup->user_id){
+                $email = $setup->email;
+            }else{
+               $email = $setup->Uemail;
             }
             $tabSetup[] = [
                 'id'=>$setup->id,
@@ -88,6 +97,7 @@ class CalendarController extends Controller
                 'skype' => $setup->skype,
                 'typeL' => $setup->typeName,
                 'typeJ' => $setup->name,
+                'email' => $email,
             ];
         }
         return $tabSetup;
@@ -116,8 +126,8 @@ class CalendarController extends Controller
             }
             $startDate = date('Y-m-d', strtotime($startDate. ' + 1 days'));
         }          
-        
-        return redirect()->route('getLector', ['id' => $request['id_lector']]);
+        return redirect()->back();
+        // return redirect()->route('getLector', ['id' => $request['id_lector']]);
     }
     public function GetSetup(Request $request){
         $CS = CalendarSetup::where('lector_id',$request->id)->get();
