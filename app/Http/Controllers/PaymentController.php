@@ -519,16 +519,19 @@ class PaymentController extends Controller
 
         $faktura = '';
         $result = explode("\n",$result);
-        $pay = Payment::whereId(session()->get('payment_id'));
+
+        $session_id = Session::get('payment_session', 'default');
+        $payment = Payment::where('session_id',$session_id)->first();
+
         if ($result[0]==1)
         {
-            $pay->invoice = $result[3];
+           $payment->invoice = $result[3];
         }
         else
         {
-            $pay->invoice = "ERROR: ".$result[1];
+            $payment->invoice = "ERROR: ".$result[1];
         }
-        $pay->save();
+        $payment->save();
     }
     public static function getToken($kwota,$zamowienie,$session_id){
         
