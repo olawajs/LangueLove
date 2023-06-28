@@ -40,25 +40,42 @@ class PaymentController extends Controller
     // $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
 
     public function  buyLesson(Request $request){
-        $start = $request->data;
-        $hour = $request->godzina;
-        $duration_id = $request->duration_id;
+       
+    $RequestTab = [
+        'typPlatnosci' => 'LEKCJA',
+        'start' => $request->data,
+        'hour' => $request->godzina,
+        'duration_id' => $request->duration_id,
+        'language_id' => $request->jezyk,
+        'type_id' => $request->rodzaj,
+        'lectorId' => $request->lectorId,
+        'ileFaktura' => 1,
+        'ile' => isset($request->ile) ? $request->ile : 1,
+        'cert' => isset($request->cert) ? 1 : 0,
+        'zajecia' => isset($request->zajecia) ? 1 : 0,
+        'cykliczne' => isset($request->cykliczne) ? 1 : 0,
+        'priceG' => isset($request->price) ? $request->price : 0,
+        'lessonI' => $request->lessonI,
+        'title' => $request->title,
+        'calendarId' => $request->calendarId,
+        'name' => $request->name,
+        'nip' => isset($request->nip) ? $request->nip : '',
+        'city' => $request->city,
+        'postcode' => $request->postcode,
+        'street' => $request->street,
+    ];
+        $request->session()->put('data', $RequestTab);
+       
         $language_id = $request->jezyk;
-        $type_id = $request->rodzaj;
-        $lectorId = $request->lectorId;
-        $ileFaktura = 1;
-
-
-        $cykliczne = isset($request->cykliczne) ? 1 : 0;
+        $duration_id = $request->duration_id;
         $cert = isset($request->cert) ? 1 : 0;
-        $ile = isset($request->ile) ? $request->ile : 1;
-        $zajecia = isset($request->zajecia) ? 1 : 0;
+        $zajecia =  isset($request->zajecia) ? 1 : 0;
         $priceG = isset($request->price) ? $request->price : 0;
-
-        
-        $l = Language::where('id',$language_id)->first();
-        $type = $l->price_type;
-        $lName = $l->name;
+        $ile = isset($request->ile) ? $request->ile : 1;
+        $type_id = $request->rodzaj;
+            $l = Language::where('id',$language_id)->first();
+            $type = $l->price_type;
+            $lName = $l->name;
         if($zajecia == 1){
             $price = $priceG;
             $kwota = $price;
@@ -71,185 +88,36 @@ class PaymentController extends Controller
                         ->price; 
                         $kwota = $price*$ile;
         }
-       
-         $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
-        $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
-        $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
         
-       
-
-        if($zajecia != 1){
-            $lesson = new Lesson;
-            $lesson->type_id = $type_id;
-            $lesson->duration_id = $duration_id;
-            $lesson->amount_of_lessons = $ile;
-            if($type_id == 1){
-                $studentow = 1;
-                $desc = 'Lekcja indywidualna z języka '.$lName.'ego';
-            }
-            else{
-                $studentow = 2;
-                $desc = 'Lekcja w parze z języka '.$lName.'ego';
-            }
-            $lesson->amount_of_students = $studentow;
-            $lesson->price = $kwota;
-            $lesson->start = $start2;
-            $lesson->lector_id = $lectorId;
-            $lesson->language_id = $language_id;
-            $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
-            $lesson->status = 0;
-            $lesson->certificat = $cert;
-            $lesson->save();
-            $lessonId = $lesson->id;
-            $ileFaktura = $ile;
-            $lecMail = Lector::where('id', $lectorId)->first();
-            Mail::to('kontakt@languelove.pl')->send(new AcceptTermin());
-            Mail::to($lecMail->email)->send(new AcceptTermin());
-        }else{
-            $lessonId = $request->lessonId;
-            $desc = $request->title;
+        if($type_id == 1){
+            $desc = 'Lekcja indywidualna z języka '.$lName.'ego';
         }
-
-        if($zajecia != 1){
-            for($i=0; $i<$ile; $i++){
-                $event = new CalendarEvent;
-                $event->start = $start2;
-                $event->end = $end;
-                $event->lector_id = $lectorId;
-                $event->type = 3;
-                $event->lesson_id =  $lessonId;
-                $event->save();
-
-
-                $calendar = new EventUsers;
-                $calendar->calendar_id = $event->id;
-                $calendar->user_id = Auth::user()->id;
-                $calendar->comment = '';
-                $calendar->status = 1;
-                $calendar->lector_accept = 0;
-                $calendar->student_accept = 1;
-                $calendar->save();
-                
-                $start2 = date('Y-m-d', strtotime($start2. ' + 1 week'));
-                $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
-            }
-        }else{
-            $events = CalendarEvent::where('lesson_id',$lessonId)->get();
-            foreach($events as $event){
-
-                $calendar = new EventUsers;
-                $calendar->calendar_id = $event->id;
-                $calendar->user_id = Auth::user()->id;
-                $calendar->comment = '';
-                $calendar->status = 3;
-                $calendar->lector_accept = 0;
-                $calendar->student_accept = 1;
-                $calendar->save();
-            }
-            $eventId =  $request->calendarId;
+        else{
+            $desc = 'Lekcja w parze z języka '.$lName.'ego';
         }
-       
-
         $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
-    // Dodawanie faktury
-    $api = array();
-    $api["api_id"] = "deeff9e22df4f2135e00ad03d29ccda7";
-    $api["api_zadanie"] = "1";
-    $api["dokument_dostep"] = "1";
-    // $api["dokument_miejsce"] = "Kraków";
-
-    $api["dokument_rodzaj"] = "0";
-    $api["dokument_marza"] = "0";
-    $api["dokument_drugi_jezyk"] = "2";
-    $api["dokument_zaplata"] = "20";
-    $api["dokument_pokaz_zaplata"] = "1";
-    $api["dokument_zaplacono"] = $kwota;
-    $api["dokument_status"] = "1";
-    $api["dokument_rodzaj_podstawa_zw"] = "3";
-    $api["dokument_podstawa_zw"] = "Zgodnie z art. 43 ust. 1 pkt 1 ustawy o podatku od towarów i usług, szkoły językowe są zwolnione z podatku VAT.";
-    $api["dokument_fp"] = "0";
-
-
-    $api["sprzedawca_nazwa"] = "LangueLove Wiktoria Skrzypczak i Weronika Cieślak spółka cywilna";
-    $api["sprzedawca_nip"] = "9452266907";
-    $api["sprzedawca_miasto"] = "Kraków";
-    $api["sprzedawca_kod"] = "31-445";
-    $api["sprzedawca_ulica"] = "Łaszkiewicza";
-    $api["sprzedawca_budynek"] = "4";
-    $api["sprzedawca_lokal"] = "39";
-
-
-    if(isset($request->nip)){
-        $api["nabywca_osoba"] = 0;
-         $api["nabywca_nazwa"] = $request->name;
-        $api["nabywca_nip"] = isset($request->nip) ? $request->nip : '';
-    }else{
-        $dane = explode(" ",$request->name);
-        $api["nabywca_osoba"] = 1;
-        $api["nabywca_imie"] = $dane[0];
-        $api["nabywca_nazwisko"] = $dane[1];
-    }
-   
     
-    $api["nabywca_miasto"] = $request->city;
-    $api["nabywca_kod"] = $request->postcode;
-    $api["nabywca_ulica"] = $request->street;
-
-
-    $api["produkt_nazwa"] = $desc;
-    $api["produkt_ilosc"] = $ileFaktura;
-    $api["produkt_jm"] = "2";
-    $api["produkt_stawka_vat"] = "zw";
-    $api["produkt_wartosc_brutto"] = $kwota;
-    
-    $curl = curl_init();
-    curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
-    curl_setopt($curl,CURLOPT_POST,1);
-    curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
-    curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
-    curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
-    $result = curl_exec($curl);
-    curl_close($curl);
-    //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
-
-    $faktura = '';
-    $result = explode("\n",$result);
-    if ($result[0]==1)
-    {
-     $faktura = $result[3];   
-     echo "OK: ".$result[1];
-     echo "\nAdres URL pobrania dokumentu: ".$result[2];
-     echo "\nAdres URL podglądu dokumentu: ".$result[3];
-     echo "\nNazwa pliku PDF: ".$result[4];
-    }
-    else
-    {
-        $faktura = "ERROR: ".$result[1];
-    }
         $payment = new Payment;
         $payment->price = $kwota;
         $payment->description =  $desc;
         $payment->id_language = $language_id;
         $payment->id_user = Auth::user()->id;
-        $session_id = Session::getId().date('YmdHis');
-        Session::put('payment_session', $session_id);
+            $session_id = Session::getId().date('YmdHis');
+            Session::put('payment_session', $session_id);
         $payment->session_id = $session_id;
         $payment->quantity = 1;
         $payment->status = 1;
-        $payment->invoice = $faktura;
 
         $payment->name = $request->name;
         $payment->street = $request->street;
         $payment->postcode = $request->postcode;
         $payment->city = $request->city;
         $payment->nip = isset($request->nip) ? $request->nip : '';
-        $payment->save();
-        
-
+      $payment->save();
 
         $suma_zamowienia = $kwota*100 ; //wartość musi być podana w groszach
         $tytul = $desc ;
@@ -341,98 +209,33 @@ class PaymentController extends Controller
     public function  transaction(Request $request)
     {
        
+        $RequestTab = [
+            'typPlatnosci' => 'PAKIET',
+            'priceG' => isset($request->price) ? $request->price : 0,
+            'title' => $request->desc,
+            'name' => $request->name,
+            'nip' => isset($request->nip) ? $request->nip : '',
+            'city' => $request->city,
+            'postcode' => $request->postcode,
+            'street' => $request->street,
+            'langDesc' => $request->langDesc,
+            'packet' => $request->packet,
+            'typeA' => $request->typeA,
+            'certyficate' => $request->certyficate,
+        ];
+        $request->session()->put('data', $RequestTab);
         $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
-
-        // end faktura
-        
-            // Dodawanie faktury
-    $api = array();
-    $api["api_id"] = "deeff9e22df4f2135e00ad03d29ccda7";
-    $api["api_zadanie"] = "1";
-    $api["dokument_dostep"] = "1";
-    // $api["dokument_miejsce"] = "Kraków";
-
-    $api["dokument_rodzaj"] = "0";
-    $api["dokument_marza"] = "0";
-    $api["dokument_drugi_jezyk"] = "2";
-    $api["dokument_zaplata"] = "20";
-    $api["dokument_pokaz_zaplata"] = "1";
-    $api["dokument_zaplacono"] = $request->price;
-    $api["dokument_status"] = "1";
-    $api["dokument_rodzaj_podstawa_zw"] = "3";
-    $api["dokument_podstawa_zw"] = "Zgodnie z art. 43 ust. 1 pkt 1 ustawy o podatku od towarów i usług, szkoły językowe są zwolnione z podatku VAT.";
-    $api["dokument_fp"] = "0";
-
-
-    $api["sprzedawca_nazwa"] = "LangueLove Wiktoria Skrzypczak i Weronika Cieślak spółka cywilna";
-    $api["sprzedawca_nip"] = "9452266907";
-    $api["sprzedawca_miasto"] = "Kraków";
-    $api["sprzedawca_kod"] = "31-445";
-    $api["sprzedawca_ulica"] = "Łaszkiewicza";
-    $api["sprzedawca_budynek"] = "4";
-    $api["sprzedawca_lokal"] = "39";
-
-
-
-    if(isset($request->nip)){
-        $api["nabywca_osoba"] = 0;
-         $api["nabywca_nazwa"] = $request->name;
-        $api["nabywca_nip"] = isset($request->nip) ? $request->nip : '';
-    }else{
-        $dane = explode(" ",$request->name);
-        $api["nabywca_osoba"] = 1;
-        $api["nabywca_imie"] = $dane[0];
-        $api["nabywca_nazwisko"] = $dane[1];
-    }
-   
-    
-    $api["nabywca_miasto"] = $request->city;
-    $api["nabywca_kod"] = $request->postcode;
-    $api["nabywca_ulica"] = $request->street;
-
-
-    $api["produkt_nazwa"] = $request->desc;
-    $api["produkt_ilosc"] = "1";
-    $api["produkt_jm"] = "2";
-    $api["produkt_stawka_vat"] = "zw";
-    $api["produkt_wartosc_brutto"] = $request->price;
-    
-    // $curl = curl_init();
-    // curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
-    // curl_setopt($curl,CURLOPT_POST,1);
-    // curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
-    // curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
-    // curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
-    // $result = curl_exec($curl);
-    // curl_close($curl);
-    //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
-
-    $faktura = '';
-    // $result = explode("\n",$result);
-    // if ($result[0]==1)
-    // {
-    //  $faktura = $result[3];   
-    //  echo "OK: ".$result[1];
-    //  echo "\nAdres URL pobrania dokumentu: ".$result[2];
-    //  echo "\nAdres URL podglądu dokumentu: ".$result[3];
-    //  echo "\nNazwa pliku PDF: ".$result[4];
-    // }
-    // else
-    // {
-    //     $faktura = "ERROR: ".$result[1];
-    // }
-        dd($request);
         $payment = new Payment;
         $payment->price = $request->price;
         $payment->description = $request->desc;
         $payment->id_language = $request->langDesc;
         $payment->id_user = Auth::user()->id;
         $session_id = Session::getId().date('YmdHis');
-        Session::put('payment_session', $session_id);
+            Session::put('payment_session', $session_id);
         $payment->session_id = $session_id;
         $payment->quantity = 1;
         $payment->status = 1;
@@ -440,27 +243,11 @@ class PaymentController extends Controller
         $payment->street = $request->street;
         $payment->postcode = $request->postcode;
         $payment->city = $request->city;
-        $payment->invoice = $faktura;
         $payment->nip = isset($request->nip) ? $request->nip : '';
         $payment->save();
+        Session::put('payment_id',$payment->id);
         
-        $language_id = $request->langDesc;
-        $l = Language::where('id',$language_id)->first();
-        $type = $l->price_type;
 
-        $pakiet = $request->packet;
-        for($i=1; $i<=$pakiet; $i++){
-              $bank = new LessonsBank;
-                $bank->user_id = Auth::user()->id;
-                $bank->payment_id = $payment->id;
-                $bank->overdue_date = Carbon::now()->addWeeks($pakiet);
-                $bank->type_id = $request->typeA;
-                
-                $bank->priceType = $type;
-                $bank->certificat = $request->certyficate;
-                $bank->save();
-        }
-      
         $suma_zamowienia = $request->price*100 ; //wartość musi być podana w groszach
         $tytul = $request->desc;
         
@@ -476,9 +263,9 @@ class PaymentController extends Controller
     public function getReturn(){
         
         $link = 'https://secure.przelewy24.pl/';
-    $merchant_id = 207228;
-    $crc_code = '89cb17cc0941683b';
-    $apiKey = 'bc839088e33f425cd818e56eac59d080';
+        $merchant_id = 207228;
+        $crc_code = '89cb17cc0941683b';
+        $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
         $session_id = Session::get('payment_session', 'default');
         $payment = Payment::where('session_id',$session_id)->first();
@@ -535,15 +322,213 @@ class PaymentController extends Controller
         ));
 
         $response2 = json_decode(curl_exec($curl2));
-        // curl_close($curl2);
         if($response2->data->status == 'success'){
+            $payment->status = 2;
+            $payment->save();
+            $this->CreateLessons();
             Mail::to(Auth::user()->email)->send(new ThankYou());
             return view('thankYou');
         }else{
+            $payment->status = 3;
+            $payment->save();
             dd('Wystąpił niespodziewany błąd');
         }
+
     
   
+    }
+    public static function CreateLessons(){
+        $data = session()->get('data');
+        if($data['typPlatnosci'] == 'LEKCJA'){
+            $start = $data['start'];
+            $hour = $data['hour'];
+            $duration_id = $data['duration_id'];
+            $language_id = $data['language_id'];
+            $type_id =$data['type_id'] ;
+            $lectorId = $data['lectorId'];
+            $ileFaktura = $data['ileFaktura'];
+            $cykliczne = $data['cykliczne'];
+            $cert = $data['cert'];
+            $ile = $data['ile'];
+            $zajecia = $data['zajecia'];
+            $priceG =$data['priceG'];
+
+            $l = Language::where('id',$language_id)->first();
+            $type = $l->price_type;
+            $lName = $l->name;
+            if($zajecia == 1){
+                $price = $priceG;
+                $kwota = $price;
+            }else{
+                $price = Price::where('type_id',$type_id)
+                            ->where('price_type_id',$type)
+                            ->where('duration_id',$duration_id)
+                            ->where('certification',$cert)
+                            ->first()
+                            ->price; 
+                            $kwota = $price*$ile;
+            }
+
+            $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
+            $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
+            $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+            
+            if($zajecia != 1){
+                $lesson = new Lesson;
+                $lesson->type_id = $type_id;
+                $lesson->duration_id = $duration_id;
+                $lesson->amount_of_lessons = $ile;
+                if($type_id == 1){
+                    $studentow = 1;
+                    $desc = 'Lekcja indywidualna z języka '.$lName.'ego';
+                }
+                else{
+                    $studentow = 2;
+                    $desc = 'Lekcja w parze z języka '.$lName.'ego';
+                }
+                $lesson->amount_of_students = $studentow;
+                $lesson->price = $kwota;
+                $lesson->start = $start2;
+                $lesson->lector_id = $lectorId;
+                $lesson->language_id = $language_id;
+                $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
+                $lesson->status = 0;
+                $lesson->certificat = $cert;
+                $lesson->save();
+                $lessonId = $lesson->id;
+                $ileFaktura = $ile;
+                $lecMail = Lector::where('id', $lectorId)->first();
+                Mail::to('kontakt@languelove.pl')->send(new AcceptTermin());
+                Mail::to($lecMail->email)->send(new AcceptTermin());
+            }else{
+                $lessonId = $request->lessonId;
+                $desc = $request->title;
+            }
+
+            if($zajecia != 1){
+                for($i=0; $i<$ile; $i++){
+                    $event = new CalendarEvent;
+                    $event->start = $start2;
+                    $event->end = $end;
+                    $event->lector_id = $lectorId;
+                    $event->type = 3;
+                    $event->lesson_id =  $lessonId;
+                    $event->save();
+    
+    
+                    $calendar = new EventUsers;
+                    $calendar->calendar_id = $event->id;
+                    $calendar->user_id = Auth::user()->id;
+                    $calendar->comment = '';
+                    $calendar->status = 1;
+                    $calendar->lector_accept = 0;
+                    $calendar->student_accept = 1;
+                    $calendar->save();
+                    
+                    $start2 = date('Y-m-d H:i', strtotime($start2. ' + 1 week'));
+                    $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+                }
+            }else{
+                $events = CalendarEvent::where('lesson_id',$lessonId)->get();
+                foreach($events as $event){
+    
+                    $calendar = new EventUsers;
+                    $calendar->calendar_id = $event->id;
+                    $calendar->user_id = Auth::user()->id;
+                    $calendar->comment = '';
+                    $calendar->status = 3;
+                    $calendar->lector_accept = 0;
+                    $calendar->student_accept = 1;
+                    $calendar->save();
+                }
+                $eventId =  $request->calendarId;
+            }
+        }elseif($data['typPlatnosci'] == 'PAKIET')
+        {
+            $language_id = $data['langDesc'];
+            $l = Language::where('id',$language_id)->first();
+            $type = $l->price_type;
+            $kwota =  $data['priceG'];
+            $desc =  $data['title'];
+            $pakiet = $data['packet'];
+            $ileFaktura = 1;
+            for($i=1; $i<=$pakiet; $i++){
+                  $bank = new LessonsBank;
+                    $bank->user_id = Auth::user()->id;
+                    $bank->payment_id = session()->get('payment_id') ; 
+                    $bank->overdue_date = Carbon::now()->addWeeks($pakiet);
+                    $bank->type_id = $data['typeA'];
+                    
+                    $bank->priceType = $type;
+                    $bank->certificat = $data['certyficate'];
+                    $bank->save();
+            }
+          
+        }
+        $api = array();
+        $api["api_id"] = "deeff9e22df4f2135e00ad03d29ccda7";
+        $api["api_zadanie"] = "1";
+        $api["dokument_dostep"] = "1";
+        $api["dokument_rodzaj"] = "0";
+        $api["dokument_marza"] = "0";
+        $api["dokument_drugi_jezyk"] = "2";
+        $api["dokument_zaplata"] = "20";
+        $api["dokument_pokaz_zaplata"] = "1";
+        $api["dokument_zaplacono"] = $kwota;
+        $api["dokument_status"] = "1";
+        $api["dokument_rodzaj_podstawa_zw"] = "3";
+        $api["dokument_podstawa_zw"] = "Zgodnie z art. 43 ust. 1 pkt 1 ustawy o podatku od towarów i usług, szkoły językowe są zwolnione z podatku VAT.";
+        $api["dokument_fp"] = "0";
+        $api["sprzedawca_nazwa"] = "LangueLove Wiktoria Skrzypczak i Weronika Cieślak spółka cywilna";
+        $api["sprzedawca_nip"] = "9452266907";
+        $api["sprzedawca_miasto"] = "Kraków";
+        $api["sprzedawca_kod"] = "31-445";
+        $api["sprzedawca_ulica"] = "Łaszkiewicza";
+        $api["sprzedawca_budynek"] = "4";
+        $api["sprzedawca_lokal"] = "39";
+        if($data['nip'] != ''){
+            $api["nabywca_osoba"] = 0;
+            $api["nabywca_nazwa"] = $data['name'];
+            $api["nabywca_nip"] = $data['nip'];
+        }else{
+            $dane = explode(" ",$data['name']);
+            $api["nabywca_osoba"] = 1;
+            $api["nabywca_imie"] = $dane[0];
+            $api["nabywca_nazwisko"] = $dane[1];
+        }
+        
+        $api["nabywca_miasto"] = $data['city'];
+        $api["nabywca_kod"] = $data['postcode'];
+        $api["nabywca_ulica"] = $data['street'];
+
+
+        $api["produkt_nazwa"] = $desc;
+        $api["produkt_ilosc"] = $ileFaktura;
+        $api["produkt_jm"] = "2";
+        $api["produkt_stawka_vat"] = "zw";
+        $api["produkt_wartosc_brutto"] = $kwota;
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
+        curl_setopt($curl,CURLOPT_POST,1);
+        curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
+
+        $faktura = '';
+        $result = explode("\n",$result);
+        $pay = Payment::whereId(session()->get('payment_id'));
+        if ($result[0]==1)
+        {
+            $pay->invoice = $result[3];
+        }
+        else
+        {
+            $pay->invoice = "ERROR: ".$result[1];
+        }
+        $pay->save();
     }
     public static function getToken($kwota,$zamowienie,$session_id){
         
