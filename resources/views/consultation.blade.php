@@ -108,12 +108,7 @@ LABEL.indented-checkbox-text
 .inputH{
   height: 50px; !important;
 }
-.Info{
-  border-radius: 44px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-}
+
 </style>
 
 @section('content')

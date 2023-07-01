@@ -189,22 +189,37 @@ class PaymentController extends Controller
                 $calendar->student_accept = 1;
                 $calendar->save();
                 // 
-                LessonsBank::where(['user_id' => Auth::user()->id, 
+                $lessonBank = LessonsBank::where(['user_id' => Auth::user()->id, 
                                     'priceType' => $type,
                                     'certificat' => $cert,
                                     'type_id' => $type_id
                                     ])
                             ->where('overdue_date','>=',Carbon::now())
-                            ->first()
-                            ->update(['use_date' => Carbon::now()]);
+                            ->whereNull('use_date')
+                            ->first()   ;
+                 $lessonBank->use_date = Carbon::now();
+                 $lessonBank->save();
+                $Hdate = $lessonBank->created_at;
+                $check = LessonsBank::where('payment_id', $lessonBank->payment_id)->whereNotNull('use_date')->count();
+                if($check == 1){
+                    $date = new Carbon($Hdate);
+                    $ileL=LessonsBank::where('payment_id', $lessonBank->payment_id)->count(); 
 
-                $start2 = date('Y-m-d', strtotime($start2. ' + 1 week'));
+                    $date = $date->addWeeks($ileL);
+                    $lessonBank = LessonsBank::where('payment_id', $lessonBank->payment_id)
+                    ->whereNull('use_date')
+                    ->update(['overdue_date' => $date]);
+                }
+                
+
+                $start2 = date('Y-m-d H:i', strtotime($start2. ' + 1 week'));
                 $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
             }
             $lecMail = Lector::where('id', $lectorId)->first();
             Mail::to('kontakt@languelove.pl')->send(new AcceptTermin());
             Mail::to($lecMail->email)->send(new AcceptTermin());
-            return Redirect::to('https://languelove.pl/priceList/search/1/1');
+            return redirect()->back()->with('success','Lekcja zarezerwowana poprawnie');
+            // return Redirect::to('https://languelove.pl/priceList/search/1/1');
     }
     public function  transaction(Request $request)
     {
@@ -456,7 +471,7 @@ class PaymentController extends Controller
                   $bank = new LessonsBank;
                     $bank->user_id = Auth::user()->id;
                     $bank->payment_id = session()->get('payment_id') ; 
-                    $bank->overdue_date = Carbon::now()->addWeeks($pakiet);
+                    $bank->overdue_date = Carbon::now()->addDays(30);
                     $bank->type_id = $data['typeA'];
                     
                     $bank->priceType = $type;

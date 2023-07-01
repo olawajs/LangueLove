@@ -127,7 +127,7 @@
 <div class="container">
     <div class="row justify-content-center classicDIV">
         <div class="col-md-8 animation">
-            <div>
+            <div class="AnimationContent">
                 <div class="m-3">
                     <h1>Ucz się języków i <span class="underline-blue">odkrywaj świat</span></h1>
                 </div>

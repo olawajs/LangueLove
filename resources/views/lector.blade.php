@@ -37,7 +37,13 @@
     }
 </style>
 <div class="container px-a">
-
+@if(session()->has('success'))
+    <div class="Info" style="background-color: var(--bs-primary);">
+      <span class="text-white">
+        {{session()->get('success')}}
+      </span>
+    </div>
+  @endif
     <div class="content" id="content">
         <div class="d-flex" style="gap:20px;">
             <div class="d-flex flex-column" style="flex-grow: 3; gap:20px;">

@@ -12,16 +12,28 @@ use App\Models\LanguageLevel;
 use App\Models\Price;
 use App\Models\DiscountPacket;
 use App\Models\CalendarEvent;
+use App\Models\LessonsBank;
 use App\Models\EventUsers;
+use Auth;
+use Carbon\Carbon;
 
 class EditInfo extends Controller
 {
     public function Test()
     {
-        $levels = LanguageLevel::where('lector_id',6)->distinct('language_id')->pluck('language_id');
+    //     $levels =       LessonsBank::where(
+    //         ['user_id' => Auth::user()->id, 
+    //     'priceType' => '1',
+    //     'certificat' => '1',
+    //     'type_id' => '1'
+    //     ])
+    //     ->where('overdue_date','>=',Carbon::now())
+    //     ->whereNull('use_date')
+    //     ->first();
         
-
-       dd($levels);
+        $date = new Carbon('23-06-11 07:14:55');
+        dd($date->addWeeks(5));
+    //    dd());
     }
     public function getLanguages()
     {
