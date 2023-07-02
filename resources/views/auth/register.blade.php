@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .iconHeart{
+        display: flex; justify-content: end; align-items: center;
+    }
+    @media (max-width:800px) { 
+        .iconHeart{
+            justify-content: unset;
+            width: 50px;
+        }
+        .iconText{
+            width: calc(100% - 50px);
+        }
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,7 +76,7 @@
 
                         <div class="row mb-3">
                         <div class="col-md-3 "></div>
-                            <div class="col-md-1 " style="display: flex; justify-content: end; align-items: center;">
+                            <div class="col-md-1 iconHeart">
                             <div class="con-like">
                                 <input title="like" type="checkbox" class="like" required>
                                 <div class="checkmark">
@@ -84,7 +98,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 iconText">
                                 Oświadczam że zapoznałem się z <a href="{{ asset('files/LangueLove Regulamin.pdf') }}" >Regulaminem</a> i <a  href="{{ asset('files/Polityka prywatności LangueLove.pdf') }}">Polityką prywatności</a>
                             </div>
                         </div>

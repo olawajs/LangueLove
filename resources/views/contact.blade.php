@@ -122,7 +122,7 @@ LABEL.indented-checkbox-text
 
     <div class="row justify-content-center classic">
       <div class="classicTwo">
-        <img src="{{ asset('images/logo/logo1 2x.png') }}" height="100" alt="">
+        <img class="consLogo" src="{{ asset('images/logo/logo1 2x.png') }}" alt="">
       </div>
       <div class="classicTwo">
         <h4><b>Skontaktuj się z nami</b></h4>

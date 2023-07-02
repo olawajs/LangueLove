@@ -90,7 +90,7 @@
                 <div class="searchFoto"><img src="/images/lessons/{{$lesson->photo}}" onerror="this.onerror=null;this.src='/images/lectors/{{ App\Models\Lector::find($lesson->lector_id)->photo}}';" style='width:190px; height: 190px; object-fit: cover;'></div>
                 <div class="searchFText">
                     <div>
-                        <div class="STitle" style="gap: 15px;"><b>{{$lesson->title}}</b> <span>Język {{ App\Models\Language::find($lesson->language_id)->name}} <i class="flag flag-{{ App\Models\Language::find($lesson->language_id)->short}}"></i></span></div>
+                        <div class="STitle" style="gap: 15px;"><b>{{$lesson->title}}</b> <span class="LangSpan">Język {{ App\Models\Language::find($lesson->language_id)->name}} <i class="flag flag-{{ App\Models\Language::find($lesson->language_id)->short}}"></i></span></div>
                         <div class="SType">{{ App\Models\LessonDuration::find($lesson->duration_id)->duration }} min / {{ App\Models\LessonType::find($lesson->type_id)->name }}</div>
                     </div>
                     <div>
@@ -135,7 +135,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <div>
+                    <div class="DescFilter">
                         <div>{!! $l->description !!}</div>
 
                     </div>

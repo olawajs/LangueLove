@@ -45,21 +45,27 @@
     </div>
   @endif
     <div class="content" id="content">
-        <div class="d-flex" style="gap:20px;">
+        <div class="d-flex LectorDiv" style="gap:20px;">
             <div class="d-flex flex-column" style="flex-grow: 3; gap:20px;">
                 <h2>O lektorze</h2>
-                <h3><b>{{$lector->name}}</b></h3>
+                <h3 class="LecNam"><b>{{$lector->name}}</b></h3>
                 <div>{!! $lector->description !!}</div>
-                <h2>Poziomy nauczania</h2>
-                <div class="SType" style="margin: 10px;">
-                    @foreach ($levels as $d)
-                        <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
-                    @endforeach
+                <div>
+                    <h2>Poziomy nauczania</h2>
+                    <div class="SType" style="margin: 10px;">
+                        @foreach ($levels as $d)
+                            <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
+                        @endforeach
+                    </div>
                 </div>
+       
                 <div>{!! $lector->levele !!}</div>
                 @if($lector->style != '')
-                <h2>Styl nauczania:</h2>
-                <div>{!! $lector->style !!}</div>
+                <div>
+                    <h2>Styl nauczania:</h2>
+                    <div>{!! $lector->style !!}</div>
+                </div>
+                
                 @endif
             </div>
             <div class="d-flex justify-content-center flex-column align-items-center fotoContainer" style="flex-grow: 1;max-height: 450px;">
