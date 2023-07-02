@@ -160,7 +160,7 @@ LABEL.indented-checkbox-text
             </p>
           </div>
         <div class="row justify-content-center classic2 radius" style="padding: 20px 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-          <h4 class="ButtonsLabel text-center">Skonaktuj się z nami:</h4>
+          <h4 class="ButtonsLabel text-center vidText">Skonaktuj się z nami:</h4>
           <div class="consultation2Div">
             <div class="classicTwoFlex" style="gap: 15px;">
               <input id="name" type="text" class="form-control inputH" placeholder="Nazwa firmy" name="name" required >

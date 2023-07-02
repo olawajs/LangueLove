@@ -11730,7 +11730,8 @@ footer{
     max-height: 220px;
   }
   .vidText{
-    text-align: unset;
+    text-align: unset !important;
+    margin:0;
   }
   .w100{
     width: 100%;
