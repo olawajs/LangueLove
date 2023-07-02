@@ -203,19 +203,19 @@
         <div class="d-flex p-2 justify-content-around flex-wrap">
             <div class="col-md-5 d-flex p-2 justify-content-around align-items-center  videoContainer" style="position: relative;">
                 <div class="video-mask">
-                    <video width="420" height="220" class="rounded" autoplay muted>
+                    <video class="rounded Vid" autoplay muted>
                         <source src="/video/homePage.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="pinkHome-bubble">
                     <svg height="200" width="200">
-                        <circle cx="100" cy="100" r="100" fill=" var(--bs-secondary)" />
+                        <circle class="bubble1" cx="100" cy="100" r="100" fill=" var(--bs-secondary)" />
                     </svg> 
                 </div>
                 <!-- <div class="circle-magenta" style="bottom: -79px; right: -37px;"></div> -->
             </div>
-            <div class="col-md-5" style="text-align: justify;">
+            <div class="col-md-5" class="vidText">
                <p>
                     W jaki sposób uczysz się najefektywniej? <br>
                     Prowadzimy zarówno zajęcia indywidualne, w parach, jak i kursy w małych grupach (max. 6 osób). 
@@ -225,7 +225,7 @@
                     Będziesz mieć na bieżąco kontakt nie tylko z wiedzą teoretyczną, ale także z <b>codziennym językiem</b> i często stosowanym słownictwem.
                </p>
                
-                <button class="btn btn-primary"><a class="footLink" href="{{ route('searchPricelist', ['lang' => 1,'type' => 1]) }}" >Zapisz się na kurs</a></button>
+                <button class="btn btn-primary w100"><a class="footLink" href="{{ route('searchPricelist', ['lang' => 1,'type' => 1]) }}" >Zapisz się na kurs</a></button>
             </div>
         </div>
       
@@ -328,7 +328,7 @@
         <div class="owl-carousel owl-theme" id="carousel2">
             <!-- 1 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
+                <div class="dynkspUp"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Jestem totalnie zadowolona. 😃 Szkoła była moim wybawieniem. 
@@ -371,7 +371,7 @@
             </div>
             <!-- 3 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
+                <div class="dynkspUp"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     The best school and teacher ever had. All perfect. Lessons are always interested and fully personalised.
@@ -408,7 +408,7 @@
             </div>
             <!-- 5 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
+                <div class="dynkspUp"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Moja przyjaciółka znalazła Wiktorię na instagramie i od tego zaczęła się wspólna przygoda
@@ -446,7 +446,7 @@
             </div>
             <!-- 7 -->
             <div class="item d-flex p-2 flex-wrap" style="justify-content: center; gap: 20px;">
-                <div style="padding-top: 210px;"><img src="/images/Dynks.png"></div>
+                <div class="dynkspUp"><img src="/images/Dynks.png"></div>
                 <div class="col-md-5 TextComment">
                     <p>
                     Już od kilku miesięcy uczę się włoskiego z Wiktorią. Jestem bardzo zadowolona ze sposobu prowadzenia lekcji. 
@@ -527,7 +527,7 @@
                 nav:true,
                 navText:['<span style="font-size: x-large;">&#8592;</span>','<span style="font-size: x-large;">&#8594;</span>'],
                 navContainer: document.getElementById('arrows2'),
-                autoplay: true,
+                // autoplay: true,
                 autoplayTimeout: 5000,
                 responsive:{
                     0:{
