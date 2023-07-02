@@ -20,13 +20,20 @@ h2{
     justify-content: center;
     align-items: center;
     padding: 30px;
+    min-width: 300px;
 }
 .WhiteBack{
     background-color: white;
     border-radius: 15px;
     padding: 50px !important;
 }
-@media (max-width:600px) { 
+.classic{
+    justify-content: center;
+}
+.Fotos{
+    width: 60%;
+}
+@media (max-width:800px) { 
     p{
         font-size: 15px;
     }
@@ -42,27 +49,45 @@ h2{
         justify-content: center;
         width: 100% !important;
     }
+    .classicCont{
+        padding: 0 !important;
+    }
+    .classic{
+        justify-content: unset;
+    }
+    .TwoSide{
+        max-width: 100% !important;
+        max-width: 800px;
+    }
+    .ColRev{
+        flex-flow: column-reverse;
+    }
+    .Fotos{
+        width: 100%; 
+    }
     
 }
 </style>
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center classic">
-        <div class="TwoSide">
-            <img src="{{ asset('images/logo/logo1 2x.png') }}" height="150" alt="">
-        </div>
-        <div class="TwoSide">
-            <h2>Poznajmy się!</h2>
-                <p>
-                    LangueLove to szkoła języków obcych online. 
-                    Nazwa naszej szkoły została zainspirowana francuskim słowem “langue”, czyli język (wymawianego jako «lɑ̃ɡ»)
-                     i jego połączeniem z “love” (ang. miłość).
-                      Wierzymy, że połączy nas miłość i pasja do języków, która okaże się być “long love”.
-                </p>
+    <div class="row classic classicCont">
+        <div class="consultation2Div">
+            <div class="TwoSide">
+                <img  class="consLogo" src="{{ asset('images/logo/logo1 2x.png') }}" alt="">
+            </div>
+            <div class="TwoSide">
+                <h2>Poznajmy się!</h2>
+                    <p>
+                        LangueLove to szkoła języków obcych online. 
+                        Nazwa naszej szkoły została zainspirowana francuskim słowem “langue”, czyli język (wymawianego jako «lɑ̃ɡ»)
+                        i jego połączeniem z “love” (ang. miłość).
+                        Wierzymy, że połączy nas miłość i pasja do języków, która okaże się być “long love”.
+                    </p>
+            </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center ColRev" >
         <div class="TwoSide">
             <h2>Dlaczego warto nas wybrać?</h2>
                 <p>
@@ -74,7 +99,7 @@ h2{
                 </p>
         </div>
         <div class="TwoSide">
-            <img src="{{asset('images/foto1.jpg')}}" width="60%"  alt="">
+            <img src="{{asset('images/foto1.jpg')}}" class="Fotos"  alt="">
         </div>
     </div>
 
@@ -96,7 +121,7 @@ h2{
                     <br><b>Rozpocznij z nami przygodę i osiągnij swój cel! </b>
                     <br>
                 </p>
-                <button class="btn btn-secondary"><a class="footLink" href="{{ route('searchPricelist', ['lang' => 1,'type' => 1]) }}" >ZAPISUJĘ SIĘ!</a></button>
+                <button class="btn btn-secondary w100"><a class="footLink" href="{{ route('searchPricelist', ['lang' => 1,'type' => 1]) }}" >ZAPISUJĘ SIĘ!</a></button>
         </div> 
         <div class="TwoSide">
             <img src="{{ asset('images/aboutUs/aoutUs2.jpg') }}"  width="100%" alt="">
@@ -112,7 +137,7 @@ h2{
                 </p>
         </div> 
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center ColRev">
         <div class="TwoSide">
             <h2>Zespół</h2>
                 <p>
@@ -127,7 +152,7 @@ h2{
                 Nie wiesz który kurs wybrać? Odezwij się do nas! Chętnie pomożemy i już podczas tej luźnej rozmowy zobaczysz, że nadajemy na tych samych falach!
                 <br>
                 </p>
-                <button class="btn btn-primary"><a class="footLink" href="{{ route('consultation') }}">NAPISZ DO NAS</a></button>
+                <button class="btn btn-primary w100"><a class="footLink" href="{{ route('consultation') }}">NAPISZ DO NAS</a></button>
         </div>
         <div class="TwoSide">
             <img src="{{asset('images/aboutUs/team.gif')}}" width="80%"  alt="">
@@ -144,7 +169,7 @@ h2{
                 </p>
     </div>
         </div>       
-    <div class="row justify-content-center classic">
+    <div class="row justify-content-center classic  ColRev">
         
         <div class="TwoSide WhiteBack">
             <h2>Weronika</h2>
@@ -161,7 +186,7 @@ h2{
                 </p>
         </div>
         <div class="TwoSide">
-            <img src="{{ asset('images/wera2.jpg') }}" width="55%" alt="">
+            <img src="{{ asset('images/wera2.jpg') }}" class="Fotos"  alt="">
         </div>
         <div class="TwoSide WhiteBack">
             <h2>Wiktoria</h2>
@@ -172,7 +197,7 @@ h2{
                 </p>
         </div>
         <div class="TwoSide">
-            <img src="{{ asset('images/wiki1.jpg') }}" width="60%" alt="">
+            <img src="{{ asset('images/wiki1.jpg') }}" class="Fotos" alt="">
         </div>
     </div>
 

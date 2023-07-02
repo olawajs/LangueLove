@@ -5410,7 +5410,9 @@ textarea.form-control-lg {
 .modal-footer > * {
   margin: calc(var(--bs-modal-footer-gap) * 0.5);
 }
-
+.consultationMain{
+  padding: 20px 50px;
+}
 @media (min-width: 576px) {
   .modal {
     --bs-modal-margin: 1.75rem;
@@ -10930,11 +10932,14 @@ option{
 
 .classicTwo{
   flex-grow: 1;
-  max-width: 45%;
+  min-width: 300px;
+}
+.consLogo{
+  height: 100px;
 }
 .classicTwoFlex{
   flex-grow: 1;
-  max-width: 45%;
+  min-width: 300px;
   display: flex;
   flex-flow: column;
 }
@@ -11650,11 +11655,26 @@ footer{
     display: none;
   }
 }
+.consultationeHead{
+  padding: 25px;
+}
+.mobile{
+  display: none;
+}
+.consultation2Div{
+  display: flex;
+  justify-content: space-around;
+  gap: 24px;
+  flex-wrap: wrap;
+}
 /* mobilka */
 .navbar-toggler{
   border: none
 }
 @media only screen and (max-width: 800px) {
+  .mobile{
+    display: unset;
+  }
   .navPurpleButton{
     width: 55%;
   }
@@ -11726,6 +11746,36 @@ footer{
   }
   .dynkspUp{
     padding-top: 0;
+  }
+  .footCE{
+    font-size: 12px;
+  }
+  .footer{
+    height: unset;
+  }
+  .footLinks{
+    height: fit-content;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .consultationMain{
+    padding: 20px 16px;
+  }
+  .consultationeHead{
+    padding:0;
+  }
+  .consLogo{
+    height: 40px;
+  }
+  .TitleConsultation{
+    margin: 0 !important;
+  }
+  .classicCont{
+    min-height: unset;
+    gap: 6px;
+  }
+  .TwoButtons{
+    flex-wrap: wrap;
   }
 }
 /* // flags */

@@ -65,7 +65,8 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
 }
 .Description{
-  height: 70px;
+  min-height: 70px;
+  padding: 12px;
   border-radius: 8px;
   border: 2px solid var(--bs-secondary);
   display: none;
@@ -78,7 +79,7 @@
 .BuyButton{
   height: 70px;
   border-radius: 8px;
-  background-color: var(--bs-primary);
+  background-color: var(--bs-secondary);
   display: none;
   justify-content: center;
   align-items: center;
@@ -143,7 +144,7 @@
 <div class="container">
   <div class="row justify-content-center classic">
     <div class="classicTwo">
-      <img src="{{ asset('images/logo/logo1 2x.png') }}" height="100" alt="">
+      <img class="consLogo" src="{{ asset('images/logo/logo1 2x.png') }}" alt="">
     </div>
     <div class="classicTwo">
       <h4><b>Wybierz jak chcesz się uczyć i sprawdź cenę Twojego kursu.</b></h4>

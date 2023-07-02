@@ -132,47 +132,54 @@ LABEL.indented-checkbox-text
       </span>
     </div>
   @endif
-  <form method="POST" action="{{ route('sendCompany') }}">
+  <form method="POST" action="{{ route('sendCompany') }}" style="margin-bottom: 0;">
   @csrf
 
-    <div class="row justify-content-center classic">
+    <div class="row justify-content-center classic classicCont">
       <div class="classicTwo">
-        <img src="{{ asset('images/logo/logo1 2x.png') }}" height="100" alt="">
+        <img  class="consLogo" src="{{ asset('images/logo/logo1 2x.png') }}"alt="">
       </div>
       <div class="classicTwo">
-        <h4><b>Dla firm</b></h4>
+        <h4 class="TitleConsultation"><b>Dla firm</b></h4>
       </div>
     </div>
 
-    <div style="padding: 20px 50px;">
-          <div style="padding: 25px">
+    <div class="consultationMain">
+          <div  class="consultationeHead">
             <p>
             Chcesz aby Twoi pracownicy mogli lepiej się porozumieć w międzynarodowym środowisku? 
             W naszej szkole językowej zapewniamy doskonałe kursy językowe, 
-            dopasowane do indywidualnych potrzeb Twojej firmy. Doświadczeni nauczyciele, 
+            dopasowane do indywidualnych potrzeb Twojej firmy. 
+            <br class="mobile"><br class="mobile">
+            Doświadczeni nauczyciele, 
             spersonalizowane programy, elastyczność harmonogramu i monitorowanie postępów - wszystko po to, 
-            aby osiągnąć komunikacyjne sukcesy Twojej firmy. Skontaktuj się z nami i zobacz jak możemy Ci pomóc.
+            aby osiągnąć komunikacyjne sukcesy Twojej firmy. 
+            <br class="mobile">
+            <br class="mobile">
+            Skontaktuj się z nami i zobacz jak możemy Ci pomóc.
             </p>
           </div>
         <div class="row justify-content-center classic2 radius" style="padding: 20px 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
           <h4 class="ButtonsLabel text-center">Skonaktuj się z nami:</h4>
-          <div class="classicTwoFlex" style="gap: 15px;">
-            <input id="name" type="text" class="form-control inputH" placeholder="Nazwa firmy" name="name" required >
-            <input id="email" type="email" class="form-control inputH" placeholder="Adres email" name="email" required >
-            <select class="form-control inputH" name="language_id" id="language_id">
-                <option value="Język nie został wybrany">Wybierz język</option>
-                @foreach($languages as $lang)
-                    <option value="{{$lang->name}}">{{$lang->name}}</option>
-                @endforeach
-            </select>
-            <select class="form-control inputH" name="kurs" id="kurs">
-                <option value="Kurs indywidualny">Kurs indywidualny</option>
-                <option value="Kurs grupowy">Kurs grupowy</option>
-            </select>
-            <input id="miasto" type="text" class="form-control inputH" placeholder="Miejsce kursu - miasto / online" name="miasto" required >
-          </div>
-          <div class="classicTwoFlex">
-            <textarea placeholder="Treść Twojej wiadomości" class="form-control" style="height: 100%" name='message'></textarea>
+          <div class="consultation2Div">
+            <div class="classicTwoFlex" style="gap: 15px;">
+              <input id="name" type="text" class="form-control inputH" placeholder="Nazwa firmy" name="name" required >
+              <input id="email" type="email" class="form-control inputH" placeholder="Adres email" name="email" required >
+              <select class="form-control inputH" name="language_id" id="language_id">
+                  <option value="Język nie został wybrany">Wybierz język</option>
+                  @foreach($languages as $lang)
+                      <option value="{{$lang->name}}">{{$lang->name}}</option>
+                  @endforeach
+              </select>
+              <select class="form-control inputH" name="kurs" id="kurs">
+                  <option value="Kurs indywidualny">Kurs indywidualny</option>
+                  <option value="Kurs grupowy">Kurs grupowy</option>
+              </select>
+              <input id="miasto" type="text" class="form-control inputH" placeholder="Miejsce kursu - miasto / online" name="miasto" required >
+            </div>
+            <div class="classicTwoFlex">
+              <textarea placeholder="Treść Twojej wiadomości" class="form-control" style="height: 100%" name='message'></textarea>
+            </div>
           </div>
           <button class="btn btn-secondary SButton" style="margin-top: 20px;"> Wyślij</button>
         <div>

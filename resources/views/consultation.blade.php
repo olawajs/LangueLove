@@ -127,43 +127,46 @@ LABEL.indented-checkbox-text
       </span>
     </div>
   @endif
-  <form method="POST" action="{{ route('sendConsultation') }}">
+  <form method="POST" action="{{ route('sendConsultation') }}" style="margin-bottom: 0;">
   @csrf
 
-    <div class="row justify-content-center classic">
+    <div class="row justify-content-center classic classicCont">
       <div class="classicTwo">
-        <img src="{{ asset('images/logo/logo1 2x.png') }}" height="100" alt="">
+        <img class="consLogo" src="{{ asset('images/logo/logo1 2x.png') }}" alt="">
       </div>
       <div class="classicTwo">
-        <h4><b>Darmowa konsultacja</b></h4>
+        <h4 class="TitleConsultation"><b>Darmowa konsultacja</b></h4>
       </div>
     </div>
 
-    <div style="padding: 20px 50px;">
-          <div style="padding: 25px">
+    <div class="consultationMain">
+          <div class="consultationeHead">
             <p>
               Nie wiesz do jakiej grupy się zapisać? Chcesz zacząć naukę z nowym lektorem 
               i potrzebujesz ustalić zasady współpracy lub sprawdzić jak wyglądają zajęcia z danym 
-              lektorem? Zachęcamy do skorzystania z bezpłatnej 15-minutowej konsultacji, na której 
-              ustalisz cele nauki, plan działania oraz sposób prowadzenia zajęć. Wypełnij poniższy 
+              lektorem? <br class="mobile"><br class="mobile">Zachęcamy do skorzystania z bezpłatnej 15-minutowej konsultacji, na której 
+              ustalisz cele nauki, plan działania oraz sposób prowadzenia zajęć.<br class="mobile"><br class="mobile"> Wypełnij poniższy 
               formularz, a my się z Tobą skontaktujemy.
             </p>
           </div>
         <div class="row justify-content-center classic2 radius" style="padding: 20px 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
           <h4 class="ButtonsLabel text-center">Zapisz się na darmową konsultację</h4>
-          <div class="classicTwoFlex" style="gap: 15px;">
-            <input id="name" type="text" class="form-control inputH" placeholder="Imię i nazwisko" name="name" required >
-            <input id="email" type="email" class="form-control inputH" placeholder="Adres email" name="email" required >
-            <select class="form-control inputH" name="language_id" id="language_id">
-                <option value="Język nie został wybrany">Wybierz język</option>
-                @foreach($languages as $lang)
-                    <option value="{{$lang->name}}">{{$lang->name}}</option>
-                @endforeach
-            </select>
+          <div class="consultation2Div">
+            <div class="classicTwoFlex" style="gap: 15px;">
+              <input id="name" type="text" class="form-control inputH" placeholder="Imię i nazwisko" name="name" required >
+              <input id="email" type="email" class="form-control inputH" placeholder="Adres email" name="email" required >
+              <select class="form-control inputH" name="language_id" id="language_id">
+                  <option value="Język nie został wybrany">Wybierz język</option>
+                  @foreach($languages as $lang)
+                      <option value="{{$lang->name}}">{{$lang->name}}</option>
+                  @endforeach
+              </select>
+            </div>
+            <div class="classicTwoFlex">
+              <textarea placeholder="Treść Twojej wiadomości" class="form-control" style="height: 100%" name='message'></textarea>
+            </div>
           </div>
-          <div class="classicTwoFlex">
-            <textarea placeholder="Treść Twojej wiadomości" class="form-control" style="height: 100%" name='message'></textarea>
-          </div>
+          
           <button class="btn btn-secondary SButton" style="margin-top: 20px;"> Wyślij</button>
         <div>
     </div>  
