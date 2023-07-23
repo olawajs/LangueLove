@@ -155,9 +155,9 @@ class MainController extends Controller
         $hour = $request->hour;
         $ile = $request->ile;
         $dlugosc = LessonDuration::where('id',$request->dlugosc)->first()->duration;
-        $dlugosc+=14;
         $start =  date('Y-m-d H:i', strtotime($date.' '.$hour));
         $end = date('Y-m-d H:i', strtotime($start. ' + '.$dlugosc.' minutes'));
+        $end2 = date('Y-m-d H:i', strtotime($start. ' + '.($dlugosc-1).' minutes'));
       
 
         $isInFree = CalendarSetup::where('start', '<=',$start)
@@ -172,13 +172,14 @@ class MainController extends Controller
         ->where('lector_id',$lector)
         ->get();
 
-        $isEndInLessons= CalendarEvent::where('start', '<=',$end)
-        ->where('end', '>=',$end)
+        $isEndInLessons= CalendarEvent::where('start', '<=',$end2)
+        ->where('end', '>=',$end2)
         ->where('type',3)
         ->where('lector_id',$lector)
         ->get();
         if(count($isInFree)== 0 || (count($isEndInTaken)>0 || count($isEndInLessons)>0)){
-            return 0 ;  return 'free: '.count($isInFree).' /endintaken: '.count($isEndInTaken).' /endinlessons: '.count($isEndInLessons);
+            return 0 ; 
+            //  return 'free: '.count($isInFree).' /endintaken: '.count($isEndInTaken).' /endinlessons: '.count($isEndInLessons);
         }else{
             return 'free: '.count($isInFree).' /endintaken: '.count($isEndInTaken).' /endinlessons: '.count($isEndInLessons);
         }

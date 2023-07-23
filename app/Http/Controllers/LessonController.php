@@ -172,7 +172,7 @@ class LessonController extends Controller
         $startDate = $request->start;
         $lessonAmount = $request->amount_of_lessons;
         $duration = LessonDuration::where('id',$request->duration_id)->first();
-        $duration = $duration->duration;
+        $duration = $duration->duration + 15;
         
        
         $lesson = Lesson::create($validated);
