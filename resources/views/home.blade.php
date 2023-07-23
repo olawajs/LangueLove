@@ -129,10 +129,10 @@
         <div class="col-md-8 animation">
             <div class="AnimationContent">
                 <div class="m-3">
-                    <h1>Ucz się języków i <span class="underline-blue">odkrywaj świat</span></h1>
+                    <h1>Ucz się języków i <span class="underline-blue">odkrywaj świat!</span></h1>
                 </div>
                 <div class="m-3 mb-4">
-                    <h3>Gdzie chcesz i kiedy chcesz! Zacznij już dzisiaj!</h3>
+                    <h3>Gdzie chcesz i kiedy chcesz! Zacznij już dziś!</h3>
                 </div>
                 <div class="col-md-8 m-3"> 
                     <form method="POST" action="{{ route('search') }}">
@@ -198,7 +198,7 @@
             <h6 class="text-center smallText">OFERTA</h6>
         </div>
         <div class="mb-2">
-            <h2 class="text-center">Ucz się języków i <span class="underline-magenta">odkrywaj świat na nowo</span></h2>
+            <h2 class="text-center">Ucz się języków i <span class="underline-magenta">odkrywaj świat na nowo!</span></h2>
         </div>
         <div class="d-flex p-2 justify-content-around flex-wrap">
             <div class="col-md-5 d-flex p-2 justify-content-around align-items-center  videoContainer" style="position: relative;">
@@ -218,7 +218,7 @@
             <div class="col-md-5" class="vidText">
                <p>
                     W jaki sposób uczysz się najefektywniej? <br>
-                    Prowadzimy zarówno zajęcia indywidualne, w parach, jak i kursy w małych grupach (max. 6 osób). 
+                    Prowadzimy zarówno <b>zajęcia indywidualne, w parach, jak i kursy w małych grupach</b> (max. 6 osób). 
                     Dzięki temu lektor poświęci Ci wystarczającą ilość <b>czasu</b>, abyś faktycznie wyniósł wiele z każdej lekcji. 
                     Formę zajęć dostosowujemy do <b>Twojego celu</b>.
                     Korzystamy także z <b>autentycznych tekstów</b> (z prasy, wiadomości, literatury, blogów, social mediów, podcastów). 

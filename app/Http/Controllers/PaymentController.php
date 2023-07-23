@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ThankYou;
+use App\Mail\NewLessonInfo;
 use App\Mail\AcceptTermin;
 use Auth;
 use Carbon\Carbon;
@@ -216,7 +217,19 @@ class PaymentController extends Controller
                 $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
             }
             $lecMail = Lector::where('id', $lectorId)->first();
-            Mail::to('kontakt@languelove.pl')->send(new AcceptTermin());
+             try {
+                    $mailData=[
+                     'lector' => $lecMail->name.' ['.$lecMail->email.']',
+                     'user' => Auth::user()->name.' '.Auth::user()->surname.' ['.Auth::user()->email.']',
+                     'date' => $lesson->start,
+                     'language' => 'Język '.$lName;
+                    ]; 
+                    Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
+                    Mail::to('olawjs@gmail.com')->send(new NewLessonInfo($mailData));
+                    // return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
+                 } catch (\Throwable $th) {
+                    //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+                 }
             Mail::to($lecMail->email)->send(new AcceptTermin());
             return redirect()->back()->with('success','Lekcja zarezerwowana poprawnie');
             // return Redirect::to('https://languelove.pl/priceList/search/1/1');
@@ -413,7 +426,19 @@ class PaymentController extends Controller
                 $lessonId = $lesson->id;
                 $ileFaktura = $ile;
                 $lecMail = Lector::where('id', $lectorId)->first();
-                Mail::to('kontakt@languelove.pl')->send(new AcceptTermin());
+                try {
+                    $mailData=[
+                     'lector' => $lecMail->name.' ['.$lecMail->email.']',
+                     'user' => Auth::user()->name.' '.Auth::user()->surname.' ['.Auth::user()->email.']',
+                     'date' => $lesson->start,
+                     'language' => 'Język '.$lName;
+                    ]; 
+                    Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
+                    Mail::to('olawjs@gmail.com')->send(new NewLessonInfo($mailData));
+                    // return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
+                 } catch (\Throwable $th) {
+                    //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+                 }
                 Mail::to($lecMail->email)->send(new AcceptTermin());
             }else{
                 $lessonId = $request->lessonId;
