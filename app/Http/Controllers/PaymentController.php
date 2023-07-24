@@ -222,7 +222,7 @@ class PaymentController extends Controller
                      'lector' => $lecMail->name.' ['.$lecMail->email.']',
                      'user' => Auth::user()->name.' '.Auth::user()->surname.' ['.Auth::user()->email.']',
                      'date' => $lesson->start,
-                     'language' => 'Język '.$lName;
+                     'language' => 'Język '.$lName
                     ]; 
                     Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
                     Mail::to('olawjs@gmail.com')->send(new NewLessonInfo($mailData));
@@ -431,7 +431,7 @@ class PaymentController extends Controller
                      'lector' => $lecMail->name.' ['.$lecMail->email.']',
                      'user' => Auth::user()->name.' '.Auth::user()->surname.' ['.Auth::user()->email.']',
                      'date' => $lesson->start,
-                     'language' => 'Język '.$lName;
+                     'language' => 'Język '.$lName
                     ]; 
                     Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
                     Mail::to('olawjs@gmail.com')->send(new NewLessonInfo($mailData));
