@@ -23,10 +23,13 @@ class LectorController extends Controller
        
         $lector = Lector::where('id',$request->id)->get();
         $levels = LanguageLevel::where('lector_id',$request->id)->get();
+        $langs = Language::where('active',1)->get();
+        // dd($levels);
         return view('admin/lectorData',[
-                'lector' => $lector,
+                'lector' => $lector[0],
                 'id' => $request->id,
                 'levels' => $levels,
+                'langs' => $langs
             ]);
     }
     public function NewLector()

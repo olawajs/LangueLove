@@ -1,3 +1,4 @@
+<!DOCTYPE HTML> 
 @extends('layouts.app')
 
 <style>
@@ -137,94 +138,150 @@ input[type=time] {
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <div class="justify-content-center classicDIV" id="topper">
             <h2>Karta lektora</h2>
-            <form method="POST" action="{{ route('editLector') }}" enctype="multipart/form-data">
-            @csrf
-                <div class="FormContainer">
-                    <div class="inputDIV">
-                        <input type="file" name="photo" id="file_input" value="" class="file_upload">
-                        <div id="gallery">
-                            <div>
-                                <img src="<?php echo asset("images/lectors/{$lector[0]->photo}")?>" width="200">
-                            </div>
+            <!-- <form method="POST" action="{{ route('editLector') }}" enctype="multipart/form-data"> -->
+            <!-- @csrf -->
+            <div class="FormContainer">
+                <div class="inputDIV">
+                    <input type="file" name="photo" id="file_input" value="" class="file_upload">
+                    <div id="gallery">
+                        <div>
+                            <img src="<?php echo asset("images/lectors/{$lector->photo}")?>" width="200">
                         </div>
                     </div>
-                    <div>
-                        <div class="TwoColumns">
-                            <div class="form-group col-md-5">
-                                <label for="name">Imię</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{$lector[0]->name}}" placeholder="Imię" required>
-                            </div>
-                            <div class="form-group col-md-5">
-                                <label for="surname">Nazwisko</label>
-                                <input type="text" class="form-control" id="surname" name="surname" value="{{$lector[0]->surname}}" placeholder="Nazwisko" required>
-                            </div>
+                </div>
+                <div>
+                    <div class="TwoColumns">
+                        <div class="form-group col-md-5">
+                            <label for="name">Imię</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{$lector->name}}" onfocusout="editInfo(event)" placeholder="Imię" required>
                         </div>
-                        <div class="form-group col-md-12">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" value="{{$lector[0]->email}}" placeholder="Email" required>
-                            </div>
-                        <div class="TwoColumns">
-                            <div class="form-group col-md-5">
-                                <label for="native_language">Język ojczysty</label>
-                                <select name="native_language_id" class="form-control" required>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-5" id="pozDiv">
-                                <label for="native_language">Poziom językowy:</label></label>
+                        <div class="form-group col-md-5">
+                            <label for="surname">Nazwisko</label>
+                            <input type="text" class="form-control" id="surname" name="surname" value="{{$lector->surname}}" onfocusout="editInfo(event)" placeholder="Nazwisko" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{$lector->email}}" onfocusout="editInfo(event)" placeholder="Email" required>
+                        </div>
+                    <div class="TwoColumns">
+                        <div class="form-group col-md-5">
+                            <label for="native_language">Język ojczysty</label>
+                            <select name="native_language_id" id="native_language_id" onfocusout="editInfo(event)" class="form-control" required>
+                                @foreach ($langs as $lang)
+                                    <option value="{{$lang->id}}">{{$lang->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-5" id="pozDiv">
+                            <label for="native_language">Poziom językowy:</label></label>
+                            @foreach($levels as $level)
                                 <div style="display: flex; justify-content: space-around;">
                                     <div class="col-md-5">
                                             <select name="native_language1" class="form-control" required>
                                                 <option value="0">-</option>
+                                                @foreach ($langs as $lang)
+                                                    <option value="{{$lang->id}}" @if($lang->id == $level->language_id) selected @endif>{{$lang->name}}</option>
+                                                @endforeach
                                             </select>  
                                         </div>
                                     <div class="col-md-5">
                                             <select name="language_level1" class="form-control" required>
-                                                <option value="0">-</option>
-                                                <option value="Ojczysty">Ojczysty</option>
-                                                <option value="A1">A1</option>
-                                                <option value="A2">A2</option>
-                                                <option value="B1">B1</option>
-                                                <option value="B2">B2</option>
-                                                <option value="C1">C1</option>
-                                                <option value="C2">C2</option>
-                                                <option value="Inne">Inne</option>
+                                                <option value="0" >-</option>
+                                                <option value="Ojczysty" @if($level->level == "Ojczysty" ) selected @endif>Ojczysty</option>
+                                                <option value="A1"  @if($level->level == "A1") selected @endif>A1</option>
+                                                <option value="A2"  @if($level->level == "A2") selected @endif>A2</option>
+                                                <option value="B1"  @if($level->level == "B1") selected @endif>B1</option>
+                                                <option value="B2"  @if($level->level == "B2") selected @endif>B2</option>
+                                                <option value="C1"  @if($level->level == "C1") selected @endif>C1</option>
+                                                <option value="C2"  @if($level->level == "C2") selected @endif>C2</option>
+                                                <option value="A1 - A2"  @if($level->level == "A1-A2") selected @endif>A1 - A2</option>
+                                                <option value="A1 - C1" @if($level->level == "A1-C1") selected @endif >A1 - C1</option>
+                                                <option value="A2 - C1"  @if($level->level == "A2-C1") selected @endif>A2 - C1 </option>
+                                                <option value="A1 - B1" @if($level->level == "A1-B1") selected @endif>A1 - B1</option>
+                                                <option value="A1 - C2" @if($level->level == "A1-C2") selected @endif>A1 - C2</option>
+                                                <option value="A1 - B2" @if($level->level == "A1-B2") selected @endif>A1 - B2</option>
+                                                <option value="Business English" @if($level->level == "Business English") selected @endif>Business English</option>
+                                                <option value="Przygotowanie do egzaminu/ matury" @if($level->level == "Przygotowanie do egzaminu/matury") selected @endif>Przygotowanie do egzaminu/ matury</option>
+                                                <option value="Konwersacje" @if($level->level == "Konwersacje") selected @endif>Konwersacje</option>
+                                                <option value="Języki specjalistyczne" @if($level->level == "Języki specjalistyczne") selected @endif>Języki specjalistyczne</option>
+                                                <option value="Dialekt" @if($level->level == "Dialekt") selected @endif>Dialekt</option>
+                                                <option value="Italiano al lavoro" @if($level->level == "Italiano al lavoro") selected @endif>Italiano al lavoro</option>
+                                                <option value="Kultura krajów portugalskojęzycznych" @if($level->level == "Kultura krajów portugalskojęzycznych") selected @endif>Kultura krajów portugalskojęzycznych</option>
+                                                <option value="Nauka o dialektach" @if($level->level == "Nauka o dialektach") selected @endif>Nauka o dialektach</option>
+                                                <option value="Português no turismo" @if($level->level == "Português no turismo") selected @endif>Português no turismo</option>
+                                                <option value="Polish for foreigners" @if($level->level == "Polish for foreigners") selected @endif>Polish for foreigners</option>
+                                                <option value="NATIVE SPEAKER" @if($level->level == "NATIVE SPEAKER") selected @endif>NATIVE SPEAKER</option>
+                                                <option value="Language for Specific Purposes" @if($level->level == "Language for Specific Purposes") selected @endif>Language for Specific Purposes</option>
+                                                <option value="Français au travail" @if($level->level == "Français au travail") selected @endif>Français au travail</option>
+                                                <option value="Deutsch bei der Arbeit" @if($level->level == "Deutsch bei der Arbeit") selected @endif>Deutsch bei der Arbeit</option>
+                                                <option value="Chiński w pracy" @if($level->level == "Chiński w pracy") selected @endif>Chiński w pracy</option>
+                                                <option value="Kultura Chin" @if($level->level == "Kultura Chin") selected @endif>Kultura Chin</option>
+                                                <option value="Turecki w pracy" @if($level->level == "Turecki w pracy") selected @endif>Turecki w pracy</option>
+                                                <option value="Kultura Turcji" @if($level->level == "Kultura Turcji") selected @endif>Kultura Turcji</option>
+                                                <option value="Inne" @if($level->level == "Inne") selected @endif>Inne</option>
+                                                <option value="Español en el trabajo" @if($level->level == "Español en el trabajo") selected @endif>Español en el trabajo</option>
                                             </select>
                                     </div>
-                                    <div class="col-md-1">
-                                        <button class="plusButton" onclick="AddLangLevel(event)">
-                                            +
-                                        </button>
-                                    </div>
+                                    
                                 </div>
-                            </div>
-                        </div> 
-                        
-                        <div class="form-group col-md-12">
-                            <label for="education">Wykształcenie</label>
-                            <textarea class="form-control" id="education" name="education" required>{{$lector[0]->education}}</textarea>
+                            @endforeach
+
                         </div>
-                        <div class="form-group col-md-12">
-                            <label for="description">Opis</label>
-                            <textarea class="form-control" id="description" name="description" required>{{$lector[0]->description}}</textarea>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="street">Ulica i numer domu</label>
-                            <input class="form-control" id="street" name="street" value="{{$lector[0]->street}}" required placeholder="Ulica i numer domu">
-                        </div>
-                        <div class="TwoColumns">
-                            <div class="form-group col-md-5">
-                                <label for="post_code">Kod Pocztowy</label>
-                                <input type="text" class="form-control" value="{{$lector[0]->post_code}}" id="post_code" name="post_code" placeholder="Kod pocztowy" required>
+                            <div class="col-md-1">
+                                <button class="plusButton" onclick="AddLangLevel(event)">
+                                    +
+                                </button>
                             </div>
-                            <div class="form-group col-md-5">
-                                <label for="city">Miasto</label>
-                                <input type="text" class="form-control" id="city" name="city" value="{{$lector[0]->city}}" placeholder="Miasto" required>
-                            </div>
+                    </div> 
+                    
+                    <div class="form-group col-md-12">
+                        <label for="education">Wykształcenie</label>
+                        <textarea class="form-control" id="education" onfocusout="editInfo(event)"  name="education" required>{{$lector->education}}</textarea>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="street">Ulica i numer domu</label>
+                        <input class="form-control" id="street" name="street" onfocusout="editInfo(event)" value="{{$lector->street}}" required placeholder="Ulica i numer domu">
+                    </div>
+                    <div class="TwoColumns">
+                        <div class="form-group col-md-5">
+                            <label for="post_code">Kod Pocztowy</label>
+                            <input type="text" class="form-control" id="post_code" onfocusout="editInfo(event)" value="{{$lector->post_code}}" name="post_code" placeholder="Kod pocztowy" required>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="city">Miasto</label>
+                            <input type="text" class="form-control" id="city" name="city" onfocusout="editInfo(event)" value="{{$lector->city}}" placeholder="Miasto" required>
                         </div>
                     </div>
-                    
-                </div>  
-                <input type="hidden" name="languageAmount" id="languageAmount" value="1">
+                    <div class="TwoColumns">
+                        <div class="form-group col-md-5">
+                            <label for="phone">Telefon</label>
+                            <input type="text" class="form-control" id="phone" onfocusout="editInfo(event)" value="{{$lector->phone}}" name="phone" placeholder="Telefon">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="skype">Skype</label>
+                            <input type="text" class="form-control" id="skype" onfocusout="editInfo(event)" value="{{$lector->skype}}" name="skype" placeholder="Skype link" required>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>  
+            <div class="FormContainer">
+                <div class="form-group col-md-12">
+                        <label for="description">Opis</label>
+                        <textarea class="form-control" id="description"  onblur="editInfo(event)" name="description">{{$lector->description}}</textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="style">Styl nauczania</label>
+                        <textarea class="form-control" id="style" onfocusout="editInfo(event)" name="style">{{$lector->style}}</textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="levels">Levele: </label>
+                        <textarea class="form-control" id="levels" onfocusout="editInfo(event)" name="levels">{{$lector->levels}}</textarea>
+                    </div>
+            </div>
+                <input type="hidden" name="languageAmount" id="languageAmount" value="{{count($levels)}}">
                 <button type="submit" class="btn btn-primary col-md-12">Zapisz</button>
             </form>
             
@@ -236,7 +293,7 @@ input[type=time] {
         <div class="Setup">
             <form method="POST" action="{{ route('AddSetup') }}">
                 @csrf
-                <input type="hidden" value="{{$lector[0]->id}}" name="id_lector">
+                <input type="hidden" value="{{$lector->id}}" name="id_lector">
                 <h3>Dostępność:</h3>
                 <div class="SetupDate">
                     <label for="date_from">Od: </label><input class="form-control" type="date" id="date_from" name="date_from" required>
@@ -315,7 +372,7 @@ input[type=time] {
                     
                     </tr>
                 </table>
-           </form>
+           <!-- </form> -->
         </div> 
     </div>
   
@@ -338,11 +395,96 @@ input[type=time] {
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> 
     <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    
+    <script src="https://cdn.tiny.cloud/1/r7yvsqva0lmrh081yjb12u1yyn51cak9j4frujmxqj8ihg31/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+     tinymce.init({
+    selector: 'textarea#description', 
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: true,
+    setup: function(ed) {
+        ed.on('submit', function(e) { ed.save(); });
+        ed.on('focusout', function(e) {console.log(e);editInfo(e);});
+    }
+  });
+  tinymce.init({
+    selector: 'textarea#levels', 
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: true,
+    setup: function(ed) {
+        ed.on('submit', function(e) { ed.save(); });
+    }
+  });
+  tinymce.init({
+    selector: 'textarea#style', 
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: true,
+    setup: function(ed) {
+        ed.on('submit', function(e) { ed.save(); });
+    }
+  });
+</script>
+
 <script>
    var calendar; 
-
-
+   let lanDiv = ' <div style="display: flex; gap: 7px; margin-left: 3px;">'+
+             '               <div class="col-md-5">'+
+             '                       <select name="native_language#" class="form-control" required>'+
+             '                           <option value="0">-</option>'+
+                                        @foreach ($langs as $lang)
+             '                               <option value="{{$lang->id}}">{{$lang->name}}</option>'+
+                                      @endforeach
+             '                       </select>  '+
+             '                                </div>'+
+             '               <div class="col-md-5">'+
+             '                       <select name="language_level#" class="form-control" required>'+
+             '                                   <option value="0">-</option>'+
+            '                              <option value="Ojczysty">Ojczysty</option>'+
+            '                               <option value="A1">A1</option>'+
+            '                               <option value="A2">A2</option>'+
+            '                               <option value="B1">B1</option>'+
+            '                               <option value="B2">B2</option>'+
+            '                               <option value="C1">C1</option>'+
+            '                               <option value="C2">C2</option>'+
+            '                               <option value="A1 - A2">A1 - A2</option>'+
+            '                               <option value="A1 - C1">A1 - C1</option>'+
+            '                               <option value="A2 - C1">A2 - C1 </option>'+
+            '                               <option value="A1 - B1">A1 - B1</option>'+
+            '                               <option value="A1 - C2">A1 - C2</option>'+
+            '                               <option value="A1 - B2">A1 - B2</option>'+
+            '                               <option value="Business English">Business English</option>'+
+            '                              <option value="Przygotowanie do egzaminu/ matury">Przygotowanie do egzaminu/ matury</option>'+
+            '                               <option value="Konwersacje">Konwersacje</option>'+
+            '                               <option value="Języki specjalistyczne">Języki specjalistyczne</option>'+
+            '                               <option value="Dialekt">Dialekt</option>'+
+            '                               <option value="Italiano al lavoro">Italiano al lavoro</option>'+
+            '                               <option value="Kultura krajów portugalskojęzycznych">Kultura krajów portugalskojęzycznych</option>'+
+            '                               <option value="Nauka o dialektach">Nauka o dialektach</option>'+
+            '                               <option value="Português no turismo">Português no turismo</option>'+
+            '                              <option value="Polish for foreigners">Polish for foreigners</option>'+
+            '                               <option value="NATIVE SPEAKER">NATIVE SPEAKER</option>'+
+            '                               <option value="Language for Specific Purposes">Language for Specific Purposes</option>'+
+            '                               <option value="Français au travail">Français au travail</option>'+
+            '                               <option value="Deutsch bei der Arbeit">Deutsch bei der Arbeit</option>'+
+            '                               <option value="Chiński w pracy">Chiński w pracy</option>'+
+            '                               <option value="Kultura Chin">Kultura Chin</option>'+
+            '                               <option value="Turecki w pracy">Turecki w pracy</option>'+
+            '                               <option value="Kultura Turcji">Kultura Turcji</option>'+
+            '                               <option value="Inne">Inne</option>'+
+            '                               <option value="Español en el trabajo">Español en el trabajo</option>'+
+             '                           <option value="C1">C1</option>'+
+             '                           <option value="C2">C2</option>'+
+             '                           <option value="Inne">Inne</option>'+
+             '                       </select>'+
+             '               </div>'+
+             '           </div>';
+let LanAmount = {{count($levels)}};
+let lector = {{$lector->id}};
  $( document ).ready(function() {      
    
     //
@@ -433,6 +575,12 @@ function AddLangLevel(e) {
     let tekst = lanDiv;
     MainDiv.insertAdjacentHTML('beforeend',tekst.replace('@', LanAmount));
     
+}
+function editInfo(e){
+    // lector
+    
+    let column = e.target.id;
+    alert(column);
 }
 // 
 
