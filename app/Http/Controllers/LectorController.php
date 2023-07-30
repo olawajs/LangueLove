@@ -40,52 +40,23 @@ class LectorController extends Controller
         ]);
     }
     public function EditLector(Request $request)
-    {
-
-        $imageName = time().'.'.$request->name.'_'.$request->file('photo')->getClientOriginalName();    
-        $validated = $request->validate([
-            'name' => 'required', 
-            'surname' => 'required', 
-            'email' => 'required', 
-            'native_language_id' => 'required|integer', 
-            'education' => 'required',
-            'description' => 'required',
-            'city' => 'required',
-            'levels' => 'nullable',
-            'style' => 'nullable',
-            'street' => 'required',
-            'post_code' => 'required',
-        ]);
-        $ile = $request->languageAmount;
-        if($request->file('photo') !=''){
-         $validated['photo'] = $imageName;
+    {   
+        if(Lector::where('id',$request->lector)->update([$request->column => $request->value])){
+            echo 1;
+        }else{
+            echo 0;
         }
        
-        $validated['active'] = true;
-       
-       
-        $lector = Lector::update($validated);
-  
-            //  for($i=1; $i<=$ile; $i++){
-                 
-            //     if($request['language_level'.$i] != '0'){
-            //          $data=[
-            //                 'lector_id'=>$lector->id,
-            //                 'language_id'=>$request['native_language'.$i],
-            //                 'level'=>$request['language_level'.$i],
-            //             ];
-            //     $lanLevel = LanguageLevel::create($data);  
-            //     }
-             
-            // }
-                
-        if($lector){
-            if($request->file('photo') !=''){
-              $image = $request->file('photo')->move('images/lectors/', $imageName);
-            }
-              return redirect()->route('lectors');
-          
+    }
+    public function EditLevel(Request $request)
+    {   
+        // dd($request);
+        if(LanguageLevel::where('id',$request->id)->update([$request->column => $request->value])){
+            echo 1;
+        }else{
+            echo 0;
         }
+       
     }
     public function AddLector(Request $request)
     {

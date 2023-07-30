@@ -1,6 +1,6 @@
 <!DOCTYPE HTML> 
 @extends('layouts.app')
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <style>
 .inputDIV {
    position: relative;
@@ -178,7 +178,7 @@ input[type=time] {
                             @foreach($levels as $level)
                                 <div style="display: flex; justify-content: space-around;">
                                     <div class="col-md-5">
-                                            <select name="native_language1" class="form-control" required>
+                                            <select name="native_language1" class="form-control" onchange="editLevels('language_id','{{$level->id}}',event)" required>
                                                 <option value="0">-</option>
                                                 @foreach ($langs as $lang)
                                                     <option value="{{$lang->id}}" @if($lang->id == $level->language_id) selected @endif>{{$lang->name}}</option>
@@ -186,7 +186,7 @@ input[type=time] {
                                             </select>  
                                         </div>
                                     <div class="col-md-5">
-                                            <select name="language_level1" class="form-control" required>
+                                            <select name="language_level1" onchange="editLevels('level','{{$level->id}}',event)" class="form-control" required>
                                                 <option value="0" >-</option>
                                                 <option value="Ojczysty" @if($level->level == "Ojczysty" ) selected @endif>Ojczysty</option>
                                                 <option value="A1"  @if($level->level == "A1") selected @endif>A1</option>
@@ -270,15 +270,15 @@ input[type=time] {
             <div class="FormContainer">
                 <div class="form-group col-md-12">
                         <label for="description">Opis</label>
-                        <textarea class="form-control" id="description"  onblur="editInfo(event)" name="description">{{$lector->description}}</textarea>
+                        <textarea class="form-control" id="description" onblur="editInfoTiny('description',event)" name="description">{{$lector->description}}</textarea>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="style">Styl nauczania</label>
-                        <textarea class="form-control" id="style" onfocusout="editInfo(event)" name="style">{{$lector->style}}</textarea>
+                        <textarea class="form-control" id="style" onblur="editInfoTiny('style',event)" name="style">{{$lector->style}}</textarea>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="levels">Levele: </label>
-                        <textarea class="form-control" id="levels" onfocusout="editInfo(event)" name="levels">{{$lector->levels}}</textarea>
+                        <textarea class="form-control" id="levels" onblur="editInfoTiny('levels',event)" name="levels">{{$lector->levels}}</textarea>
                     </div>
             </div>
                 <input type="hidden" name="languageAmount" id="languageAmount" value="{{count($levels)}}">
@@ -405,7 +405,7 @@ input[type=time] {
     menubar: true,
     setup: function(ed) {
         ed.on('submit', function(e) { ed.save(); });
-        ed.on('focusout', function(e) {console.log(e);editInfo(e);});
+        ed.on('focusout', function(e) {editInfo2('description',ed.getContent());});
     }
   });
   tinymce.init({
@@ -416,6 +416,7 @@ input[type=time] {
     menubar: true,
     setup: function(ed) {
         ed.on('submit', function(e) { ed.save(); });
+        ed.on('focusout', function(e) {editInfo2('levels',ed.getContent());});
     }
   });
   tinymce.init({
@@ -426,6 +427,7 @@ input[type=time] {
     menubar: true,
     setup: function(ed) {
         ed.on('submit', function(e) { ed.save(); });
+        ed.on('focusout', function(e) {editInfo2('style',ed.getContent());});
     }
   });
 </script>
@@ -574,13 +576,74 @@ function AddLangLevel(e) {
     document.getElementById('languageAmount').value = LanAmount;
     let tekst = lanDiv;
     MainDiv.insertAdjacentHTML('beforeend',tekst.replace('@', LanAmount));
-    
 }
 function editInfo(e){
-    // lector
-    
     let column = e.target.id;
-    alert(column);
+    $.ajax({
+            type: "POST",
+            url: '../editLector',
+            data: {
+                column: column, 
+                value: e.target.value,
+                lector: lector,
+                _token: "{{ csrf_token() }}",
+            },
+        })
+        .done(function( data) {
+            if(data == 1){
+               alert('Edytowano');
+            }else{
+                alert('Wystąpił błąd');
+            }
+        })
+        .fail(function() {
+            alert( "error" );
+        });
+}
+function editInfo2(column,e){
+    $.ajax({
+            type: "POST",
+            url: '../editLector',
+            data: {
+                column: column, 
+                value: e,
+                lector: lector,
+                _token: "{{ csrf_token() }}",
+            },
+        })
+        .done(function( data) {
+            if(data == 1){
+               alert('Edytowano');
+            }else{
+                alert('Wystąpił błąd');
+            }
+        })
+        .fail(function() {
+            alert( "error" );
+        });
+}
+function editLevels(column,id,e){
+   
+    $.ajax({
+            type: "POST",
+            url: '../editLevel',
+            data: {
+                column: column, 
+                value: e.target.value,
+                id: id,
+                _token: "{{ csrf_token() }}",
+            },
+        })
+        .done(function( data) {
+            if(data == 1){
+               alert('Edytowano');
+            }else{
+                alert('Wystąpił błąd');
+            }
+        })
+        .fail(function() {
+            alert( "error" );
+        });
 }
 // 
 
