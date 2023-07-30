@@ -282,7 +282,7 @@ input[type=time] {
                     </div>
             </div>
                 <input type="hidden" name="languageAmount" id="languageAmount" value="{{count($levels)}}">
-                <button type="submit" class="btn btn-primary col-md-12">Zapisz</button>
+                <!-- <button type="submit" class="btn btn-primary col-md-12">Zapisz</button> -->
             </form>
             
         </div>
@@ -404,8 +404,7 @@ input[type=time] {
     toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
     menubar: true,
     setup: function(ed) {
-        ed.on('submit', function(e) { ed.save(); });
-        ed.on('focusout', function(e) {editInfo2('description',ed.getContent());});
+        ed.on('change', function(e) {editInfo2('description',ed.getContent());});
     }
   });
   tinymce.init({
@@ -415,8 +414,7 @@ input[type=time] {
     toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
     menubar: true,
     setup: function(ed) {
-        ed.on('submit', function(e) { ed.save(); });
-        ed.on('focusout', function(e) {editInfo2('levels',ed.getContent());});
+        ed.on('change', function(e) {editInfo2('levels',ed.getContent());});
     }
   });
   tinymce.init({
@@ -426,8 +424,7 @@ input[type=time] {
     toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
     menubar: true,
     setup: function(ed) {
-        ed.on('submit', function(e) { ed.save(); });
-        ed.on('focusout', function(e) {editInfo2('style',ed.getContent());});
+        ed.on('change', function(e) {editInfo2('style',ed.getContent());});
     }
   });
 </script>
@@ -444,7 +441,7 @@ input[type=time] {
              '                       </select>  '+
              '                                </div>'+
              '               <div class="col-md-5">'+
-             '                       <select name="language_level#" class="form-control" required>'+
+             '                       <select name="language_level#"  onchange="editLevels(\'level\',event)" class="form-control" required>'+
              '                                   <option value="0">-</option>'+
             '                              <option value="Ojczysty">Ojczysty</option>'+
             '                               <option value="A1">A1</option>'+
@@ -571,11 +568,12 @@ function cal() {
 }
 function AddLangLevel(e) { 
     e.preventDefault();
-    LanAmount++;
-    let MainDiv = document.getElementById('pozDiv');
-    document.getElementById('languageAmount').value = LanAmount;
-    let tekst = lanDiv;
-    MainDiv.insertAdjacentHTML('beforeend',tekst.replace('@', LanAmount));
+    alert('To musze przemyśleć');
+    // LanAmount++;
+    // let MainDiv = document.getElementById('pozDiv');
+    // document.getElementById('languageAmount').value = LanAmount;
+    // let tekst = lanDiv;
+    // MainDiv.insertAdjacentHTML('beforeend',tekst.replace('@', LanAmount));
 }
 function editInfo(e){
     let column = e.target.id;

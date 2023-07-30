@@ -255,7 +255,7 @@ let lanDiv = ' <div style="display: flex; gap: 7px; margin-left: 3px;">'+
              '                           <option value="0">-</option>'+
                                         @foreach ($langs as $lang)
              '                               <option value="{{$lang->id}}">{{$lang->name}}</option>'+
-                                      @endforeach
+                                       @endforeach
              '                       </select>  '+
              '                                </div>'+
              '               <div class="col-md-5">'+

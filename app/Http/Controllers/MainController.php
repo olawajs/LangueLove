@@ -117,7 +117,7 @@ class MainController extends Controller
         else{
              $langs = Language::where('active',1)->get();
             $types = LessonType::where('active',1)->get();
-            $lectors = Lector::all();
+            $lectors = Lector::where('id','!=',18)->get();
             return view('home',[
                 'languages' => $langs,
                 'types' => $types,

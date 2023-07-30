@@ -28,6 +28,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> 
     <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+    <meta property="og:image" content="{{ asset('images/logoSmall.png') }}" />
     <!-- Calendar -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 
