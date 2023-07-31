@@ -225,7 +225,6 @@ class PaymentController extends Controller
                      'language' => 'Język '.$lName
                     ]; 
                     Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
-                    Mail::to('olawjs@gmail.com')->send(new NewLessonInfo($mailData));
                     // return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
                  } catch (\Throwable $th) {
                     //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
@@ -434,7 +433,6 @@ class PaymentController extends Controller
                      'language' => 'Język '.$lName
                     ]; 
                     Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
-                    Mail::to('olawjs@gmail.com')->send(new NewLessonInfo($mailData));
                     // return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
                  } catch (\Throwable $th) {
                     //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');

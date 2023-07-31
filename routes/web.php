@@ -66,6 +66,7 @@ Route::get('priceList/search/{lang}/{type}', [App\Http\Controllers\MainControlle
 Route::GET('lesson/{id}', [App\Http\Controllers\LessonController::class, 'showLesson'])->name('showLesson');
 Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLector'])->name('showLector');
 Route::GET('activate/{mail}', [App\Http\Controllers\MainController::class, 'activate'])->name('activate');
+Route::GET('generateCode', [App\Http\Controllers\NewsletterController::class, 'generateCode'])->name('generateCode');
 
 // form admin only
 

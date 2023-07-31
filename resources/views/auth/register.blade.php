@@ -127,7 +127,7 @@
                             </div>
 
                             <div class="col-md-6 iconText">
-                                
+                            Zapisuję się do językowego newslettera i otrzymuję 10% zniżki na kurs grupowy! 
                             </div>
                         </div>
 

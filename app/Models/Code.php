@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Newsletter extends Model
+class Code extends Model
 {
     protected $fillable = [
-        'email',
-        'user_id',
-        'code_id'
+        'email', 
+        'code', 
+        'use_date',
+        'lesson_type',
+        'amount',
+        'type'
     ];
 }

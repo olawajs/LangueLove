@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use App\Models\Lector;
+use App\Models\Code;
+use App\Models\Newsletter;
 
 class RegisterController extends Controller
 {
@@ -67,6 +69,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $result = app('App\Http\Controllers\NewsletterController')->generateCode();
+       if(isset($data['newsletter'])){
+            if($doesExist = Newsletter::where('email',$data['email'])->first()) {}
+            else{
+                $code = Code::create([
+                    'code' => $result,
+                    'email' => $data['email'],
+                    'lesson_type' => 2,
+                    'amount' => 10,
+                    'type' => '%'
+                ]);
+
+                $newsletter = Newsletter::create([
+                    'email' => $data['email'],
+                    'code_id' => $code->id,
+                ]);
+                $mail = app('App\Http\Controllers\NewsletterController')->sendMail($result,$data['email']);
+            }
+       }
+       
         $mailData=[
             'email' => $data['email']
            ]; 
