@@ -109,6 +109,9 @@ class MainController extends Controller
     }
     public function home()
     {
+
+            dd('Przepraszamy strona chwilowo wstrzymana');
+     
         if(Auth::user()  && Auth::user()->active == 0){
             Auth::logout();
             Session::flush();
@@ -187,7 +190,7 @@ class MainController extends Controller
     }
     public function search(Request $request)
     {
-        
+        dd('Przepraszamy strona chwilowo wstrzymana');
         if(!is_null($request->lang)  && !is_null($request->type) && $request->type[0] != '0' && $request->lang[0] != '0'){
             $lessons = Lesson::whereIn('language_id', $request->lang)
                                 ->whereIn('type_id', $request->type)

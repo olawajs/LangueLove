@@ -41,7 +41,9 @@ class PaymentController extends Controller
     // $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
 
     public function  buyLesson(Request $request){
-       
+       if(date() <= '2023-08-02 04:00:00'){
+            dd('Przepraszamy płatności chwilowo');
+       }
     $RequestTab = [
         'typPlatnosci' => 'LEKCJA',
         'start' => $request->data,
