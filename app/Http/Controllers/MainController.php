@@ -196,25 +196,25 @@ class MainController extends Controller
                                 ->get();
             
             $languageT = LanguageLevel::whereIn('language_id',$request->lang)->pluck('lector_id')->toArray();
-            $lectors = Lector::whereIn('id',$languageT)->get();
+            $lectors = Lector::whereIn('id',$languageT)->where('id','!=',18)->get();
         }else if(!is_null($request->lang)  && (is_null($request->type)||$request->type[0] == '0') && $request->lang[0] != '0'){
             $lessons = Lesson::whereIn('language_id', $request->lang)
                             ->where('start', '>', Carbon::today())   
                             ->where('status','<>',0)                    
                             ->get();
             $languageT = LanguageLevel::whereIn('language_id',$request->lang)->pluck('lector_id')->toArray();
-            $lectors = Lector::whereIn('id',$languageT)->get();
+            $lectors = Lector::whereIn('id',$languageT)->where('id','!=',18)->get();
         }
         else if((is_null($request->lang)|| $request->lang[0] == '0')  && !is_null($request->type) && $request->type[0] != '0'){
             $lessons = Lesson::whereIn('type_id', $request->type)
                             ->where('start', '>', Carbon::today())
                             ->where('status','<>',0)
                             ->get();
-             $lectors = Lector::all();
+             $lectors = Lector::where('id','!=',18)->get();
         }
         else{
             $lessons = Lesson::where('start', '>', Carbon::today())->where('status','<>',0)->get();
-            $lectors = Lector::all();
+            $lectors = Lector::where('id','!=',18)->get();
         }
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
@@ -238,7 +238,7 @@ class MainController extends Controller
                             ->where('start', '>', Carbon::today())
                             ->get();
         $languageT = LanguageLevel::where('language_id',$request->lang)->pluck('lector_id')->toArray();
-        $lectors = Lector::whereIn('id',$languageT)->get();
+        $lectors = Lector::whereIn('id',$languageT)->where('id','!=',18)->get();
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
 
