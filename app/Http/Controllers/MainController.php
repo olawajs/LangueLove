@@ -109,8 +109,6 @@ class MainController extends Controller
     }
     public function home()
     {
-
-            dd('trwają prace serwisowe do godziny 3:00. W przypadku pytań lub chęci  rezerwacji zajęć, prosimy o kontakt mailowy kontakt@languelove.pl');
      
         if(Auth::user()  && Auth::user()->active == 0){
             Auth::logout();
@@ -190,7 +188,6 @@ class MainController extends Controller
     }
     public function search(Request $request)
     {
-        dd('trwają prace serwisowe do godziny 3:00. W przypadku pytań lub chęci  rezerwacji zajęć, prosimy o kontakt mailowy kontakt@languelove.pl');
         if(!is_null($request->lang)  && !is_null($request->type) && $request->type[0] != '0' && $request->lang[0] != '0'){
             $lessons = Lesson::whereIn('language_id', $request->lang)
                                 ->whereIn('type_id', $request->type)
