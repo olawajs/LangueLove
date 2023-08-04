@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Code;
 use App\Mail\Newsletter;
+use App\Mail\NewsletterMail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Newsletter as NW;
 
 class NewsletterController extends Controller
 {
@@ -28,10 +30,36 @@ class NewsletterController extends Controller
         return $code;
     }
     public function sendMail(string $code,string $email){
+        
          $mailData=[
             'code' =>  $code
            ]; 
            Mail::to($email)->send(new Newsletter($mailData));
 
+    }
+    public function signOff(Request $request){
+        $email = $request->email;
+        $res = NW::where('email',$email)->delete();
+        return 1;
+    }
+    public function signIn(Request $request){
+        $code = $this->generateCode();
+        $email = $request->email;
+        if($doesExist = NW::where('email',$email)->first()) {}
+        else{
+            $code2 = Code::create([
+                'code' => $code,
+                'email' => $email,
+                'lesson_type' => 2,
+                'amount' => 10,
+                'type' => '%'
+            ]);
+            $newsletter = NW::create([
+                'email' => $email,
+                'code_id' => $code2->id,
+            ]);
+            $mail = $this->sendMail($code,$email);
+        }
+       return 1;
     }
 }

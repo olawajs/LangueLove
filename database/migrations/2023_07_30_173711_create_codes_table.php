@@ -16,7 +16,7 @@ class CreateCodesTable extends Migration
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
             $table->string('code',500)->unique();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->dateTime('use_date', $precision = 0)->nullable();
             $table->integer('lesson_type')->nullable();
             $table->integer('amount');

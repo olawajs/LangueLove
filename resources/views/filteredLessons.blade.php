@@ -95,7 +95,7 @@
                     </div>
                     <div>
                         <div><b>Lektor: </b>{{ App\Models\Lector::find($lesson->lector_id)->name}}<br></div>
-                        <div><b>Maksymalna ilość osób: </b>{{$lesson->amount_of_students}}</div>
+                        <div><b>Maksymalna liczba osób: </b>{{$lesson->amount_of_students}}</div>
                         <div><b>Dostępnych miejsc: </b>{{$lesson->amount_of_students-App\Models\EventUsers::whereIn('calendar_id',App\Models\CalendarEvent::where('lesson_id',$lesson->id)->pluck('id')->toArray())->distinct('user_id')->pluck('user_id')->count()}}</div>
                     </div>
                     <div>

@@ -35,6 +35,8 @@ Route::get('/thankYou', function () {
 Route::post('/payment/useLessons', [App\Http\Controllers\PaymentController::class, 'useLessons'])->name('useLessons'); 
 Route::get('myCalendar', [App\Http\Controllers\MainController::class, 'myCalendar'])->name('myCalendar'); 
 Route::get('myAccount', [App\Http\Controllers\MainController::class, 'myAccount'])->name('myAccount'); 
+Route::get('signIn', [App\Http\Controllers\NewsletterController::class, 'signIn'])->name('signIn'); 
+Route::get('signOff', [App\Http\Controllers\NewsletterController::class, 'signOff'])->name('signOff'); 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
 Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
 Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'sendConsultationMail'])->name('sendConsultation'); 
