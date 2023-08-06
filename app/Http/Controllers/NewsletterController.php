@@ -34,8 +34,18 @@ class NewsletterController extends Controller
          $mailData=[
             'code' =>  $code
            ]; 
-           Mail::to($email)->send(new Newsletter($mailData));
+           Mail::to($email)->send(new Newsletter());
 
+    }
+    public function checkCode(Request $request){
+        $code = Code::where('code',$request->code)->where('lesson_type',$request->type)->whereNull('use_date')->first();
+        if($code){
+            return $code;
+        }
+        else{
+            return 0;
+        }
+       
     }
     public function signOff(Request $request){
         $email = $request->email;
@@ -45,20 +55,27 @@ class NewsletterController extends Controller
     public function signIn(Request $request){
         $code = $this->generateCode();
         $email = $request->email;
-        if($doesExist = NW::where('email',$email)->first()) {}
+        if($doesExist = NW::where('email',$email)->first()) {
+           
+        }
         else{
-            $code2 = Code::create([
-                'code' => $code,
-                'email' => $email,
-                'lesson_type' => 2,
-                'amount' => 10,
-                'type' => '%'
-            ]);
-            $newsletter = NW::create([
-                'email' => $email,
-                'code_id' => $code2->id,
-            ]);
-            $mail = $this->sendMail($code,$email);
+            if($doesExist = Code::where('email',$email)->where('lesson_type',2)->first()) {
+                Mail::to($email)->send(new NewsletterMail($mailData));
+            }else{
+                $code2 = Code::create([
+                    'code' => $code,
+                    'email' => $email,
+                    'lesson_type' => 2,
+                    'amount' => 10,
+                    'type' => '%'
+                ]);
+                $newsletter = NW::create([
+                    'email' => $email,
+                    'code_id' => $code2->id,
+                ]);
+                $mail = $this->sendMail($code,$email); 
+            }
+           
         }
        return 1;
     }

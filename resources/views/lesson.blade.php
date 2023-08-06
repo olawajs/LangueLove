@@ -77,7 +77,7 @@
                 <form class="floatForm" id="buyForm" method='POST' action="{{ route('buyLesson') }}">
                 @csrf
                 <h2 class="Tcenter"> Podsumowanie płatności:</h2>
-                    <h3 class="Tcenter">Do zapłaty: <b>{{$lesson->price*$lesson->amount_of_lessons}} zł</b></h3>
+                    <h3 class="Tcenter">Do zapłaty: <b id="kwotaZaplaty">{{$lesson->price*$lesson->amount_of_lessons}} zł</b></h3>
                     
                     <h2 class="Tcenter">Dane do faktury: </h2>
                         <div class="box">
@@ -100,6 +100,12 @@
                             <span class="napis">NIP: </span>
                             <input type="text" class="form-control" name="nip" id="nip">
                         </div>
+                        <div class="box">
+                            <span class="napis" style="width: 100%; display: inline-block;">Posiadasz kod rabatowy? Wpisz go poniżej : </span>
+                            <input type="text" class="form-control" style="width: calc(100% - 100px); float: left" name="code" id="code">
+                            <button class="btn btn-secondary" style="width: 100px" onclick="checkCode()">Użyj kod</button>
+                            <span id="codeResponse" class="napis" style="width: 100%; display: inline-block;"></span>
+                        </div>
 
                     <input type="hidden" name="duration_id" value="{{$lesson->duration_id}}">
                     <input type="hidden" name="jezyk" value="{{$lesson->language_id}}">
@@ -107,9 +113,10 @@
                     <input type="hidden" name="lectorId" value="{{$lector->id}}">
                     <input type="hidden" name="ile" value="{{$lesson->amount_of_lessons}}">
                     <input type="hidden" name="zajecia" value="1">
-                    <input type="hidden" name="price" value="{{$lesson->price*$lesson->amount_of_lessons}}">
+                    <input type="hidden" name="price" id="price" value="{{$lesson->price*$lesson->amount_of_lessons}}">
                     <input type="hidden" name="lessonId" value="{{$lesson->id}}">
                     <input type="hidden" name="title" value="{{$lesson->title}}">
+                    <input type="hidden" name="PromoCode" id="PromoCode" value="">
                     <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
                     <input type="button" class="btn btn-primary mb-3 close" id="buyButton" value="ANULUJ">
                 </form>
@@ -123,7 +130,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 
 <script>
-
+    let useCode = false;
     $(document).ready(function () {
         
         $('.langInp').click(function() {
@@ -144,6 +151,8 @@
             check(event,2);
         });
        
+
+
         function check(e,type) {
             let id ='';
             let class1 = '';
@@ -183,5 +192,51 @@
 
         }
     })
+    function checkCode(){
+        event.preventDefault();
+        let code = document.getElementById('code').value;
+        // alert(code);
+        if(!useCode){
+            useCode = true;
+            $.ajax({
+            type: "POST",
+            url: '../checkCode',
+            data: {
+                code: code,
+                type: 2,
+                _token: "{{ csrf_token() }}",
+            },
+            })
+            .done(function( data) {
+                if(data != 0){
+                    let container = document.getElementById('kwotaZaplaty');
+                    let kwota = document.getElementById('price');
+                    let opis = document.getElementById('codeResponse');
+                    let PromoCode = document.getElementById('PromoCode');
+                    
+                    let amount = data.amount;
+                    let nowaKwota;
+                    if(data.type == '%'){
+                        nowaKwota = kwota.value - (kwota.value*(amount/100));
+                    }
+                    else{
+                        nowaKwota = kwota.value - amount;
+                        
+                    }
+                    kwota.value = nowaKwota;
+                    container.innerText = nowaKwota+' zł';
+                    opis.innerHTML = '<span style="color: green"><b>Kod został przypisany</b></span>';
+                    PromoCode.value = data.code;
+                }
+                else{
+                    opis.innerHTML = '<span style="color: red"><b>Kod nie istnieje bądź został już wykorzystany</b></span>';
+                }
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+        }
+        
+    }
    
 </script>

@@ -20,6 +20,7 @@ class CreateCodesTable extends Migration
             $table->dateTime('use_date', $precision = 0)->nullable();
             $table->integer('lesson_type')->nullable();
             $table->integer('amount');
+            $table->integer('payment_id');
             $table->string('type');
             $table->timestamps();
         });

@@ -37,6 +37,7 @@ Route::get('myCalendar', [App\Http\Controllers\MainController::class, 'myCalenda
 Route::get('myAccount', [App\Http\Controllers\MainController::class, 'myAccount'])->name('myAccount'); 
 Route::get('signIn', [App\Http\Controllers\NewsletterController::class, 'signIn'])->name('signIn'); 
 Route::get('signOff', [App\Http\Controllers\NewsletterController::class, 'signOff'])->name('signOff'); 
+Route::post('checkCode', [App\Http\Controllers\NewsletterController::class, 'checkCode'])->name('checkCode'); 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
 Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
 Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'sendConsultationMail'])->name('sendConsultation'); 

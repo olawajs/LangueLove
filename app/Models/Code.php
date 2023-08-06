@@ -13,6 +13,7 @@ class Code extends Model
         'use_date',
         'lesson_type',
         'amount',
-        'type'
+        'type',
+        'payment_id'
     ];
 }

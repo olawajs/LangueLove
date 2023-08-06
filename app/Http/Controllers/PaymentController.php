@@ -15,6 +15,7 @@ use App\Models\LessonDuration;
 use App\Models\Language;
 use App\Models\Lector;
 use App\Models\CalendarEvent;
+use App\Models\Code;
 use App\Models\EventUsers;
 use App\Models\LessonsBank;
 use App\Models\Price;
@@ -41,7 +42,7 @@ class PaymentController extends Controller
     // $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
 
     public function  buyLesson(Request $request){
-
+        $PromoCode = isset($request->PromoCode) ? $request->PromoCode : '';
     $RequestTab = [
         'typPlatnosci' => 'LEKCJA',
         'start' => $request->data,
@@ -119,6 +120,10 @@ class PaymentController extends Controller
         $payment->city = $request->city;
         $payment->nip = isset($request->nip) ? $request->nip : '';
       $payment->save();
+
+      if($PromoCode != ''){
+        Code::where('code',$PromoCode)->update(['use_date' => Carbon::now(),'payment_id' => $payment->id ]);
+      }
 
         $suma_zamowienia = $kwota*100 ; //wartość musi być podana w groszach
         $tytul = $desc ;
