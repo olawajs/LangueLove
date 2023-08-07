@@ -74,6 +74,7 @@ Route::GET('generateCode', [App\Http\Controllers\NewsletterController::class, 'g
 // form admin only
 
 Route::get('admin/lessons', [App\Http\Controllers\Admin\EditInfo::class, 'getLessons'])->name('lessons');
+Route::get('admin/data', [App\Http\Controllers\Admin\AdministratorController::class, 'Database'])->name('database');
 Route::get('admin/prices', [App\Http\Controllers\Admin\EditInfo::class, 'getPrices'])->name('prices');
 Route::get('admin/lectors', [App\Http\Controllers\LectorController::class, 'showLectors'])->name('lectors');
 Route::get('admin/newLector', [App\Http\Controllers\LectorController::class, 'NewLector'])->name('newLector');

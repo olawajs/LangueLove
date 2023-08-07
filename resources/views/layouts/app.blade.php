@@ -123,6 +123,9 @@ src="https://www.facebook.com/tr?id=216815460947111&ev=PageView
                                             <a class="dropdown-item" href="{{ route('addLesson') }}">
                                                 {{ __('Lekcje') }}
                                             </a> 
+                                            <a class="dropdown-item" href="{{ route('database') }}">
+                                                {{ __('Baza danych') }}
+                                            </a>
                                         @endif
                                         <a class="dropdown-item" href="{{ route('myAccount') }}">
                                             {{ __('Moje konto') }}
