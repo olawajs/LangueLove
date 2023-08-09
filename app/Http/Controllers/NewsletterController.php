@@ -60,7 +60,7 @@ class NewsletterController extends Controller
         }
         else{
             if($doesExist = Code::where('email',$email)->where('lesson_type',2)->first()) {
-                Mail::to($email)->send(new NewsletterMail($mailData));
+                Mail::to($email)->send(new NewsletterMail());
             }else{
                 $code2 = Code::create([
                     'code' => $code,

@@ -69,11 +69,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
+        $mailData=[
+            'email' => $data['email']
+           ]; 
+           Mail::to($data['email'])->send(new WelcomeMail($mailData));
         $result = app('App\Http\Controllers\NewsletterController')->generateCode();
        if(isset($data['newsletter'])){
             if($doesExist = Newsletter::where('email',$data['email'])->first()) {
-                
+
             }
             else{
                 $code = Code::create([
@@ -92,10 +95,7 @@ class RegisterController extends Controller
             }
        }
        
-        $mailData=[
-            'email' => $data['email']
-           ]; 
-           Mail::to($data['email'])->send(new WelcomeMail($mailData));
+      
 
         return User::create([
             'name' => $data['name'],
