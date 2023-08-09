@@ -27,4 +27,24 @@
         </ul>
     </div>
 </div>
+<div class="footNewsletter">
+    <div class="footHalf">
+        <h2>Zostań z nami na dłużej!</h2>
+        <p>Zapisz się do naszego newslettera, aby otrzymać 10% zniżki na zajęcia grupowe i zacznij uczyć się już dziś! Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
+    </div>
+    <div class="footHalf" >
+        <div class="footInput">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Adres email" id="newsMail" aria-label="Adres email" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-black" type="button" onclick="SignInN()">Zapisz się</button>
+                </div>
+            
+            </div>
+        </div>
+         <span style="font-size: small">Rejestrując się do newslettera akceptujesz Politykę prywatności.</span>
+    </div>
+    
+    
+</div>
 </footer>

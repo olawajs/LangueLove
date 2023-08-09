@@ -1228,3 +1228,22 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	
 /******/ })()
 ;
+
+function SignInN(){
+  let email = document.getElementById('newsMail').value;
+  $.ajax({
+            type: "GET",
+            url: '../signIn',
+            data: {
+                email: email, 
+            },
+          })
+          .done(function( data) {
+            if(data == 1){
+              alert('Dziękujemy za zapisanie się do newslettera!');
+            }
+          })
+          .fail(function() {
+              console.log( "error" );
+          });
+}
