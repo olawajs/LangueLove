@@ -72,7 +72,9 @@ class RegisterController extends Controller
 
         $result = app('App\Http\Controllers\NewsletterController')->generateCode();
        if(isset($data['newsletter'])){
-            if($doesExist = Newsletter::where('email',$data['email'])->first()) {}
+            if($doesExist = Newsletter::where('email',$data['email'])->first()) {
+                
+            }
             else{
                 $code = Code::create([
                     'code' => $result,

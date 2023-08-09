@@ -34,7 +34,7 @@ class NewsletterController extends Controller
          $mailData=[
             'code' =>  $code
            ]; 
-           Mail::to($email)->send(new Newsletter());
+           Mail::to($email)->send(new Newsletter($mailData));
 
     }
     public function checkCode(Request $request){
