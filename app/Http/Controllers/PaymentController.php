@@ -60,6 +60,7 @@ class PaymentController extends Controller
         'lessonI' => $request->lessonI,
         'title' => $request->title,
         'calendarId' => $request->calendarId,
+        'lessonId' => $request->lessonId,
         'name' => $request->name,
         'nip' => isset($request->nip) ? $request->nip : '',
         'city' => $request->city,

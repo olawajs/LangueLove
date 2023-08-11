@@ -107,6 +107,7 @@
                             <span id="codeResponse" class="napis" style="width: 100%; display: inline-block;"></span>
                         </div>
 
+                   s
                     <input type="hidden" name="duration_id" value="{{$lesson->duration_id}}">
                     <input type="hidden" name="jezyk" value="{{$lesson->language_id}}">
                     <input type="hidden" name="rodzaj" value="{{$lesson->type_id}}">
