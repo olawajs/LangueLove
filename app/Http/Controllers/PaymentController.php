@@ -90,13 +90,17 @@ class PaymentController extends Controller
                         ->first()
                         ->price; 
                         $kwota = $price*$ile;
+       
+       
         }
         
         if($type_id == 1){
             $desc = 'Lekcja indywidualna z języka '.$lName.'ego';
+        }else if($type_id == 4){
+           $desc = 'Lekcja w parze z języka '.$lName.'ego';
         }
         else{
-            $desc = 'Lekcja w parze z języka '.$lName.'ego';
+             $desc = $request->title;
         }
         $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
@@ -128,7 +132,6 @@ class PaymentController extends Controller
 
         $suma_zamowienia = $kwota*100 ; //wartość musi być podana w groszach
         $tytul = $desc ;
-        
         $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
         return new RedirectResponse($link.'trnRequest/'.$token);
 
