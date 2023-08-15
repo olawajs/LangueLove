@@ -488,7 +488,7 @@ class PaymentController extends Controller
                     $calendar->student_accept = 1;
                     $calendar->save();
                 }
-                $eventId =  $request->calendarId;
+                $eventId =  $data['calendarId'];
             }
         }elseif($data['typPlatnosci'] == 'PAKIET')
         {
