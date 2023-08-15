@@ -17,7 +17,10 @@
     <button class="nav-link" id="calendar-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Newsletter</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="codes-tab" data-bs-toggle="tab" data-bs-target="#codes-tab-pane" type="button" role="tab" aria-controls=codes-tab-pane" aria-selected="false">Kody promocyjne</button>
+    <button class="nav-link" id="codes-tab" data-bs-toggle="tab" data-bs-target="#codes-tab-pane" type="button" role="tab" aria-controls="codes-tab-pane" aria-selected="false">Kody promocyjne</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users-tab-pane" type="button" role="tab" aria-controls="users-tab-pane" aria-selected="false">Użytkownicy</button>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -96,6 +99,31 @@
             </table>
     </div>
   </div>
+  <div class="tab-pane fade" id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab" tabindex="0">
+    <div class="CalDiv">
+        <h2 class="text-center">Użytkownicy</h2>
+            <table id="users">
+                <thead>
+                    <th>Imie i nazwisko</th>
+                    <th>Email</th>
+                    <th>Aktywny</th>
+                    <th>Typ</th>
+                    <th>Data Dodania</th>
+                </thead>
+                <tbody>
+                    @foreach($users as $u)
+                    <tr>
+                        <td>{{$u->name}}</td>
+                        <td>{{$u->email}}</td>
+                        <td>{{$u->active}}</td>
+                        <td>{{ App\Models\UserType::where('id',$u->user_type)->distinct('level')->pluck('name')->first()   }}</td>
+                        <td>{{$u->created_at}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+    </div>
+  </div>
 </div>
 
 </div>
@@ -117,6 +145,9 @@
             order: [[1, 'desc']]
         });
         let table3 = $('#codes').DataTable({
+            order: [[1, 'desc']]
+        });
+        let table4 = $('#users').DataTable({
             order: [[1, 'desc']]
         });
     });

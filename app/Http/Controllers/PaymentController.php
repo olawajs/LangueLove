@@ -448,8 +448,8 @@ class PaymentController extends Controller
                  }
                 Mail::to($lecMail->email)->send(new AcceptTermin());
             }else{
-                $lessonId = $request->lessonId;
-                $desc = $request->title;
+                $lessonId =  $data['lessonId'];
+                $desc =  $data['title'];
             }
 
             if($zajecia != 1){
