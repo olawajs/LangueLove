@@ -96,6 +96,7 @@ Route::post('/payment/make', [App\Http\Controllers\PaymentController::class, 'tr
 
 Route::post('/payment/buy', [App\Http\Controllers\PaymentController::class, 'buyLesson'])->name('buyLesson'); 
 
+Route::get('searchLessons/{type}', [App\Http\Controllers\MainController::class, 'search2'])->name('searchLessons');
 
 //dla maili
 Route::get('/email', function () {

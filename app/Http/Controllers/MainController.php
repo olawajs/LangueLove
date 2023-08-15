@@ -226,6 +226,23 @@ class MainController extends Controller
             'types' => $types
         ]);
     }
+    public function search2(Request $request)
+    {
+            $lessons = Lesson::where('type_id', intval($request->type))
+                            ->where('start', '>', Carbon::today())
+                            ->where('status','<>',0)
+                            ->get();
+       
+        $langs = Language::where('active',1)->get();
+        $types = LessonType::where('active',1)->get();
+
+        return view('filteredLessons',[
+            'lessons' => $lessons,
+            'lectors' => [],
+            'languages' => $langs,
+            'types' => $types
+        ]);
+    }
 
     public function searchPricelist(Request $request)
     {
