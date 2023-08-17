@@ -363,6 +363,7 @@ class PaymentController extends Controller
             $payment->save();
             $this->CreateLessons();
             Mail::to(Auth::user()->email)->send(new ThankYou());
+           
             return view('thankYou');
         }else{
             $payment->status = 3;
