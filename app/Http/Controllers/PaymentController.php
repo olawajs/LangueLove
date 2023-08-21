@@ -125,6 +125,7 @@ class PaymentController extends Controller
         $payment->city = $request->city;
         $payment->nip = isset($request->nip) ? $request->nip : '';
       $payment->save();
+        Session::put('payment_id',$payment->id);
 
       if($PromoCode != ''){
         Code::where('code',$PromoCode)->update(['use_date' => Carbon::now(),'payment_id' => $payment->id ]);
