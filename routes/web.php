@@ -104,3 +104,5 @@ Route::get('/email', function () {
     return new WelcomeMail();
 });
 
+// test
+Route::GET('lectorTest/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'showLector']);

@@ -617,7 +617,7 @@ class PaymentController extends Controller
                 "language": "pl",
                 "method": 0,
                 "urlReturn": "https://languelove.pl/payment/validate",
-                "urlStatus": "https://languelove.pl/payment/status",
+                "urlStatus": "https://languelove.pl/payment/validate",
                 "timeLimit": 0,
                 "channel": 7,
                 "waitForResult": true,
