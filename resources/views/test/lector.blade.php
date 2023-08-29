@@ -79,9 +79,60 @@
                 <button class="btn btn-primary mb-3" onclick="przejdzDo()">Zobacz terminarz</button>
             </div>
         </div>
-                <div>
-                    <div id="calendar"></div>
-                </div>
+        <div>
+            <h2>Kalendarz</h2>
+            <div class="calendarInfo">
+                <img src="{{asset('images/svg/warning.svg')}}">
+                <div>Zajęcia trwają 55 lub 85 minut. Wybierz godzinę rozpoczęcia zajęć, a w następnym kroku czas trwania.</div>
+            </div>
+            
+            
+                @foreach($calendar as $q => $c)
+                <div id="Week{{$loop->index}}" @if($loop->index > 0)style="display: none" @endif>
+                    <div class="calendarButtons" >
+                        <div class="weekButtons">
+                            <div class="d-flex" style="gap: 6px;">
+                                <button class="btn activeButton @if($loop->index == 0)LLdisabled @endif  HBorder"  onClick="goTo('{{$loop->index -1}}','{{$loop->index}}')">@if($loop->index == 0)<img src="{{asset('images/svg/DArrowL.svg')}}"> @else <img src="{{asset('images/svg/AArrowL.svg')}}"> @endif </button>
+                               <button class="btn activeButton @if(($loop->index+1)==count($calendar) )LLdisabled @endif HBorder" onClick="goTo('{{$loop->index +1}}','{{$loop->index}}')">@if(($loop->index+1)==count($calendar))<img src="{{asset('images/svg/DArrowR.svg')}}"> @else <img src="{{asset('images/svg/AArrowR.svg')}}"> @endif</button>
+                            </div>
+                            <div>
+                                {{$q}}
+                            </div>
+                        </div>
+                        <button class="btn TodayButton @if($loop->index == 0)LLdisabled @endif  HBorder" onClick="goTo('0','{{$loop->index}}')">dzisiaj</button>
+                    </div>
+                    <div class="weekContainer" >
+                        @foreach($c as $k => $d)
+                        <div class="dayContainer">
+                            <div class="headContainer">
+                                <span>{{$d['name']}}</span>
+                                <span>{{$d['shortDate']}}</span>
+                            </div>
+                            <div class="hoursContainer">
+                                @foreach($d as $k2 => $d2)
+                                    @if($k2 != 'name' && $k2 != 'shortDate')
+                                        @if(isset($d2['free']) && $d2['free']==1)
+                                            <div class="freeHour HBorder">{{$k2}}</div>
+                                        @endif
+                                        @if(isset($d2['free']) && $d2['free']==0)
+                                            <div class="takenHour">{{$k2}}</div>
+                                        @endif
+                                        @if(!isset($d2['free']))
+                                            <div class="emptyHour"></div>
+                                        @endif
+                                        
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        @endforeach
+                    </div> 
+                </div> 
+                @endforeach
+            
+            
+        </div>
+
     </div>
     
 </div>
@@ -194,54 +245,6 @@
         });
 
 
-        var calendarEl = document.getElementById('calendar');
-        calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'timeGridWeek',
-            slotMinTime:"07:00",
-            slotDuration: '00:15:00',
-            slotMaxTime:"23:00",
-            allDaySlot: false,
-            hiddenDays: [ 0 ], //wyłączenie niedzieli
-            editable: true,
-            locale: 'pl',
-            eventOverlap:false,
-            validRange: {
-                start: new Date(),
-            },
-            events:{
-                url: '/getCalendar/{{$lector->id}}',
-                method: 'GET',
-            } ,
-
-            selectConstraint: "businessHours",
-            eventClick: function(info) {
-                
-            },
-            dateClick: function(info) {
-                var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
-                if(!AuthUser){
-                    window.location.href = "{{ route('login')}}";
-                }else{
-                    let text = '';
-                    if(typeof info.jsEvent.explicitOriginalTarget != "undefined"){
-                       text=info.jsEvent.explicitOriginalTarget.textContent;
-                    }
-                    else{
-                        text=info.jsEvent.target.textContent;
-                    }
-                   if(text == 'Wolny termin' ){
-                   
-                        let data = info.date; 
-                        document.getElementById('data').value = data.getFullYear() + "-" +((data.getMonth()).length != 2 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" +((data.getDate()) <= 9 ? "0" + (data.getDate()) : (data.getDate())) ;
-                        document.getElementById('godzina').value = ((data.getHours()) <= 9 ? "0" + (data.getHours()) : (data.getHours())) + ":" +((data.getMinutes()) <= 9 ? "0" + (data.getMinutes()) : (data.getMinutes()));
-                        OpenModal('BuyModal');
-                    } 
-                }
-                
-                
-            },
-        });
-        calendar.render();
 
         function OpenModal(id){
             document.getElementById(id).style.display = 'block';
@@ -257,6 +260,10 @@
             validTermins(); checkAmount();
         }
     })
+    function goTo(week,active){
+        document.getElementById('Week'+active).style.display = 'none';
+        document.getElementById('Week'+week).style.display = 'block';
+    }
     function Cost(){
         if(document.getElementById('ile').value >=5){
             alert('Dziękujemy za wybranie tak dużej ilości zajęć! Zajrzyj do naszego cennika, aby kupić pakiet zajęć w okazyjnej cenie!!!');
