@@ -166,7 +166,7 @@
         <div class="card wallet">
             <div class="overlay"></div>
             <div class="circle">
-                <div class="number">{{$IndAzj}}</div>
+                <div class="number">{{$ParEur}}</div>
             </div>
             <p>Lekcje w parze</p>
             <p>Języki europejskie</p>
@@ -183,7 +183,7 @@
         <div class="card wallet2">
             <div class="overlay"></div>
             <div class="circle">
-                <div class="number">{{$ParEur}}</div>
+                <div class="number">{{$IndAzj}}</div>
             </div>
             <p>Lekcje indywidualne</p>
             <p>Języki azjatyckie</p>

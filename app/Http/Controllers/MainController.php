@@ -60,6 +60,8 @@ class MainController extends Controller
         $lessonsIndAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->where('type_id',1)->where('priceType',2)->count();
         $lessonsParAz = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->where('type_id',4)->where('priceType',2)->count();
         $newsletter = Newsletter::where('email',Auth::user()->email)->count();
+        // echo $lessonsIndEu.','.$lessonsParEu.','.$lessonsIndAz.','.$lessonsParAz;
+        // dd();
         return view('myAccount',[
             'IndEur'=>$lessonsIndEu,
             'IndAzj'=>$lessonsIndAz,
