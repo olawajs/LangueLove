@@ -35,7 +35,7 @@ class AdministratorController extends Controller
         return view('aboutUs');
     }
     public function testSes2(Request $request){
-        dd(Session::get('test'););
+        dd(Session::get('test'));
     }
 
     public function Database(Request $request){
