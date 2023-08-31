@@ -30,11 +30,12 @@ use App\Mail\StudentMailLessonNotification;
 class AdministratorController extends Controller
 {
     public function testSes(Request $request){
-        $request->session()->put('test', 'Test123');
+        // $request->session()->put('test', 'Test123');
+        Session::put('test', 'Test123');
         return view('aboutUs');
     }
     public function testSes2(Request $request){
-        dd($request->session()->get('test'));
+        dd(Session::get('test'););
     }
 
     public function Database(Request $request){
