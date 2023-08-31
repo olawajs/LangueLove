@@ -100,7 +100,7 @@
                                             <a class="dropdown-item" href="{{ route('testSes') }}">
                                                 {{ __('Test Ola') }}
                                             </a> 
-                                            <a class="dropdown-item" href="{{ route('testSes2') }}">
+                                            <a class="dropdown-item" href="{{ route('testSes2') }}"> 
                                                 {{ __('Test Ola2') }}
                                             </a> 
                                             <a class="dropdown-item" href="{{ route('languages') }}">
