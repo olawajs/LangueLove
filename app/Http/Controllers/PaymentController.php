@@ -304,7 +304,8 @@ class PaymentController extends Controller
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
-        $session_id = Session::get('payment_session', 'default');
+        $session_id = Session::get('payment_session');
+        $session_id = $request->session()->get('payment_session');
         $payment = Payment::where('session_id',$session_id)->first();
         $basicAuth = base64_encode($merchant_id.':'.$apiKey );
         $kwota =  ($payment->price)*100;

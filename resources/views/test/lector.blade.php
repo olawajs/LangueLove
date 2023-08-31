@@ -37,14 +37,38 @@
     }
 </style>
 <div class="container px-a">
-@if(session()->has('success'))
-    <div class="Info" style="background-color: var(--bs-primary);">
-      <span class="text-white">
-        {{session()->get('success')}}
-      </span>
-    </div>
-  @endif
+    @if(session()->has('success'))
+        <div class="Info" style="background-color: var(--bs-primary);">
+        <span class="text-white">
+            {{session()->get('success')}}
+        </span>
+        </div>
+    @endif
     <div class="content" id="content">
+        <div class="d-flex flex-row">
+            <div>
+                <img src="/images/lectors/{{$lector->photo}}" style='width:174px; height: 174px; object-fit: cover;'>
+            </div>
+            <div>
+                <div>
+                    <h2>{{$lector->name}}</h2>
+                </div>
+                <div>
+                    @foreach ($levels as $d)
+                         <span class="SPrice"><img src="{{asset('images/flags/'.App\Models\Language::find($d->language_id)->short.'.svg')}}">{{ $d->level}}</span>
+                    @endforeach
+                </div>
+                <div>
+                    @foreach ($topics as $d)
+                            <span class="SPrice">{{$d->level}}</span>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    
         <div class="d-flex LectorDiv" style="gap:20px;">
             <div class="d-flex flex-column" style="flex-grow: 3; gap:20px;">
                 <h2>O lektorze</h2>
@@ -54,7 +78,7 @@
                     <h2>Poziomy nauczania</h2>
                     <div class="SType" style="margin: 10px;">
                         @foreach ($levels as $d)
-                            <span class="SPrice"><i class="flag flag-{{ App\Models\Language::find($d->language_id)->short}}"></i>{{ $d->level}}</span>
+                            <span class="SPrice"><img src="{{asset('images/flags/'.App\Models\Language::find($d->language_id)->short.'.svg')}}">{{ $d->level}}</span>
                         @endforeach
                     </div>
                 </div>
@@ -73,7 +97,7 @@
                 <h4>{{$lector->name}}</h4>
                 <div class="SType" style="margin: 10px;">
                     @foreach (App\Models\LanguageLevel::where('lector_id',$lector->id)->distinct('language_id')->pluck('language_id') as $d)
-                        <span><i class="flag flag-{{ App\Models\Language::find($d)->short}}"></i>Język {{ App\Models\Language::find($d)->name}}</span><br>
+                        <span><img src="{{asset('images/flags/'.App\Models\Language::find($d)->short.'.svg')}}">Język {{ App\Models\Language::find($d)->name}}</span><br>
                     @endforeach
                 </div>
                 <button class="btn btn-primary mb-3" onclick="przejdzDo()">Zobacz terminarz</button>

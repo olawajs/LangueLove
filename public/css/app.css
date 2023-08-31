@@ -144,7 +144,12 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  /* font-size: calc(1.305rem + 0.66vw); */
+  color: #000;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
 }
 @media (min-width: 1200px) {
   h2, .h2 {
@@ -11964,7 +11969,9 @@ footer{
   background: var(--langue-love-light-purple, #E7E5EC);
   border: 1px solid var(--langue-love-purple, #3C0079);
 }
-
+.container{
+  /* max-width: 1200px; */
+}
 
 
 

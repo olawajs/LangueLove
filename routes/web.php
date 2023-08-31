@@ -106,6 +106,8 @@ Route::get('/email', function () {
 
 // test
 Route::GET('lectorTest/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'showLector']);
+Route::GET('testSes', [App\Http\Controllers\Admin\AdministratorController::class, 'testSes'])->name('testSes');
+Route::GET('testSes2', [App\Http\Controllers\Admin\AdministratorController::class, 'testSes2'])->name('testSes2');
 
 
 //czasowe maile

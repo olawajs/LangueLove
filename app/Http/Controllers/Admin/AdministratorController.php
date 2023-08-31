@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 use App\Models\Code;
 use App\Models\Newsletter;
 use App\Models\Payment;
@@ -29,6 +29,14 @@ use App\Mail\StudentMailLessonNotification;
 
 class AdministratorController extends Controller
 {
+    public function testSes(Request $request){
+        $request->session()->put('test', 'Test123');
+        return view('aboutUs');
+    }
+    public function testSes2(Request $request){
+        dd($request->session()->get('test'));
+    }
+
     public function Database(Request $request){
         $codes = Code::all();
         $newsletters = Newsletter::all();
@@ -257,9 +265,24 @@ class AdministratorController extends Controller
                                             }
                                         }
 
+            $levels = LanguageLevel::where('lector_id',$request->id)
+                                        ->where('level', 'like', '%-%')
+                                        ->get();
+            $levels2 = LanguageLevel::select('level')->where('lector_id',$request->id)
+                                        ->where('level', 'not like', '%-%')
+                                        ->distinct()
+                                        ->get();     
+           
+        // $session_id = Session::get('_token');
+        
+        $session_id = $request->session()->get('_token');
+        dd($session_id);
+                dd($request->session());
+                // _token
              return view('test/lector',[
                 'durations' => $duratons,
-                'levels' => $languageTypes,
+                'levels' => $levels,
+                'topics' => $levels2,
                 'lector' => $lector,
                 'languages' => $languages,
                 'lessonAmount' => $wykupioneLekcje,
