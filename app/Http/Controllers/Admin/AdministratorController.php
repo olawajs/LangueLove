@@ -22,6 +22,10 @@ use App\Models\EventUsers;
 use App\Models\Lector;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LectorMailLessonNotification;
+use App\Mail\StudentMailLessonNotification;
 
 class AdministratorController extends Controller
 {
@@ -262,4 +266,64 @@ class AdministratorController extends Controller
                 'calendar' => $calendarTab
             ]);
     }
+    public function HoursMails(Request $request){
+        $start = Carbon::tomorrow();
+
+        $end = Carbon::tomorrow();
+        $end = $end->addHours(24);
+
+        $lessons = DB::table('event_users')
+                    ->join('calendar_events', 'event_users.calendar_id', '=', 'calendar_events.id')
+                    ->join('lessons', 'lessons.id', '=', 'calendar_events.lesson_id')
+                    ->join('lectors', 'lectors.id', '=', 'calendar_events.lector_id')
+                    ->join('users', 'users.id', '=', 'event_users.user_id')
+                    ->join('languages', 'languages.id', '=', 'lessons.language_id')
+                    ->select(
+                        'calendar_events.start',
+                        'lessons.title',
+                        'lessons.type_id',
+                        'languages.name',
+                        'users.name as uczen',
+                        'users.email as uEmail',
+                        'lectors.name as lektor',
+                        'lectors.email as Emaillektor',
+                        'lectors.id as lektorId',
+                        'lectors.skype',
+                    )
+                    ->whereBetween('calendar_events.start', [$start, $end])
+                    ->orderby('calendar_events.start')
+                    ->get();
+
+        // dd($lessons);
+                    
+        $lectors=[];
+        
+        foreach($lessons as $lesson){
+            // Maile do uczniów
+            $godzina = new Carbon($lesson->start);
+            $lektor = $lesson->Emaillektor;
+            $lectors[$lektor][$godzina->format('H:i')]= $lesson->title;
+            $mailData=[
+                'godzina' => $godzina->format('H:i'),
+                'jezyk' => $lesson->name,
+                'lektor' => $lesson->lektor,
+                'skype' => $lesson->skype
+               ]; 
+            //    $lesson->uEmail
+               Mail::to( $lesson->uEmail)->send(new StudentMailLessonNotification($mailData));
+        }
+        
+  
+    foreach ($lectors as $k=>$lector){
+        $lekcje = '';
+        foreach ($lector as $key=>$lesson){
+            $lekcje.= $key.' => '.$lesson.'<br>';
+        } 
+        $mailData=[
+            'lekcje' =>$lekcje
+        ]; 
+        Mail::to($k)->send(new LectorMailLessonNotification($mailData));
+
+    } 
+ }
 }
