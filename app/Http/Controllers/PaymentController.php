@@ -114,7 +114,9 @@ class PaymentController extends Controller
         $payment->id_language = $language_id;
         $payment->id_user = Auth::user()->id;
             $session_id = Session::getId().date('YmdHis');
-            Session::put('payment_session', $session_id);
+            // Session::put('payment_session', $session_id);
+            $request->session()->put('payment_session', $session_id);
+            
         $payment->session_id = $session_id;
         $payment->quantity = 1;
         $payment->status = 1;
@@ -126,6 +128,7 @@ class PaymentController extends Controller
         $payment->nip = isset($request->nip) ? $request->nip : '';
       $payment->save();
         Session::put('payment_id',$payment->id);
+        $request->session()->put('payment_id', $payment->id);
 
       if($PromoCode != ''){
         Code::where('code',$PromoCode)->update(['use_date' => Carbon::now(),'payment_id' => $payment->id ]);
@@ -272,7 +275,8 @@ class PaymentController extends Controller
         $payment->id_language = $request->langDesc;
         $payment->id_user = Auth::user()->id;
         $session_id = Session::getId().date('YmdHis');
-            Session::put('payment_session', $session_id);
+            // Session::put('payment_session', $session_id);
+            $request->session()->put('payment_session', $session_id);
         $payment->session_id = $session_id;
         $payment->quantity = 1;
         $payment->status = 1;
@@ -282,7 +286,8 @@ class PaymentController extends Controller
         $payment->city = $request->city;
         $payment->nip = isset($request->nip) ? $request->nip : '';
         $payment->save();
-        Session::put('payment_id',$payment->id);
+        // Session::put('payment_id',$payment->id);
+        $request->session()->put('payment_id', $payment->id);
         
 
         $suma_zamowienia = $request->price*100 ; //wartość musi być podana w groszach
@@ -304,9 +309,12 @@ class PaymentController extends Controller
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
-        $session_id = Session::get('payment_session');
+        // $session_id = Session::get('payment_session');
         $session_id = $request->session()->get('payment_session');
-        $payment = Payment::where('session_id',$session_id)->first();
+        $payment_id = $request->session()->get('payment_id');
+
+        $payment = Payment::where('session_id',$session_id)->orWhere('id',$payment_id)->first();
+
         $basicAuth = base64_encode($merchant_id.':'.$apiKey );
         $kwota =  ($payment->price)*100;
         $sign = '{"sessionId":"'.$session_id.'","amount":'.$kwota.',"currency":"PLN","crc":"'.$crc_code.'"}';
