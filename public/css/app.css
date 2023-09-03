@@ -77,8 +77,9 @@
   --langue-love-light-purple: #E7E5EC;
   --ll-dark-grey: #969696;
   --langue-love-purple: #3C0079;
+  --langue-love-pink: #C75470;
+  --langue-love-black: #2B2B33
 }
-
 *,
 *::before,
 *::after {
@@ -11969,12 +11970,262 @@ footer{
   background: var(--langue-love-light-purple, #E7E5EC);
   border: 1px solid var(--langue-love-purple, #3C0079);
 }
+.LectorInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1 0 0;
+}
+.bubbleInfo{
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.VidInfoContainer{
+  width: 379px;
+  padding: 40px;
+  align-items: flex-start;
+  border-radius: 16px;
+  background: var(--langue-love-white, #FFF);
+  box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1 0 0;
+  height: fit-content;
+}
+.YTVideo{
+  height: 183px;
+  align-self: stretch;
+  border-radius: 16px;
+}
+.LL-button{
+  display: flex;
+  height: 48px;
+  padding: 10px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 16px;
+}
+
+.LL-button-primary{
+  background: var(--langue-love-purple, #3C0079);
+  color: white;
+}
+.LL-button-primary:hover{
+  background: var(--langue-love-pink);
+  color: white;
+}
+.LL-button-secondary{
+  background: var(--langue-love-light-purple, #E7E5EC);
+  color: var(--langue-love-black, #2B2B33);
+}
+.LL-button-secondary:hover{
+  background: #D9D7DD;
+  color: var(--langue-love-black, #2B2B33);
+}
 .container{
   /* max-width: 1200px; */
 }
+.LectroH2{
+  color: var(--langue-love-black, #2B2B33);
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+.LectorText{
+  color: var(--langue-love-black, #2B2B33);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+.TopicBubble{
+  display: flex;
+  padding: 4px 12px;
+  align-items: flex-start;
+  gap: 6px;
+  border-radius: 8px;
+  background: var(--langue-love-light-purple, #E7E5EC);
+  font-size: 12px;
+  color: var(--langue-love-black, #2B2B33);
+}
+.MobileLectorButtons{
+  display: none;
+}
 
+@media only screen and (max-width: 800px) {
+  .mobile{
+    display: unset;
+  }
+  .navPurpleButton{
+    width: 55%;
+  }
+  .animation{
+    background: url("/images/Flags2.png");
+    animation: flow2 60s linear infinite;
+  background-repeat: repeat;
+  background-size: auto;
+  background-repeat: repeat-x;
+  background-size: 500px;
+  }
+  .InputSearch{
+    display: flex;
+    flex-flow: column;
+    gap: 12px;
+  }
+  .iconsButton{
+    background-color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid black;
+    height: 48px;
+    margin: 0;
+  }
+  .Vid{
+    width: 100%;
+    height: 90%;
+  }
+  .AnimationContent{
+    position: relative;
+    top: 80px;
+  }
+  #language, #course{
+    padding: 0;
+   
+  }
+  .pinkHome-bubble{
+    top: -19px;
+    right: 72px;
+  }
+  .bubble1{
+    cx: 50px;
+    cy: 50px;
+    r: 50px;
+  }
+  .classicDIV{
+    overflow: hidden;
+  }
 
+  .video-mask{
+    width: fit-content !important;
+    height: fit-content !important;
+    max-height: 220px;
+  }
+  .vidText{
+    text-align: unset !important;
+    margin:0;
+  }
+  .w100{
+    width: 100%;
+  }
+  .owl-item{
+    width: 340.8px;
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .owl-stage-outer{
+    padding: 0;
+  }
+  .dynkspUp{
+    padding-top: 0;
+  }
+  .footCE{
+    font-size: 12px;
+  }
+  .footer{
+    height: unset;
+  }
+  .footLinks{
+    height: fit-content;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .consultationMain{
+    padding: 20px 16px;
+  }
+  .consultationeHead{
+    padding:0;
+  }
+  .consLogo{
+    height: 40px;
+  }
+  .TitleConsultation{
+    margin: 0 !important;
+  }
+  .classicCont{
+    min-height: unset;
+    gap: 6px;
+  }
+  .TwoButtons{
+    flex-wrap: wrap;
+  }
+  .DescFilter{
+    font-size: 14px;
+  }
+  .searchedDIV{
+    grid-template-rows: unset;
+    grid-template-areas:
+    "foto" 
+    "text" 
+    "buttons";
+    grid-template-columns: 1fr;
+  }
+  .searchFoto{
+    display: flex;
+    justify-content: center;  
+  }
+  .STitle{
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .SPrice{
+    font-size: 10px;
+  }
+  .LangSpan{
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    margin-top: -15px;
+  }
+  .LectorDiv{
+    flex-flow: column-reverse;
+  }
+  .px-a{
+    padding-right: 16px !important;
+    padding-left:  16px !important;
+    padding-bottom:  unset !important;
+  }
+  #calendar{
+    margin-bottom: 60px;
+  }
+  .LecNam{
+    display: none;
+  }
+  /* New style */
+  .VidInfoContainer{
+    display: none;
+  }
+  .MobileLectorButtons{
+    display: flex;
+  }
+  .LectorHeader{
+    flex-flow: column !important;
+    justify-content: center;
+    align-items: center;
+  }
 
+}
 
 
 

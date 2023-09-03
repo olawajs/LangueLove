@@ -44,119 +44,109 @@
         </span>
         </div>
     @endif
-    <div class="content" id="content">
-        <div class="d-flex flex-row">
-            <div>
-                <img src="/images/lectors/{{$lector->photo}}" style='width:174px; height: 174px; object-fit: cover;'>
-            </div>
-            <div>
-                <div>
-                    <h2>{{$lector->name}}</h2>
-                </div>
-                <div>
-                    @foreach ($levels as $d)
-                         <span class="SPrice"><img src="{{asset('images/flags/'.App\Models\Language::find($d->language_id)->short.'.svg')}}">{{ $d->level}}</span>
-                    @endforeach
-                </div>
-                <div>
-                    @foreach ($topics as $d)
-                            <span class="SPrice">{{$d->level}}</span>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    
-    
-    
-    
-        <div class="d-flex LectorDiv" style="gap:20px;">
+    <div class="content" id="content">    
+        <div class="d-flex LectorDiv" style="gap:48px;">
             <div class="d-flex flex-column" style="flex-grow: 3; gap:20px;">
-                <h2>O lektorze</h2>
-                <h3 class="LecNam"><b>{{$lector->name}}</b></h3>
-                <div>{!! $lector->description !!}</div>
-                <div>
-                    <h2>Poziomy nauczania</h2>
-                    <div class="SType" style="margin: 10px;">
-                        @foreach ($levels as $d)
-                            <span class="SPrice"><img src="{{asset('images/flags/'.App\Models\Language::find($d->language_id)->short.'.svg')}}">{{ $d->level}}</span>
-                        @endforeach
+                <div class="d-flex flex-row LectorHeader">
+                    <div style="margin-right: 32px">
+                        <img src="/images/lectors/{{$lector->photo}}" style='width:174px; height: 174px; object-fit: cover;'>
+                    </div>
+                    <div class="LectorInfo">
+                        <div>
+                            <h2>{{$lector->name}}</h2>
+                        </div>
+                        <div class="bubbleInfo"> <b>Uczy:</b>
+                            @foreach ($levels as $d)
+                                <span class=""><img src="{{asset('images/flags/'.App\Models\Language::find($d->language_id)->short.'.svg')}}"> język {{App\Models\Language::find($d->language_id)->name}} <span style="color: #969696; font-weight: bold;">{{ $d->level}}</span></span>
+                            @endforeach
+                        </div>
+                        <div class="bubbleInfo"> <b>Tematyka zajęć:</b>
+                            @foreach ($topics as $d)
+                                    <span class="TopicBubble">{{$d->level}}</span>
+                            @endforeach
+                        </div>
+                        <buton class="LL-button LL-button-primary w-100 MobileLectorButtons"  onclick="przejdzDo()">Zobacz kalendarz</buton>
+                        <buton class="LL-button LL-button-secondary MobileLectorButtons">Zobacz cennik</buton>
                     </div>
                 </div>
-       
-                <div>{!! $lector->levele !!}</div>
+              
+                @if($lector->description != '')
+                <div>
+                    <h2 class="LectroH2">O lektorze</h2>
+                    <div class="LectorText">{!! $lector->description !!}</div>
+                </div>
+                @endif
+                <!-- @if($lector->levele != '')
+                <div>
+                    <h2 class="LectroH2">Styl nauczania</h2>
+                    <div>{!! $lector->levele !!}</div>
+                </div>
+                @endif -->
                 @if($lector->style != '')
                 <div>
-                    <h2>Styl nauczania:</h2>
-                    <div>{!! $lector->style !!}</div>
+                    <h2 class="LectroH2">Styl nauczania</h2>
+                    <div class="LectorText">{!! $lector->style !!}</div>
                 </div>
-                
                 @endif
-            </div>
-            <div class="d-flex justify-content-center flex-column align-items-center fotoContainer" style="flex-grow: 1;max-height: 450px;">
-                <div class="searchFoto"><img src="/images/lectors/{{$lector->photo}}" style='width:280px; height: 280px; object-fit: cover;'></div>
-                <h4>{{$lector->name}}</h4>
-                <div class="SType" style="margin: 10px;">
-                    @foreach (App\Models\LanguageLevel::where('lector_id',$lector->id)->distinct('language_id')->pluck('language_id') as $d)
-                        <span><img src="{{asset('images/flags/'.App\Models\Language::find($d)->short.'.svg')}}">Język {{ App\Models\Language::find($d)->name}}</span><br>
-                    @endforeach
-                </div>
-                <button class="btn btn-primary mb-3" onclick="przejdzDo()">Zobacz terminarz</button>
-            </div>
-        </div>
-        <div>
-            <h2>Kalendarz</h2>
-            <div class="calendarInfo">
-                <img src="{{asset('images/svg/warning.svg')}}">
-                <div>Zajęcia trwają 55 lub 85 minut. Wybierz godzinę rozpoczęcia zajęć, a w następnym kroku czas trwania.</div>
-            </div>
-            
-            
-                @foreach($calendar as $q => $c)
-                <div id="Week{{$loop->index}}" @if($loop->index > 0)style="display: none" @endif>
-                    <div class="calendarButtons" >
-                        <div class="weekButtons">
-                            <div class="d-flex" style="gap: 6px;">
-                                <button class="btn activeButton @if($loop->index == 0)LLdisabled @endif  HBorder"  onClick="goTo('{{$loop->index -1}}','{{$loop->index}}')">@if($loop->index == 0)<img src="{{asset('images/svg/DArrowL.svg')}}"> @else <img src="{{asset('images/svg/AArrowL.svg')}}"> @endif </button>
-                               <button class="btn activeButton @if(($loop->index+1)==count($calendar) )LLdisabled @endif HBorder" onClick="goTo('{{$loop->index +1}}','{{$loop->index}}')">@if(($loop->index+1)==count($calendar))<img src="{{asset('images/svg/DArrowR.svg')}}"> @else <img src="{{asset('images/svg/AArrowR.svg')}}"> @endif</button>
-                            </div>
-                            <div>
-                                {{$q}}
-                            </div>
-                        </div>
-                        <button class="btn TodayButton @if($loop->index == 0)LLdisabled @endif  HBorder" onClick="goTo('0','{{$loop->index}}')">dzisiaj</button>
+                
+                <div>
+                    <h2 class="LectroH2">Kalendarz</h2>
+                    <div class="calendarInfo" id="calendarInfo">
+                        <img src="{{asset('images/svg/warning.svg')}}">
+                        <div>Zajęcia trwają 55 lub 85 minut. Wybierz godzinę rozpoczęcia zajęć, a w następnym kroku czas trwania.</div>
                     </div>
-                    <div class="weekContainer" >
-                        @foreach($c as $k => $d)
-                        <div class="dayContainer">
-                            <div class="headContainer">
-                                <span>{{$d['name']}}</span>
-                                <span>{{$d['shortDate']}}</span>
+                        @foreach($calendar as $q => $c)
+                        <div id="Week{{$loop->index}}" @if($loop->index > 0)style="display: none" @endif>
+                            <div class="calendarButtons" >
+                                <div class="weekButtons">
+                                    <div class="d-flex" style="gap: 6px;">
+                                        <button class="btn activeButton @if($loop->index == 0)LLdisabled @endif  HBorder"  onClick="goTo('{{$loop->index -1}}','{{$loop->index}}')">@if($loop->index == 0)<img src="{{asset('images/svg/DArrowL.svg')}}"> @else <img src="{{asset('images/svg/AArrowL.svg')}}"> @endif </button>
+                                    <button class="btn activeButton @if(($loop->index+1)==count($calendar) )LLdisabled @endif HBorder" onClick="goTo('{{$loop->index +1}}','{{$loop->index}}')">@if(($loop->index+1)==count($calendar))<img src="{{asset('images/svg/DArrowR.svg')}}"> @else <img src="{{asset('images/svg/AArrowR.svg')}}"> @endif</button>
+                                    </div>
+                                    <div>
+                                        {{$q}}
+                                    </div>
+                                </div>
+                                <button class="btn TodayButton @if($loop->index == 0)LLdisabled @endif  HBorder" onClick="goTo('0','{{$loop->index}}')">dzisiaj</button>
                             </div>
-                            <div class="hoursContainer">
-                                @foreach($d as $k2 => $d2)
-                                    @if($k2 != 'name' && $k2 != 'shortDate')
-                                        @if(isset($d2['free']) && $d2['free']==1)
-                                            <div class="freeHour HBorder">{{$k2}}</div>
-                                        @endif
-                                        @if(isset($d2['free']) && $d2['free']==0)
-                                            <div class="takenHour">{{$k2}}</div>
-                                        @endif
-                                        @if(!isset($d2['free']))
-                                            <div class="emptyHour"></div>
-                                        @endif
-                                        
-                                    @endif
+                            <div class="weekContainer" >
+                                @foreach($c as $k => $d)
+                                <div class="dayContainer">
+                                    <div class="headContainer">
+                                        <span>{{$d['name']}}</span>
+                                        <span>{{$d['shortDate']}}</span>
+                                    </div>
+                                    <div class="hoursContainer">
+                                        @foreach($d as $k2 => $d2)
+                                            @if($k2 != 'name' && $k2 != 'shortDate')
+                                                @if(isset($d2['free']) && $d2['free']==1)
+                                                    <div class="freeHour HBorder">{{$k2}}</div>
+                                                @endif
+                                                @if(isset($d2['free']) && $d2['free']==0)
+                                                    <div class="takenHour">{{$k2}}</div>
+                                                @endif
+                                                @if(!isset($d2['free']))
+                                                    <div class="emptyHour"></div>
+                                                @endif
+                                                
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
                                 @endforeach
-                            </div>
-                        </div>
+                            </div> 
+                        </div> 
                         @endforeach
-                    </div> 
-                </div> 
-                @endforeach
-            
-            
+                    </div>
+                </div>
+            <div class="VidInfoContainer">
+                <iframe class="YTVideo" src="https://www.youtube.com/embed/C0DPdy98e4c?si=Nz6Etje8GK2mJO4p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <buton class="LL-button LL-button-primary w-100"  onclick="przejdzDo()">Zobacz kalendarz</buton>
+                <buton class="LL-button LL-button-secondary">Zobacz cennik</buton>
+                <!-- <buton class="LL-button LL-button-secondary">Wiadomość</buton> -->
+            </div>
         </div>
-
+      
     </div>
     
 </div>
@@ -395,7 +385,7 @@
             document.getElementById('BuyModal').submit();
         }
         function przejdzDo(){
-            const element = document.getElementById("calendar");
+            const element = document.getElementById("calendarInfo");
             element.scrollIntoView();
         }
 </script>
