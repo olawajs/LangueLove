@@ -106,7 +106,6 @@ class PaymentController extends Controller
         $merchant_id = 207228;
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
-
     
         $payment = new Payment;
         $payment->price = $kwota;
@@ -303,18 +302,18 @@ class PaymentController extends Controller
     }
     
     public function getReturn(){
-        
+       
         $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
         $crc_code = '89cb17cc0941683b';
         $apiKey = 'bc839088e33f425cd818e56eac59d080';
 
         // $session_id = Session::get('payment_session');
-        $session_id = $request->session()->get('payment_session');
-        $payment_id = $request->session()->get('payment_id');
-
-        $payment = Payment::where('session_id',$session_id)->orWhere('id',$payment_id)->first();
-
+        // $session_id = $request->session()->get('payment_session');
+        // $payment_id = $request->session()->get('payment_id');
+        $session_id=$_GET['Sid'];
+       
+        $payment = Payment::where('session_id',$session_id)->first();
         $basicAuth = base64_encode($merchant_id.':'.$apiKey );
         $kwota =  ($payment->price)*100;
         $sign = '{"sessionId":"'.$session_id.'","amount":'.$kwota.',"currency":"PLN","crc":"'.$crc_code.'"}';
@@ -573,6 +572,8 @@ class PaymentController extends Controller
         curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
         $result = curl_exec($curl);
         curl_close($curl);
+
+
         //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
 
         $faktura = '';
@@ -625,8 +626,8 @@ class PaymentController extends Controller
                 "country": "PL",
                 "language": "pl",
                 "method": 0,
-                "urlReturn": "https://languelove.pl/payment/validate",
-                "urlStatus": "https://languelove.pl/payment/validate",
+                "urlReturn": "https://languelove.pl/payment/validate?Sid='.$session_id.'",
+                "urlStatus": "https://languelove.pl/payment/validate?Sid='.$session_id.'",
                 "timeLimit": 0,
                 "channel": 7,
                 "waitForResult": true,
@@ -642,62 +643,5 @@ class PaymentController extends Controller
   
         $response = json_decode(curl_exec($curl));
         return $response->data->token;
-    }
-    public static function getOrderId(){
-        $curl = curl_init();
-        $session_id = session()->get('kuchnia_payment_session');
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://sandbox.przelewy24.pl/api/v1/transaction/by/sessionId/'.$session_id,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'GET',
-          CURLOPT_HTTPHEADER => array(
-            'Authorization: Basic MTcyOTQ3OjQzN2RiYjVkYjJjYjdhZjhjNmQ5YjUxNzY1OTYwMjY0'),
-        ));
-        
-        $response = curl_exec($curl);
-        
-        curl_close($curl);
-      
-        return $response;
-    }
-    
-    public static function VerifyPament($kwota,$orderId){
-      $curl = curl_init();
-      $session_id = session()->get('kuchnia_payment_session');
-      $crc_code = '1f877e568ba89a84';
-      $sign = '{"sessionId":"'.$session_id.'","orderId":'.$orderId.',"amount":'.$kwota.',"currency":"PLN","crc":"'.$crc_code.'"}';
-      $sign = hash('sha384', $sign);
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://secure.przelewy24.pl/api/v1/transaction/verify',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'PUT',
-        CURLOPT_POSTFIELDS =>'{
-          "merchantId": 172947,
-          "posId": 172947,
-          "sessionId": "'.$session_id.'",
-          "amount": '.$kwota.',
-          "currency": "PLN",
-          "orderId": '.$orderId.',
-          "sign": "'.$sign.'"
-      }',
-        CURLOPT_HTTPHEADER => array(
-          'Authorization: Basic MTcyOTQ3OjQzN2RiYjVkYjJjYjdhZjhjNmQ5YjUxNzY1OTYwMjY0',
-          'Content-Type: application/json' ),
-      ));
-      
-      $response = curl_exec($curl);
-      
-      curl_close($curl);
-      return $response;
     }
 }
