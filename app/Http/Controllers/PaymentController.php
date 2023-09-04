@@ -19,6 +19,7 @@ use App\Models\Code;
 use App\Models\EventUsers;
 use App\Models\LessonsBank;
 use App\Models\Price;
+use App\Models\PaymentDetails;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
@@ -136,6 +137,36 @@ class PaymentController extends Controller
         $suma_zamowienia = $kwota*100 ; //wartość musi być podana w groszach
         $tytul = $desc ;
         $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
+
+        $details = new PaymentDetails;
+        $details->typPlatnosci = 'LEKCJA';
+        $details->start = $request->data;
+        $details->hour = $request->godzina;
+        $details->duration_id = $request->duration_id;
+        $details->language_id = $request->jezyk;
+        $details->type_id = $request->rodzaj;
+        $details->lectorId = $request->lectorId;
+        $details->ileFaktura = 1;
+        $details->ile = isset($request->ile) ? $request->ile : 1;
+        $details->cert = isset($request->cert) ? 1 : 0;
+        $details->zajecia = isset($request->zajecia) ? 1 : 0;
+        $details->cykliczne = isset($request->cykliczne) ? 1 : 0;
+        $details->priceG = isset($request->price) ? $request->price : 0;
+        $details->lessonI = $request->lessonI;
+        $details->title = $desc;
+        $details->calendarId = $request->calendarId;
+        $details->lessonId = $request->lessonId;
+        $details->name = $request->name;
+        $details->nip = isset($request->nip) ? $request->nip : '';
+        $details->city = $request->city;
+        $details->postcode = $request->postcode;
+        $details->street = $request->street;
+        $details->P24token = $token;
+        $details->session_id = $session_id;
+        $details->payment_id = $payment->id;
+        $details->user_id = Auth::user()->id;
+    $details->save();
+
         return new RedirectResponse($link.'trnRequest/'.$token);
 
     }
@@ -262,6 +293,7 @@ class PaymentController extends Controller
             'typeA' => $request->typeA,
             'certyficate' => $request->certyficate,
         ];
+
         $request->session()->put('data', $RequestTab);
         $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;
@@ -293,6 +325,25 @@ class PaymentController extends Controller
         $tytul = $request->desc;
         
         $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
+        $details = new PaymentDetails;
+            $details->typPlatnosci = 'PAKIET';
+            $details->priceG = isset($request->price) ? $request->price : 0;
+            $details->title = $request->desc;
+            $details->name = $request->name;
+            $details->nip = isset($request->nip) ? $request->nip : '';
+            $details->city = $request->city;
+            $details->postcode = $request->postcode;
+            $details->street = $request->street;
+            $details->langDesc = $request->langDesc;
+            $details->packet = $request->packet;
+            $details->typeA = $request->typeA;
+            $details->street = $request->street;
+            $details->certyficate = $request->certyficate;
+            $details->P24token = $token;
+            $details->session_id = $session_id;
+            $details->payment_id = $payment->id;
+            $details->user_id = Auth::user()->id;
+        $details->save();
         return new RedirectResponse($link.'trnRequest/'.$token);
 
     }
