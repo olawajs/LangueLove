@@ -95,6 +95,7 @@ Route::post('/payment/status', [App\Http\Controllers\PaymentController::class, '
 Route::post('/payment/make', [App\Http\Controllers\PaymentController::class, 'transaction'])->name('transaction'); 
 
 Route::post('/payment/buy', [App\Http\Controllers\PaymentController::class, 'buyLesson'])->name('buyLesson'); 
+Route::GET('/payment/fix/{id}', [App\Http\Controllers\PaymentController::class, 'fixPayment'])->name('fixPayment'); 
 
 Route::get('searchLessons/{type}', [App\Http\Controllers\MainController::class, 'search2'])->name('searchLessons');
 

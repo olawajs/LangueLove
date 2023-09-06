@@ -29,6 +29,7 @@
             <h2 class="text-center">Płatności</h2>
             <table id="payments">
                 <thead>
+                    <th>Ponów</th>
                     <th>Opis</th>
                     <th>Język</th>
                     <th>Użytkownik</th>
@@ -41,6 +42,7 @@
                 <tbody>
                     @foreach($payments as $p)
                     <tr>
+                        <td>@if($p->status==1)<a href="{{ route('fixPayment', ['id' => $p->id]) }}">Zaksięguj</a> @endif</td>
                         <td>{{$p->description}}</td>
                         <td>{{$p->id_language}}</td>
                         <td>{{ App\Models\User::find($p->id_user)->name}}</td>
