@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ThankYou;
+use App\Mail\ZapisNaZajeciaGrupowe;
 use App\Mail\NewLessonInfo;
 use App\Mail\AcceptTermin;
 use Auth;
@@ -721,6 +722,8 @@ class PaymentController extends Controller
     }
     public static function CreateFixedLessons($id){
         $data = PaymentDetails::where('session_id',$id)->first();
+        $userId =  $data['user_id'];
+        $user = User::where('id',$userId)->first();
         if($data['typPlatnosci'] == 'LEKCJA'){
             $start = $data['start'];
             $hour = $data['hour'];
@@ -773,7 +776,7 @@ class PaymentController extends Controller
                 $lesson->start = $start2;
                 $lesson->lector_id = $lectorId;
                 $lesson->language_id = $language_id;
-                $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
+                $lesson->title = 'Zajęcia z '.$user->name.' '.$user->surname;
                 $lesson->status = 0;
                 $lesson->certificat = $cert;
                 $lesson->save();
@@ -783,7 +786,7 @@ class PaymentController extends Controller
                 try {
                     $mailData=[
                      'lector' => $lecMail->name.' ['.$lecMail->email.']',
-                     'user' => Auth::user()->name.' '.Auth::user()->surname.' ['.Auth::user()->email.']',
+                     'user' => $user->name.' '.$user->surname.' ['$user->email.']',
                      'date' => $lesson->start,
                      'language' => 'Język '.$lName
                     ]; 
@@ -796,6 +799,18 @@ class PaymentController extends Controller
             }else{
                 $lessonId =  $data['lessonId'];
                 $desc =  $data['title'];
+                $info = CalendarEvent::where('lesson_id',$lessonId)->orderBy('start', 'desc')->first();
+                $lesson = Lesson::where('id', $lessonId)->first();
+                $s = new Carbon($lesson->start);
+                $d = new Carbon($lesson->start);
+                $day = $d->dayOfWeek;
+                $mailData=[
+                    'nazwa' => $desc,
+                    'start' => $s->format('Y-m-d'),
+                    'dzien' => Carbon::parse( $info->start)->locale('pl')->dayName,
+                    'godzina' =>  Carbon::parse($info->start)->format('H:i'),
+                   ]; 
+                   Mail::to($user->email)->send(new ZapisNaZajeciaGrupowe($mailData));
             }
 
             if($zajecia != 1){
@@ -811,7 +826,7 @@ class PaymentController extends Controller
     
                     $calendar = new EventUsers;
                     $calendar->calendar_id = $event->id;
-                    $calendar->user_id = Auth::user()->id;
+                    $calendar->user_id = $user->id;
                     $calendar->comment = '';
                     $calendar->status = 1;
                     $calendar->lector_accept = 0;
@@ -827,7 +842,7 @@ class PaymentController extends Controller
     
                     $calendar = new EventUsers;
                     $calendar->calendar_id = $event->id;
-                    $calendar->user_id = Auth::user()->id;
+                    $calendar->user_id = $user->id;
                     $calendar->comment = '';
                     $calendar->status = 3;
                     $calendar->lector_accept = 0;
@@ -847,7 +862,7 @@ class PaymentController extends Controller
             $ileFaktura = 1;
             for($i=1; $i<=$pakiet; $i++){
                   $bank = new LessonsBank;
-                    $bank->user_id = Auth::user()->id;
+                    $bank->user_id = $user->id;
                     $bank->payment_id = session()->get('payment_id') ; 
                     $bank->overdue_date = Carbon::now()->addDays(30);
                     $bank->type_id = $data['typeA'];
