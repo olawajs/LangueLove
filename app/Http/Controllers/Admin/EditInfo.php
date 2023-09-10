@@ -12,6 +12,7 @@ use App\Models\LanguageLevel;
 use App\Models\Price;
 use App\Models\DiscountPacket;
 use App\Models\CalendarEvent;
+use App\Models\PaymentDetails;
 use App\Models\CalendarSetup;
 use App\Models\LessonsBank;
 use App\Models\EventUsers;
@@ -22,181 +23,215 @@ class EditInfo extends Controller
 {
     public function Test()
     {
-        $lessonsParEu = LessonsBank::where('user_id',81)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->where('type_id',4)->where('priceType',1)->count();
-dd($lessonsParEu);
-        $months = [
-            '',
-            'stycznia',
-            'lutego',
-            'marca',
-            'kwietnia',
-            'maja',
-            'czerwca',
-            'lipca',
-            'sierpnia',
-            'września',
-            'października',
-            'listopada',
-            'grudnia'
-        ];
-        $days=[
-            '',
-            'Pon.',
-            'Wt.',
-            'Śr.',
-            'Czw.',
-            'Pt.',
-            'Sb.',
-            'Nd.'
-        ];
-$lector = 8;
-        $calendar_Free = CalendarSetup::where('lector_id',$lector)
-                                        ->where('type',1)
-                                        ->where('start','>=',Carbon::now())
-                                        ->get();
-        $calendar_Events = CalendarEvent::where('lector_id',$lector)
-                                        ->where('start','>=',Carbon::now())
-                                        ->get();
+        // $data = PaymentDetails::where('session_id',$id)->first();
+        $id = 'nzokEZkn0FeoEdo1Ku9oONoZIo5MbPxEDgwDfU8J20230910140125';
+        $data = PaymentDetails::where('session_id',$id)->first();
+        if($data['typPlatnosci'] == 'LEKCJA'){
+            $start = $data['start'];
+            $hour = $data['hour'];
+            $duration_id = $data['duration_id'];
+            $language_id = $data['language_id'];
+            $type_id =$data['type_id'] ;
+            $lectorId = $data['lectorId'];
+            $ileFaktura = $data['ileFaktura'];
+            $cykliczne = $data['cykliczne'];
+            $cert = $data['cert'];
+            $ile = $data['ile'];
+            $zajecia = $data['zajecia'];
+            $priceG =$data['priceG'];
 
-        $maxDate = CalendarSetup::where('lector_id',$lector)->max('end');
-        $maxDate2 = CalendarEvent::where('lector_id',$lector)->max('end');
-        if($maxDate2 >$maxDate ){
-            $maxDate = $maxDate2;
-        }
-        $calendar_Taken= CalendarSetup::where('lector_id',$lector)
-                                        ->where('type',0)
-                                        ->where('start','>=',Carbon::now())
-                                        ->get();
-                                        $dateStart = Carbon::tomorrow();
-                                        $dataTestowa = new Carbon($maxDate);
-                                        $maxDate = new Carbon($maxDate);
-                                        $maxDate = $maxDate->endOfWeek()->format('Y-m-d');
-                                        $dateUsed = $dateStart->startOfWeek()->format('Y-m-d');
-                                        $calendarTab = [];
-                                        $helpDate = new Carbon('01-01-2023 07:00');
-                                        while($dateUsed <= $maxDate){
-                                            $hpDate = new Carbon($dateUsed);
-                                            $weekStart = $hpDate->startOfWeek()->format('d');
-                                            $weekEnd= $hpDate->endOfWeek()->format('d').' '.$months[intval($hpDate->format('m'))].' '.$hpDate->endOfWeek()->format('Y');
-                                
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$dateUsed]=[];
-                                            $nweDate = new Carbon($dateUsed);
-                                            $day = $nweDate->dayOfWeek;
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$dateUsed]['name']=$days[$day];
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$dateUsed]['shortDate']=$nweDate->format('d.m');;
-                                            $hourMax = '20:30';
-                                            while($helpDate->roundMinute(30)->format('H:i') != $hourMax){
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$dateUsed][$helpDate->roundMinute(30)->format('H:i')] = [];
-                                                $helpDate = $helpDate->addMinutes(30);
-                                            }
-                                          
-                                            $helpDate = new Carbon('01-01-2023 07:00');
-                                            $dateUsed = new Carbon($dateUsed);
-                                            $dateUsed = $dateUsed->addDay();
-                                            $dateUsed = $dateUsed->format('Y-m-d');
-                                        }
-                                        foreach($calendar_Free as $cF){
-                                           
-                                            $start = new Carbon($cF->start);
-                                            $start2 =  new Carbon($cF->start);
-                                            $startDate = $start->format('Y-m-d');
-                                            $startHour = $start2->format('H:i');
-                                          
-                                            $weekStart = $start->startOfWeek()->format('d');
-                                            $weekEnd= $start->endOfWeek()->format('d').' '.$months[intval($start->format('m'))].' '.$start->endOfWeek()->format('Y');
-                                
-                                            $end = new Carbon($cF->end);
-                                            $end = $end->subMinutes(60);
-                                            $endHour = $end->format('H:i');
-                                            while($startHour <= $endHour){
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['free'] = 1;
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['60'] = 1;
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['90'] = 1;
-                                                // echo '['.$weekStart.'-'.$weekEnd.']['.$startDate.']['.$startHour.']<br>';
-                                                $start = $start2->addMinutes(30);
-                                                $startHour = $start->format('H:i');
-                                               
-                                            }
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['free'] = 1;
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['60'] = 1;
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['90'] = 0;
-                                        }
-                                
-                                        foreach($calendar_Taken as $cF){
-                                            $start = new Carbon($cF->start);
-                                            $startDate = $start->format('Y-m-d');
-                                            $startHour = $start->roundMinute(30)->format('H:i');
-                                
-                                            $weekStart = $start->startOfWeek()->format('d');
-                                            // $weekEnd= $start->endOfWeek()->format('d F Y');
-                                            $weekEnd= $start->endOfWeek()->format('d').' '.$months[intval($start->format('m'))].' '.$start->endOfWeek()->format('Y');
-                                
-                                
-                                            $end = new Carbon($cF->end);
-                                            $end = $end->subMinutes(30);
-                                            $endHour = $end->roundMinute(30)->format('H:i');
-                                
-                                            $h = $start;
-                                            $del1 = $h->subMinutes(30);
-                                            $del1 = $del1->roundMinute(30)->format('H:i');
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['free'] = 0;
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['60'] = 0;
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['90'] = 0;
-                                
-                                
-                                            $del2 = $h->subMinutes(30);
-                                            $del2 = $del2->roundMinute(30)->format('H:i');
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del2]['90'] = 0;
-                                
-                                            while($startHour <= $endHour){
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['free'] = 0;
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['60'] = 0;
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['90'] = 0;
-                                                $start = $start->addMinutes(30);
-                                                $startHour = $start->roundMinute(30)->format('H:i');
-                                            }
-                                        }
-                                        foreach($calendar_Events as $cF){
-                                            
-                                            $start = new Carbon($cF->start);
-                                            $startDate = $start->format('Y-m-d');
-                                            $startHour = $start->roundMinute(30)->format('H:i');
-                                
-                                            $weekStart = $start->startOfWeek()->format('d');
-                                            // $weekEnd= $start->endOfWeek()->format('d F Y');
-                                            $weekEnd= $start->endOfWeek()->format('d').' '.$months[intval($start->format('m'))].' '.$start->endOfWeek()->format('Y');
-                                
-                                
-                                
-                                            $end = new Carbon($cF->end);
-                                            $end = $end->subMinutes(30);
-                                            $endHour = $end->roundMinute(30)->format('H:i');
-                                
-                                            $h = $start;
-                                            $del1 = $h->subMinutes(30);
-                                            $del1 = $del1->roundMinute(30)->format('H:i');
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['free'] = 0;
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['60'] = 0;
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['90'] = 0;
-                                
-                                
-                                            $del2 = $h->subMinutes(30);
-                                            $del2 = $del2->roundMinute(30)->format('H:i');
-                                            $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del2]['90'] = 0;
-                                            // $calendarTab[$startDate][$del2]['90'] = 0;
-                                            // dd($startDate);
-                                
-                                            while($startHour <= $endHour){
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['free'] = 0;
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['60'] = 0;
-                                                $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['90'] = 0;
-                                                $start = $start->addMinutes(30);
-                                                $startHour = $start->roundMinute(30)->format('H:i');
-                                            }
-                                        }
-        dd($calendarTab);
-     
+            $l = Language::where('id',$language_id)->first();
+            $type = $l->price_type;
+            $lName = $l->name;
+            if($zajecia == 1){
+                $price = $priceG;
+                $kwota = $price;
+            }else{
+                $price = Price::where('type_id',$type_id)
+                            ->where('price_type_id',$type)
+                            ->where('duration_id',$duration_id)
+                            ->where('certification',$cert)
+                            ->first()
+                            ->price; 
+                            $kwota = $price*$ile;
+            }
+
+            $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
+            $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
+            $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+            
+            if($zajecia != 1){
+                $lesson = new Lesson;
+                $lesson->type_id = $type_id;
+                $lesson->duration_id = $duration_id;
+                $lesson->amount_of_lessons = $ile;
+                if($type_id == 1){
+                    $studentow = 1;
+                    $desc = 'Lekcja indywidualna z języka '.$lName.'ego';
+                }
+                else{
+                    $studentow = 2;
+                    $desc = 'Lekcja w parze z języka '.$lName.'ego';
+                }
+                $lesson->amount_of_students = $studentow;
+                $lesson->price = $kwota;
+                $lesson->start = $start2;
+                $lesson->lector_id = $lectorId;
+                $lesson->language_id = $language_id;
+                $lesson->title = 'Zajęcia z '.Auth::user()->name.' '.Auth::user()->surname;
+                $lesson->status = 0;
+                $lesson->certificat = $cert;
+                $lesson->save();
+                $lessonId = $lesson->id;
+                $ileFaktura = $ile;
+                $lecMail = Lector::where('id', $lectorId)->first();
+                try {
+                    $mailData=[
+                     'lector' => $lecMail->name.' ['.$lecMail->email.']',
+                     'user' => Auth::user()->name.' '.Auth::user()->surname.' ['.Auth::user()->email.']',
+                     'date' => $lesson->start,
+                     'language' => 'Język '.$lName
+                    ]; 
+                    Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
+                    // return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
+                 } catch (\Throwable $th) {
+                    //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+                 }
+                Mail::to($lecMail->email)->send(new AcceptTermin());
+            }else{
+                $lessonId =  $data['lessonId'];
+                $desc =  $data['title'];
+            }
+
+            if($zajecia != 1){
+                for($i=0; $i<$ile; $i++){
+                    $event = new CalendarEvent;
+                    $event->start = $start2;
+                    $event->end = $end;
+                    $event->lector_id = $lectorId;
+                    $event->type = 3;
+                    $event->lesson_id =  $lessonId;
+                    $event->save();
     
+    
+                    $calendar = new EventUsers;
+                    $calendar->calendar_id = $event->id;
+                    $calendar->user_id = 89;
+                    $calendar->comment = '';
+                    $calendar->status = 1;
+                    $calendar->lector_accept = 0;
+                    $calendar->student_accept = 1;
+                    $calendar->save();
+                    
+                    $start2 = date('Y-m-d H:i', strtotime($start2. ' + 1 week'));
+                    $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+                }
+            }else{
+                $events = CalendarEvent::where('lesson_id',$lessonId)->get();
+                foreach($events as $event){
+    
+                    $calendar = new EventUsers;
+                    $calendar->calendar_id = $event->id;
+                    $calendar->user_id = 89;
+                    $calendar->comment = '';
+                    $calendar->status = 3;
+                    $calendar->lector_accept = 0;
+                    $calendar->student_accept = 1;
+                    $calendar->save();
+                }
+                $eventId =  $data['calendarId'];
+            }
+        }elseif($data['typPlatnosci'] == 'PAKIET')
+        {
+            $language_id = $data['langDesc'];
+            $l = Language::where('id',$language_id)->first();
+            $type = $l->price_type;
+            $kwota =  $data['priceG'];
+            $desc =  $data['title'];
+            $pakiet = $data['packet'];
+            $ileFaktura = 1;
+            for($i=1; $i<=$pakiet; $i++){
+                  $bank = new LessonsBank;
+                    $bank->user_id = 89;
+                    $bank->payment_id = session()->get('payment_id') ; 
+                    $bank->overdue_date = Carbon::now()->addDays(30);
+                    $bank->type_id = $data['typeA'];
+                    
+                    $bank->priceType = $type;
+                    $bank->certificat = $data['certyficate'];
+                    $bank->save();
+            }
+          
+        }
+        $api = array();
+        $api["api_id"] = "deeff9e22df4f2135e00ad03d29ccda7";
+        $api["api_zadanie"] = "1";
+        $api["dokument_dostep"] = "1";
+        $api["dokument_rodzaj"] = "0";
+        $api["dokument_marza"] = "0";
+        $api["dokument_drugi_jezyk"] = "2";
+        $api["dokument_zaplata"] = "20";
+        $api["dokument_pokaz_zaplata"] = "1";
+        $api["dokument_zaplacono"] = $kwota;
+        $api["dokument_status"] = "1";
+        $api["dokument_rodzaj_podstawa_zw"] = "3";
+        $api["dokument_podstawa_zw"] = "Zgodnie z art. 43 ust. 1 pkt 1 ustawy o podatku od towarów i usług, szkoły językowe są zwolnione z podatku VAT.";
+        $api["dokument_fp"] = "0";
+        $api["sprzedawca_nazwa"] = "LangueLove Wiktoria Skrzypczak i Weronika Cieślak spółka cywilna";
+        $api["sprzedawca_nip"] = "9452266907";
+        $api["sprzedawca_miasto"] = "Kraków";
+        $api["sprzedawca_kod"] = "31-445";
+        $api["sprzedawca_ulica"] = "Łaszkiewicza";
+        $api["sprzedawca_budynek"] = "4";
+        $api["sprzedawca_lokal"] = "39";
+        if($data['nip'] != ''){
+            $api["nabywca_osoba"] = 0;
+            $api["nabywca_nazwa"] = $data['name'];
+            $api["nabywca_nip"] = $data['nip'];
+        }else{
+            $dane = explode(" ",$data['name']);
+            $api["nabywca_osoba"] = 1;
+            $api["nabywca_imie"] = $dane[0];
+            $api["nabywca_nazwisko"] = $dane[1];
+        }
+        
+        $api["nabywca_miasto"] = $data['city'];
+        $api["nabywca_kod"] = $data['postcode'];
+        $api["nabywca_ulica"] = $data['street'];
+
+
+        $api["produkt_nazwa"] = $desc;
+        $api["produkt_ilosc"] = $ileFaktura;
+        $api["produkt_jm"] = "2";
+        $api["produkt_stawka_vat"] = "zw";
+        $api["produkt_wartosc_brutto"] = $kwota;
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,"https://www.fakturowo.pl/api");
+        curl_setopt($curl,CURLOPT_POST,1);
+        curl_setopt($curl,CURLOPT_CONNECTTIMEOUT,300);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$api);
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+
+        //Pozytywna odpowiedź otrzymana w wyniku powyższego działania (parametr dokument_dostep=1):
+
+        $faktura = '';
+        $result = explode("\n",$result);
+
+        $session_id = $id;
+        $payment = Payment::where('session_id',$session_id)->first();
+
+        if ($result[0]==1)
+        {
+           $payment->invoice = $result[3];
+        }
+        else
+        {
+            $payment->invoice = "ERROR: ".$result[1];
+        }
+        $payment->save();
     }
     public function getLanguages()
     {

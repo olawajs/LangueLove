@@ -496,7 +496,8 @@ class PaymentController extends Controller
         if($response2->data->status == 'success'){
             $payment->status = 2;
             $payment->save();
-            $this->CreateLessons();
+            // $this->CreateLessons();
+            $this->CreateFixedLessons($session_id);
             Mail::to(Auth::user()->email)->send(new ThankYou());
            
             return view('thankYou');
