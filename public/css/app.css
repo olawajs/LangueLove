@@ -12062,6 +12062,9 @@ footer{
 }
 
 @media only screen and (max-width: 800px) {
+  .Desktop{
+    display: none;
+  }
   .mobile{
     display: unset;
   }
