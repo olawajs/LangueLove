@@ -786,7 +786,7 @@ class PaymentController extends Controller
                 try {
                     $mailData=[
                      'lector' => $lecMail->name.' ['.$lecMail->email.']',
-                     'user' => $user->name.' '.$user->surname.' ['$user->email.']',
+                     'user' => $user->name.' '.$user->surname.' ['.$user->email.']',
                      'date' => $lesson->start,
                      'language' => 'Język '.$lName
                     ]; 
