@@ -22,6 +22,7 @@ class CreateLectorsTable extends Migration
             $table->foreign('native_language_id')->references('id')->on('languages');
             $table->longText('education');
             $table->string('photo');
+            $table->integer('lector_type_id');
             $table->longText('description');
             $table->string('city');
             $table->string('street');
