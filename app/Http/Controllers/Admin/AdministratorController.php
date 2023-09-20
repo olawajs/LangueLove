@@ -20,6 +20,8 @@ use App\Models\CalendarSetup;
 use App\Models\LessonsBank;
 use App\Models\EventUsers;
 use App\Models\Lector;
+use App\Models\LectorPrices;
+use App\Models\Packets;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -339,7 +341,9 @@ class AdministratorController extends Controller
                                         ->get();     
            
         // $session_id = Session::get('_token');
-    
+
+        $prices = LectorPrices::where('lector_type_id', $lector->lector_type_id)->get();
+        // dd($prices);
              return view('test/lector',[
                 'durations' => $duratons,
                 'levels' => $levels,

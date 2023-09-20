@@ -418,7 +418,7 @@ class PaymentController extends Controller
             $payment->status = 2;
             $payment->save();
             $this->CreateFixedLessons($session_id);
-            $mail = User::where('id',$payment->id_user)->get();
+            $mail = User::where('id',$payment->id_user)->first();
             Mail::to($mail->email)->send(new ThankYou());
            
             return view('thankYou');

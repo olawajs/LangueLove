@@ -36,7 +36,7 @@
         text-align: justify;
     }
 </style>
-<div class="container px-a">
+<div class="container px-a" id="container">
     @if(session()->has('success'))
         <div class="Info" style="background-color: var(--bs-primary);">
         <span class="text-white">
@@ -46,7 +46,7 @@
     @endif
     <div class="content" id="content">    
         <div class="d-flex LectorDiv" style="gap:48px;">
-            <div class="d-flex flex-column" style="flex-grow: 3; gap:20px;">
+            <div class="d-flex flex-column" style="flex-grow: 3; gap:20px; width: 100%;">
                 <div class="d-flex flex-row LectorHeader">
                     <div style="margin-right: 32px">
                         <img src="/images/lectors/{{$lector->photo}}" style='width:174px; height: 174px; object-fit: cover;'>
@@ -66,7 +66,7 @@
                             @endforeach
                         </div>
                         <buton class="LL-button LL-button-primary w-100 MobileLectorButtons"  onclick="przejdzDo()">Zobacz kalendarz</buton>
-                        <buton class="LL-button LL-button-secondary MobileLectorButtons">Zobacz cennik</buton>
+                        <buton class="LL-button LL-button-secondary MobileLectorButtons" onclick="OpenPriceTable()">Zobacz cennik</buton>
                     </div>
                 </div>
               
@@ -188,7 +188,7 @@
             <div class="VidInfoContainer">
                 <iframe class="YTVideo" src="https://www.youtube.com/embed/C0DPdy98e4c?si=Nz6Etje8GK2mJO4p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 <buton class="LL-button LL-button-primary w-100"  onclick="przejdzDo()">Zobacz kalendarz</buton>
-                <buton class="LL-button LL-button-secondary">Zobacz cennik</buton>
+                <buton class="LL-button LL-button-secondary" onclick="OpenPriceTable()">Zobacz cennik</buton>
                 <!-- <buton class="LL-button LL-button-secondary">Wiadomość</buton> -->
             </div>
         </div>
@@ -196,7 +196,121 @@
     </div>
     
 </div>
-
+<!-- Cennik -->
+<div class="PriceTable" id="PriceTable">
+    <div class='desktop'>
+        <div class="DivHead">
+            <span class="HeadText">Cennik</span>
+            <button class="btn XButton" onClick="closePriceTable()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                </svg>
+            </button>
+        </div>
+        <div class="DivButtons">
+            <div class="PriceTab PriceTabActive">Indywidualne</div>
+            <div class="PriceTab">W parze</div>
+        </div>
+        <div class="DivButtons">
+            <div class="PriceColumn">
+                <div class="PriceBubble"></div>
+                <div class="priceText" style="height: 44px;">pojedyncza lekcja</div>
+                <div class="priceText" style="height: 44px;">pakiet 5 lekcji</div>
+                <div class="priceText" style="height: 44px;">pakiet 10 lekcji</div>
+                <div class="priceText" style="height: 44px;">pakiet 30 lekcji</div>
+            </div>
+            
+            @foreach($durations as $d)
+                <div class="PriceColumn">
+                    <div class="priceText">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\LectorPrices::where('type_id',1)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',1)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',1)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',1)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                </div>  
+            @endforeach
+            @foreach($durations as $d)
+                <div class="PriceColumn" style="display: none">
+                    <div class="priceText">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\LectorPrices::where('type_id',4)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',4)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',4)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',4)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                </div>  
+            @endforeach
+            
+            
+            @foreach($durations as $d)
+                <div class="PriceColumn">
+                    <div class="priceText"><img src="{{asset('images/svg/badge 1.svg')}}">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\LectorPrices::where('type_id',1)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class='mobile mobileFlex' style="width: 100%;">
+        <div class="DivHead">
+            <span class="HeadText">Cennik</span>
+            <button class="btn XButton" onClick="closePriceTable()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                </svg>
+            </button>
+        </div>
+        <div class="DivButtons">
+            <div class="PriceTab PriceTabActive">Indywidualne</div>
+            <div class="PriceTab">W parze</div>
+        </div>
+        <div class="DivButtons">
+            <b>Standardowe zajęcia:</b>
+        </div>
+        <div class="DivButtons" style="justify-content: space-evenly;">
+            <div class="PriceColumn">
+                <div class="PriceBubble"></div>
+                <div class="priceText" style="height: 44px;">pojedyncza</div>
+                <div class="priceText" style="height: 44px;">5 lekcji</div>
+                <div class="priceText" style="height: 44px;">10 lekcji</div>
+                <div class="priceText" style="height: 44px;">30 lekcji</div>
+            </div>
+            
+            @foreach($durations as $d)
+                <div class="PriceColumn">
+                    <div class="priceText">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\LectorPrices::where('type_id',1)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',1)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',1)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',1)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                </div>  
+            @endforeach
+        </div>
+        <div class="DivButtons">
+            <b><img src="{{asset('images/svg/badge 1.svg')}}">Zajęcia przygotowujące do egzaminu:</b>
+        </div>
+        <div class="DivButtons" style="justify-content: space-evenly;">    
+            <div class="PriceColumn">
+                <div class="PriceBubble"></div>
+                <div class="priceText" style="height: 44px;">pojedyncza</div>
+                <div class="priceText" style="height: 44px;">5 lekcji</div>
+                <div class="priceText" style="height: 44px;">10 lekcji</div>
+                <div class="priceText" style="height: 44px;">30 lekcji</div>
+            </div>
+            @foreach($durations as $d)
+                <div class="PriceColumn">
+                    <div class="priceText"><img src="{{asset('images/svg/badge 1.svg')}}">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\LectorPrices::where('type_id',1)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                </div>
+            @endforeach
+        </div>
+        </div>
+    </div>
+    
+</div>
 <!-- Language modal -->
 <form class="Custom_modal" style="display: none; z-index: 3;" id="BuyModal" method='POST' action="{{ route('buyLesson') }}">
     @csrf

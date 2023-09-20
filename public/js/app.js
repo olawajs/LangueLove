@@ -1247,3 +1247,13 @@ function SignInN(){
               console.log( "error" );
           });
 }
+function OpenPriceTable(){
+  document.getElementById('PriceTable').style.display = 'inline-flex';
+  document.getElementById('container').style.filter = 'blur(15px)';
+  // 
+}
+function closePriceTable(){
+  document.getElementById('PriceTable').style.display = 'none';
+  document.getElementById('container').style.filter = 'blur(0px)';
+  // 
+}

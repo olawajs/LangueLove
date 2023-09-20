@@ -78,7 +78,8 @@
   --ll-dark-grey: #969696;
   --langue-love-purple: #3C0079;
   --langue-love-pink: #C75470;
-  --langue-love-black: #2B2B33
+  --langue-love-black: #2B2B33;
+  --langue-love-beige: #FFF8F0;
 }
 *,
 *::before,
@@ -11912,7 +11913,7 @@ footer{
 }
 .calendarInfo{
   display: flex;
-  width: 790px;
+  max-width: 790px;
   padding: 8px 16px;
   justify-content: center;
   align-items: center;
@@ -11929,7 +11930,7 @@ footer{
 }
 .calendarButtons{
   display: flex;
-  width: 790px;
+  max-width: 790px;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
@@ -12060,13 +12061,142 @@ footer{
 .MobileLectorButtons{
   display: none;
 }
+.PriceTable{
+  /* display: inline-flex; */
+  padding: 80px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  min-width: 980px;
+  height: 560px;
+  border-radius: 32px;
+  background: var(--langue-love-beige, #FFF8F0);
+  box-shadow: 20px 20px 45px 0px rgba(0, 0, 0, 0.10);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.HeadText{
+  color: var(--langue-love-black, #2B2B33);
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+}
+.XButton{
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--langue-love-light-purple, #E7E5EC);
 
+}
+.DivHead{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.PriceTab{
+  display: flex;
+  height: 48px;
+  padding-bottom: 0px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--langue-love-pink, #C75470);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+}
+.PriceTabActive{
+  color: var(--langue-love-black, #2B2B33);
+  font-weight: 700;
+  border-bottom: 3px solid var(--langue-love-pink, #C75470);
+
+}
+.DivButtons{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 40px;
+}
+.PriceBubble{
+  display: flex;
+  width: 120px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+.purpleBubble{
+  background: var(--langue-love-light-purple, #E7E5EC);
+  color: var(--langue-love-purple, #3C0079);
+}
+.pinkBubble{
+  background: var(--langue-love-light-pink, #F9EEF1);
+  color: var(--langue-love-pink, #C75470);;
+}
+.priceText{
+  color: var(--langue-love-black, #2B2B33);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.PriceColumn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+@media only screen and (max-width: 1320px) {
+  /* .VidInfoContainer{
+    display: none;
+  } */
+}
 @media only screen and (max-width: 800px) {
   .Desktop{
     display: none;
   }
   .mobile{
     display: unset;
+  }
+  .mobileFlex{
+    display: flex;
+    flex-flow: column;
+    gap: 24px;
+  }
+  .priceText{
+    font-size: 12px;
+  }
+  .PriceTable{
+    width: 100% !important;
+    min-width: unset;
+    padding: 24px;
+    height: unset;
+    margin-top: 100px;
   }
   .navPurpleButton{
     width: 55%;
