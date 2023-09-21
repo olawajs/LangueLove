@@ -34,6 +34,7 @@ class CreateLessonsTable extends Migration
             $table->unsignedBigInteger('language_id');
             $table->foreign('language_id')->references('id')->on('languages');
             $table->boolean('certificat')->default(false);
+            $table->string('skype');
             $table->timestamps();
         });
       

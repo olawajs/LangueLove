@@ -21,6 +21,7 @@ class Lesson extends Model
         'language_id',
         'title',
         'status',
-        'certificat'
+        'certificat',
+        'skype'
     ];
 }

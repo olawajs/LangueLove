@@ -378,6 +378,7 @@ class AdministratorController extends Controller
                         'lectors.email as Emaillektor',
                         'lectors.id as lektorId',
                         'lectors.skype',
+                        'lessons.skype as skype2',
                     )
                     ->whereBetween('calendar_events.start', [$start, $end])
                     ->orderby('calendar_events.start')
@@ -392,11 +393,16 @@ class AdministratorController extends Controller
             $godzina = new Carbon($lesson->start);
             $lektor = $lesson->Emaillektor;
             $lectors[$lektor][$godzina->format('H:i')]= $lesson->title;
+            if($lesson->type_id == 2){
+                $s = $lesson->skype2;
+            } else{
+                $s = $lesson->skype;
+            }
             $mailData=[
                 'godzina' => $godzina->format('H:i'),
                 'jezyk' => $lesson->name,
                 'lektor' => $lesson->lektor,
-                'skype' => $lesson->skype
+                'skype' => $s
                ]; 
             //    $lesson->uEmail
                Mail::to( $lesson->uEmail)->send(new StudentMailLessonNotification($mailData));
