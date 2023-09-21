@@ -82,6 +82,10 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-12">
+                    <label for="skype" class="form-label">Skype</label>
+                    <input class="form-control" placeholder="Skype" name="skype" id="skype">
+                </div>
                 
                 <div class="col-md-6">
                     <label for="description" class="form-label">Opis:</label>

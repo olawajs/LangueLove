@@ -164,6 +164,7 @@ class LessonController extends Controller
             'title' => 'required',
             'description' => 'nullable',
             'draft' => 'nullable',
+            'skype' => 'nullable',
             'lector_id' => 'required|integer',
             'language_id' => 'required|integer'
         ]); 
