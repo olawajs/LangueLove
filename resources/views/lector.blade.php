@@ -223,6 +223,7 @@
                     window.location.href = "{{ route('login')}}";
                 }else{
                     let text = '';
+                    
                     if(typeof info.jsEvent.explicitOriginalTarget != "undefined"){
                        text=info.jsEvent.explicitOriginalTarget.textContent;
                     }
@@ -231,8 +232,8 @@
                     }
                    if(text == 'Wolny termin' ){
                         let data = info.date; 
-                        
-                        document.getElementById('data').value = data.getFullYear() + "-" +(data.getMonth() <10 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" +((data.getDate()) <= 9 ? "0" + (data.getDate()) : (data.getDate())) ;
+                        console.log(data.getFullYear() + "-" +(data.getMonth() <9 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" +((data.getDate()) <= 9 ? "0" + (data.getDate()) : (data.getDate())));
+                        document.getElementById('data').value = data.getFullYear() + "-" +(data.getMonth() <9 ? "0" + (data.getMonth()+1) : (data.getMonth()+1)) + "-" +((data.getDate()) <= 9 ? "0" + (data.getDate()) : (data.getDate())) ;
                         document.getElementById('godzina').value = ((data.getHours()) <= 9 ? "0" + (data.getHours()) : (data.getHours())) + ":" +((data.getMinutes()) <= 9 ? "0" + (data.getMinutes()) : (data.getMinutes()));
                         OpenModal('BuyModal');
                     } 
