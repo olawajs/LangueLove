@@ -723,12 +723,14 @@
         }
 
         document.addEventListener('touchstart', e => {
-        touchstartX = e.changedTouches[0].screenX
+            touchstartX = e.changedTouches[0].screenX;
+            roznica = touchstartX - touchendX;
         })
 
         document.addEventListener('touchend', e => {
-        touchendX = e.changedTouches[0].screenX
-        checkDirection()
+            touchendX = e.changedTouches[0].screenX;
+            roznica = touchstartX - touchendX;
+        checkDirection();
         })
     </script>
 <script>
