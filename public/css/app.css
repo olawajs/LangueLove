@@ -80,6 +80,7 @@
   --langue-love-pink: #C75470;
   --langue-love-black: #2B2B33;
   --langue-love-beige: #FFF8F0;
+  --langue-love-light-grey: #D7D7D7;
 }
 *,
 *::before,
@@ -4529,7 +4530,7 @@ textarea.form-control-lg {
 }
 
 .pagination {
-  --bs-pagination-padding-x: 0.75rem;
+  /* --bs-pagination-padding-x: 0.75rem; */
   --bs-pagination-padding-y: 0.375rem;
   --bs-pagination-font-size: 0.9rem;
   --bs-pagination-color: var(--bs-link-color);
@@ -4544,8 +4545,8 @@ textarea.form-control-lg {
   --bs-pagination-focus-bg: #e9ecef;
   --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   --bs-pagination-active-color: #fff;
-  --bs-pagination-active-bg: #0d6efd;
-  --bs-pagination-active-border-color: #0d6efd;
+  --bs-pagination-active-bg: var(--langue-love-purple);
+  --bs-pagination-active-border-color: var(--langue-love-purple);
   --bs-pagination-disabled-color: #6c757d;
   --bs-pagination-disabled-bg: #fff;
   --bs-pagination-disabled-border-color: #dee2e6;
@@ -11243,7 +11244,7 @@ margin: 20px auto;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.PriceTable{
+.PriceTable,.PaymentTable{
   margin-top: 10px;
 }
 footer{
@@ -11447,7 +11448,13 @@ footer{
   }
 
 }
-
+.page-link{
+  height: 8px;
+  width: 8px;
+  background-color: var(--langue-love-light-grey);
+  border-radius: 50% !important;
+  display: inline-block;
+}
 .LectorCard{
   background-color: white; 
   width: 300px; 
@@ -12078,6 +12085,23 @@ footer{
   transform: translate(-50%, -50%);
   display: none;
 }
+.PaymentTable{
+  /* display: inline-flex; */
+  padding: 80px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  min-width: 980px;
+  /* height: 560px; */
+  border-radius: 32px;
+  background: var(--langue-love-beige, #FFF8F0);
+  box-shadow: 20px 20px 45px 0px rgba(0, 0, 0, 0.10);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* display: none; */
+}
 .HeadText{
   color: var(--langue-love-black, #2B2B33);
   font-family: Montserrat;
@@ -12085,6 +12109,54 @@ footer{
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
+}
+.HeadText2{
+  color: var(--langue-love-black, #2B2B33);
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+.UnderText{
+  color: var(--langue-love-dark-grey, #969696);
+  font-family: Montserrat;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+.CrossLine{
+  text-decoration: line-through;
+  color: var(--langue-love-dark-grey, #969696);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.PaymentList{
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+}
+.ListArgument{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.ListImage{
+  height: 24px;
+  display: flex;
+}
+.PaymentColumn{
+  width: 33%;
+  display: flex;
+  flex-flow: column;
+  gap: 32px;
+}
+.rightLine{
+  border-right: 1px solid var(--langue-love-light-grey, #D7D7D7);
 }
 .XButton{
   display: flex;
@@ -12197,6 +12269,36 @@ footer{
     padding: 24px;
     height: unset;
     margin-top: 100px;
+  }
+  .PaymentTable{
+    width: 100% !important;
+    min-width: unset;
+    padding: 24px;
+    height: unset;
+    margin-top: 100px;
+  }
+  .HeadText{
+    font-size: 24px;
+  }
+  .HeadText2{
+    font-size: 16px;
+  }
+  .CrossLine{
+    font-size: unset;
+  }
+  .pagination{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .PaymentColumn{
+    width: unset;
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--langue-love-light-grey);
   }
   .navPurpleButton{
     width: 55%;

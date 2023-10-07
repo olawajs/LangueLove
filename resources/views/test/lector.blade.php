@@ -208,8 +208,8 @@
             </button>
         </div>
         <div class="DivButtons">
-            <div class="PriceTab PriceTabActive">Indywidualne</div>
-            <div class="PriceTab">W parze</div>
+            <div class="PriceTab PriceTabActive" id="BInd" data="Ind" onClick="changeType(event,'Par')">Indywidualne</div>
+            <div class="PriceTab" data="Par" id="BPar" onClick="changeType(event,'Ind')">W parze</div>
         </div>
         <div class="DivButtons">
             <div class="PriceColumn">
@@ -221,7 +221,7 @@
             </div>
             
             @foreach($durations as $d)
-                <div class="PriceColumn">
+                <div class="PriceColumn" id="Ind1">
                     <div class="priceText">{{($d->duration)-5}} min</div>
                     <div class="PriceBubble purpleBubble">{{App\Models\LectorPrices::where('type_id',1)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',0)->first()->price}} zł</div>
                     <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',1)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
@@ -230,7 +230,7 @@
                 </div>  
             @endforeach
             @foreach($durations as $d)
-                <div class="PriceColumn" style="display: none">
+                <div class="PriceColumn" style="display: none" id="Par1">
                     <div class="priceText">{{($d->duration)-5}} min</div>
                     <div class="PriceBubble purpleBubble">{{App\Models\LectorPrices::where('type_id',4)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',0)->first()->price}} zł</div>
                     <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',4)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
@@ -241,12 +241,21 @@
             
             
             @foreach($durations as $d)
-                <div class="PriceColumn">
+                <div class="PriceColumn" id="Ind2">
                     <div class="priceText"><img src="{{asset('images/svg/badge 1.svg')}}">{{($d->duration)-5}} min</div>
                     <div class="PriceBubble pinkBubble">{{App\Models\LectorPrices::where('type_id',1)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',1)->first()->price}} zł</div>
                     <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
                     <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
                     <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',1)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                </div>
+            @endforeach
+            @foreach($durations as $d)
+                <div class="PriceColumn" style="display: none"  id="Par2">
+                    <div class="priceText"><img src="{{asset('images/svg/badge 1.svg')}}">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\LectorPrices::where('type_id',4)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',4)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',4)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',4)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
                 </div>
             @endforeach
         </div>
@@ -261,13 +270,13 @@
             </button>
         </div>
         <div class="DivButtons">
-            <div class="PriceTab PriceTabActive">Indywidualne</div>
-            <div class="PriceTab">W parze</div>
+            <div class="PriceTab PriceTabActive"  id="MIndM" data="IndM" onClick="changeTypeM(event,'ParM')">Indywidualne</div>
+            <div class="PriceTab" id="MParM" data="ParM" onClick="changeTypeM(event,'IndM')">W parze</div>
         </div>
         <div class="DivButtons">
             <b>Standardowe zajęcia:</b>
         </div>
-        <div class="DivButtons" style="justify-content: space-evenly;">
+        <div class="DivButtons" style="justify-content: space-evenly;" id="IndM1">
             <div class="PriceColumn">
                 <div class="PriceBubble"></div>
                 <div class="priceText" style="height: 44px;">pojedyncza</div>
@@ -286,10 +295,29 @@
                 </div>  
             @endforeach
         </div>
+        <div class="DivButtons" style="justify-content: space-evenly; display: none" id="ParM1">
+            <div class="PriceColumn">
+                <div class="PriceBubble"></div>
+                <div class="priceText" style="height: 44px;">pojedyncza</div>
+                <div class="priceText" style="height: 44px;">5 lekcji</div>
+                <div class="priceText" style="height: 44px;">10 lekcji</div>
+                <div class="priceText" style="height: 44px;">30 lekcji</div>
+            </div>
+            
+            @foreach($durations as $d)
+                <div class="PriceColumn">
+                    <div class="priceText">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\LectorPrices::where('type_id',4)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',4)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',4)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                    <div class="PriceBubble purpleBubble">{{App\Models\Packet::where('type_id',4)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',0)->first()->price}} zł</div>
+                </div>  
+            @endforeach
+        </div>
         <div class="DivButtons">
             <b><img src="{{asset('images/svg/badge 1.svg')}}">Zajęcia przygotowujące do egzaminu:</b>
         </div>
-        <div class="DivButtons" style="justify-content: space-evenly;">    
+        <div class="DivButtons" style="justify-content: space-evenly;"  id="IndM2">    
             <div class="PriceColumn">
                 <div class="PriceBubble"></div>
                 <div class="priceText" style="height: 44px;">pojedyncza</div>
@@ -307,9 +335,267 @@
                 </div>
             @endforeach
         </div>
+        <div class="DivButtons" style="justify-content: space-evenly; display:none"  id="ParM2">    
+            <div class="PriceColumn">
+                <div class="PriceBubble"></div>
+                <div class="priceText" style="height: 44px;">pojedyncza</div>
+                <div class="priceText" style="height: 44px;">5 lekcji</div>
+                <div class="priceText" style="height: 44px;">10 lekcji</div>
+                <div class="priceText" style="height: 44px;">30 lekcji</div>
+            </div>
+            @foreach($durations as $d)
+                <div class="PriceColumn">
+                    <div class="priceText"><img src="{{asset('images/svg/badge 1.svg')}}">{{($d->duration)-5}} min</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\LectorPrices::where('type_id',4)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certification',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',4)->where('amount',5)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',4)->where('amount',10)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                    <div class="PriceBubble pinkBubble">{{App\Models\Packet::where('type_id',4)->where('amount',30)->where('duration_id',$d->id)->where('lector_type_id',$lector->lector_type_id)->where('certyficate',1)->first()->price}} zł</div>
+                </div>
+            @endforeach
+        </div>
         </div>
     </div>
     
+</div>
+
+<!-- Modal płatności -->
+<div class="PaymentTable" id="PaymentTable">
+    <div class='desktop'>
+        <div class='d-flex' style="flex-flow: column; gap:60px;">
+            <div class="DivHead">
+                <span class="HeadText">Szczegóły rezerwacji</span>
+                <button class="btn XButton" onClick="closePriceTable()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                    </svg>
+                </button>
+            </div>
+            <div>
+                <span class="HeadText2">Wybierz odpowiedni pakiet dla Ciebie:</span>
+            </div>
+            <div class="d-flex">
+                <div class="PaymentColumn rightLine" style="padding-right: 32px;">
+                    <div>
+                        <div>
+                            <span class="HeadText2">Pakiet</span>
+                        </div>
+                        <div style="min-height: 40px">
+                            <span class="UnderText">5, 10 lub 30 zajęć do wykorzystania odpowiednio w ciągu 5, 10 lub 30 tygodni</span> 
+                        </div>
+                    </div>
+                    <div class="PaymentList">
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>promocyjna cena</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>rezerwacja najlepszego dla Ciebie terminu</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>elastyczne terminy</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>możliwość przełożenia i odwołania zajęć</span>
+                        </div>
+                    </div>
+                    <div>
+                        <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                    </div>
+                </div>
+                <div class="PaymentColumn rightLine" style="padding: 0px 24px 0px 32px;">
+                    <div>
+                        <div>
+                            <span class="HeadText2">Zajęcia cykliczne</span>
+                        </div>
+                        <div style="min-height: 40px">
+                            <span class="UnderText">dowolna ilość zajęć co tydzień o stałej porze</span>
+                        </div>  
+                    </div>
+                    <div class="PaymentList">
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                            <span class="CrossLine">promocyjna cena</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>rezerwacja najlepszego dla Ciebie terminu</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>regularne zajęcia</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>możliwość przełożenia i odwołania zajęć</span>
+                        </div>
+                    </div>
+                    <div>
+                        <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                    </div>
+                </div>
+                <div class="PaymentColumn" style="padding-left: 32px;">
+                    <div>
+                        <div>
+                            <span class="HeadText2">Pojedyncze zajęcia</span>
+                        </div>
+                        <div style="min-height: 40px">
+                            <span class="UnderText">pojedyncze zajęcia o wybranej godzinie</span>
+                        </div>   
+                    </div>
+                    <div class="PaymentList">
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                            <span class="CrossLine">promocyjna cena</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                            <span class="CrossLine">rezerwacja najlepszego dla Ciebie terminu</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                            <span class="CrossLine">regularne zajęcia</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>możliwość przełożenia i odwołania zajęć</span>
+                        </div>
+                    </div>
+                    <div>
+                        <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='mobile mobileFlex' style="width: 100%;">
+        <div class="DivHead">
+            <span class="HeadText">Szczegóły rezerwacji</span>
+            <button class="btn XButton" onClick="closePriceTable()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                </svg>
+            </button>
+        </div>
+        <div>
+            <span class="HeadText2">Wybierz odpowiedni pakiet dla Ciebie:</span>
+        </div>
+        <div>
+            <!-- test -->
+	<div class="container">
+		<div id="1" class="Paymentcard">
+            <div class="PaymentColumn rightLine" style="padding-right: 32px;">
+                <div>
+                    <div>
+                        <span class="HeadText2">Pakiet</span>
+                    </div>
+                    <div style="min-height: 40px">
+                        <span class="UnderText">5, 10 lub 30 zajęć do wykorzystania odpowiednio w ciągu 5, 10 lub 30 tygodni</span> 
+                    </div>
+                </div>
+                <div class="PaymentList">
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>promocyjna cena</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>rezerwacja najlepszego dla Ciebie terminu</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>elastyczne terminy</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>możliwość przełożenia i odwołania zajęć</span>
+                    </div>
+                </div>
+                <div>
+                    <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                </div>
+            </div>
+		</div>
+		<div id="2" class="Paymentcard">
+            <div class="PaymentColumn">
+                <div>
+                    <div>
+                        <span class="HeadText2">Zajęcia cykliczne</span>
+                    </div>
+                    <div style="min-height: 40px">
+                        <span class="UnderText">dowolna ilość zajęć co tydzień o stałej porze</span>
+                    </div>  
+                </div>
+                <div class="PaymentList">
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                        <span class="CrossLine">promocyjna cena</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>rezerwacja najlepszego dla Ciebie terminu</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>regularne zajęcia</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>możliwość przełożenia i odwołania zajęć</span>
+                    </div>
+                </div>
+                <div>
+                    <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                </div>
+            </div>
+		</div>
+		<div id="3" class="Paymentcard">
+            <div class="PaymentColumn">
+                <div>
+                    <div>
+                        <span class="HeadText2">Pojedyncze zajęcia</span>
+                    </div>
+                    <div style="min-height: 40px">
+                        <span class="UnderText">pojedyncze zajęcia o wybranej godzinie</span>
+                    </div>   
+                </div>
+                <div class="PaymentList">
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                        <span class="CrossLine">promocyjna cena</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                        <span class="CrossLine">rezerwacja najlepszego dla Ciebie terminu</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                        <span class="CrossLine">regularne zajęcia</span>
+                    </div>
+                    <div class="ListArgument">
+                        <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                        <span>możliwość przełożenia i odwołania zajęć</span>
+                    </div>
+                </div>
+                <div>
+                    <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+    <div>  
+        <div>
+            <div class="pagination pg-red">
+                <div class="page-item active"><a class="page-link" data="1"></a></div>
+                <div class="page-item"><a class="page-link" data="2"></a></div>
+                <div class="page-item"><a class="page-link" data="3"></a></div>
+            </div>
+        </div>
+    </div>
+    </div> 
 </div>
 <!-- Language modal -->
 <form class="Custom_modal" style="display: none; z-index: 3;" id="BuyModal" method='POST' action="{{ route('buyLesson') }}">
@@ -397,7 +683,50 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 
+<script type="text/javascript">
+    	$(document).ready(function(){
+            
+    		//Hide all cards
+    		$(".Paymentcard").each(function(index, value){
+    			$('.Paymentcard').hide();
+    		});
+            $('#1').show();
+    		$(".page-link").on('click', function(){
+                
+    			$(".page-link").each(function(index, value){
+    				$(value).parent().removeClass("active");
+    			});
 
+    			//Hide all cards
+	    		$(".Paymentcard").each(function(index, value){
+	    			$('.Paymentcard').hide();
+	    		})
+  
+    			$(this).parent().addClass("active");
+    			var cardId = "#" + $(this)[0].attributes.data.value;
+                // e.target.attributes.data.value
+    			$(cardId).show();
+    		});
+
+    	});
+
+        let touchstartX = 0
+        let touchendX = 0
+            
+        function checkDirection() {
+        if (touchendX < touchstartX) alert('swiped left!')
+        if (touchendX > touchstartX) alert('swiped right!')
+        }
+
+        document.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX
+        })
+
+        document.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX
+        checkDirection()
+        })
+    </script>
 <script>
     let LessonAmount = {!! json_encode($lessonAmount) !!};
    

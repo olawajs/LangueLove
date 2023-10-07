@@ -1257,3 +1257,33 @@ function closePriceTable(){
   document.getElementById('container').style.filter = 'blur(0px)';
   // 
 }
+function changeType(e,id){
+  let active = e.target.attributes.data.value;
+    document.getElementById('B'+id).classList.remove('PriceTabActive');
+
+    const matches = Array.from(document.querySelectorAll('[id^='+id+']'));
+    for(var index=0;index < matches.length;index++){
+      matches[index].style.display = 'none';
+    }
+    const matches2 = Array.from(document.querySelectorAll('[id^='+active+']'));
+    for(var index=0;index < matches2.length;index++){
+      matches2[index].style.display = 'flex';
+    }
+
+    e.target.classList.add('PriceTabActive');
+}
+function changeTypeM(e,id){
+  let active = e.target.attributes.data.value;
+    document.getElementById('M'+id).classList.remove('PriceTabActive');
+
+    const matches = Array.from(document.querySelectorAll('[id^='+id+']'));
+    for(var index=0;index < matches.length;index++){
+      matches[index].style.display = 'none';
+    }
+    const matches2 = Array.from(document.querySelectorAll('[id^='+active+']'));
+    for(var index=0;index < matches2.length;index++){
+      matches2[index].style.display = 'flex';
+    }
+
+    e.target.classList.add('PriceTabActive');
+}
