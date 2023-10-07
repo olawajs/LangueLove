@@ -589,9 +589,9 @@
     <div>  
         <div>
             <div class="pagination pg-red">
-                <div class="page-item active"><a class="page-link" data="1"></a></div>
-                <div class="page-item"><a class="page-link" data="2"></a></div>
-                <div class="page-item"><a class="page-link" data="3"></a></div>
+                <div class="page-item active"><a class="page-link" data="1" id="1B"></a></div>
+                <div class="page-item"><a class="page-link" data="2" id="2B"></a></div>
+                <div class="page-item"><a class="page-link" data="3" id="3B"></a></div>
             </div>
         </div>
     </div>
@@ -714,12 +714,40 @@
         let touchendX = 0
         let roznica = touchstartX - touchendX;
         function checkDirection() {
+            let active = document.getElementsByClassName("active");
+            let now = active[0].childNodes[0].attributes.data.value;
+            let cardId;
+            let id;
+            console.log('now: '+now);
             if (touchendX < touchstartX && Math.abs(roznica)>20){
-                alert('swiped left!');
+                if(now != 3){
+                    cardId = "#" + (parseInt(now) + 1);
+                    id = parseInt(now) + 1;
+                }
+                else {
+                    cardId =  "#" +1;
+                    id = 1;
+                }
             } 
             if (touchendX > touchstartX && Math.abs(roznica)>20) {
-                alert('swiped right!');
+                if(now != 1){
+                    cardId = "#" + (parseInt(now) - 1);
+                    id = parseInt(now)- 1;
+                }
+                else {
+                    cardId =  "#" +3;
+                    id = 3;
+                }
             }
+            $(".page-link").each(function(index, value){
+                $(value).parent().removeClass("active");
+            });
+            $(".Paymentcard").each(function(index, value){
+                $('.Paymentcard').hide();
+            });
+            // document.getElementById(id).addClass("active");
+            $(cardId).show();
+            $(cardId+'B').parent().addClass("active");
         }
 
         document.addEventListener('touchstart', e => {
