@@ -572,7 +572,7 @@ function searchFor(type)
     function checkCode(){
       let code = document.getElementById('code').value;
       let date = new Date();
-      if(typeV == 4 && code.toUpperCase() == 'LANGUEFRIDAY' && date.getFullYear() == '2023' && date.getMonth() == '10' && date.getDate() == '4'){
+      if(typeV == 4 && code.toUpperCase() == 'LANGUEFRIDAY' && date.getFullYear() == '2023' && date.getMonth() == '10' && date.getDate() == '24'){
       
         $.ajax({
             type: "POST",
