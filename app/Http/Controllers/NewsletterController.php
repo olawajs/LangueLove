@@ -8,6 +8,8 @@ use App\Mail\Newsletter;
 use App\Mail\NewsletterMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Newsletter as NW;
+use Auth;
+use Carbon\Carbon;
 
 class NewsletterController extends Controller
 {
@@ -44,6 +46,26 @@ class NewsletterController extends Controller
         }
         else{
             return 0;
+        }
+       
+    }
+    public function checkPacketCode(Request $request){
+        $code = Code::where('code',$request->code)
+                    ->where('email', Auth::user()->email)
+                    ->first();
+        if($code){
+            return 0;
+        }
+        else{
+            $code2 = Code::create([
+                'code' => $request->code,
+                'email' => Auth::user()->email,
+                'lesson_type' => 2,
+                'amount' => 1,
+                'type' => 'P',
+                'use_date' => Carbon::now()
+            ]);
+            return 1;
         }
        
     }

@@ -151,6 +151,7 @@
         </div>
        
     </div>
+    @include('layouts.blackfriday')
     @include('layouts.foot')
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6Z8GWFZ"

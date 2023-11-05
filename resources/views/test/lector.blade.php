@@ -121,7 +121,7 @@
                                             @foreach($d as $k2 => $d2)
                                                 @if($k2 != 'name' && $k2 != 'shortDate')
                                                     @if(isset($d2['free']) && $d2['free']==1)
-                                                        <div class="freeHour HBorder">{{$k2}}</div>
+                                                        <div class="freeHour HBorder" onclick="OpenHour(`{{$k2}}`,`{{$k}}`,`{{$d['name']}}`,`{{$d2['60']}}`,`{{$d2['90']}}`)">{{$k2}}</div>
                                                     @endif
                                                     @if(isset($d2['free']) && $d2['free']==0)
                                                         <div class="takenHour">{{$k2}}</div>
@@ -146,7 +146,7 @@
                                     <div class="weekButtons">
                                         <div class="d-flex" style="gap: 6px;">
                                             <button class="btn activeButton @if($loop->index == 0)LLdisabled @endif  HBorder"  onClick="goToM('{{$loop->index -1}}','{{$loop->index}}')">@if($loop->index == 0)<img src="{{asset('images/svg/DArrowL.svg')}}"> @else <img src="{{asset('images/svg/AArrowL.svg')}}"> @endif </button>
-                                        <button class="btn activeButton @if(($loop->index+1)==count($calendar) )LLdisabled @endif HBorder" onClick="goToM('{{$loop->index +1}}','{{$loop->index}}')">@if(($loop->index+1)==count($calendar))<img src="{{asset('images/svg/DArrowR.svg')}}"> @else <img src="{{asset('images/svg/AArrowR.svg')}}"> @endif</button>
+                                        <button class="btn activeButton @if(($loop->index+1)==count($calendarMobile) )LLdisabled @endif HBorder" onClick="goToM('{{$loop->index +1}}','{{$loop->index}}')">@if(($loop->index+1)==count($calendarMobile))<img src="{{asset('images/svg/DArrowR.svg')}}"> @else <img src="{{asset('images/svg/AArrowR.svg')}}"> @endif</button>
                                         </div>
                                         <div>
                                             {{$q}}
@@ -165,7 +165,7 @@
                                             @foreach($d as $k2 => $d2)
                                                 @if($k2 != 'name' && $k2 != 'shortDate')
                                                     @if(isset($d2['free']) && $d2['free']==1)
-                                                        <div class="freeHour HBorder">{{$k2}}</div>
+                                                        <div class="freeHour HBorder" onclick="OpenHour(`{{$k2}}`,`{{$k}}`,`{{$d['name']}}`,`{{$d2['60']}}`,`{{$d2['90']}}`)">{{$k2}}</div>
                                                     @endif
                                                     @if(isset($d2['free']) && $d2['free']==0)
                                                         <div class="takenHour">{{$k2}}</div>
@@ -364,7 +364,7 @@
         <div class='d-flex' style="flex-flow: column; gap:60px;">
             <div class="DivHead">
                 <span class="HeadText">Szczegóły rezerwacji</span>
-                <button class="btn XButton" onClick="closePriceTable()">
+                <button class="btn XButton" onClick="closePaymentTable()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
                     </svg>
@@ -433,7 +433,7 @@
                         </div>
                     </div>
                     <div>
-                        <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                        <buton class="LL-button LL-button-primary w-100"  onclick="MCyklLessons()">Rezerwuj</buton>
                     </div>
                 </div>
                 <div class="PaymentColumn" style="padding-left: 32px;">
@@ -464,7 +464,7 @@
                         </div>
                     </div>
                     <div>
-                        <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                        <buton class="LL-button LL-button-primary w-100"  onclick="openInd()">Rezerwuj</buton>
                     </div>
                 </div>
             </div>
@@ -473,7 +473,7 @@
     <div class='mobile mobileFlex' style="width: 100%;">
         <div class="DivHead">
             <span class="HeadText">Szczegóły rezerwacji</span>
-            <button class="btn XButton" onClick="closePriceTable()">
+            <button class="btn XButton" onClick="closePaymentTable()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
                 </svg>
@@ -547,7 +547,7 @@
                     </div>
                 </div>
                 <div>
-                    <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                    <buton class="LL-button LL-button-primary w-100"  onclick="MCyklLessons()">Rezerwuj</buton>
                 </div>
             </div>
 		</div>
@@ -580,7 +580,7 @@
                     </div>
                 </div>
                 <div>
-                    <buton class="LL-button LL-button-primary w-100"  onclick="">Rezerwuj</buton>
+                    <buton class="LL-button LL-button-primary w-100" onclick="openInd()">Rezerwuj</buton>
                 </div>
             </div>
         </div>
@@ -595,6 +595,420 @@
             </div>
         </div>
     </div>
+    </div> 
+</div>
+<!-- Indywidualny -->
+<div class="StickDiv" id="MIndLessons" style="display: none">
+    <div class='desktop'>
+        <div class='d-flex' style="flex-flow: column; gap:60px;">
+            <div class="DivHead">
+                <span class="HeadText">Szczegóły rezerwacji</span>
+                <button class="btn XButton" onClick="closeModal('MIndLessons')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="d-flex" style="flex-flow: column">
+                <div class="DivButtons">
+                    <div class="PayTab IndLink PayTabActive" data="IndS" id="IndS" data="IndM">Szczegóły zajęć</div>
+                    <div class="PayTab IndLink" data="IndD" id="IndD">Dane do płatności</div>
+                </div>
+                <div class="container">
+                    <div id="ContainerIndS" class="PayCard">
+                        <div class="PayInfo">
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/cap.svg')}}"></div>
+                                <div>Pojedyncze zajęcia</div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/calendar.svg')}}"></div>
+                                <div><span id="IndData">01.09.2023</span> (<span id="IndDzien">piątek</span>), <span id="IndGodz">09:00 - 9:55</span></div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="/images/lectors/{{$lector->photo}}" style='width:48px; height: 48px; object-fit: cover;'></div>
+                                <div>{{$lector->name}}</div>
+                            </div>     
+                        </div>
+                       <div>
+                            <div class="PayCustom">
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Rodzaj zajęć</label>
+                                    <select class="select" id="LessonTypeD" onChange="PriceCheck()">
+                                        <option value="1">Indywidualne</option>
+                                        <option value="4">W parach</option>
+                                    </select>
+                                </div>
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Długość trwania</label>
+                                    <select class="select" id="LessonDurationD" onChange="PriceCheck()">
+                                        <option value="2" id="D60">55 minut</option>
+                                        <option value="3" id="D90">85 minut</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="PayCustom">
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Język</label>
+                                    <select class="select" id="LessonLanguageD">
+                                        @foreach($languages as $language)
+                                            <option value="{{$language->id}}">{{$language->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Przygotowanie do egzaminu</label>
+                                    <select class="select" id="LessonCertyficateD" onChange="PriceCheck()">
+                                        <option value="0">Nie</option>
+                                        <option value="1">Tak</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="AmountDiv">
+                            Cena: <span id="cenaD">99</span> zł
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ContainerIndD" class="PayCard">
+                <div>
+                    <label class="SelectLabel">Imię i nazwisko</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
+                    <input class="input" id="NameIndD" onchange="fixSelects()" required>
+                </div>
+                <div>
+                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <input class="input" id="AdressIndD" onchange="fixSelects()">
+                </div>
+                <div class="PayCustom">
+                    <div class="PayRow">
+                        <label class="SelectLabel">Kod pocztowy</label>
+                        <input class="input" id="PostCodeIndD" onchange="fixSelects()">
+                    </div>
+                    <div class="PayRow">
+                        <label class="SelectLabel">Miasto</label>
+                        <input class="input" id="CityIndD" onchange="fixSelects()">
+                    </div>
+                </div>
+                <div>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <input class="input" id="NIPIndD" onchange="fixSelects()">
+                </div>
+            </div>
+            <div class="PaymentButtons">
+                <button id="backButton1" onClick="closeModal('MIndLessons')" class="btn LL-button LL-button-secondary">Wróć</button>
+                <button id="backButton2" style="display: none" data="IndS" class="IndLink btn LL-button LL-button-secondary">Wróć</button>
+                <button id="nextButton1" data="IndD" class="IndLink btn LL-button LL-button-primary">Dalej</button>
+                <button id="nextButton2" style="display: none" class="btn LL-button LL-button-primary">Przejdź do płatności</button>
+            </div>
+        </div>
+    </div>
+    <div class='mobile mobileFlex' style="width: 100%;">
+        <div class="DivHead">
+            <span class="HeadText">Szczegóły rezerwacji</span>
+            <button class="btn XButton" onClick="closeModal('MIndLessons')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                </svg>
+            </button>
+        </div>
+        <div class="d-flex" style="flex-flow: column">
+                <div class="DivButtons">
+                    <div class="PayTab IndLinkM PayTabActive" data="IndMS" id="IndMS">Szczegóły zajęć</div>
+                    <div class="PayTab IndLinkM" data="IndMD" id="IndMD">Dane do płatności</div>
+                </div>
+                <div class="container">
+                    <div id="ContainerIndMS" class="PayCardM">
+                        <div class="PayInfo">
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/cap.svg')}}"></div>
+                                <div>Pojedyncze zajęcia</div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/calendar.svg')}}"></div>
+                                <div><span id="IndDataM">01.09.2023</span> (<span id="IndDzienM">piątek</span>), <span id="IndGodzM">09:00 - 9:55</span></div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="/images/lectors/{{$lector->photo}}" style='width:48px; height: 48px; object-fit: cover;'></div>
+                                <div>{{$lector->name}}</div>
+                            </div>     
+                        </div>
+                       <div>
+                            <div>
+                                <label class="SelectLabel">Rodzaj zajęć</label>
+                                <select class="select" id="LessonTypeM" onChange="PriceCheck()">
+                                    <option value="1">Indywidualne</option>
+                                    <option value="4">W parach</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="SelectLabel">Długość trwania</label>
+                                <select class="select" id="LessonDurationM" onChange="PriceCheck()">
+                                    <option value="2" id="M60">55 minut</option>
+                                    <option value="3" id="M90">85 minut</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="SelectLabel">Język</label>
+                                <select class="select" id="LessonLanguageM" >
+                                    @foreach($languages as $language)
+                                        <option value="{{$language->id}}">{{$language->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
+                                <label class="SelectLabel">Przygotowanie do egzaminu</label>
+                                <select class="select" id="LessonCertyficateM" onChange="PriceCheck()">
+                                    <option value="0">Nie</option>
+                                    <option value="1">Tak</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="AmountDiv">
+                            Cena: <span id="cenaM">99</span> zł
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ContainerIndMD" class="PayCardM">
+                <div>
+                    <label class="SelectLabel">Imię i nazwisko</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
+                    <input class="input" id="NameIndM" onchange="fixSelects()" required>
+                </div>
+                <div>
+                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <input class="input" id="AdressIndM" onchange="fixSelects()">
+                </div>
+                <div>
+                    <label class="SelectLabel">Kod pocztowy</label>
+                    <input class="input" id="PostCodeIndM" onchange="fixSelects()">
+                </div>
+                <div>
+                    <label class="SelectLabel">Miasto</label>
+                    <input class="input" id="CityIndM" onchange="fixSelects()">
+                </div>
+                <div>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <input class="input" id="NIPIndM" onchange="fixSelects()">
+                </div>
+                
+                
+            </div>
+            <div class="d-flex" style="gap: 12px; flex-flow: column">
+                <button id="backButtonM1" onClick="closeModal('MIndLessons')" class="btn LL-button LL-button-secondary W-100">Wróć</button>
+                <button id="backButtonM2" style="display: none" data="IndMS" class="IndLinkM btn LL-button LL-button-secondary W-100">Wróć</button>
+                <button id="nextButtonM1" data="IndMD" class="IndLinkM btn LL-button LL-button-primary w-100">Dalej</button>
+                <button id="nextButtonM2" style="display: none" class="btn LL-button LL-button-primary w-100">Przejdź do płatności</button>
+            </div>
+    </div> 
+</div>
+<!-- Cykliczne -->
+<div class="StickDiv" id="MCyklLessons" style="display: none">
+    <div class='desktop'>
+        <div class='d-flex' style="flex-flow: column; gap:60px;">
+            <div class="DivHead">
+                <span class="HeadText">Szczegóły rezerwacji</span>
+                <button class="btn XButton" onClick="closeModal('MCyklLessons')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="d-flex" style="flex-flow: column">
+                <div class="DivButtons">
+                    <div class="PayTab CyklLink PayTabActive" data="CyklS" id="CyklS" data="CyklM">Szczegóły zajęć</div>
+                    <div class="PayTab CyklLink" data="CyklD" id="CyklD">Dane do płatności</div>
+                </div>
+                <div class="container">
+                    <div id="ContainerCyklS" class="PayCard">
+                        <div class="PayInfo">
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/cap.svg')}}"></div>
+                                <div>Cykliczne zajęcia</div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/calendar.svg')}}"></div>
+                                <div><span id="CyklData">01.09.2023</span> (<span id="CyklDzien">piątek</span>), <span id="CyklGodz">09:00 - 9:55</span></div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="/images/lectors/{{$lector->photo}}" style='width:48px; height: 48px; object-fit: cover;'></div>
+                                <div>{{$lector->name}}</div>
+                            </div>     
+                        </div>
+                       <div>
+                            <div class="PayCustom">
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Rodzaj zajęć</label>
+                                    <select class="select" id="LessonTypeCyklD" onChange="PriceCheckCykl()">
+                                        <option value="1">Indywidualne</option>
+                                        <option value="4">W parach</option>
+                                    </select>
+                                </div>
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Długość trwania</label>
+                                    <select class="select" id="LessonDurationCyklD" onChange="PriceCheckCykl()">
+                                        <option value="2" id="DC60">55 minut</option>
+                                        <option value="3" id="DC90">85 minut</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="PayCustom">
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Język</label>
+                                    <select class="select" id="LessonLanguageCyklD">
+                                        @foreach($languages as $language)
+                                            <option value="{{$language->id}}">{{$language->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="PayRow">
+                                    <label class="SelectLabel">Przygotowanie do egzaminu</label>
+                                    <select class="select" id="LessonCertyficateCyklD" onChange="PriceCheckCykl()">
+                                        <option value="0">Nie</option>
+                                        <option value="1">Tak</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="AmountDiv">
+                            Cena: <span id="cenaCyklD">99</span> zł
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ContainerCyklD" class="PayCard">
+                <div>
+                    <label class="SelectLabel">Imię i nazwisko</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
+                    <input class="input" id="NameCyklD" onchange="fixSelectsCykl()" required>
+                </div>
+                <div>
+                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <input class="input" id="AdressCyklD" onchange="fixSelectsCykl()">
+                </div>
+                <div class="PayCustom">
+                    <div class="PayRow">
+                        <label class="SelectLabel">Kod pocztowy</label>
+                        <input class="input" id="PostCodeCyklD" onchange="fixSelectsCykl()">
+                    </div>
+                    <div class="PayRow">
+                        <label class="SelectLabel">Miasto</label>
+                        <input class="input" id="CityCyklD" onchange="fixSelectsCykl()">
+                    </div>
+                </div>
+                <div>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <input class="input" id="NIPCyklD" onchange="fixSelectsCykl()">
+                </div>
+            </div>
+            <div class="PaymentButtons">
+                <button id="CyklbackButton1" onClick="closeModal('MCyklLessons')" class="btn LL-button LL-button-secondary">Wróć</button>
+                <button id="CyklbackButton2" style="display: none" data="CyklS" class="CyklLink btn LL-button LL-button-secondary">Wróć</button>
+                <button id="CyklnextButton1" data="CyklD" class="CyklLink btn LL-button LL-button-primary">Dalej</button>
+                <button id="CyklnextButton2" style="display: none" class="btn LL-button LL-button-primary">Przejdź do płatności</button>
+            </div>
+        </div>
+    </div>
+    <div class='mobile mobileFlex' style="width: 100%;">
+        <div class="DivHead">
+            <span class="HeadText">Szczegóły rezerwacji</span>
+            <button class="btn XButton" onClick="closeModal('MCyklLessons')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
+                </svg>
+            </button>
+        </div>
+        <div class="d-flex" style="flex-flow: column">
+                <div class="DivButtons">
+                    <div class="PayTab CyklLinkM PayTabActive" data="CyklMS" id="CyklMS">Szczegóły zajęć</div>
+                    <div class="PayTab CyklLinkM" data="CyklMD" id="CyklMD">Dane do płatności</div>
+                </div>
+                <div class="container">
+                    <div id="ContainerCyklMS" class="PayCardM">
+                        <div class="PayInfo">
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/cap.svg')}}"></div>
+                                <div>Pojedyncze zajęcia</div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="{{asset('images/svg/calendar.svg')}}"></div>
+                                <div><span id="CyklDataM">01.09.2023</span> (<span id="CyklDzienM">piątek</span>), <span id="CyklGodzM">09:00 - 9:55</span></div>
+                            </div>    
+                            <div class="PayLabel">
+                                <div class="PayIcon"><img src="/images/lectors/{{$lector->photo}}" style='width:48px; height: 48px; object-fit: cover;'></div>
+                                <div>{{$lector->name}}</div>
+                            </div>     
+                        </div>
+                       <div>
+                            <div>
+                                <label class="SelectLabel">Rodzaj zajęć</label>
+                                <select class="select" id="LessonTypeCyklM" onChange="PriceCheckCykl()">
+                                    <option value="1">Indywidualne</option>
+                                    <option value="4">W parach</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="SelectLabel">Długość trwania</label>
+                                <select class="select" id="LessonDurationCyklM" onChange="PriceCheckCykl()">
+                                    <option value="2" id="MC60">55 minut</option>
+                                    <option value="3" id="MC90">85 minut</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="SelectLabel">Język</label>
+                                <select class="select" id="LessonLanguageCyklM" >
+                                    @foreach($languages as $language)
+                                        <option value="{{$language->id}}">{{$language->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
+                                <label class="SelectLabel">Przygotowanie do egzaminu</label>
+                                <select class="select" id="LessonCertyficateCyklM" onChange="PriceCheckCykl()">
+                                    <option value="0">Nie</option>
+                                    <option value="1">Tak</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="SelectLabel">Ilość zajęć</label>
+                                <input class="select" typ="number" step="1" id="LessonAmountCyklM" onChange="PriceCheckCykl()">
+                            </div>
+                        </div>
+                        <div class="AmountDiv">
+                            Cena: <span id="cenaCyklM">99</span> zł
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ContainerCyklM" class="PayCardM">
+                <div>
+                    <label class="SelectLabel">Imię i nazwisko</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
+                    <input class="input" id="NameCyklM" onchange="fixSelectsCykl()" required>
+                </div>
+                <div>
+                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <input class="input" id="AdressCyklM" onchange="fixSelectsCykl()">
+                </div>
+                <div>
+                    <label class="SelectLabel">Kod pocztowy</label>
+                    <input class="input" id="PostCodeCyklM" onchange="fixSelectsCykl()">
+                </div>
+                <div>
+                    <label class="SelectLabel">Miasto</label>
+                    <input class="input" id="CityCyklM" onchange="fixSelectsCykl()">
+                </div>
+                <div>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <input class="input" id="NIPCyklM" onchange="fixSelectsCykl()">
+                </div>
+                
+                
+            </div>
+            <div class="d-flex" style="gap: 12px; flex-flow: column">
+                <button id="backButtonM1" onClick="closeModal('MCyklLessons')" class="btn LL-button LL-button-secondary W-100">Wróć</button>
+                <button id="backButtonM2" style="display: none" data="CyklMS" class="CyklLinkM btn LL-button LL-button-secondary W-100">Wróć</button>
+                <button id="nextButtonM1" data="CyklMD" class="CyklLinkM btn LL-button LL-button-primary w-100">Dalej</button>
+                <button id="nextButtonM2" style="display: none" class="btn LL-button LL-button-primary w-100">Przejdź do płatności</button>
+            </div>
     </div> 
 </div>
 <!-- Language modal -->
@@ -683,32 +1097,168 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 
-<script type="text/javascript">
-    	$(document).ready(function(){
+<script>
+    let LessonAmount = {!! json_encode($lessonAmount) !!};
+    let Savedhour,less60,less90,dzienNazwa,ZajeciaData,ScreenType;
+    let PaymentType = '';
+    // console.log(Languages);
+    let kwota = 0;
+    let ok = true;
+    $(document).ready(function () {
+
+        $(".Paymentcard").each(function(index, value){
+            $('.Paymentcard').hide();
+        });
+        $('#1').show();
+        $(".page-link").on('click', function(){
             
-    		//Hide all cards
-    		$(".Paymentcard").each(function(index, value){
-    			$('.Paymentcard').hide();
-    		});
-            $('#1').show();
-    		$(".page-link").on('click', function(){
+            $(".page-link").each(function(index, value){
+                $(value).parent().removeClass("active");
+            });
+
+            //Hide all cards
+            $(".Paymentcard").each(function(index, value){
+                $('.Paymentcard').hide();
+            })
+
+            $(this).parent().addClass("active");
+            var cardId = "#" + $(this)[0].attributes.data.value;
+            // e.target.attributes.data.value
+            $(cardId).show();
+        });
+        // 
+            $(".PayCard").each(function(index, value){
+                $('.PayCard').hide();
+            });
+            $(".PayCardM").each(function(index, value){
+                $('.PayCardM').hide();
+            });
+            $('#ContainerIndS').show();
+            $('#ContainerIndMS').show();
+            $(".IndLink").on('click', function(){
                 
-    			$(".page-link").each(function(index, value){
-    				$(value).parent().removeClass("active");
-    			});
+                $(".IndLink").each(function(index, value){
+                    $(value).removeClass("PayTabActive");
+                });
 
-    			//Hide all cards
-	    		$(".Paymentcard").each(function(index, value){
-	    			$('.Paymentcard').hide();
-	    		})
-  
-    			$(this).parent().addClass("active");
-    			var cardId = "#" + $(this)[0].attributes.data.value;
+                //Hide all cards
+                $(".PayCard").each(function(index, value){
+                    $('.PayCard').hide();
+                })
+                if($(this)[0].attributes.data.value =='IndD'){
+                   document.getElementById('nextButton1').style.display = 'none';
+                   document.getElementById('backButton1').style.display = 'none';
+                   document.getElementById('nextButton2').style.display = 'block';
+                   document.getElementById('backButton2').style.display = 'block';
+                //    button.setAttribute( "onClick", "javascript: Boo();" ); //tutaj koniec
+                }
+                else{
+                    document.getElementById('nextButton1').style.display = 'block';
+                   document.getElementById('backButton1').style.display = 'block';
+                   document.getElementById('nextButton2').style.display = 'none';
+                   document.getElementById('backButton2').style.display = 'none';
+                }
+                
+                let id = "#"+$(this)[0].attributes.data.value;
+                $(id).addClass("PayTabActive");
+                var cardId = "#" +'Container'+ $(this)[0].attributes.data.value;
                 // e.target.attributes.data.value
-    			$(cardId).show();
-    		});
+                $(cardId).show();
+            });
+            $(".IndLinkM").on('click', function(){
+                
+                $(".IndLinkM").each(function(index, value){
+                    $(value).removeClass("PayTabActive");
+                });
 
-    	});
+                //Hide all cards
+                $(".PayCardM").each(function(index, value){
+                    $('.PayCardM').hide();
+                })
+                if($(this)[0].attributes.data.value =='IndMD'){
+                   document.getElementById('nextButtonM1').style.display = 'none';
+                   document.getElementById('backButtonM1').style.display = 'none';
+                   document.getElementById('nextButtonM2').style.display = 'block';
+                   document.getElementById('backButtonM2').style.display = 'block';
+                //    button.setAttribute( "onClick", "javascript: Boo();" ); //tutaj koniec
+                }
+                else{
+                    document.getElementById('nextButtonM1').style.display = 'block';
+                   document.getElementById('backButtonM1').style.display = 'block';
+                   document.getElementById('nextButtonM2').style.display = 'none';
+                   document.getElementById('backButtonM2').style.display = 'none';
+                }
+                
+                let id = "#"+$(this)[0].attributes.data.value;
+                $(id).addClass("PayTabActive");
+                var cardId = "#" +'Container'+ $(this)[0].attributes.data.value;
+                // e.target.attributes.data.value
+                $(cardId).show();
+            });
+        // 
+        // cykliczne
+        $('#ContainerCyklS').show();
+            $('#ContainerCyklMS').show();
+            $(".CyklLink").on('click', function(){
+                
+                $(".CyklLink").each(function(index, value){
+                    $(value).removeClass("PayTabActive");
+                });
+
+                //Hide all cards
+                $(".PayCard").each(function(index, value){
+                    $('.PayCard').hide();
+                })
+                if($(this)[0].attributes.data.value =='CyklD'){
+                   document.getElementById('CyklnextButton1').style.display = 'none';
+                   document.getElementById('CyklbackButton1').style.display = 'none';
+                   document.getElementById('CyklnextButton2').style.display = 'block';
+                   document.getElementById('CyklbackButton2').style.display = 'block';
+                //    button.setAttribute( "onClick", "javascript: Boo();" ); //tutaj koniec
+                }
+                else{
+                    document.getElementById('CyklnextButton1').style.display = 'block';
+                   document.getElementById('CyklbackButton1').style.display = 'block';
+                   document.getElementById('CyklnextButton2').style.display = 'none';
+                   document.getElementById('CyklbackButton2').style.display = 'none';
+                }
+                
+                let id = "#"+$(this)[0].attributes.data.value;
+                $(id).addClass("PayTabActive");
+                var cardId = "#" +'Container'+ $(this)[0].attributes.data.value;
+                // e.target.attributes.data.value
+                $(cardId).show();
+            });
+            $("CyklLinkM").on('click', function(){
+                
+                $(".CyklLinkM").each(function(index, value){
+                    $(value).removeClass("PayTabActive");
+                });
+
+                //Hide all cards
+                $(".PayCardM").each(function(index, value){
+                    $('.PayCardM').hide();
+                })
+                if($(this)[0].attributes.data.value =='CyklMD'){
+                   document.getElementById('CyklnextButtonM1').style.display = 'none';
+                   document.getElementById('CyklbackButtonM1').style.display = 'none';
+                   document.getElementById('CyklnextButtonM2').style.display = 'block';
+                   document.getElementById('CyklbackButtonM2').style.display = 'block';
+                //    button.setAttribute( "onClick", "javascript: Boo();" ); //tutaj koniec
+                }
+                else{
+                    document.getElementById('CyklnextButtonM1').style.display = 'block';
+                   document.getElementById('CyklbackButtonM1').style.display = 'block';
+                   document.getElementById('CyklnextButtonM2').style.display = 'none';
+                   document.getElementById('CyklbackButtonM2').style.display = 'none';
+                }
+                
+                let id = "#"+$(this)[0].attributes.data.value;
+                $(id).addClass("PayTabActive");
+                var cardId = "#" +'Container'+ $(this)[0].attributes.data.value;
+                // e.target.attributes.data.value
+                $(cardId).show();
+            });
 
         let touchstartX = 0
         let touchendX = 0
@@ -718,7 +1268,6 @@
             let now = active[0].childNodes[0].attributes.data.value;
             let cardId;
             let id;
-            console.log('now: '+now);
             if (touchendX < touchstartX && Math.abs(roznica)>20){
                 if(now != 3){
                     cardId = "#" + (parseInt(now) + 1);
@@ -753,36 +1302,16 @@
         document.addEventListener('touchstart', e => {
             touchstartX = e.changedTouches[0].screenX;
             roznica = touchstartX - touchendX;
-        })
+        });
 
         document.addEventListener('touchend', e => {
             touchendX = e.changedTouches[0].screenX;
             roznica = touchstartX - touchendX;
         checkDirection();
-        })
-    </script>
-<script>
-    let LessonAmount = {!! json_encode($lessonAmount) !!};
-   
-    // console.log(Languages);
-    let kwota = 0;
-    let ok = true;
-    $(document).ready(function () {
-
-        $('.timepicker').timepicker({
-            timeFormat: 'HH:mm',
-            interval: 15,
-            minTime: '7:00am',
-            maxTime: '8:30pm',
-            defaultTime: '11',
-            startTime: '7:00',
-            dynamic: false,
-            dropdown: true,
-            scrollbar: true
         });
 
-
-
+       
+     
         function OpenModal(id){
             document.getElementById(id).style.display = 'block';
             document.getElementById('content').style.pointerEvents = "none";
@@ -797,6 +1326,82 @@
             validTermins(); checkAmount();
         }
     })
+    function openInd(){
+        PaymentType = 'Indywidualne';
+        closeModal('PaymentTable');
+        document.getElementById('container').style.filter = 'blur(15px)';
+        window.scrollTo(0, 0);
+        PriceCheck();
+        document.getElementById('IndData').innerText = ZajeciaData;
+        document.getElementById('IndDzien').innerText = dzienNazwa;
+        document.getElementById('IndGodz').innerText = Savedhour;
+        document.getElementById('IndDataM').innerText = ZajeciaData;
+        document.getElementById('IndDzienM').innerText = dzienNazwa;
+        document.getElementById('IndGodzM').innerText = Savedhour;
+        let test = new Date('2024-01-01 '+Savedhour);
+        let test2 = new Date(test);
+        test2.setMinutes ( test.getMinutes() + 30 );
+            document.getElementById('MIndLessons').style.display = 'block';
+            if(less60 == 0){
+                document.getElementById('M60').disabled = true;
+                document.getElementById('D60').disabled = true;
+            }
+            else{
+                document.getElementById('M60').disabled = false;
+                document.getElementById('D60').disabled = false; 
+            }
+            if(less90 == 0){
+                document.getElementById('M90').disabled = true;
+                document.getElementById('D90').disabled = true;
+            }
+            else{
+                document.getElementById('M90').disabled = false;
+                document.getElementById('D90').disabled = false; 
+            }
+            // tu selecty
+        }
+    function MCyklLessons(){
+        PaymentType = 'Cykliczne';
+        closeModal('PaymentTable');
+        document.getElementById('container').style.filter = 'blur(15px)';
+        window.scrollTo(0, 0);
+        PriceCheckCykl();
+        document.getElementById('CyklData').innerText = ZajeciaData;
+        document.getElementById('CyklDzien').innerText = dzienNazwa;
+        document.getElementById('CyklGodz').innerText = Savedhour;
+        document.getElementById('CyklDataM').innerText = ZajeciaData;
+        document.getElementById('CyklDzienM').innerText = dzienNazwa;
+        document.getElementById('CyklGodzM').innerText = Savedhour;
+        let test = new Date('2024-01-01 '+Savedhour);
+        let test2 = new Date(test);
+        test2.setMinutes ( test.getMinutes() + 30 );
+            document.getElementById('MCyklLessons').style.display = 'block';
+            if(less60 == 0){
+                document.getElementById('MC60').disabled = true;
+                document.getElementById('DC60').disabled = true;
+            }
+            else{
+                document.getElementById('MC60').disabled = false;
+                document.getElementById('DC60').disabled = false; 
+            }
+            if(less90 == 0){
+                document.getElementById('MC90').disabled = true;
+                document.getElementById('DC90').disabled = true;
+            }
+            else{
+                document.getElementById('MC90').disabled = false;
+                document.getElementById('DC90').disabled = false; 
+            }
+            // tu selecty
+        }
+    function OpenHour(hour,dataZ,dzien,l60,l90){
+            Savedhour = hour;
+            less60 = l60;
+            less90 = l90;
+            dzienNazwa = dzien;
+            ZajeciaData = dataZ;
+            OpenPaymentTable();
+        }
     function goTo(week,active){
         document.getElementById('Week'+active).style.display = 'none';
         document.getElementById('Week'+week).style.display = 'block';
@@ -915,4 +1520,90 @@
             const element = document.getElementById("calendarInfo");
             element.scrollIntoView();
         }
+        function PriceCheck(){
+            $.ajax({
+            type: "POST",
+            url: '../api/Paymentprice',
+            data: {
+                lector_type_id: '{{$lector->lector_type_id}}', 
+                duration: document.getElementById('LessonDuration'+ScreenType).value, 
+                cert: document.getElementById('LessonCertyficate'+ScreenType).value,
+                rodzaj: document.getElementById('LessonType'+ScreenType).value
+                },
+            })
+            .done(function( data) {
+                kwota = data;
+                document.getElementById('cenaM').innerText = kwota;
+                document.getElementById('cenaD').innerText = kwota;
+                fixSelects();
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+        }
+        function PriceCheckCykl(){
+            $.ajax({
+            type: "POST",
+            url: '../api/Paymentprice',
+            data: {
+                lector_type_id: '{{$lector->lector_type_id}}', 
+                duration: document.getElementById('LessonDuration'+ScreenType).value, 
+                cert: document.getElementById('LessonCertyficate'+ScreenType).value,
+                rodzaj: document.getElementById('LessonType'+ScreenType).value
+                },
+            })
+            .done(function( data) {
+                kwota = data;
+                document.getElementById('cenaCyklM').innerText = kwota;
+                document.getElementById('cenaCyklD').innerText = kwota;
+                fixSelectsCykl();
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+        }
+        function fixSelects(){
+            if(ScreenType == 'M'){
+                type2 = 'D';
+            }else{
+                type2 = 'M';
+            }
+            document.getElementById('LessonDuration'+type2).value = document.getElementById('LessonDuration'+ScreenType).value ;
+            document.getElementById('LessonCertyficate'+type2).value = document.getElementById('LessonCertyficate'+ScreenType).value;
+            document.getElementById('LessonType'+type2).value = document.getElementById('LessonType'+ScreenType).value;
+            document.getElementById('LessonLanguage'+type2).value = document.getElementById('LessonLanguage'+ScreenType).value;
+            
+            document.getElementById('NameInd'+type2).value = document.getElementById('NameInd'+ScreenType).value;
+            document.getElementById('AdressInd'+type2).value = document.getElementById('AdressInd'+ScreenType).value;
+            document.getElementById('PostCodeInd'+type2).value = document.getElementById('PostCodeInd'+ScreenType).value;
+            document.getElementById('CityInd'+type2).value = document.getElementById('CityInd'+ScreenType).value;
+            document.getElementById('NIPInd'+type2).value = document.getElementById('NIPInd'+ScreenType).value;
+        }
+        function fixSelectsCykl(){
+            if(ScreenType == 'M'){
+                type2 = 'D';
+            }else{
+                type2 = 'M';
+            }
+            document.getElementById('LessonDurationCykl'+type2).value = document.getElementById('LessonDurationCykl'+ScreenType).value ;
+            document.getElementById('LessonCertyficateCykl'+type2).value = document.getElementById('LessonCertyficateCykl'+ScreenType).value;
+            document.getElementById('LessonTypeCykl'+type2).value = document.getElementById('LessonTypeCykl'+ScreenType).value;
+            document.getElementById('LessonLanguageCykl'+type2).value = document.getElementById('LessonLanguageCykl'+ScreenType).value;
+            
+            document.getElementById('NameCykl'+type2).value = document.getElementById('NameCykl'+ScreenType).value;
+            document.getElementById('AdressCykl'+type2).value = document.getElementById('AdressCykl'+ScreenType).value;
+            document.getElementById('PostCodeCykl'+type2).value = document.getElementById('PostCodeCykl'+ScreenType).value;
+            document.getElementById('CityCykl'+type2).value = document.getElementById('CityCykl'+ScreenType).value;
+            document.getElementById('NIPCykl'+type2).value = document.getElementById('NIPCykl'+ScreenType).value;
+        }
+go();
+window.addEventListener('resize', go());
+function go(){
+    if(document.documentElement.clientWidth > 800){
+        ScreenType = 'D';
+    }
+    else{
+        ScreenType = 'M';
+    }
+}
 </script>

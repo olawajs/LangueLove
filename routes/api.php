@@ -31,4 +31,5 @@ Route::resource('lesson_durations', LessonDurationController::class);
 Route::resource('packets', DiscountPacketController::class);
 
 Route::post('count', [App\Http\Controllers\MainController::class, 'count'])->name('count');
+Route::post('Paymentprice', [App\Http\Controllers\MainController::class, 'Paymentprice'])->name('Paymentprice');
 Route::post('validTermins', [App\Http\Controllers\MainController::class, 'validTermins'])->name('validTermins');

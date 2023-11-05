@@ -125,8 +125,8 @@ input[type=time] {
                             Poniedziałek:
                         </td>
                         <td>
-                            <input class="form-control" type="time" id="from_1" name="from_1" value="00:00" required>
-                            <label for="pon_to">Do: </label><input class="form-control" type="time" id="to_1" name="to_1"  value="00:00" required>
+                            <input class="form-control" type="time" id="from_1" name="from_1" value="00:00" step="1800" required>
+                            <label for="pon_to">Do: </label><input class="form-control" type="time" id="to_1" name="to_1"  value="00:00" step="1800" required>
                         </td>
                     </tr>
                     <tr>
@@ -134,8 +134,8 @@ input[type=time] {
                             Wtorek:
                         </td>
                         <td>
-                            <input class="form-control" type="time" id="from_2" name="from_2" value="00:00" required>
-                            <input class="form-control" type="time" id="to_2" name="to_2" value="00:00" required>
+                            <input class="form-control" type="time" id="from_2" name="from_2" value="00:00" step="1800" required>
+                            <input class="form-control" type="time" id="to_2" name="to_2" value="00:00" step="1800" required>
                         </td>
                     </tr>
                     <tr>
@@ -143,8 +143,8 @@ input[type=time] {
                             Środa:
                         </td>
                         <td>
-                            <input class="form-control" type="time" id="from_3" name="from_3" value="00:00" required>
-                            <input class="form-control" type="time" id="to_3" name="to_3" value="00:00" required>
+                            <input class="form-control" type="time" id="from_3" name="from_3" value="00:00" step="1800" required>
+                            <input class="form-control" type="time" id="to_3" name="to_3" value="00:00" step="1800" required>
                         </td>
                     </tr>
                     <tr>
@@ -152,8 +152,8 @@ input[type=time] {
                             Czwartek:
                         </td>
                         <td>
-                            <input class="form-control" type="time" id="from_4" name="from_4" value="00:00" required>
-                            <input class="form-control" type="time" id="to_4" name="to_4" value="00:00" required>
+                            <input class="form-control" type="time" id="from_4" name="from_4" value="00:00" step="1800" required>
+                            <input class="form-control" type="time" id="to_4" name="to_4" value="00:00" step="1800" required>
                         </td>
                     </tr>
                     <tr>
@@ -161,8 +161,8 @@ input[type=time] {
                             Piątek:
                         </td>
                         <td>
-                            <input class="form-control" type="time" id="from_5" name="from_5" value="00:00" required>
-                            <input class="form-control" type="time" id="to_5" name="to_5" value="00:00" required>
+                            <input class="form-control" type="time" id="from_5" name="from_5" value="00:00" step="1800" required>
+                            <input class="form-control" type="time" id="to_5" name="to_5" value="00:00" step="1800" required>
                         </td>
                     </tr>
                     <tr>
@@ -170,8 +170,8 @@ input[type=time] {
                             Sobota:
                         </td>
                         <td>
-                            <input class="form-control" type="time" id="from_6" name="from_6" value="00:00" required>
-                        <input class="form-control" type="time" id="to_6" name="to_6" value="00:00" required>
+                            <input class="form-control" type="time" id="from_6" name="from_6" value="00:00" step="1800" required>
+                        <input class="form-control" type="time" id="to_6" name="to_6" value="00:00" step="1800" required>
                         </td>
                     </tr>
                     <tr>

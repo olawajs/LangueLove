@@ -133,7 +133,9 @@ class PaymentController extends Controller
         $request->session()->put('payment_id', $payment->id);
 
       if($PromoCode != ''){
-        Code::where('code',$PromoCode)->update(['use_date' => Carbon::now(),'payment_id' => $payment->id ]);
+        Code::where('code',$PromoCode)
+             ->WhereNull('use_date')
+             ->update(['use_date' => Carbon::now(),'payment_id' => $payment->id ]);
       }
 
         $suma_zamowienia = $kwota*100 ; //wartość musi być podana w groszach

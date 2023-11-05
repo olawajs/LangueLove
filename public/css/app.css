@@ -81,6 +81,8 @@
   --langue-love-black: #2B2B33;
   --langue-love-beige: #FFF8F0;
   --langue-love-light-grey: #D7D7D7;
+  --langue-love-dark-grey: #969696;
+  --langue-love-light-pink: #F9EEF1;
 }
 *,
 *::before,
@@ -12100,6 +12102,23 @@ footer{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: none;
+}
+.StickDiv{
+  /* display: inline-flex; */
+  padding: 80px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  min-width: 700px;
+  /* height: 560px; */
+  border-radius: 32px;
+  background: var(--langue-love-beige, #FFF8F0);
+  box-shadow: 20px 20px 45px 0px rgba(0, 0, 0, 0.10);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   /* display: none; */
 }
 .HeadText{
@@ -12188,11 +12207,104 @@ footer{
   font-weight: 500;
   line-height: 22px;
 }
+.PayTab{
+  display: flex;
+  height: 48px;
+  padding-bottom: 0px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--langue-love-dark-grey);
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+.PayIcon{
+  display: flex;
+  width: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.PayInfo{
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  align-self: stretch;
+  border-radius: 16px;
+  border: 1px solid var(--langue-love-light-grey);
+  margin-top: 40px;
+}
+.PayLabel{
+  color: var(--langue-love-black, #2B2B33);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 48px;
+}
+.PayCustom{
+  display: flex;
+  gap: 32px;
+}
+.PayRow{
+  width: 50%;
+}
+.PayCard{
+  display: flex;
+  flex-flow: column;
+  gap: 32px;
+}
+.PayCardM{
+  display: flex;
+  flex-flow: column;
+  gap: 32px;
+}
+.AmountDiv{
+  display: flex;
+  padding: 12px 0px;
+  align-items: flex-start;
+  gap: 10px;
+  justify-content: center;
+  border-radius: 16px;
+  background: var(--langue-love-light-pink, #F9EEF1);
+  color: var(--langue-love-pink, #C75470);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+.PaymentButtons{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+  padding: 12px;
+}
+.SelectLabel{
+  color: var(--langue-love-dark-grey, #969696);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
 .PriceTabActive{
   color: var(--langue-love-black, #2B2B33);
   font-weight: 700;
   border-bottom: 3px solid var(--langue-love-pink, #C75470);
-
+}
+.PayTabActive{
+  color: var(--langue-love-black, #2B2B33);
+  font-weight: 700;
+  border-bottom: 3px solid var(--langue-love-pink, #C75470);
 }
 .DivButtons{
   display: flex;
@@ -12243,6 +12355,9 @@ footer{
   align-items: center;
   gap: 12px;
 }
+select option:disabled {
+  background-color: #6e050557;
+}
 @media only screen and (max-width: 1320px) {
   /* .VidInfoContainer{
     display: none;
@@ -12277,10 +12392,17 @@ footer{
     height: unset;
     margin-top: 100px;
   }
+  .StickDiv{
+    width: 100% !important;
+    min-width: unset;
+    padding: 24px;
+    height: unset;
+    margin-top: 100px;
+  }
   .HeadText{
     font-size: 24px;
   }
-  .HeadText2{
+  .HeadText2,.PayTab{
     font-size: 16px;
   }
   .CrossLine{
@@ -12461,8 +12583,46 @@ footer{
   }
 
 }
-
-
+.input{
+  padding: 12px;
+  color: var(--langue-love-black, #2B2B33);
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid var(--langue-love-light-grey, #D7D7D7);
+  background: none;
+  width: 100%;
+}
+.input:focus{
+  outline: none !important;
+  border-bottom: 1px solid var(--langue-love-purple, #3C0079);
+}
+.select{
+  display: flex;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  align-self: stretch;
+  color: var(--langue-love-black, #2B2B33);
+  font-size: 14px;
+  border: none;
+  border-bottom-width: medium;
+  border-bottom-style: none;
+  border-bottom-color: currentcolor;
+  border-bottom: 1px solid var(--langue-love-light-grey, #D7D7D7);
+  background: url("../images/svg/drop.svg")  no-repeat right;
+  -webkit-appearance: none;
+  background-position-x: calc(100% - 12px);
+  width: 100%;
+}
+.select > option{
+  color: #000;
+  font-family: Montserrat !important;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
 
 
 /* // flags */

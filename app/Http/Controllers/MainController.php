@@ -12,6 +12,7 @@ use App\Models\PriceType;
 use App\Models\LessonDuration;
 use App\Models\LessonType;
 use App\Models\LessonsBank;
+use App\Models\LectorPrices;
 use App\Models\Price;
 use App\Models\DiscountPacket;
 use App\Models\CalendarEvent;
@@ -150,6 +151,21 @@ class MainController extends Controller
                         ->price;
         
         return $price*$ile;
+    }
+    public function Paymentprice(Request $request)
+    {
+        $lector_type_id = $request->lector_type_id;
+        $duration_id = $request->duration;
+        $cert = $request->cert;
+        $rodzaj_id = $request->rodzaj;
+        
+        $price = LectorPrices::where('lector_type_id', $lector_type_id)
+        ->where('type_id',$rodzaj_id)
+        ->where('duration_id',$duration_id)
+        ->where('certification',$cert)
+        ->first()
+        ->price;
+        return $price;
     }
     public function validTermins(Request $request)
     {

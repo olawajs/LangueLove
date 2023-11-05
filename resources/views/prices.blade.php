@@ -290,6 +290,13 @@
                 <span class="napis">NIP: </span>
                 <input type="text" class="form-control" name="nip" id="nip">
             </div>
+            <div class="box" style="margin-bottom: 10px">
+                <span class="napis" style="width: 100%; display: inline-block;">Posiadasz kod rabatowy? Wpisz go poniżej : </span>
+                <input type="text" class="form-control" style="width: calc(100% - 110px); float: left" name="code" id="code">
+                <button class="btn btn-secondary" style="width: 100px; margin-left: 10px" onclick="checkCode()">Użyj kod</button>
+                <span id="codeResponse" class="napis" style="width: 100%; display: inline-block;"></span>
+            
+              </div>
           <button class="btn btn-secondary  mb-3" onclick="buy()">Przejdź do płatności</button>
           <button class="btn btn-primary  mb-3" onclick="CloseModal('BuyModal')">ANULUJ</button>
         </div>
@@ -470,7 +477,10 @@ function searchFor(type)
     var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
     if(!AuthUser){
         window.location.href = "{{ route('login')}}";
-    }else{
+    }else if(document.getElementById('name').value == '' || document.getElementById('street').value == '' ||  document.getElementById('postcode').value == '' || document.getElementById('city').value =='' ){
+      alert('Prosimy o wypełnienie danych do faktury.');
+    }
+    else{
       let form = document.createElement('form');
         form.setAttribute('method','POST');
         form.setAttribute('action',"{{ route('transaction') }}");
@@ -558,5 +568,40 @@ function searchFor(type)
         document.getElementById(id).style.display = 'none';
         document.getElementById('topper').style.pointerEvents = "";
         document.getElementById('topper').style.opacity = "1";
+    }
+    function checkCode(){
+      let code = document.getElementById('code').value;
+      let date = new Date();
+      if(typeV == 4 && code.toUpperCase() == 'LANGUEFRIDAY' && date.getFullYear() == '2023' && date.getMonth() == '10' && date.getDate() == '4'){
+      
+        $.ajax({
+            type: "POST",
+            url: '../checkPacketCode',
+            data: {
+                code: code,
+                _token: "{{ csrf_token() }}",
+            },
+            })
+            .done(function( data) {
+                if(data == 1){
+                  let tab = letdesc['1'+','+timeV+','+certyficateV+','+amountV];
+                  let opis='';
+                  if(languageV == 1){
+                    price = tab[0];
+                  }else{
+                    price = tab[1]; 
+                  }
+                  document.getElementById('codeResponse').innerText = 'Kod użyty pomyśnie! Nowa cena to: '+price+'zł';
+                }
+                else{
+                  document.getElementById('codeResponse').innerText = 'Kod został wykorzystany';
+                }
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+      }else{
+        document.getElementById('codeResponse').innerText = 'Błędny kod';
+      }
     }
 </script>

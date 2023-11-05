@@ -208,7 +208,7 @@ class AdministratorController extends Controller
             $end = new Carbon($cF->end);
             $end = $end->subMinutes(60);
             $endHour = $end->format('H:i');
-            while($startHour <= $endHour){
+            while($startHour < $endHour){
                 $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['free'] = 1;
                          $calendarTabMobile[$TabName][$startDate][$startHour]['free'] = 1;
                 $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['60'] = 1;
@@ -250,8 +250,10 @@ class AdministratorController extends Controller
             $end = new Carbon($cF->end);
             $end = $end->subMinutes(30);
             $endHour = $end->format('H:i');
-
-            $h = $start;
+            
+            // dd($endHour);
+            
+            $h = $start2;
             $del1 = $h->subMinutes(30);
             $del1 = $del1->format('H:i');
             $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['free'] = 0;
@@ -278,11 +280,13 @@ class AdministratorController extends Controller
                 $startHour = $start->format('H:i');
             }
         }
+        // dd($calendar_Events);
         foreach($calendar_Events as $cF){
             
             $start = new Carbon($cF->start);
+            $start2 = new Carbon($cF->start);
             $startDate = $start->format('Y-m-d');
-            $startHour = $start->roundMinute(30)->format('H:i');
+            $startHour = $start->format('H:i');
 
             $weekStart = $start->startOfWeek()->format('d');
                 $wednesday = $start->startOfWeek()->addDays('2')->format('d').' '.$months[intval($start->format('m'))].' '.$start->endOfWeek()->format('Y');
@@ -299,12 +303,12 @@ class AdministratorController extends Controller
             }
 
             $end = new Carbon($cF->end);
-            $end = $end->subMinutes(30);
-            $endHour = $end->roundMinute(30)->format('H:i');
+            // $end = $end->subMinutes(30);
+            $endHour = $end->format('H:i');
 
-            $h = $start;
+            $h = $start2;
             $del1 = $h->subMinutes(30);
-            $del1 = $del1->roundMinute(30)->format('H:i');
+            $del1 = $del1->format('H:i');
             $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['free'] = 0;
                      $calendarTabMobile[$TabName][$startDate][$del1]['free'] = 0;
             $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del1]['60'] = 0;
@@ -314,21 +318,21 @@ class AdministratorController extends Controller
 
 
             $del2 = $h->subMinutes(30);
-            $del2 = $del2->roundMinute(30)->format('H:i');
+            $del2 = $del2->format('H:i');
             $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$del2]['90'] = 0;
                      $calendarTabMobile[$TabName][$startDate][$del2]['90'] = 0;
             // $calendarTab[$startDate][$del2]['90'] = 0;
             // dd($startDate);
 
-            while($startHour <= $endHour){
+            while($startHour < $endHour){
                 $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['free'] = 0;
                          $calendarTabMobile[$TabName][$startDate][$startHour]['free'] = 0;
                 $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['60'] = 0;
                          $calendarTabMobile[$TabName][$startDate][$startHour]['60'] = 0;
                 $calendarTab[$weekStart.'-'.$weekEnd][$startDate][$startHour]['90'] = 0;
                          $calendarTabMobile[$TabName][$startDate][$startHour]['90'] = 0;
-                $start = $start->addMinutes(30);
-                $startHour = $start->roundMinute(30)->format('H:i');
+                $start2 = $start2->addMinutes(30);
+                $startHour = $start2->format('H:i');
             }
         }
 
@@ -341,9 +345,8 @@ class AdministratorController extends Controller
                                         ->get();     
            
         // $session_id = Session::get('_token');
-
         $prices = LectorPrices::where('lector_type_id', $lector->lector_type_id)->get();
-        // dd($prices);
+        // dd($calendarTab);
              return view('test/lector',[
                 'durations' => $duratons,
                 'levels' => $levels,

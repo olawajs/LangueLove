@@ -1247,13 +1247,49 @@ function SignInN(){
               console.log( "error" );
           });
 }
+function SignInN2(){
+  let email = document.getElementById('newsKomMail').value;
+  $.ajax({
+            type: "GET",
+            url: '../signIn',
+            data: {
+                email: email, 
+            },
+          })
+          .done(function( data) {
+            if(data == 1){
+              alert('Dziękujemy za zapisanie się do newslettera!');
+            }
+          })
+          .fail(function() {
+              console.log( "error" );
+          });
+}
+
 function OpenPriceTable(){
   document.getElementById('PriceTable').style.display = 'inline-flex';
   document.getElementById('container').style.filter = 'blur(15px)';
+  window.scrollTo(0, 0);
   // 
 }
 function closePriceTable(){
   document.getElementById('PriceTable').style.display = 'none';
+  document.getElementById('container').style.filter = 'blur(0px)';
+  // 
+}
+function OpenPaymentTable(){
+  document.getElementById('PaymentTable').style.display = 'inline-flex';
+  document.getElementById('container').style.filter = 'blur(15px)';
+  window.scrollTo(0, 0);
+  // 
+}
+function closePaymentTable(){
+  document.getElementById('PaymentTable').style.display = 'none';
+  document.getElementById('container').style.filter = 'blur(0px)';
+  // 
+}
+function closeModal(id){
+  document.getElementById(id).style.display = 'none';
   document.getElementById('container').style.filter = 'blur(0px)';
   // 
 }
