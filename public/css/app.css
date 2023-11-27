@@ -12592,6 +12592,35 @@ select option:disabled {
   background: none;
   width: 100%;
 }
+.number{
+  padding: 12px;
+  color: var(--langue-love-black, #2B2B33);
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid var(--langue-love-light-grey, #D7D7D7);
+  background: none;
+  width: 46px;
+  text-align: center;
+}
+.NumberType{
+  display: flex;
+  width: 46px;
+  height: 46px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--langue-love-dark-grey);
+  background: var(--langue-love-beige);
+}
+.NumberType:disabled,
+.NumberType[disabled]{
+  opacity: 0.5;
+}
+.NumberDiv{
+  display: flex;
+  gap: 16px;
+}
 .input:focus{
   outline: none !important;
   border-bottom: 1px solid var(--langue-love-purple, #3C0079);
@@ -12615,6 +12644,9 @@ select option:disabled {
   background-position-x: calc(100% - 12px);
   width: 100%;
 }
+
+
+
 .select > option{
   color: #000;
   font-family: Montserrat !important;
@@ -12623,6 +12655,57 @@ select option:disabled {
   font-weight: 400;
   line-height: 22px;
 }
+
+.radio-input  {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.radio-input label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+
+.radio-input  label input {
+  position: absolute;
+  left: -9999px;
+}
+
+.radio-input label input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em var(--langue-love-purple);
+}
+
+.radio-input label span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+  color: var(--langue-love-black);
+}
+
+.radio-input label span:hover {
+  background-color: #d6d6e5;
+}
+
+.radio-input label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em var(--langue-love-dark-grey);
+}
+
+
 
 
 /* // flags */

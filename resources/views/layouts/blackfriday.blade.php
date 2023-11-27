@@ -81,8 +81,14 @@
     .komHead{
             line-height: normal;
         }
+        .lineDesktop{
+
+        }
     @media (max-width:960px) { 
         .komunikatFlagi{
+            display: none;
+        }
+        .lineDesktop{
             display: none;
         }
         .komunikat{
@@ -127,11 +133,10 @@
     <div class="komunikatBody">
         <div class="komB">
             <div style="font-size: 40px" class="KomHead">
-                Nasz <span class="violet">LangueFriday</span> jest <span class="pink">różowo</span><span class="violet">-fioletowy!</span>
+                Zapisy na <span class="violet">lekcje grupowe</span> ruszają <span class="pink"><br class="lineDesktop"> już 27.12.2023r.!</span>
             </div>
             <div style="font-size: 16px;">
-                <span style="font-weight: bold;">24.11.2023 od 00:00 do 23:59</span> z kodem <span class="violet">LANGUEFRIDAY</span> za pakiet zajęć w parze zapłacisz jak za pakiet zajęć indywidualnych.
-                Zapisz się do naszego newslettera, aby nie przegapić kolejnych zniżek!
+                Zapisz się <span class="violet">do naszego newslettera </span>aby dostać możliwość rezerwacji miejsca jako pierwsza/y!
             </div>
             <div class="input-group mb-3" style="font-size: 16px;">
                 <input type="text" style="border-radius: 15px 0 0 15px" class="form-control" placeholder="Twój email" id="newsKomMail" aria-label="Adres email" aria-describedby="basic-addon2">
