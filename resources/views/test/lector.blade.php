@@ -1097,15 +1097,15 @@
                                 <label class="SelectLabel">Wybierz pakiet:</label>
                                 <div class="radio-input">
                                     <label>
-                                        <input type="radio" name="radio" checked="">
+                                        <input type="radio" value="5" id="PacketAmountD[]"  name="PacketAmountD" checked="">
                                         <span>5 zajęć</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="radio">
+                                        <input type="radio" value="10" id="PacketAmountD[]"  name="PacketAmountD">
                                         <span>10 zajęć</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="radio">
+                                        <input type="radio" value="30" id="PacketAmountD[]"  name="PacketAmountD">
                                         <span>30 zajęć</span>
                                     </label>
                                 </div>  
@@ -1209,13 +1209,22 @@
                                     <option value="1">Tak</option>
                                 </select>
                             </div>
-                            <div>
-                                <label class="SelectLabel">Ilość zajęć</label>
-                                <div class="NumberDiv">
-                                    <button class="NumberType" id="minusM" onClick="addLessons('-')" disabled><img src="{{asset('images/svg/minus.svg')}}"></button>
-                                        <input class="number" value="2" id="LessonAmountPacketM" onChange="PriceCheckPacket()" readonly >
-                                    <button class="NumberType" onClick="addLessons('+')"><img src="{{asset('images/svg/plus.svg')}}"></button>
-                                </div>
+                            <div class="flex-column" style="margin-top: 32px">
+                                <label class="SelectLabel">Wybierz pakiet:</label>
+                                <div class="radio-input">
+                                    <label>
+                                        <input type="radio" name="PacketAmountM" value="5" id="PacketAmountM[]" checked="">
+                                        <span>5 zajęć</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="PacketAmountM" value="10" id="PacketAmountM[]">
+                                        <span>10 zajęć</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="PacketAmountM" value='30' id="PacketAmountM[]">
+                                        <span>30 zajęć</span>
+                                    </label>
+                                </div>  
                             </div>
                         </div>
                         <div class="AmountDiv">
@@ -1928,9 +1937,9 @@
                 },
             })
             .done(function(data) {
-                kwota = data * document.getElementById('LessonAmountPacket'+ScreenType).value;
-                document.getElementById('cenaPacketM').innerText = kwota;
-                document.getElementById('cenaPacketD').innerText = kwota;
+                // kwota = data * document.getElementById('LessonAmountPacket'+ScreenType).value;
+                // document.getElementById('cenaPacketM').innerText = kwota;
+                // document.getElementById('cenaPacketD').innerText = kwota;
                 fixSelectsPacket();
             })
             .fail(function() {
@@ -1984,8 +1993,9 @@
             document.getElementById('LessonCertyficatePacket'+type2).value = document.getElementById('LessonCertyficatePacket'+ScreenType).value;
             document.getElementById('LessonTypePacket'+type2).value = document.getElementById('LessonTypePacket'+ScreenType).value;
             document.getElementById('LessonLanguagePacket'+type2).value = document.getElementById('LessonLanguagePacket'+ScreenType).value;
-            document.getElementById('LessonAmountPacket'+type2).value = document.getElementById('LessonAmountPacket'+ScreenType).value;
-
+            // document.getElementById('PacketAmount'+type2).value = document.getElementById('PacketAmount'+ScreenType).value;
+            // $('input[name="PacketAmount'+type2+'"]:checked').val() = $('input[name="PacketAmount'+ScreenType+'"]:checked').val();
+console.log($('input[name="PacketAmount'+type2+'"]:checked').val());
             document.getElementById('NamePacket'+type2).value = document.getElementById('NamePacket'+ScreenType).value;
             document.getElementById('AdressPacket'+type2).value = document.getElementById('AdressPacket'+ScreenType).value;
             document.getElementById('PostCodePacket'+type2).value = document.getElementById('PostCodePacket'+ScreenType).value;
