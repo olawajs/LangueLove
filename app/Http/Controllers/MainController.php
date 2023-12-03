@@ -21,6 +21,7 @@ use App\Models\Lesson;
 use App\Models\Lector;
 use App\Models\LanguageLevel;
 use App\Models\User;
+use App\Models\Packet;
 use App\Models\Newsletter;
 use DB;
 use Session;
@@ -151,6 +152,24 @@ class MainController extends Controller
                         ->price;
         
         return $price*$ile;
+    }
+    public function Packetprice(Request $request){
+        $lector_type_id = $request->lector_type_id;
+        $duration_id = $request->duration;
+        $cert = $request->cert;
+        $rodzaj_id = $request->rodzaj;
+        $amount = $request->amount;
+
+        $price = Packet::where('type_id',$rodzaj_id)
+                        ->where('amount',$amount)
+                        ->where('duration_id',$duration_id)
+                        ->where('lector_type_id',$lector_type_id)
+                        ->where('certyficate',$cert)
+                        ->first()
+                        ->price;
+                        
+
+        return $price;
     }
     public function Paymentprice(Request $request)
     {

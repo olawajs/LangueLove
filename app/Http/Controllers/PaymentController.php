@@ -297,7 +297,6 @@ class PaymentController extends Controller
             'typeA' => $request->typeA,
             'certyficate' => $request->certyficate,
         ];
-
         $request->session()->put('data', $RequestTab);
         $link = 'https://secure.przelewy24.pl/';
         $merchant_id = 207228;

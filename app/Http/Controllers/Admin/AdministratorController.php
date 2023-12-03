@@ -44,6 +44,7 @@ class AdministratorController extends Controller
         ]);
     }
     public function showLector(Request $request){
+       
         $lector = Lector::where('id',$request->id)->first();
         // $calendarLessons = CalendarEvent::where('lector_id',$request->id)->orderBy('start')->get();
         $duratons = LessonDuration::all();
