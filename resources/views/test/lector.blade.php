@@ -1639,6 +1639,9 @@
     });
 
     function openInd(){
+        if(!AuthUser){
+            window.location.href = "{{ route('login')}}";
+        }
         $('#ContainerIndS').show();
         $('#ContainerIndMS').show();
         PaymentType = 'Indywidualne';
@@ -1676,6 +1679,9 @@
             // tu selecty
         }
     function MCyklLessons(){
+        if(!AuthUser){
+            window.location.href = "{{ route('login')}}";
+        }
         $('#ContainerCyklS').show();
         $('#ContainerCyklMS').show();
         PaymentType = 'Cykliczne';
@@ -1713,6 +1719,10 @@
             // tu selecty
     }
     function MPacketLessons(){
+        var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+        if(!AuthUser){
+            window.location.href = "{{ route('login')}}";
+        }
         $('#ContainerPacketS').show();
         $('#ContainerPacketMS').show();
         PaymentType = 'Pakiet';
