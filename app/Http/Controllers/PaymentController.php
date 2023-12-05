@@ -181,10 +181,11 @@ class PaymentController extends Controller
         $language_id = $request->jezyk;
         $type_id = $request->rodzaj;
         $lectorId = $request->lectorId;
+        
 
 
         $cykliczne = isset($request->cykliczne) ? 1 : 0;
-        $cert = isset($request->cert) ? 1 : 0;
+        $cert = isset($request->cert) ? $request->cert : 0;
         $ile = isset($request->ile) ? $request->ile : 1;
         $zajecia = isset($request->zajecia) ? 1 : 0;
         $priceG = isset($request->price) ? $request->price : 0;
@@ -192,6 +193,7 @@ class PaymentController extends Controller
         
         $l = Language::where('id',$language_id)->first();
         $type = $l->price_type;
+        $type = isset($request->LectorType) ? $request->LectorType : $type;
         $lName = $l->name;
        
          $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
@@ -289,6 +291,7 @@ class PaymentController extends Controller
             'title' => $request->desc,
             'name' => $request->name,
             'nip' => isset($request->nip) ? $request->nip : '',
+            'LectorType' => isset($request->LectorType) ? $request->LectorType : 1,
             'city' => $request->city,
             'postcode' => $request->postcode,
             'street' => $request->street,
@@ -633,8 +636,8 @@ class PaymentController extends Controller
         }elseif($data['typPlatnosci'] == 'PAKIET')
         {
             $language_id = $data['langDesc'];
-            $l = Language::where('id',$language_id)->first();
-            $type = $l->price_type;
+            // $l = Language::where('id',$language_id)->first();
+            $type = $data['LectorType'];
             $kwota =  $data['priceG'];
             $desc =  $data['title'];
             $pakiet = $data['packet'];

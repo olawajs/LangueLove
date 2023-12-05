@@ -34,3 +34,4 @@ Route::post('count', [App\Http\Controllers\MainController::class, 'count'])->nam
 Route::post('Paymentprice', [App\Http\Controllers\MainController::class, 'Paymentprice'])->name('Paymentprice');
 Route::post('Packetprice', [App\Http\Controllers\MainController::class, 'Packetprice'])->name('Packetprice');
 Route::post('validTermins', [App\Http\Controllers\MainController::class, 'validTermins'])->name('validTermins');
+Route::post('checkBank', [App\Http\Controllers\MainController::class, 'checkBank'])->name('checkBank');

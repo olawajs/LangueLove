@@ -171,6 +171,20 @@ class MainController extends Controller
 
         return $price;
     }
+    public function checkBank(Request $request){
+        $type = $request->type;
+        $priceType = $request->priceType;
+        $id = $request->user;
+        $cert = $request->cert;
+        $lessons = LessonsBank::where('user_id',$id)
+                                ->where('overdue_date','>=',Carbon::today())
+                                ->whereNull('use_date')
+                                ->where('type_id',$type)
+                                ->where('priceType',$priceType)
+                                ->where('certificat',$cert)
+                                ->count();
+        return $lessons;
+    }
     public function Paymentprice(Request $request)
     {
         $lector_type_id = $request->lector_type_id;
@@ -179,11 +193,11 @@ class MainController extends Controller
         $rodzaj_id = $request->rodzaj;
         
         $price = LectorPrices::where('lector_type_id', $lector_type_id)
-        ->where('type_id',$rodzaj_id)
-        ->where('duration_id',$duration_id)
-        ->where('certification',$cert)
-        ->first()
-        ->price;
+                                ->where('type_id',$rodzaj_id)
+                                ->where('duration_id',$duration_id)
+                                ->where('certification',$cert)
+                                ->first()
+                                ->price;
         return $price;
     }
     public function validTermins(Request $request)

@@ -11897,7 +11897,7 @@ footer{
 }
 .emptyHour{
   background-color: #F8FAFC;
-  color:#F8FAFC;
+  color: #E5E7E8;
   display: flex;
   height: 30px;
   width: 100px;
@@ -12005,6 +12005,8 @@ footer{
   gap: 16px;
   flex: 1 0 0;
   height: fit-content;
+  position: sticky !important;
+  top: 20px;
 }
 .YTVideo{
   height: 183px;
@@ -12358,10 +12360,37 @@ footer{
 select option:disabled {
   background-color: #6e050557;
 }
-@media only screen and (max-width: 1320px) {
-  /* .VidInfoContainer{
-    display: none;
-  } */
+.PayHead{
+  height: 100px;
+}
+@media only screen and (min-width:785px ) and (max-width: 1000px) {
+  .PaymentTable {
+    width: 750px !important;
+    min-width: unset !important;
+    padding: 35px !important;
+  }
+  .CrossLine{
+    font-size: 12px;
+    line-height: 19px;
+  }
+  .ListArgument{
+    font-size: 12px;
+  }
+  
+}
+@media only screen and (min-width:785px ) and (max-width: 1400px) {
+  .LectorColumn{
+      width: calc(100% - 400px);
+    }
+    #container{
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+}
+@media only screen and (max-height: 740px) {
+  .PaymentTable{
+    top: 55%;
+  }
 }
 @media only screen and (max-width: 800px) {
   .Desktop{

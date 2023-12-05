@@ -46,7 +46,7 @@
     @endif
     <div class="content" id="content">    
         <div class="d-flex LectorDiv" style="gap:48px;">
-            <div class="d-flex flex-column" style="flex-grow: 3; gap:20px; width: 100%;">
+            <div class="d-flex flex-column LectorColumn" style="gap:20px;">
                 <div class="d-flex flex-row LectorHeader">
                     <div style="margin-right: 32px">
                         <img src="/images/lectors/{{$lector->photo}}" style='width:174px; height: 174px; object-fit: cover;'>
@@ -127,7 +127,7 @@
                                                         <div class="takenHour">{{$k2}}</div>
                                                     @endif
                                                     @if(!isset($d2['free']))
-                                                        <div class="emptyHour"></div>
+                                                        <div class="emptyHour">{{$k2}}</div>
                                                     @endif
                                                     
                                                 @endif
@@ -375,7 +375,7 @@
             </div>
             <div class="d-flex">
                 <div class="PaymentColumn rightLine" style="padding-right: 32px;">
-                    <div>
+                    <div class="PayHead">
                         <div>
                             <span class="HeadText2">Pakiet</span>
                         </div>
@@ -406,7 +406,7 @@
                     </div>
                 </div>
                 <div class="PaymentColumn rightLine" style="padding: 0px 24px 0px 32px;">
-                    <div>
+                    <div class="PayHead">
                         <div>
                             <span class="HeadText2">Zajęcia cykliczne</span>
                         </div>
@@ -437,7 +437,7 @@
                     </div>
                 </div>
                 <div class="PaymentColumn" style="padding-left: 32px;">
-                    <div>
+                    <div class="PayHead">
                         <div>
                             <span class="HeadText2">Pojedyncze zajęcia</span>
                         </div>
@@ -677,16 +677,16 @@
                     <input class="input" id="NameIndD" onchange="fixSelects()" required>
                 </div>
                 <div>
-                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <label class="SelectLabel">Ulica i nr domu</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="AdressIndD" onchange="fixSelects()">
                 </div>
                 <div class="PayCustom">
                     <div class="PayRow">
-                        <label class="SelectLabel">Kod pocztowy</label>
+                        <label class="SelectLabel">Kod pocztowy</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                         <input class="input" id="PostCodeIndD" onchange="fixSelects()">
                     </div>
                     <div class="PayRow">
-                        <label class="SelectLabel">Miasto</label>
+                        <label class="SelectLabel">Miasto</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                         <input class="input" id="CityIndD" onchange="fixSelects()">
                     </div>
                 </div>
@@ -776,19 +776,19 @@
                     <input class="input" id="NameIndM" onchange="fixSelects()" required>
                 </div>
                 <div>
-                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <label class="SelectLabel">Ulica i nr domu</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="AdressIndM" onchange="fixSelects()">
                 </div>
                 <div>
-                    <label class="SelectLabel">Kod pocztowy</label>
+                    <label class="SelectLabel">Kod pocztowy</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="PostCodeIndM" onchange="fixSelects()">
                 </div>
                 <div>
-                    <label class="SelectLabel">Miasto</label>
+                    <label class="SelectLabel">Miasto</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="CityIndM" onchange="fixSelects()">
                 </div>
                 <div>
-                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="NIPIndM" onchange="fixSelects()">
                 </div>
                 
@@ -891,21 +891,21 @@
                     <input class="input" id="NameCyklD" onchange="fixSelectsCykl()" required>
                 </div>
                 <div>
-                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <label class="SelectLabel">Ulica i nr domu</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="AdressCyklD" onchange="fixSelectsCykl()">
                 </div>
                 <div class="PayCustom">
                     <div class="PayRow">
-                        <label class="SelectLabel">Kod pocztowy</label>
+                        <label class="SelectLabel">Kod pocztowy</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                         <input class="input" id="PostCodeCyklD" onchange="fixSelectsCykl()">
                     </div>
                     <div class="PayRow">
-                        <label class="SelectLabel">Miasto</label>
+                        <label class="SelectLabel">Miasto</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                         <input class="input" id="CityCyklD" onchange="fixSelectsCykl()">
                     </div>
                 </div>
                 <div class="PayCustom">
-                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="NIPCyklD" onchange="fixSelectsCykl()">
                 </div>
             </div>
@@ -998,19 +998,19 @@
                     <input class="input" id="NameCyklM" onchange="fixSelectsCykl()" required>
                 </div>
                 <div>
-                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <label class="SelectLabel">Ulica i nr domu</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="AdressCyklM" onchange="fixSelectsCykl()">
                 </div>
                 <div>
-                    <label class="SelectLabel">Kod pocztowy</label>
+                    <label class="SelectLabel">Kod pocztowy</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="PostCodeCyklM" onchange="fixSelectsCykl()">
                 </div>
                 <div>
-                    <label class="SelectLabel">Miasto</label>
+                    <label class="SelectLabel">Miasto</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="CityCyklM" onchange="fixSelectsCykl()">
                 </div>
                 <div>
-                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="NIPCyklM" onchange="fixSelectsCykl()">
                 </div>
                 
@@ -1122,16 +1122,16 @@
                     <input class="input" id="NamePacketD" onchange="fixSelectsPacket()" required>
                 </div>
                 <div>
-                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <label class="SelectLabel">Ulica i nr domu</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="AdressPacketD" onchange="fixSelectsPacket()">
                 </div>
                 <div class="PayCustom">
                     <div class="PayRow">
-                        <label class="SelectLabel">Kod pocztowy</label>
+                        <label class="SelectLabel">Kod pocztowy</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                         <input class="input" id="PostCodePacketD" onchange="fixSelectsPacket()">
                     </div>
                     <div class="PayRow">
-                        <label class="SelectLabel">Miasto</label>
+                        <label class="SelectLabel">Miasto</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                         <input class="input" id="CityPacketD" onchange="fixSelectsPacket()">
                     </div>
                 </div>
@@ -1238,19 +1238,19 @@
                     <input class="input" id="NamePacketM" onchange="fixSelectsPacket()" required>
                 </div>
                 <div>
-                    <label class="SelectLabel">Ulica i nr domu</label>
+                    <label class="SelectLabel">Ulica i nr domu</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="AdressPacketM" onchange="fixSelectsPacket()">
                 </div>
                 <div>
-                    <label class="SelectLabel">Kod pocztowy</label>
+                    <label class="SelectLabel">Kod pocztowy</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="PostCodePacketM" onchange="fixSelectsPacket()">
                 </div>
                 <div>
-                    <label class="SelectLabel">Miasto</label>
+                    <label class="SelectLabel">Miasto</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="CityPacketM" onchange="fixSelectsPacket()">
                 </div>
                 <div>
-                    <label class="SelectLabel">NIP (opcjonalnie)</label>
+                    <label class="SelectLabel">NIP (opcjonalnie)</label><span style="color: var(--langue-love-purple, #3C0079);">*</span>
                     <input class="input" id="NIPPacketM" onchange="fixSelectsPacket()">
                 </div>
                 
@@ -1265,86 +1265,7 @@
     </div> 
 </div>
 <!-- Language modal -->
-<form class="Custom_modal" style="display: none; z-index: 3;" id="BuyModal" method='POST' action="{{ route('buyLesson') }}">
-    @csrf
-      <h2 class="Tcenter">SZCZEGÓŁY ZAKUPU: </h2>
-      <hr>
-       <div id="addNewLanguage" class="ModalFlex">
-        <input type="hidden" value="{{$lector->id}}" name="lectorId"> 
-            <div class="box">
-                <span class="napis">Data: </span>
-                <input type="date" class="form-control" name="data" id="data"  readonly>
-            </div>
-            <div class="box">
-                <span class="napis" for="godzina">Godzina rozpoczęcia: </span>
-                <input type="time" class="form-control timepicker" name="godzina" id="godzina" readonly>
-            </div>
-            <div class="box">
-                <span class="napis" for="data">Długość zajęć: </span>
-                <select class="form-control CountCost" name="duration_id" id="duration_id">
-                    @foreach($durations as $d)
-                        <option value="{{$d->id}}">{{$d->duration}} min</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="box">
-                <span class="napis" for="jezyk">Język: </span>
-                <select class="form-control CountCost" name="jezyk" id="jezyk" autocomplete="off">
-                    @foreach($languages as $l)
-                        <option value="{{$l->id}}">{{$l->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="box">
-                <span class="napis" for="rodzaj">Rodzaj zajęć: </span>
-                <select class="form-control CountCost" name="rodzaj" id="rodzaj">
-                        <option value="1">Indywidualne</option>
-                        <option value="4">W parach</option>
-                </select>
-            </div>
-            <div class="form-check form-switch box">
-                <input class="form-check-input" type="checkbox" role="switch" id="cykliczne" name="cykliczne" onchange="cykl(event)">
-                <label class="form-check-label" for="cykliczne">Zajęcia cykliczne</label>
-            </div>
-            <div class="form-check form-switch box">
-                <input class="form-check-input  CountCost" type="checkbox" role="switch" id="cert" name="cert">
-                <label class="form-check-label" for="cert">Przygotowanie do certyfikatu</label>
-            </div>
-            <div id="ileLekcji" style="display: none" class="box">
-                <span class="napis" for="ile">Ilość: </span>
-                <input type="number" class="form-control CountCost" name="ile" id="ile" step="1" min="1" placeholder="Ilość lekcji">
-            </div>
-           <p class="cena1" id="cena1">Do zapłaty: <b id='kwota'></b></p>
-           <hr>
-           <div id="daneFaktura">
-                <h2 class="Tcenter">Dane do faktury: </h2>
-                <div class="box">
-                    <span class="napis">Imię i nazwisko: </span>
-                    <input type="text" class="form-control" name="name" id="name" required>
-                </div>
-                <div class="box">
-                    <span class="napis">Ulica i numer domu: </span>
-                    <input type="text" class="form-control" name="street" id="street" required>
-                </div>
-                <div class="box">
-                    <span class="postcode">Kod Pocztowy: </span>
-                    <input type="text" class="form-control" name="postcode" id="postcode" required>
-                </div>
-                <div class="box">
-                    <span class="napis">Miasto: </span>
-                    <input type="text" class="form-control" name="city" id="city" required>
-                </div>
-                <div class="box">
-                    <span class="napis">NIP: </span>
-                    <input type="text" class="form-control" name="nip" id="nip">
-                </div>
-           </div>
-          
-          <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
-          <button class="btn btn-secondary  mb-3" id="buyButton2" onclick="UseLessons(event)" >WYKORZYSTAJ ZAKUPIONE LEKCJE</button>
-          <input type="button" class="btn btn-primary mb-3" onclick="CloseModal('BuyModal')" value="ANULUJ">
-        </div>
-    </form>
+
   <!-- end LM -->
 
 <div id="FormDiv"></div>
@@ -1358,6 +1279,7 @@
     let packetAmount = 0;
     let nameType = '';
     let kwota = 0;
+    let dw = 0;
     let ok = true;
     $(document).ready(function () {
         $(".Paymentcard").each(function(index, value){
@@ -1639,6 +1561,7 @@
     });
 
     function openInd(){
+        var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
         if(!AuthUser){
             window.location.href = "{{ route('login')}}";
         }
@@ -1679,6 +1602,7 @@
             // tu selecty
         }
     function MCyklLessons(){
+        var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
         if(!AuthUser){
             window.location.href = "{{ route('login')}}";
         }
@@ -1859,6 +1783,7 @@
         document.getElementById('PostCodeInd'+type2).value = document.getElementById('PostCodeInd'+ScreenType).value;
         document.getElementById('CityInd'+type2).value = document.getElementById('CityInd'+ScreenType).value;
         document.getElementById('NIPInd'+type2).value = document.getElementById('NIPInd'+ScreenType).value;
+        checkLessonAmount(document.getElementById('LessonType'+ScreenType).value,'{{$lector->lector_type_id}}',document.getElementById('LessonCertyficate'+ScreenType).value);
     }
     function fixSelectsCykl(){
         go();
@@ -1878,6 +1803,7 @@
         document.getElementById('PostCodeCykl'+type2).value = document.getElementById('PostCodeCykl'+ScreenType).value;
         document.getElementById('CityCykl'+type2).value = document.getElementById('CityCykl'+ScreenType).value;
         document.getElementById('NIPCykl'+type2).value = document.getElementById('NIPCykl'+ScreenType).value;
+        checkLessonAmount(document.getElementById('LessonTypeCykl'+ScreenType).value,'{{$lector->lector_type_id}}',document.getElementById('LessonCertyficateCykl'+ScreenType).value);
     }
     function fixSelectsPacket(){
         go();
@@ -1963,7 +1889,10 @@
                 price.setAttribute('name','price');
                 price.setAttribute('type','hidden');
                 price.value = kwota;
-            console.log(kwota);
+            let LectorType = document.createElement('input');
+                LectorType.setAttribute('name','LectorType');
+                LectorType.setAttribute('type','hidden');
+                LectorType.value = '{{$lector->lector_type_id}}';
             let desc2 = document.createElement('input');
                 desc2.setAttribute('name','desc');
                 desc2.setAttribute('type','hidden');
@@ -2009,6 +1938,7 @@
                 form.innerHTML ='@csrf';
                 form.appendChild(price);
                 form.appendChild(desc2);
+                form.appendChild(LectorType);
                 form.appendChild(name);
                 form.appendChild(nip);
                 form.appendChild(city);
@@ -2023,6 +1953,18 @@
                     alert('Prosimy o wypełnienie pola imię');
                     document.getElementById('NamePacket'+ScreenType).focus();
                 }
+                else if(city.value == ''){
+                    alert('Prosimy o wypełnienie pola miasto');
+                    document.getElementById('CityPacket'+ScreenType).focus();
+                }
+                else if(postcode.value == ''){
+                    alert('Prosimy o wypełnienie pola kod pocztowy');
+                    document.getElementById('PostCodePacket'+ScreenType).focus();
+                }
+                else if(street.value == ''){
+                    alert('Prosimy o wypełnienie pola ulica');
+                    document.getElementById('AdressPacket'+ScreenType).focus();
+                }
                 else{
                     document.getElementById('FormDiv').appendChild(form);
                     form.submit();
@@ -2035,6 +1977,7 @@
             let cert = document.getElementById('LessonCertyficate'+ScreenType).value;
             let type = document.getElementById('LessonType'+ScreenType).value;
             let languageId = document.getElementById('LessonLanguage'+ScreenType).value;
+
 
             let form = document.createElement('form');
                 form.setAttribute('method','POST');
@@ -2071,7 +2014,10 @@
                 price.setAttribute('name','price');
                 price.setAttribute('type','hidden');
                 price.value = kwota;
-
+            let LectorType = document.createElement('input');
+                LectorType.setAttribute('name','LectorType');
+                LectorType.setAttribute('type','hidden');
+                LectorType.value = '{{$lector->lector_type_id}}';
             let name = document.createElement('input');
                 name.setAttribute('name','name');
                 name.setAttribute('required','true');
@@ -2103,6 +2049,7 @@
                 form.appendChild(typeA);
                 form.appendChild(langDesc);
                 form.appendChild(certyficate);
+                form.appendChild(LectorType);
                 form.appendChild(price);
 
                 
@@ -2111,25 +2058,48 @@
                 form.appendChild(city);
                 form.appendChild(postcode);
                 form.appendChild(street);
+                // alert(dw);
                 
-                
-
-                if(name.value == ''){
-                    alert('Prosimy o wypełnienie pola imię');
-                    document.getElementById('NameInd'+ScreenType).focus();
-                }
-                else{
+                if(dw >= 1){
+                    form.setAttribute('action',"{{ route('useLessons') }}");
                     document.getElementById('FormDiv').appendChild(form);
                     form.submit();
-                }    
+                }
+                else{
+                     if(name.value == ''){
+                        alert('Prosimy o wypełnienie pola imię');
+                        document.getElementById('NameInd'+ScreenType).focus();
+                    }
+                    else if(city.value == ''){
+                        alert('Prosimy o wypełnienie pola miasto');
+                        document.getElementById('CityInd'+ScreenType).focus();
+                    }
+                    else if(postcode.value == ''){
+                        alert('Prosimy o wypełnienie pola kod pocztowy');
+                        document.getElementById('PostCodeInd'+ScreenType).focus();
+                    }
+                    else if(street.value == ''){
+                        alert('Prosimy o wypełnienie pola ulica');
+                        document.getElementById('AdressInd'+ScreenType).focus();
+                    }
+                    else{
+                        document.getElementById('FormDiv').appendChild(form);
+                        form.submit();
+                    }    
+                }
+
+               
     }
     function BuyCyklLesson(){
+           
         // let Savedhour,less60,less90,dzienNazwa,ZajeciaData,ScreenType;
                // packetAmount
             let durationId = document.getElementById('LessonDurationCykl'+ScreenType).value ;
             let cert = document.getElementById('LessonCertyficateCykl'+ScreenType).value;
             let type = document.getElementById('LessonTypeCykl'+ScreenType).value;
             let languageId = document.getElementById('LessonLanguageCykl'+ScreenType).value;
+
+            // let dostepneLekcje = checkLessonAmount(type,'{{$lector->lector_type_id}}',cert);
 
             let form = document.createElement('form');
                 form.setAttribute('method','POST');
@@ -2223,16 +2193,54 @@
                 form.appendChild(street);
                 
                 
-
-                if(name.value == ''){
-                    alert('Prosimy o wypełnienie pola imię');
-                    document.getElementById('NameCykl'+ScreenType).focus();
-                }
-                else{
+                if(dw >= ile.value){
+                    form.setAttribute('action',"{{ route('useLessons') }}");
                     document.getElementById('FormDiv').appendChild(form);
                     form.submit();
                 }
-                
+                else{
+                    if(name.value == ''){
+                        alert('Prosimy o wypełnienie pola imię');
+                        document.getElementById('NameCykl'+ScreenType).focus();
+                    }
+                    else if(city.value == ''){
+                        alert('Prosimy o wypełnienie pola miasto');
+                        document.getElementById('CityCykl'+ScreenType).focus();
+                    }
+                    else if(postcode.value == ''){
+                        alert('Prosimy o wypełnienie pola kod pocztowy');
+                        document.getElementById('PostCodeCykl'+ScreenType).focus();
+                    }
+                    else if(street.value == ''){
+                        alert('Prosimy o wypełnienie pola ulica');
+                        document.getElementById('AdressCykl'+ScreenType).focus();
+                    }
+                    else{
+                        document.getElementById('FormDiv').appendChild(form);
+                        form.submit();
+                    }
+                    
+                }
+
+      
+    }
+    function checkLessonAmount(type,priceType,cert){
+        $.ajax({
+        type: "POST",
+        url: '../api/checkBank',
+        data: {
+            type: type, 
+            priceType: priceType, 
+            user: {!! Auth::user()->id !!},
+            cert: cert
+            },
+        })
+        .done(function(data) {
+            dw = data;
+        })
+        .fail(function() {
+            alert( "error" );
+        });
     }
 go();
 window.addEventListener('resize', go());
