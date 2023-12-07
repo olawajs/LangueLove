@@ -22,6 +22,7 @@ class Lector extends Model
         'id_language',
         'phone',
         'skype',
-        'lector_type_id'
+        'lector_type_id',
+        'active'
     ];
 }
