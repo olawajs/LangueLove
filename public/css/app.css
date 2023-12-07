@@ -11707,6 +11707,63 @@ footer{
   gap: 24px;
   flex-wrap: wrap;
 }
+.AboutUsHead{
+  
+}
+.smallHeadText{
+  text-align: center;
+  color: var(--langue-love-dark-grey);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+.bigHeadText{
+  color: var(--langue-love-black);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+.middleText{
+  color: var(--langue-love-black);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+.TextCenterAbout{
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  color: var(--langue-love-black);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.BeigeBack{
+  background-image: url(/images/background/beigeBack.svg);
+  background-size: 100% 100%
+}
+.BeigeBack2{
+  background-image: url(/images/background/beigeBack2.svg);
+  background-size: 100% 100%
+}
+.AboutDiv{
+  padding: 100px 0;
+}
+.MiniMenu{
+  width: 200px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-left: 100px;
+  position: sticky !important;
+  top: 20px;
+}
 /* mobilka */
 .navbar-toggler{
   border: none

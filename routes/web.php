@@ -108,7 +108,9 @@ Route::get('/email', function () {
 
 // test
 Route::GET('lectorTest/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'showLector']);
-
+Route::get('/aboutTest', function () {
+    return view('test/aboutUs');
+})->name('aboutTest');
 
 
 //czasowe maile

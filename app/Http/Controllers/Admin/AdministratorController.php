@@ -347,6 +347,7 @@ class AdministratorController extends Controller
            
         // $session_id = Session::get('_token');
         $prices = LectorPrices::where('lector_type_id', $lector->lector_type_id)->get();
+         $id = isset(Auth::user()->id) ? Auth::user()->id : 0;
         // dd($calendarTab);
              return view('test/lector',[
                 'durations' => $duratons,
@@ -356,7 +357,8 @@ class AdministratorController extends Controller
                 'languages' => $languages,
                 'lessonAmount' => $wykupioneLekcje,
                 'calendar' => $calendarTab,
-                'calendarMobile' => $calendarTabMobile
+                'calendarMobile' => $calendarTabMobile,
+                'User' => $id
             ]);
     }
     public function HoursMails(Request $request){

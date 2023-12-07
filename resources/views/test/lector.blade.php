@@ -1025,7 +1025,7 @@
     </div> 
 </div>
 <!-- Pakiet -->
-<div class="StickDiv" id="MPacketLessons" style="display: none">
+<div class="StickDiv" id="MPacketLessons" style="display: none; top: calc(50% + 200px);">
     <div class='desktop'>
         <div class='d-flex' style="flex-flow: column; gap:60px;">
             <div class="DivHead">
@@ -1281,6 +1281,8 @@
     let kwota = 0;
     let dw = 0;
     let ok = true;
+    let User = {!! json_encode($User) !!};
+    // console.log(User2['id']);
     $(document).ready(function () {
         $(".Paymentcard").each(function(index, value){
             $('.Paymentcard').hide();
@@ -2231,7 +2233,7 @@
         data: {
             type: type, 
             priceType: priceType, 
-            user: {!! Auth::user()->id !!},
+            user: User,
             cert: cert
             },
         })
