@@ -538,7 +538,7 @@ a:active {
                 nav:true,
                 navText:[`<div class="carouselArrow"> <img src="{{asset('images/svg/AArrowL.svg')}}" width="10px"  alt=""></div>`,`<div class="carouselArrow"> <img src="{{asset('images/svg/AArrowR.svg')}}" width="10px"  alt=""></div>`],
                 navContainer: document.getElementById('arrows'),
-                autoplay: false,
+                autoplay: true,
                 autoplayTimeout: 5000,
                 responsive:{
                     0:{
@@ -562,7 +562,7 @@ a:active {
                 // nav:true,
                 // navText:[`<div class="carouselArrow"> <img src="{{asset('images/svg/AArrowL.svg')}}" width="10px"  alt=""></div>`,`<div class="carouselArrow"> <img src="{{asset('images/svg/AArrowR.svg')}}" width="10px"  alt=""></div>`],
                 // navContainer: document.getElementById('arrows'),
-                autoplay: false,
+                autoplay: true,
                 autoplayTimeout: 5000,
                 responsive:{
                     0:{
