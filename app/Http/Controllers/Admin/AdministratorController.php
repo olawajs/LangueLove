@@ -36,11 +36,42 @@ class AdministratorController extends Controller
         $newsletters = Newsletter::all();
         $users = User::all();
         $payments = Payment::orderBy('created_at')->get();
+        $packets = [];
+        $lessons = DB::table('lessons_banks')
+                    ->join('payments', 'payments.id', '=', 'lessons_banks.payment_id')
+                    ->join('users', 'users.id', '=', 'lessons_banks.user_id')
+                    ->select(
+                        'lessons_banks.use_date',
+                        'lessons_banks.overdue_date',
+                        'payments.description',
+                        'payments.id',
+                        'payments.created_at',
+                        'users.name as uczen',
+                        'users.email as uEmail',
+                    )
+                    ->get();
+        foreach ($lessons as $key => $l) {
+            if(!key_exists($l->id,$packets)){
+                $packets[$l->id]=[
+                    'title' => $l->description,
+                    'dataDo' => $l->overdue_date,
+                    'dataZakupu' => $l->created_at,
+                    'terminyUzycia' => [],
+                    'uczen' => $l->uczen,
+                    'uczenMail' => $l->uEmail,
+                ];
+            }
+
+            $packets[$l->id]['dataDo']=$l->overdue_date;
+            $packets[$l->id]['terminyUzycia'][]=$l->use_date;
+
+        }
         return view('admin/dataBase',[
             'codes'=> $codes,
             'newsletters'=> $newsletters,
             'payments'=> $payments,
             'users'=> $users,
+            'packets'=> $packets,
         ]);
     }
     public function showLector(Request $request){
@@ -361,6 +392,7 @@ class AdministratorController extends Controller
                 'User' => $id
             ]);
     }
+
     public function HoursMails(Request $request){
         $start = Carbon::tomorrow();
 

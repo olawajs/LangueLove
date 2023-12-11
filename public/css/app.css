@@ -11442,13 +11442,11 @@ footer{
   top: 1px
 }
 .lectorCardNew{
-  max-width: 200px;
+  /* max-width: 200px; */
 }
 /*  */
 @media (max-width:600px) { 
-  .lectorCardNew{
-    width: 20%;
-  }
+
 
 }
 .page-link{
@@ -11459,11 +11457,45 @@ footer{
   display: inline-block;
 }
 .lectorCardNew{
-  background-color: white; 
-  width: 300px; 
-  height: 400px; 
+  display: flex;
+  width: 379px;
+  padding: 32px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--langue-love-light-grey);
+  background: var(--langue-love-white);
+  height: 472px;
+}
+.carouselFlags{
+  padding-left: 18px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+ 
+}
+.CarouselButton{
+  position: absolute;
+  bottom: 32px;
+  text-align: right;
+  padding-right: 18px;
+  right: 32px; 
+  color: var(--langue-love-purple);
+}
+.carouselArrow{
+  display: flex;
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   border-radius: 8px;
-  padding-top: 24px;
+  border: 1px solid var(--langue-love-light-grey);
+  background: var(--langue-love-white);
 }
 .LectorPhotoCard{
   height: 220px;
@@ -11751,12 +11783,24 @@ footer{
   background-image: url(/images/background/beigeBack.svg);
   background-size: 100% 100%
 }
+.beigeBackMobile{
+  background-image: url(/images/background/beigeBackMobile.svg);
+  background-size: 100% 100%
+}
+.beigeBackMobile2{
+  background-image: url(/images/background/beigeBackMobile2.svg);
+  background-size: 100% 100%
+}
 .BeigeBack2{
   background-image: url(/images/background/beigeBack2.svg);
   background-size: 100% 100%
 }
 .PurpleBack{
   background-image: url(/images/background/purpleBack.svg);
+  background-size: 100% 100%
+}
+.purpleBackMobile{
+  background-image: url(/images/background/purpleBackMobile.svg);
   background-size: 100% 100%
 }
 .AboutBox{
@@ -11812,6 +11856,18 @@ footer{
 .Fotos{
   width: 100%; 
 }
+.FotosAbout{
+  width: 380px;
+  height: 480px;
+  flex-shrink: 0;
+}
+.TextDisplay{
+  display: flex;
+  flex-flow: column;
+  gap: 24px;
+  justify-content: center;
+
+}
 .MiniMenu{
   width: 200px;
   display: inline-flex;
@@ -11822,6 +11878,13 @@ footer{
   position: sticky !important;
   top: 100px;
 }
+.Onas_serduszko{
+  position: absolute;
+  right: 50px;
+  top: 142px;
+  width: 223.63px;
+height: 260px;
+}
 /* mobilka */
 .navbar-toggler{
   border: none
@@ -11829,6 +11892,51 @@ footer{
 @media only screen and (max-width: 800px) {
   .mobile{
     display: unset;
+  }
+  .TextCenterAbout{
+    width: unset;
+  }
+  .MiniMenu{
+    display: none;
+  }
+  .bigHeadText{
+    text-align: left !important;
+    font-size: 32px !important;
+  }
+  .smallHeadText{
+    text-align: left !important;
+  }
+  .middleText{
+    font-size: 24px;
+    line-height: 32px;
+    text-align: left !important;
+  }
+  .owl-stage-outer{
+    padding: 0 !important;
+  }
+  .AboutDiv{
+    padding: 52px 16px;
+    gap: 24px;
+  }
+  .FotosAbout
+  {
+    width: 100%;
+    height: unset;
+  }
+  .AboutBoxes{
+    display: flex;
+    flex-flow: column;
+  }
+  .AboutBox{
+    padding: 32px;
+  }
+  .OwnerInfo{
+    flex-flow: column;
+  }
+  .OwnerDesc{
+    padding: 32px;
+    gap:24px;
+    margin-bottom: unset;
   }
   .navPurpleButton{
     width: 55%;
@@ -12138,13 +12246,26 @@ footer{
   align-self: stretch;
   border-radius: 16px;
 }
-
+a{
+  text-decoration: none;
+}
+html {
+  scroll-behavior: smooth;
+}
 .LL-button-primary{
   background: var(--langue-love-purple, #3C0079);
   color: white;
 }
 .LL-button-primary:hover{
   background: var(--langue-love-pink);
+  color: white;
+}
+.LL-button-primary2{
+  background: var(--langue-love-pink);
+  color: white;
+}
+.LL-button-primary2:hover{
+  background: var(--langue-love-purple, #3C0079);
   color: white;
 }
 .LL-button-secondary{

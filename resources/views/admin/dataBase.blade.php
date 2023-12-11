@@ -22,6 +22,9 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users-tab-pane" type="button" role="tab" aria-controls="users-tab-pane" aria-selected="false">Użytkownicy</button>
   </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="packets-tab" data-bs-toggle="tab" data-bs-target="#packets-tab-pane" type="button" role="tab" aria-controls="packets-tab-pane" aria-selected="false">Pakiety</button>
+  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -126,6 +129,37 @@
             </table>
     </div>
   </div>
+  <div class="tab-pane fade" id="packets-tab-pane" role="tabpanel" aria-labelledby="packets-tab" tabindex="0">
+    <div class="CalDiv">
+        <h2 class="text-center">Pakiety</h2>
+            <table id="packets">
+                <thead>
+                    <th>Pakiet</th>
+                    <th>Osoba</th>
+                    <th>Email</th>
+                    <th>Data Zakupu</th>
+                    <th>Daty Wykorzystania</th>
+                    <th>Data Wygaśnięcia</th>
+                </thead>
+                <tbody>
+                    @foreach($packets as $n)
+                    <tr>
+                        <td>{{$n['title']}}</td>
+                        <td>{{$n['uczen']}}</td>
+                        <td>{{$n['uczenMail']}}</td>
+                        <td>{{$n['dataZakupu']}}</td>
+                        <td>
+                            @foreach($n['terminyUzycia'] as $d)
+                                <p>{{$d}}</p>
+                            @endforeach
+                        </td>
+                        <td>{{$n['dataDo']}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+    </div>
+  </div>
 </div>
 
 </div>
@@ -150,6 +184,9 @@
             order: [[1, 'desc']]
         });
         let table4 = $('#users').DataTable({
+            order: [[1, 'desc']]
+        });
+        let table5 = $('#packets').DataTable({
             order: [[1, 'desc']]
         });
     });
