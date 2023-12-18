@@ -329,15 +329,20 @@ class PaymentController extends Controller
 
         $suma_zamowienia = $request->price*100 ; //wartość musi być podana w groszach
         $tytul = $request->desc;
-        
+        if($suma_zamowienia == 0){
+            $this->AddLessons(isset($request->LectorType) ? $request->LectorType : 1,$request->packet,$request->typeA,$request->certyficate);
+            return view('thankYou');
+            
+            exit;
+        }
         $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
         $details = new PaymentDetails;
             $details->typPlatnosci = 'PAKIET';
-            $details->priceG = isset($request->price) ? $request->price : 0;
-            $details->title = $request->desc;
-            $details->name = $request->name;
-            $details->nip = isset($request->nip) ? $request->nip : '';
-            $details->city = $request->city;
+            $details->priceG   = isset($request->price) ? $request->price : 0;
+            $details->title    = $request->desc;
+            $details->name     = $request->name;
+            $details->nip      = isset($request->nip) ? $request->nip : '';
+            $details->city     = $request->city;
             $details->postcode = $request->postcode;
             $details->street = $request->street;
             $details->langDesc = $request->langDesc;
@@ -354,6 +359,23 @@ class PaymentController extends Controller
 
     }
     
+    public function  AddLessons($lektor,$pack,$t,$c){
+        // dd('?');
+            $type = $lektor;
+            $pakiet = $pack;
+            for($i=1; $i<=$pakiet; $i++){
+                  $bank = new LessonsBank;
+                    $bank->user_id = Auth::user()->id;
+                    $bank->payment_id = 1 ; 
+                    $bank->overdue_date = Carbon::now()->addDays(30);
+                    $bank->type_id = $t;
+                    
+                    $bank->priceType = $type;
+                    $bank->certificat = $c;
+                    $bank->save();
+            }
+            
+    }
     public function  status(){
         // dd('status');
     }

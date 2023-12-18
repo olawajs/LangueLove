@@ -21,6 +21,7 @@ class CreateCodesTable extends Migration
             $table->integer('lesson_type')->nullable();
             $table->integer('amount');
             $table->integer('payment_id');
+            $table->integer('packet_amount');
             $table->string('type');
             $table->timestamps();
         });

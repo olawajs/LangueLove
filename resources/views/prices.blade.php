@@ -572,25 +572,27 @@ function searchFor(type)
     function checkCode(){
       let code = document.getElementById('code').value;
       let date = new Date();
-      if(typeV == 4 && code.toUpperCase() == 'LANGUEFRIDAY' && date.getFullYear() == '2023' && date.getMonth() == '10' && date.getDate() == '24'){
-      
         $.ajax({
             type: "POST",
             url: '../checkPacketCode',
             data: {
                 code: code,
                 _token: "{{ csrf_token() }}",
+                type: typeV,
+                amount: amountV,
+                price: price
             },
             })
             .done(function( data) {
-                if(data == 1){
-                  let tab = letdesc['1'+','+timeV+','+certyficateV+','+amountV];
-                  let opis='';
-                  if(languageV == 1){
-                    price = tab[0];
-                  }else{
-                    price = tab[1]; 
-                  }
+                if(data != ''){
+                    price = data;
+                  // let tab = letdesc['1'+','+timeV+','+certyficateV+','+amountV];
+                  // let opis='';
+                  // if(languageV == 1){
+                  //   price = tab[0];
+                  // }else{
+                  //   price = tab[1]; 
+                  // }
                   document.getElementById('codeResponse').innerText = 'Kod użyty pomyśnie! Nowa cena to: '+price+'zł';
                 }
                 else{
@@ -600,8 +602,5 @@ function searchFor(type)
             .fail(function() {
                 alert( "error" );
             });
-      }else{
-        document.getElementById('codeResponse').innerText = 'Błędny kod';
       }
-    }
 </script>

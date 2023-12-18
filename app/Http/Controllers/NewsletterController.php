@@ -51,22 +51,38 @@ class NewsletterController extends Controller
     }
     public function checkPacketCode(Request $request){
         $code = Code::where('code',$request->code)
-                    ->where('email', Auth::user()->email)
+                    ->whereNull('use_date')
+                    ->where('lesson_type',$request->type)
+                    ->where('packet_amount',$request->amount)
                     ->first();
         if($code){
-            return 0;
+            if($code->type == '%'){
+                // dd($code->amount);
+                $wynik = $request->amount - ($request->amount * ($code->amount/100));
+                $code->use_date =  Carbon::now();
+                $code->save();
+                return $wynik;
+            }
+            else
+            {
+                dd('wrong?');
+            }
+          
         }
         else{
-            $code2 = Code::create([
-                'code' => $request->code,
-                'email' => Auth::user()->email,
-                'lesson_type' => 2,
-                'amount' => 1,
-                'type' => 'P',
-                'use_date' => Carbon::now()
-            ]);
-            return 1;
+              return '';
         }
+        // else{
+        //     $code2 = Code::create([
+        //         'code' => $request->code,
+        //         'email' => Auth::user()->email,
+        //         'lesson_type' => 2,
+        //         'amount' => 1,
+        //         'type' => 'P',
+        //         'use_date' => Carbon::now()
+        //     ]);
+        //     return 1;
+        // }
        
     }
     public function signOff(Request $request){

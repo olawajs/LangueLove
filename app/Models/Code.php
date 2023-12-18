@@ -14,6 +14,7 @@ class Code extends Model
         'lesson_type',
         'amount',
         'type',
-        'payment_id'
+        'payment_id',
+        'packet_amount'
     ];
 }
