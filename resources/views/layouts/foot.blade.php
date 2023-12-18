@@ -10,6 +10,7 @@
             <li class="list-group-item"><a class="footLink" href="{{ route('contact') }}">Kontakt</a></li>
             <li class="list-group-item"><a class="footLink" href="{{ asset('files/FAQ LangueLove.pdf') }}">FAQ</a></li>
             <li class="list-group-item"><a class="footLink" href="{{ asset('files/LangueLove Regulamin.pdf') }}">Regulamin</a></li>
+            <li class="list-group-item"><a class="footLink" href="{{ asset('files/LangueLove_regulamin obowiazuje od 02.01.24.pdf') }}">Regulamin (01.01.2024)</a></li>
         </ul>
     </div>
     <div>
