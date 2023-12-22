@@ -5120,6 +5120,14 @@ textarea.form-control-lg {
   padding: 1px;
   border-radius: 6px;
 }
+.navPinkButton{
+  color: var(--langue-love-pink);
+  border: 2px solid var(--langue-love-pink);
+  padding: 3px;
+  border-radius: 6px;
+  font-size: xx-small;
+  height: fit-content;
+}
 .list-group-item-warning {
   color: #664d03;
   background-color: #fff3cd;

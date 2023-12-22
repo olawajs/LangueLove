@@ -374,10 +374,43 @@
                 <span class="HeadText2">Wybierz odpowiedni pakiet dla Ciebie:</span>
             </div>
             <div class="d-flex">
-                <div class="PaymentColumn rightLine" style="padding-right: 32px;">
+                <div class="PaymentColumn" style="padding: 12px;"> 
                     <div class="PayHead">
                         <div>
-                            <span class="HeadText2">Pakiet</span>
+                            <span class="HeadText2">Zajęcia cykliczne</span>
+                        </div>
+                        <div style="min-height: 40px">
+                            <span class="UnderText">dowolna ilość zajęć co tydzień o stałej porze</span>
+                        </div>  
+                    </div>
+                    <div class="PaymentList">
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>możliwość przełożenia i odwołania zajęć</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>rezerwacja najlepszego dla Ciebie terminu</span>
+                        </div>
+                        <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>regularne zajęcia</span>
+                        </div>
+                         <div class="ListArgument">
+                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                            <span class="CrossLine">promocyjna cena</span>
+                        </div>
+                    </div>
+                    <div>
+                        <buton class="LL-button LL-button-primary w-100"  onclick="MCyklLessons()">Rezerwuj</buton>
+                    </div>
+                </div>
+                <div class="PaymentColumn" style="padding: 12px;
+                            border: 1px solid var(--langue-love-purple);
+                            border-radius: 13px;">
+                    <div class="PayHead">
+                        <div style="display: flex;  justify-content: space-between;">
+                            <span class="HeadText2">Pakiet</span><span class="navPinkButton">Najczęściej wybierany!</span>
                         </div>
                         <div style="min-height: 40px">
                             <span class="UnderText">5, 10 lub 30 zajęć do wykorzystania odpowiednio w ciągu 5, 10 lub 30 tygodni</span> 
@@ -386,7 +419,7 @@
                     <div class="PaymentList">
                         <div class="ListArgument">
                             <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
-                            <span>promocyjna cena</span>
+                            <span>możliwość przełożenia i odwołania zajęć</span>
                         </div>
                         <div class="ListArgument">
                             <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
@@ -398,45 +431,14 @@
                         </div>
                         <div class="ListArgument">
                             <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
-                            <span>możliwość przełożenia i odwołania zajęć</span>
+                            <span>promocyjna cena</span>
                         </div>
                     </div>
                     <div>
                         <buton class="LL-button LL-button-primary w-100" onclick="MPacketLessons()">Rezerwuj</buton>
                     </div>
                 </div>
-                <div class="PaymentColumn rightLine" style="padding: 0px 24px 0px 32px;">
-                    <div class="PayHead">
-                        <div>
-                            <span class="HeadText2">Zajęcia cykliczne</span>
-                        </div>
-                        <div style="min-height: 40px">
-                            <span class="UnderText">dowolna ilość zajęć co tydzień o stałej porze</span>
-                        </div>  
-                    </div>
-                    <div class="PaymentList">
-                        <div class="ListArgument">
-                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
-                            <span class="CrossLine">promocyjna cena</span>
-                        </div>
-                        <div class="ListArgument">
-                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
-                            <span>rezerwacja najlepszego dla Ciebie terminu</span>
-                        </div>
-                        <div class="ListArgument">
-                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
-                            <span>regularne zajęcia</span>
-                        </div>
-                        <div class="ListArgument">
-                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
-                            <span>możliwość przełożenia i odwołania zajęć</span>
-                        </div>
-                    </div>
-                    <div>
-                        <buton class="LL-button LL-button-primary w-100"  onclick="MCyklLessons()">Rezerwuj</buton>
-                    </div>
-                </div>
-                <div class="PaymentColumn" style="padding-left: 32px;">
+                <div class="PaymentColumn" style="padding: 12px;">
                     <div class="PayHead">
                         <div>
                             <span class="HeadText2">Pojedyncze zajęcia</span>
@@ -447,21 +449,21 @@
                     </div>
                     <div class="PaymentList">
                         <div class="ListArgument">
-                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
-                            <span class="CrossLine">promocyjna cena</span>
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span>możliwość przełożenia i odwołania zajęć</span>
                         </div>
                         <div class="ListArgument">
-                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
-                            <span class="CrossLine">rezerwacja najlepszego dla Ciebie terminu</span>
+                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
+                            <span class="">rezerwacja najlepszego dla Ciebie terminu</span>
                         </div>
                         <div class="ListArgument">
                             <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
                             <span class="CrossLine">regularne zajęcia</span>
                         </div>
                         <div class="ListArgument">
-                            <span class="ListImage"><img src="{{asset('images/svg/check.svg')}}"></span>
-                            <span>możliwość przełożenia i odwołania zajęć</span>
-                        </div>
+                            <span class="ListImage"><img src="{{asset('images/svg/cross.svg')}}"></span>
+                            <span class="CrossLine">promocyjna cena</span>
+                        </div>                        
                     </div>
                     <div>
                         <buton class="LL-button LL-button-primary w-100"  onclick="openInd()">Rezerwuj</buton>

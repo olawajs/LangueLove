@@ -31,6 +31,64 @@ use App\Mail\StudentMailLessonNotification;
 
 class AdministratorController extends Controller
 {
+    public function FullClaendars(Request $request){
+        $ch = curl_init();
+        $first = Carbon::now()->addMonths(1)->startOfMonth()->format('Y-m-d');
+        $last =  Carbon::now()->addMonths(1)->endOfMonth()->format('Y-m-d');
+        curl_setopt($ch, CURLOPT_URL, "https://openholidaysapi.org/PublicHolidays?countryIsoCode=PL&languageIsoCode=PL&validFrom=$first&validTo=$last");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = json_decode(curl_exec($ch));
+        curl_close($ch);  
+        $lectors = Lector::where('active','1')
+                            ->where('id', '!=', 14) // Faustyna
+                            ->where('id', '!=', 8) //wera
+                            ->get();
+        // $lectors = Lector::where('id','11')->get();
+        // dd($lectors);
+        foreach($lectors as $le){
+            $id = $le->id;
+            foreach($output as $o){
+                
+                $today = new Carbon($o->startDate);
+              
+                if($today->dayOfWeek != Carbon::SUNDAY){
+                    $start = $o->startDate.' 00:00:00';
+                    $end = $o->startDate.' 23:59:59';
+                    $data=[
+                        'start'=>$start,
+                        'end'=>$end,
+                        'lector_id'=>$id,
+                        'type'=>0, //wolny
+                    ];
+                    $CS = CalendarSetup::create($data);
+                }
+            }
+             $day = $first;
+            $l =  Carbon::now()->addMonths(1)->endOfMonth();
+            $l = $l->addDays(1)->format('Y-m-d');
+            while($day != $l){
+                $start2 = $day.' 07:00:00';
+                $end2 = $day.' 21:00:00';
+                $data2=[
+                    'start'=>$start2,
+                    'end'=>$end2,
+                    'lector_id'=>$id,
+                    'type'=>1, //wolny
+                ];
+                $today = new Carbon($day);
+                if($today->dayOfWeek != Carbon::SUNDAY){
+                    $CS2 = CalendarSetup::create($data2);
+                }
+                $h = new Carbon($day);
+                $day = $h->addDays(1)->format('Y-m-d');
+            }
+        }
+
+        
+       
+           
+
+    }
     public function Database(Request $request){
         $codes = Code::all();
         $newsletters = Newsletter::all();
@@ -147,6 +205,7 @@ class AdministratorController extends Controller
                                         ->where('type',1)
                                         ->where('start','>=',Carbon::now())
                                         ->get();
+       
         $calendar_Events = CalendarEvent::where('lector_id',$request->id)
                                         ->where('start','>=',Carbon::now())
                                         ->get();
@@ -379,7 +438,6 @@ class AdministratorController extends Controller
         // $session_id = Session::get('_token');
         $prices = LectorPrices::where('lector_type_id', $lector->lector_type_id)->get();
          $id = isset(Auth::user()->id) ? Auth::user()->id : 0;
-        // dd($calendarTab);
              return view('test/lector',[
                 'durations' => $duratons,
                 'levels' => $levels,

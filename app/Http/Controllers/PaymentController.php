@@ -526,7 +526,12 @@ class PaymentController extends Controller
             $payment->save();
             // $this->CreateLessons();
             $this->CreateFixedLessons($session_id);
-            Mail::to(Auth::user()->email)->send(new ThankYou());
+            try {
+                Mail::to(Auth::user()->email)->send(new ThankYou());
+             } catch (\Throwable $th) {
+                //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+             }
+           
            
             return view('thankYou');
         }else{
