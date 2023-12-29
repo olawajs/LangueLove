@@ -73,7 +73,7 @@ a:active {
 <link href="{{ asset('css/owlCarousel/owl.theme.default.min.css') }}" rel="stylesheet">
 @section('content')
 <div class="container desktop">
-    <div class="row  classicCont">
+    <div class="row  classicCont" style="margin-bottom: 60px;">
         <div class="AboutUsHead" style = 'padding-top:60px'>
             <h3 class="smallHeadText">O nas</h3>
             <h2 class="bigHeadText">Poznajmy się!</h2>
@@ -89,9 +89,9 @@ a:active {
         </div>
     </div>
     <div class="MiniMenu">
-        <a href="#oSzkole">O szkole</a>
-        <a href="#metody">Metody nauczania</a>
-        <a href="#zalozycielki">Założycielki</a>
+        <a style="color: black" href="#oSzkole">O szkole</a>
+        <a style="color: black" href="#metody">Metody nauczania</a>
+        <a style="color: black" href="#zalozycielki">Założycielki</a>
     </div>
     <div class="row justify-content-center ColRev BeigeBack AboutDiv" id="oSzkole">
         <div class="col-2"></div>
@@ -101,21 +101,21 @@ a:active {
         </div>
         <div  class="col-2"></div>
         <div class="col-5 TextDisplay">
-                <h2 class="middleText">Dlaczego warto nas wybrać?</h2>
+                <h2 class="middleText" style="text-align: left !important;">Dlaczego warto nas wybrać?</h2>
                 <p>
                     Prowadzimy kursy językowe indywidualne i grupowe oraz webinaria tematyczne. W naszej szkole
-                    językowej online znajdą Państwo kursy 10 języków obcych.<br></br>
+                    językowej online znajdziesz kursy 10 języków obcych.<br></br>
                     Mocno wierzymy, że nauka języka jest inwestycją w przyszłość i drogą do odkrywania świata, 
                     a także poszerzania horyzontów.<br><br>
                     Nasze indywidualne i grupowe kursy językowe opierają się na autorskich programach nauki,
-                    dzięki czemu mają Państwo pewność, że inwestycja przynosi efekty i jest spersonalizowana.
+                    dzięki czemu masz pewność, że inwestycja przynosi efekty i jest spersonalizowana.
                 </p>
                 <a href="/priceList/search/1/1" class="LL-button LL-button-primary2" style="width: fit-content;">Zobacz naszą ofertę</a>
         </div>
         <div class="col-1"></div>
-        <div class="col-4" style="position: relative">
+        <div class="col-4" style="position: relative;display: flex;  justify-content: end;" >
             <img src="{{asset('images/aboutUs/WW1.png')}}" class="FotosAbout" alt="">
-               <img src="{{asset('images/aboutUs/zawijas.svg')}}" style="height: 184px;  position: absolute;  right: -120px;  bottom: -185px;"  alt="">
+            <img src="{{asset('images/aboutUs/zawijas.svg')}}" style="height: 184px;  position: absolute;  right: -120px;  bottom: -185px;"  alt="">
         </div>
 
     </div>
@@ -152,7 +152,7 @@ a:active {
                 Nasze kursy są oparte na praktycznych ćwiczeniach, wykonywanych w przyjaznej atmosferze,
                 przez co poczujesz się swobodnie w mówieniu już od pierwszych zajęć.<br><br>
                 Stawiamy na nowoczesność i rozwój. 
-                Poza podręcznikiem <br>wykorzystujemy wszystkie dostępne zasoby internetu,</br>
+                Poza podręcznikiem wykorzystujemy wszystkie dostępne zasoby internetu,
                 takie jak prezentacje multimedialne, filmy, artykuły, gry, podcasty, social media, 
                 pracę w grupach i inne. 
                 Wprowadzamy nowoczesne metody oparte na badaniach neurolingwistycznych i językoznawczych, 
@@ -161,7 +161,7 @@ a:active {
             <a href="/priceList/search/1/1" class="LL-button LL-button-primary2" style="width: fit-content;">Zapisz się na zajęcia</a>
         </div>
         <div class="col-1"></div>
-        <div class="col-4">
+        <div class="col-4" style="display: flex;  justify-content: end;">
             <img src="{{asset('images/aboutUs/WW2.png')}}" class="FotosAbout"  alt="">
         </div>
     </div>
@@ -187,7 +187,12 @@ a:active {
                     @endforeach
                 </div>  
                 <div class="CarouselButton">
-                    <a href="{{ route('showLector',$lector->id) }}">Poznaj &#8594;</a>
+                    <a href="{{ route('showLector',$lector->id) }}">Poznaj 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
+                            <path d="M8.83922 11.161C8.69541 11.161 8.5516 11.108 8.43806 10.9945C8.21856 10.775 8.21856 10.4117 8.43806 10.1922L12.6313 5.99899L8.43806 1.8058C8.21856 1.5863 8.21856 1.22299 8.43806 1.00349C8.65756 0.783992 9.02087 0.783992 9.24037 1.00349L13.8347 5.59784C14.0542 5.81734 14.0542 6.18064 13.8347 6.40015L9.24037 10.9945C9.12684 11.108 8.98303 11.161 8.83922 11.161Z" fill="#3C0079"/>
+                            <path d="M13.3062 6.5665H0.567672C0.257345 6.5665 0 6.30915 0 5.99882C0 5.6885 0.257345 5.43115 0.567672 5.43115H13.3062C13.6166 5.43115 13.8739 5.6885 13.8739 5.99882C13.8739 6.30915 13.6166 6.5665 13.3062 6.5665Z" fill="#3C0079"/>
+                        </svg>
+                    </a>
                 </div> 
             </div>
 
@@ -347,11 +352,11 @@ a:active {
         <div>
                 <p>
                     Prowadzimy kursy językowe indywidualne i grupowe oraz webinaria tematyczne. W naszej szkole
-                    językowej online znajdą Państwo kursy 10 języków obcych.<br></br>
+                    językowej online znajdziesz kursy 10 języków obcych.<br></br>
                     Mocno wierzymy, że nauka języka jest inwestycją w przyszłość i drogą do odkrywania świata, 
                     a także poszerzania horyzontów.<br><br>
                     Nasze indywidualne i grupowe kursy językowe opierają się na autorskich programach nauki,
-                    dzięki czemu mają Państwo pewność, że inwestycja przynosi efekty i jest spersonalizowana.
+                    dzięki czemu masz pewność, że inwestycja przynosi efekty i jest spersonalizowana.
                 </p>
         </div>
         <div>
@@ -414,7 +419,7 @@ a:active {
             </div>
             <div id="arrows"></div>
         <div class="owl-carousel" id="carousel2">
-            @foreach (App\Models\Lector::where('active',1)->get() as $lector)
+            @foreach (App\Models\Lector::where('active',1)->where('id','!=',18)->get() as $lector)
                 <div class="card lectorCardNew">
                     <div><img src='/images/lectors/{{$lector->photo}}' style="width: 220px !important"></div>
                     <div><h4 class="text-center" style="font-size: 32px"><b>{{$lector->name}}</b></h4></div>   
@@ -443,7 +448,7 @@ a:active {
         </div>
         <div class=" AboutBoxes">
             <div class="AboutBox">
-                <div> <img src="{{asset('images/aboutUs/bulb.svg')}}" width="80px" alt="Bulb"></div>
+                <!-- <div> <img src="{{asset('images/aboutUs/bulb.svg')}}" width="80px" alt="Bulb"></div> -->
                 <h2 class="middleText" style="text-align: left">Praktyka<br> (czyni mistrza)</h2>
                 
                 <p>
@@ -452,7 +457,7 @@ a:active {
                 </p>
             </div>
             <div class="AboutBox">
-                <div> <img src="{{asset('images/aboutUs/calendar.svg')}}" width="80px" alt="Bulb"></div>
+                <!-- <div> <img src="{{asset('images/aboutUs/calendar.svg')}}" width="80px" alt="Bulb"></div> -->
                 <h2 class="middleText" style="text-align: left">Różnorodne materiały</h2>
                 <p>
                     Efektywnej nauce sprzyjają różnorodne i kreatywne materiały. 
@@ -460,7 +465,7 @@ a:active {
                 </p>
             </div>
             <div class="AboutBox">
-                <div> <img src="{{asset('images/aboutUs/rocket.svg')}}" width="80px" alt="Bulb"></div>
+                <!-- <div> <img src="{{asset('images/aboutUs/rocket.svg')}}" width="80px" alt="Bulb"></div> -->
                 <h2 class="middleText" style="text-align: left">Całkowite zanurzenie</h2>
                 <p>
                     Prowadzimy lekcje już od początkujących poziomów w języku docelowym. 

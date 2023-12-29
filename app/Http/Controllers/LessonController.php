@@ -166,7 +166,8 @@ class LessonController extends Controller
             'draft' => 'nullable',
             'skype' => 'nullable',
             'lector_id' => 'required|integer',
-            'language_id' => 'required|integer'
+            'language_id' => 'required|integer',
+            'active' => 'required'
         ]); 
         $validated['photo'] = $imageName;
         

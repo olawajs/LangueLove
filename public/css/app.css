@@ -276,6 +276,7 @@ a {
 }
 a:hover {
   color: var(--bs-link-hover-color);
+  text-decoration: underline;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -11482,7 +11483,7 @@ footer{
   flex-flow: column;
   align-items: center;
   gap: 6px;
-  font-size: 14px;
+  font-size: 16px;
  
 }
 .CarouselButton{
@@ -11504,6 +11505,9 @@ footer{
   border-radius: 8px;
   border: 1px solid var(--langue-love-light-grey);
   background: var(--langue-love-white);
+}
+.carouselArrow:hover{
+  border: 1px solid var(--langue-love-purple);
 }
 .LectorPhotoCard{
   height: 220px;
@@ -11765,6 +11769,7 @@ footer{
   font-style: normal;
   font-weight: 700;
   line-height: 48px;
+  margin-bottom: 48px !important;
 }
 .middleText{
   color: var(--langue-love-black);
@@ -11772,6 +11777,7 @@ footer{
   font-style: normal;
   font-weight: 700;
   line-height: 48px;
+  text-align: left !important;
 }
 .paddingSides{
   padding: 0 120px;
@@ -11883,6 +11889,7 @@ footer{
   align-items: flex-start;
   gap: 12px;
   margin-left: 100px;
+  margin-top: -360px;
   position: sticky !important;
   top: 100px;
 }
@@ -11898,6 +11905,9 @@ height: 260px;
   border: none
 }
 @media only screen and (max-width: 800px) {
+  .wrapper{
+    overflow-x: clip;
+  }
   .mobile{
     display: unset;
   }

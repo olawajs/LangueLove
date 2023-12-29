@@ -22,6 +22,7 @@ class Lesson extends Model
         'title',
         'status',
         'certificat',
-        'skype'
+        'skype',
+        'active'
     ];
 }

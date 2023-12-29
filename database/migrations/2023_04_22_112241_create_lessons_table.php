@@ -35,6 +35,7 @@ class CreateLessonsTable extends Migration
             $table->foreign('language_id')->references('id')->on('languages');
             $table->boolean('certificat')->default(false);
             $table->string('skype');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
       

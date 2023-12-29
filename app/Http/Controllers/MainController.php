@@ -106,6 +106,9 @@ class MainController extends Controller
         }
     }
     public function myCalendar(){
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $lessons = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->count();
         return view('myCalendar',[
             'to_use'=>$lessons
@@ -244,6 +247,7 @@ class MainController extends Controller
                                 ->whereIn('type_id', $request->type)
                                 ->where('start', '>', Carbon::today())
                                 ->where('status','<>',0)
+                                ->where('active',1)
                                 ->get();
             
             $languageT = LanguageLevel::whereIn('language_id',$request->lang)->pluck('lector_id')->toArray();
@@ -251,7 +255,8 @@ class MainController extends Controller
         }else if(!is_null($request->lang)  && (is_null($request->type)||$request->type[0] == '0') && $request->lang[0] != '0'){
             $lessons = Lesson::whereIn('language_id', $request->lang)
                             ->where('start', '>', Carbon::today())   
-                            ->where('status','<>',0)                    
+                            ->where('status','<>',0)    
+                            ->where('active',1)               
                             ->get();
             $languageT = LanguageLevel::whereIn('language_id',$request->lang)->pluck('lector_id')->toArray();
             $lectors = Lector::whereIn('id',$languageT)->where('active',1)->where('id','!=',18)->get();
@@ -260,11 +265,12 @@ class MainController extends Controller
             $lessons = Lesson::whereIn('type_id', $request->type)
                             ->where('start', '>', Carbon::today())
                             ->where('status','<>',0)
+                            ->where('active',1)
                             ->get();
              $lectors = Lector::where('id','!=',18)->where('active',1)->get();
         }
         else{
-            $lessons = Lesson::where('start', '>', Carbon::today())->where('status','<>',0)->get();
+            $lessons = Lesson::where('start', '>', Carbon::today())->where('status','<>',0)->where('active',1)->get();
             $lectors = Lector::where('id','!=',18)->where('active',1)->get();
         }
         $langs = Language::where('active',1)->get();
@@ -282,6 +288,7 @@ class MainController extends Controller
             $lessons = Lesson::where('type_id', intval($request->type))
                             ->where('start', '>', Carbon::today())
                             ->where('status','<>',0)
+                            ->where('active',1)
                             ->get();
        
         $langs = Language::where('active',1)->get();
@@ -304,6 +311,7 @@ class MainController extends Controller
                             ->where('type_id','!=', 1)
                             ->where('type_id','!=', 4)
                             ->where('start', '>', Carbon::today())
+                            ->where('active',1)
                             ->get();
         $languageT = LanguageLevel::where('language_id',$request->lang)->pluck('lector_id')->toArray();
         $lectors = Lector::whereIn('id',$languageT)->where('id','!=',18)->where('active',1)->get();

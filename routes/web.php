@@ -77,6 +77,7 @@ Route::GET('generateCode', [App\Http\Controllers\NewsletterController::class, 'g
 Route::get('admin/lessons', [App\Http\Controllers\Admin\EditInfo::class, 'getLessons'])->name('lessons');
 Route::get('admin/data', [App\Http\Controllers\Admin\AdministratorController::class, 'Database'])->name('database');
 Route::get('admin/fullCalendar', [App\Http\Controllers\Admin\AdministratorController::class, 'FullClaendars'])->name('fullCalendar');
+Route::get('admin/GenerateCodes', [App\Http\Controllers\Admin\AdministratorController::class, 'GenerateCodes'])->name('GenerateCodes');
 Route::get('admin/prices', [App\Http\Controllers\Admin\EditInfo::class, 'getPrices'])->name('prices');
 Route::get('admin/lectors', [App\Http\Controllers\LectorController::class, 'showLectors'])->name('lectors');
 Route::get('admin/newLector', [App\Http\Controllers\LectorController::class, 'NewLector'])->name('newLector');
@@ -112,6 +113,10 @@ Route::GET('lectorTest/{id}', [App\Http\Controllers\Admin\AdministratorControlle
 Route::get('/aboutTest', function () {
     return view('test/aboutUs');
 })->name('aboutTest');
+Route::get('/regulamin', function () {
+    return view('test/regulamin');
+})->name('regulamin');
+
 
 
 //czasowe maile

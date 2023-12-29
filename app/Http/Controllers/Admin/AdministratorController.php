@@ -31,6 +31,20 @@ use App\Mail\StudentMailLessonNotification;
 
 class AdministratorController extends Controller
 {
+    public function GenerateCodes(Request $request){
+        for($i=1; $i<120; $i++){
+            $result = app('App\Http\Controllers\NewsletterController')->generateCode();
+            $code = Code::create([
+                'code' => $result,
+                'email' => '',
+                'lesson_type' => 2,
+                'amount' => 20,
+                'type' => '%'
+            ]);
+            echo $result.'<br>';  
+        }
+        
+    }
     public function FullClaendars(Request $request){
         $ch = curl_init();
         $first = Carbon::now()->addMonths(1)->startOfMonth()->format('Y-m-d');
@@ -42,6 +56,8 @@ class AdministratorController extends Controller
         $lectors = Lector::where('active','1')
                             ->where('id', '!=', 14) // Faustyna
                             ->where('id', '!=', 8) //wera
+                            ->where('id', '!=', 20) //wera
+                            ->where('active',1)
                             ->get();
         // $lectors = Lector::where('id','11')->get();
         // dd($lectors);

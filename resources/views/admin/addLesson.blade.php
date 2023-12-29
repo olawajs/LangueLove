@@ -27,10 +27,10 @@
                 <div class="col-md-3">
                     <label for="type_id" class="form-label">Typ lekcji: </label>
                     <select class="form-control" name="type_id" id="type_id">
-                    @foreach($types as $type)
-                        <option value="{{$type->id}}">{{$type->name}}</option>
-                    @endforeach
-                </select>
+                        @foreach($types as $type)
+                            <option value="{{$type->id}}">{{$type->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <label for="duration_id" class="form-label">Długość zajęć:</label>
@@ -82,9 +82,16 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <label for="skype" class="form-label">Skype</label>
                     <input class="form-control" placeholder="Skype" name="skype" id="skype">
+                </div>
+                <div class="col-md-4">
+                    <label for="type_id" class="form-label">Aktywny: </label>
+                    <select class="form-control" name="active" id="active">
+                            <option value="1">TAK</option>
+                            <option value="0">NIE</option>
+                    </select>
                 </div>
                 
                 <div class="col-md-6">
