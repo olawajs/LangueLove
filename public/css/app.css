@@ -11286,6 +11286,7 @@ footer{
  flex-flow: column-reverse;
  justify-content: space-between;
  padding-top: 30px;
+ margin-top: 64px;
 }
 .footNewsletter{
   display: flex;
