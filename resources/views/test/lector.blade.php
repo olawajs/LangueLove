@@ -2236,14 +2236,15 @@
             type: type, 
             priceType: priceType, 
             user: User,
-            cert: cert
+            cert: cert,
+            data: ZajeciaData
             },
         })
         .done(function(data) {
             dw = data;
         })
         .fail(function() {
-            alert( "error" );
+            alert( "błąd bądź brak lekcji " );
         });
     }
 go();

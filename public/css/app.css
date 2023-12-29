@@ -4390,7 +4390,15 @@ textarea.form-control-lg {
   --bs-accordion-active-color: #0c63e4;
   --bs-accordion-active-bg: #e7f1ff;
 }
-
+.accordion-content {
+  display: none;
+  color: var(--langue-love-black, #2B2B33);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
 .accordion-button {
   position: relative;
   display: flex;
@@ -4447,13 +4455,23 @@ textarea.form-control-lg {
 }
 
 .accordion-header {
-  margin-bottom: 0;
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--langue-love-black, #2B2B33);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
 }
 
 .accordion-item {
-  color: var(--bs-accordion-color);
+  border-bottom: 1px solid var(--langue-love-light-grey);
+  /* color: var(--bs-accordion-color);
   background-color: var(--bs-accordion-bg);
-  border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+  border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color); */
 }
 .accordion-item:first-of-type {
   border-top-left-radius: var(--bs-accordion-border-radius);
@@ -4467,8 +4485,8 @@ textarea.form-control-lg {
   border-top: 0;
 }
 .accordion-item:last-of-type {
-  border-bottom-right-radius: var(--bs-accordion-border-radius);
-  border-bottom-left-radius: var(--bs-accordion-border-radius);
+  /* border-bottom-right-radius: var(--bs-accordion-border-radius);
+  border-bottom-left-radius: var(--bs-accordion-border-radius); */
 }
 .accordion-item:last-of-type .accordion-button.collapsed {
   border-bottom-right-radius: var(--bs-accordion-inner-border-radius);
@@ -12296,6 +12314,7 @@ html {
 }
 .container{
   /* max-width: 1200px; */
+  margin-bottom: 60px;
 }
 .LectroH2{
   color: var(--langue-love-black, #2B2B33);

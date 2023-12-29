@@ -179,8 +179,16 @@ class MainController extends Controller
         $priceType = $request->priceType;
         $id = $request->user;
         $cert = $request->cert;
+        $data = $request->data;
+        // $lessons = LessonsBank::where('user_id',$id)
+        //                         ->where('overdue_date','>=',Carbon::today())
+        //                         ->whereNull('use_date')
+        //                         ->where('type_id',$type)
+        //                         ->where('priceType',$priceType)
+        //                         ->where('certificat',$cert)
+        //                         ->count();
         $lessons = LessonsBank::where('user_id',$id)
-                                ->where('overdue_date','>=',Carbon::today())
+                                ->where('overdue_date','>=',$data)
                                 ->whereNull('use_date')
                                 ->where('type_id',$type)
                                 ->where('priceType',$priceType)
