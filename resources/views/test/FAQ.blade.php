@@ -39,18 +39,7 @@ line-height: 24px; /* 150% */
   font-weight: 700;
   line-height: 48px;
 }
-@media only screen and (max-width: 800px) {
-  .col-2{
-    display: none;
-  }
-  .accordion{
-    width: 100% !important;
-    padding: 0 16px;
-  }
-  .FileHead{
-    align-items: flex-start;
-  }
-}
+
 
 .hidden {
   display: none;
@@ -80,11 +69,6 @@ line-height: 24px; /* 150% */
 /* Stylizacja po zaznaczeniu radio button */
 .custom-radio input:checked + label {
   color: var(--langue-love-black);
-  font-family: Montserrat;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
   border-bottom: 3px solid var(--langue-love-pink);
 }
 .menuRadio{
@@ -92,6 +76,21 @@ line-height: 24px; /* 150% */
   justify-content: space-between;
   gap: 10px;
 
+}
+@media only screen and (max-width: 800px) {
+  .col-2{
+    display: none;
+  }
+  .accordion{
+    width: 100% !important;
+    padding: 0 16px;
+  }
+  .FileHead{
+    align-items: flex-start;
+  }
+  .custom-radio label {
+  font-size: 10px;
+  }
 }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">

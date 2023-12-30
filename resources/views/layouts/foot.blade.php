@@ -1,37 +1,9 @@
-<footer class="footer">
-<div class="footCE">
-    <div>© Langue Love Spółka Cywilna </div>
-    <div><a class="footLink" href="{{ asset('files/Polityka prywatności LangueLove.pdf') }}">Polityka prywatności</a></div>
-</div>
-<div class="footLinks">
-    <div>
-        <ul class="">
-            <li class="list-group-item listTitle"><b>Pomoc</b></li>
-            <li class="list-group-item"><a class="footLink" href="{{ route('contact') }}">Kontakt</a></li>
-            <li class="list-group-item"><a class="footLink" href="{{ asset('files/FAQ LangueLove.pdf') }}">FAQ</a></li>
-            <li class="list-group-item"><a class="footLink" href="{{ asset('files/LangueLove Regulamin.pdf') }}">Regulamin</a></li>
-            <li class="list-group-item"><a class="footLink" href="{{ asset('files/LangueLove_regulamin obowiazuje od 02.01.24.pdf') }}">Regulamin (02.01.2024)</a></li>
-        </ul>
-    </div>
-    <div>
-        <ul class="">
-            <li class="list-group-item listTitle"><b>LangueLove</b></li>
-            <li class="list-group-item"><a class="footLink" href="{{ route('about') }}">O nas</a></li>
-            <li class="list-group-item"><a class="footLink" href="{{ route('forCompanies') }}">Oferta dla firm</a></li>
-            <li class="list-group-item"><a class="footLink" href="{{ route('consultation') }}">Bezpłatne konsultacje</a></li>
-        </ul>
-    </div>
-    <div>
-        <ul class="">
-            <li class="list-group-item listTitle"><b>Social media</b></li>
-            <li class="list-group-item"><div class="SocialList"><a href="https://www.instagram.com/languelove"><i class="gg-instagram"></i></a><a href="https://www.facebook.com/LangueLove.szkola"><i class="gg-facebook"></i></a></div></li>
-        </ul>
-    </div>
-</div>
+<footer class="footer Desktop">
+
 <div class="footNewsletter">
     <div class="footHalf">
-        <h2>Zostań z nami na dłużej!</h2>
-        <p>Zapisz się do naszego newslettera, aby otrzymać 10% zniżki na zajęcia grupowe i zacznij uczyć się już dziś! Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
+        <h2 class="whiteH2">Zostań z nami na dłużej!</h2>
+        <p class="footText">Zapisz się do naszego newslettera, aby otrzymać 10% zniżki na zajęcia grupowe i zacznij uczyć się już dziś! Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
     </div>
     <div class="footHalf" >
         <div class="footInput">
@@ -43,9 +15,80 @@
             
             </div>
         </div>
-         <span style="font-size: small">Rejestrując się do newslettera akceptujesz Politykę prywatności.</span>
+         <span style="line-height: 20px;font-size: 11px;">Rejestrując się do newslettera akceptujesz <a target="_blank" style="color: white;font-weight: 600;" href="{{ route('polityka') }}">Politykę prywatności.</a></span>
     </div>
-    
-    
 </div>
+<div class="footLinks">
+    <div class="footColumn">
+            <span class="listTitle"><b>Pomoc</b></span>
+            <a class="footLink" href="{{ route('contact') }}">Kontakt</a>
+            <a class="footLink" href="{{ route('FAQ') }}">FAQ</a>
+            <a class="footLink" href="{{ route('regulamin') }}">Regulamin</a>
+    </div>
+    <div class="footColumn">
+            <span class="listTitle"><b>LangueLove</b></span>
+            <a class="footLink" href="{{ route('about') }}">O nas</a>
+            <a class="footLink" href="{{ route('forCompanies') }}">Oferta dla firm</a>
+            <a class="footLink" href="{{ route('consultation') }}">Bezpłatne konsultacje</a>
+    </div>
+    <div class="footColumn">
+            <span class="listTitle"><b>Social media</b></span>
+            <div class="SocialList">
+                <a href="https://www.instagram.com/languelove"><img src="{{asset('images/svg/ig.svg')}}"></a>
+                <a href="https://www.facebook.com/LangueLove.szkola"><img src="{{asset('images/svg/fb.svg')}}"></a>
+                <a href="https://www.tiktok.com/@languelove_"><img src="{{asset('images/svg/tiktok.svg')}}"></a>
+            </div>
+    </div>
+</div>
+<div class="footCE">
+   © Langue Love Spółka Cywilna &emsp; | &emsp; <a class="footLink" href="{{ route('polityka') }}">Polityka prywatności</a>
+</div>
+</footer>
+<footer class="footer mobileFoot">
+    <div class="MobileCol">
+        <div>
+            <h2 class="whiteH2">Zostań z nami na dłużej!</h2>
+        </div>
+        <div>
+            <p class="footText">Zapisz się do naszego newslettera, aby otrzymać 10% zniżki na zajęcia grupowe i zacznij uczyć się już dziś! Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
+        </div>
+        <div>
+            <h2 class="whiteH2">
+                <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Adres email" id="newsMail" aria-label="Adres email" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-black" type="button" onclick="SignInN()"><img src="{{asset('images/svg/send.svg')}}"></button>
+                </div>
+            </div></h2>
+        </div>
+        <div style="font-size: 11px;">
+            Rejestrując się do newslettera akceptujesz <a target="_blank" style="color: white;font-weight: 600;" href="{{ route('polityka') }}">Politykę prywatności.</a>
+        </div>
+    </div>
+    <div class="footLinks" style="padding: 32px 16px">
+        <div class="footColumn" style="width: 50%">
+                <span class="listTitle"><b>Pomoc</b></span>
+                <a class="footLink" href="{{ route('contact') }}">Kontakt</a>
+                <a class="footLink" href="{{ route('FAQ') }}">FAQ</a>
+                <a class="footLink" href="{{ route('regulamin') }}">Regulamin</a>
+        </div>
+        <div class="footColumn" style="width: 50%">
+                <span class="listTitle"><b>LangueLove</b></span>
+                <a class="footLink" href="{{ route('about') }}">O nas</a>
+                <a class="footLink" href="{{ route('forCompanies') }}">Oferta dla firm</a>
+                <a class="footLink" href="{{ route('consultation') }}">Bezpłatne konsultacje</a>
+        </div>
+        <div class="footColumn" style="width: 50%; margin-top: 24px">
+                <span class="listTitle"><b>Social media</b></span>
+                <div class="SocialList">
+                    <a href="https://www.instagram.com/languelove"><img src="{{asset('images/svg/ig.svg')}}"></a>
+                    <a href="https://www.facebook.com/LangueLove.szkola"><img src="{{asset('images/svg/fb.svg')}}"></a>
+                    <a href="https://www.tiktok.com/@languelove_"><img src="{{asset('images/svg/tiktok.svg')}}"></a>
+                </div>
+        </div>
+    </div>
+    <div class="footCE" style="padding: 0 16px">
+     © Langue Love Spółka Cywilna &emsp; | &emsp; <a class="footLink" href="{{ route('polityka') }}">Polityka prywatności</a>
+    </div>
+
 </footer>
