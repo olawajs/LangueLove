@@ -119,6 +119,9 @@ Route::get('/regulamin', function () {
 Route::get('/polityka', function () {
     return view('test/policy');
 })->name('polityka');
+Route::get('/FAQ', function () {
+    return view('test/FAQ');
+})->name('FAQ');
 
 
 
