@@ -52,10 +52,6 @@ line-height: 24px; /* 150% */
   }
 }
 
-.content {
-  padding: 16px;
-}
-
 .hidden {
   display: none;
 }
