@@ -9,6 +9,7 @@ use App\Models\Lector;
 use App\Models\Language;
 use App\Models\Lesson;
 use App\Models\CalendarEvent;
+use App\Models\EventUsers;
 use App\Models\CalendarSetup;
 use App\Models\LanguageLevel;
 use App\Models\LessonsBank;
@@ -84,13 +85,15 @@ class LessonController extends Controller
                 'languages' => $languages,
                 'calendarLessons' => $calendarLessons,
                 'calendarEvents' => $calendarEvents
-                ]);
+            ]);
+              
         }else{
              return view('lesson',[
             'lesson' => $lesson,
             'durations' => $duratons,
             'lector' => $lector,
-            'calendarLessons' => $calendarLessons
+            'calendarLessons' => $calendarLessons,
+              'usedLessons'=>$lesson->amount_of_students - EventUsers::whereIn('calendar_id',CalendarEvent::where('lesson_id',$lesson->id)->pluck('id')->toArray())->distinct('user_id')->pluck('user_id')->count()
             ]);
         }
         

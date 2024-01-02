@@ -23,6 +23,9 @@
         width: 100%;
         margin-top: 10px;
     }
+    .LectorDesc{
+        height: fit-content;
+    }
 </style>
 <div class="container">
 
@@ -49,7 +52,8 @@
                 <div class="LessonText">
 
                     <div>
-                        <div><b>Dostępnych miejsc: </b>{{$lesson->amount_of_students}}</div>
+                        <!-- <div><b>Dostępnych miejsc: </b>{{$lesson->amount_of_students-App\Models\EventUsers::whereIn('calendar_id',App\Models\CalendarEvent::where('lesson_id',$lesson->id)->pluck('id')->toArray())->distinct('user_id')->pluck('user_id')->count()}}</div> -->
+                        <div><b>Dostępnych miejsc: </b>{{$usedLessons}}</div>
                     </div>
                     <div>
                         <b>Cena: </b><span class="SPrice"><b>{{$lesson->price*$lesson->amount_of_lessons}} zł</b> /  {{$lesson->amount_of_lessons}} lekcji</span>
@@ -119,7 +123,7 @@
                     <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
                     <input type="button" class="btn btn-primary mb-3 close" id="buyButton" value="ANULUJ">
                 </form>
-                    <button class="btn btn-secondary SButton open">Zarezerwuj i zapłać</a>
+                    <button class="btn btn-secondary SButton open" @if($usedLessons==0) disabled @endif>Zarezerwuj i zapłać</a>
             </div>
     
     </div>

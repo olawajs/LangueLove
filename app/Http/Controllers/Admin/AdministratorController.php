@@ -68,8 +68,8 @@ class AdministratorController extends Controller
                 $today = new Carbon($o->startDate);
               
                 if($today->dayOfWeek != Carbon::SUNDAY){
-                    $start = $o->startDate.' 00:00:00';
-                    $end = $o->startDate.' 23:59:59';
+                    $start = $o->startDate.' 07:00:00';
+                    $end = $o->startDate.' 21:00:00';
                     $data=[
                         'start'=>$start,
                         'end'=>$end,
