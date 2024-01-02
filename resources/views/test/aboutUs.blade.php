@@ -506,8 +506,8 @@ a:active {
             <div class="OwnerInfo">
                 <img src="{{asset('images/aboutUs/WiktoriaKolo.png')}}" width="174px" alt="Wiktoria">
                 <div>
-                    <div><h2 class="middleText" style="text-align: left !important">Weronika</h2></div>
-                    <div class="VioletText">lektorka języka włoskiego i angielskiego | założycielka szkoły</div>
+                    <div><h2 class="middleText" style="text-align: left !important">Wiktoria</h2></div>
+                    <div class="VioletText">lektorka języka włoskiego i portugalskiego | założycielka szkoły</div>
                 </div>
             </div>
            <p>
