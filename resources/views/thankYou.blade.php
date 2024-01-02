@@ -1,151 +1,31 @@
 @extends('layouts.app')
+
 <style>
-
-.discount{
-  text-align: center;
-  background-color: #C75470;
-  width: fit-content;
-  padding: 0 9px;
-  font-size: x-small;
-  margin: auto;
-}
-.buy_arrow{
+.MainDiv{
+  padding: 272px 50px;
   display: flex;
-  justify-content: end;
-  color: white;
-  background-color: #C75470;
-  width: fit-content;
-  padding-left: 7px;
-  float: inline-end;
-  cursor: pointer;
-  pointer-events: all;
-}
-/* main{
-  height: 100%;
-  margin-bottom: -200px;
-} */
-.LessonAmount{
-  font-size: 34px;
-  display: flex;
-  justify-content: center;
-}
-.DiscountDiv{
-  display: flex;
+  max-width: 790px;
   flex-direction: column;
-}
-.prizeDiv{
+  align-items: center;
+  gap: 40px;
+  margin: auto;
   text-align: center;
-  font-size: larger;
-}
-.info{
-  display: flex; 
-  font-size: xx-small
-}
-.pricingButton{
-  height: 100px;
-  width: 250px;
-  background-color: white;
-  border: none;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding: 5px;
-}
-.LineDiv{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 50px;
-}
-.TwoButtons{
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-}
-.choosenType{
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
-}
-.Description{
-  height: 70px;
-  border-radius: 8px;
-  border: 2px solid var(--bs-secondary);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  margin-top: 50px;
-} 
-.BuyButton{
-  height: 70px;
-  border-radius: 8px;
-  background-color: var(--bs-primary);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  margin-top: 30px;
-  color: white;
-  width: 100%;
-} 
-.ButtonsLabel{
-  font-weight: bold;
-  margin: 20px 0 20px 50px;
 }
 
-h4{
-  margin: auto;
-  width: fit-content;
-}
-LABEL.indented-checkbox-text
-{
-  margin-left: 2em;
-  display: block;
-  position: relative;
-  margin-top: -1.4em;  /* make this margin match whatever your line-height is */
-  line-height: 1.4em;  /* can be set here, or elsewehere */
-}
-.inputH{
-  height: 50px; !important;
-}
-.Info{
-  border-radius: 44px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-}
 </style>
 
 @section('content')
 <div class="container">
 
-
-    <div class="row justify-content-center classic">
-      <div class="classicTwo">
-        <img src="{{ asset('images/logo/logo1 2x.png') }}" height="100" alt="">
+    <div class="MainDiv" style="padding: 272px 50px;">
+      <div><img src="{{asset('images/svg/pinkCheck.svg')}}"></div>
+      <div style="color: var(--langue-love-black, #2B2B33);font-size: 40px;font-weight: 700;line-height: 48px;">Dziękujemy za zakup!</div>
+      <div style="color: var(--langue-love-black, #2B2B33);font-size: 16px;font-weight: 400;line-height: 24px;">
+        <p>Dziękujemy za zakup lekcji w naszej szkole! Już nie możemy się doczekać! </p>
+        <p>Terminy swoich zajęć możesz sprawdzić w kalendarzu na stronie swojego konta. Tam też znajdziesz linki do zajęć na Skype. Owocnej pracy! </p>
+        <p>Zespół LangueLove 💜</p>
       </div>
-      <div class="classicTwo">
-        <h4><b>Dziękujemy za zakup!</b></h4>
-      </div>
-    </div>
-
-    <div style="padding: 20px 50px;">
- 
-        <div class="row justify-content-center classic2 radius" style="padding: 20px 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; text-align: center;">
-          <h3><b>Dziękujemy!</b></h3>
-          <p>
-            Cześć!<br>
-            Dziękujemy za zakup lekcji w naszej szkole!<br>
-            Już nie możemy się doczekać!<br>
-            Terminy swoich lekcji możesz sprawdzić w kalendarzu w swoim profilu, tam też znajdziesz linki do skype swoich lektorów.<br>
-            Pamiętaj, aby potwierdzić rejestrację za pomocą linku który znajdziesz w mailu.
-            <br><br>
-            Owocnej pracy!<br>
-            Zespół LangueLove 💜
-          </p>
-        <div>
-    </div>  
-  </div>
+       
     </div>
 
 </div>

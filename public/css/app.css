@@ -2860,7 +2860,7 @@ textarea.form-control-lg {
 .btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
   color: var(--bs-btn-active-color);
   background-color: var(--bs-btn-active-bg);
-  border-color: var(--bs-btn-active-border-color);
+  /* border-color: var(--bs-btn-active-border-color); */
 }
 .btn-check:checked + .btn:focus-visible, :not(.btn-check) + .btn:active:focus-visible, .btn:first-child:active:focus-visible, .btn.active:focus-visible, .btn.show:focus-visible {
   box-shadow: var(--bs-btn-focus-box-shadow);
@@ -11180,14 +11180,15 @@ option{
 .animation{
   width: 100vw;
   height: 584px;
-	background: url("/images/animation.png");
-	background-repeat: repeat-y;
+	background: url("/images/flags/Homeflagi.svg");
+	background-repeat: no-repeat;
 	background-size: 250px;
-	animation: flow 60s linear infinite;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 5%;
+  padding: 0 190px;
+  /* margin-top: -70px; */
+  background-position: calc(100% - 60px) center;
 }
 .underline-blue{
   background-image: url("/images/LiniaFiolet.png");
@@ -11332,6 +11333,8 @@ line-height: 32px;
   background-color: black;
   color: white;
   border-radius: 0 8px 8px 0;
+  z-index: 3;
+  position: relative;
 }
 .footCE{
   width: 100%;
@@ -11867,6 +11870,109 @@ line-height: 32px;
   background-image: url(/images/background/purpleBackMobile.svg);
   background-size: 100% 100%
 }
+.PurpleBack2{
+  background-image: url(/images/background/purpleBack2.svg);
+  background-size: 100% 100%
+}
+/* .purpleBackMobile2{
+  background-image: url(/images/background/purpleBackMobile.svg);
+  background-size: 100% 100%
+} */
+.GrayBack{
+  background-image: url(/images/background/grayBack.svg);
+  background-size: 100% 100%;
+  margin-top: -70px;
+}
+.SearchContainer{
+  display: flex;
+  width: 379px;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  border-radius: 16px;
+  background: var(--langue-love-white, #FFF);
+}
+.BoldText{
+  color: #000;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
+.SearchBox{
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+.underlinePink{
+  height: 35px;
+  box-shadow: inset 0 -10px 0 rgba(199, 84, 112, 0.50);
+  display: inline-block;
+}
+.SearchButton{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+}
+.card-text-title{
+  color: var(--langue-love-black);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+}
+.card-link,.card-link:hover{
+  text-decoration: none;
+  color: var(--langue-love-black);
+}
+.card-desc{
+  position: absolute;
+  bottom: 16px;
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  gap: 6px;
+}
+.card:hover{
+  box-shadow: 8px 8px 60px 0px rgba(0, 0, 0, 0.15);
+}
+.SearchCat{
+  color: #6D6D6D;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+.SearchChosen{
+  color: #000;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+.btn-black{
+  display: flex;
+  width: 173px;
+  height: 66px;
+  padding: 10px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  background: var(--langue-love-black);
+}
 .AboutBox{
   display: flex;
   padding: 40px 40px 41px 40px;
@@ -11903,6 +12009,70 @@ line-height: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: 22px; /* 157.143% */
+}
+.filteredInputs{
+  border-radius: 0px 0px 24px 24px;
+  background: var(--langue-love-beige);
+  /* box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.10); */
+}
+.LectorDesc{
+  overflow: hidden;
+  height: 66px;
+  margin-bottom: 10px;
+
+}
+.SearchLektor{
+  display: flex;
+  flex-flow: row;
+  gap: 32px;
+  padding: 40px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  border-radius: 16px;
+  border: 1px solid var(--langue-love-light-grey, #D7D7D7);
+  background: var(--langue-love-white, #FFF);
+}
+.SearchLesson{
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  border-radius: 16px;
+  border: 1px solid var(--langue-love-light-grey, #D7D7D7);
+  background: var(--langue-love-white, #FFF);
+  height: 324px;
+}
+.textSearchV{
+  display: flex;
+  padding: 10px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--langue-love-purple);
+  font-size: 16px;
+   font-weight: 600;
+   line-height: 24px;
+}
+.piggySearch{
+  display: flex;
+  width: 172px;
+  padding: 10px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  background: var(--langue-love-light-pink, #F9EEF1);
+  color: var(--langue-love-pink, #C75470);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.SearchLesson2{
+  display: flex;
+  padding: 40px;
+  gap: 32px;
+  width: 100%;
+  height: 100%;
 }
 .VioletText{
   color: var(--langue-love-purple);
@@ -11943,6 +12113,15 @@ line-height: 32px;
   position: sticky !important;
   top: 100px;
 }
+.opiniaDiv{
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  border-radius: 24px;
+  background: var(--langue-love-white);
+}
 .Onas_serduszko{
   position: absolute;
   right: 50px;
@@ -11970,6 +12149,11 @@ height: 260px;
   .MiniMenu{
     display: none;
   }
+  .homeHeads{
+    display: flex;
+    flex-flow: column;
+    gap: 12px;
+  }
   .bigHeadText{
     text-align: left !important;
     font-size: 32px !important;
@@ -11984,6 +12168,26 @@ height: 260px;
   }
   .owl-stage-outer{
     padding: 0 !important;
+  }
+  .SearchLektor{
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    padding: 24px;
+    align-items: flex-start;
+    border-radius: 16px;
+    border: 1px solid var(--langue-love-light-grey, #D7D7D7);
+    background: var(--langue-love-white, #FFF);
+  }
+  .SearchLesson{
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    border-radius: 16px;
+    border: 1px solid var(--langue-love-light-grey, #D7D7D7);
+    background: var(--langue-love-white, #FFF);
+    height: 324px;
   }
   .AboutDiv{
     padding: 52px 16px;
@@ -12004,6 +12208,19 @@ height: 260px;
   .OwnerInfo{
     flex-flow: column;
   }
+  .homeHeads{
+    gap: 8px;
+  }
+  .PinkText{
+    font-weight: 500;
+  }
+  .VioletText{
+    font-weight: 500;
+  }
+  .lectorCardNew{
+    width: 276px;
+    gap: 12px;
+  }
   .OwnerDesc{
     padding: 32px;
     gap:24px;
@@ -12019,6 +12236,10 @@ height: 260px;
   background-size: auto;
   background-repeat: repeat-x;
   background-size: 500px;
+  display: block;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0 0;
   }
   .InputSearch{
     display: flex;
@@ -12306,6 +12527,7 @@ height: 260px;
   height: 183px;
   align-self: stretch;
   border-radius: 16px;
+  width: 100%;
 }
 .LL-button{
   display: flex;
@@ -12326,6 +12548,7 @@ html {
 .LL-button-primary{
   background: var(--langue-love-purple, #3C0079);
   color: white;
+  text-decoration: none;
 }
 .LL-button-primary:hover{
   background: var(--langue-love-pink);
@@ -12334,9 +12557,19 @@ html {
 .LL-button-primary2{
   background: var(--langue-love-pink);
   color: white;
+  text-decoration: none;
 }
 .LL-button-primary2:hover{
   background: var(--langue-love-purple, #3C0079);
+  color: white;
+}
+.LL-button-primary3{
+  background: var(--langue-love-light-purple);
+  color: var(--langue-love-black);
+  text-decoration: none;
+}
+.LL-button-primary3:hover{
+  background: #D9D7DD;
   color: white;
 }
 .LL-button-secondary{
@@ -12684,17 +12917,17 @@ select option:disabled {
   .ListArgument{
     font-size: 12px;
   }
-  
 }
-@media only screen and (min-width:785px ) and (max-width: 1400px) {
-  .LectorColumn{
+@media only screen and (min-width:785px ){
+   .LectorColumn{
       width: calc(100% - 400px);
     }
-    #container{
-      padding-right: 30px;
-      padding-left: 30px;
-    }
 }
+ 
+    #container{
+      /* padding-right: 30px;
+      padding-left: 30px; */
+    }
 @media only screen and (max-height: 740px) {
   .PaymentTable{
     top: 55%;
@@ -12706,6 +12939,22 @@ select option:disabled {
   }
   .mobile{
     display: unset;
+  }
+  .textSearchV{
+    border-radius: 16px;
+    background: #EBE5F2;
+    display: flex;
+    justify-content: center;
+  }
+  .bigHeadText{
+    margin-bottom: 0px;
+  }
+  .MobileCard{
+    border-radius: 0px 0px 16px 16px;
+    border-right: 1px solid var(--LangueLove-light-grey, #D7D7D7);
+    border-bottom: 1px solid var(--LangueLove-light-grey, #D7D7D7);
+    border-left: 1px solid var(--LangueLove-light-grey, #D7D7D7);
+    background: var(--LangueLove-white, #FFF);
   }
   .mobileFlex{
     display: flex;
@@ -12762,14 +13011,7 @@ select option:disabled {
   .navPurpleButton{
     width: 55%;
   }
-  .animation{
-    background: url("/images/Flags2.png");
-    animation: flow2 60s linear infinite;
-  background-repeat: repeat;
-  background-size: auto;
-  background-repeat: repeat-x;
-  background-size: 500px;
-  }
+ 
   .InputSearch{
     display: flex;
     flex-flow: column;
@@ -12789,7 +13031,21 @@ select option:disabled {
   }
   .AnimationContent{
     position: relative;
-    top: 80px;
+    top: 200px;
+    padding: 16px;
+  }
+  .btn-black{
+    font-size: 20px;
+    height: 60px;
+  }
+  .GrayBack{
+    padding-bottom: 65px;
+  }
+  .SearchBox{
+    margin-bottom: 0px;
+  }
+  .SearchContainer{
+    width: 100%;
   }
   #language, #course{
     padding: 0;

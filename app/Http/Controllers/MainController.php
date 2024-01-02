@@ -134,6 +134,28 @@ class MainController extends Controller
         }
        
     }
+    public function Testhome()
+    {
+     
+        if(Auth::user()  && Auth::user()->active == 0){
+            Auth::logout();
+            Session::flush();
+            return redirect('/login');
+        }
+        else{
+             $langs = Language::where('active',1)->get();
+            $types = LessonType::where('active',1)->get();
+            $lectors = Lector::where('id','!=',18)->where('active',1)->get();
+            $grupy = Lesson::where('type_id',2)->where('active',1)->orderBy('id','DESC')->take(4)->get();
+            return view('test/home',[
+                'languages' => $langs,
+                'types' => $types,
+                'lectors' => $lectors,
+                'grupy' => $grupy,
+            ]);
+        }
+       
+    }
     public function count(Request $request)
     {
         $language_id = $request->language;
@@ -283,12 +305,13 @@ class MainController extends Controller
         }
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
-
-        return view('filteredLessons',[
+        $durations = LessonDuration::get();
+        return view('test/filteredLessons',[
             'lessons' => $lessons,
             'lectors' => $lectors,
             'languages' => $langs,
-            'types' => $types
+            'types' => $types,
+            'durations' => $durations,
         ]);
     }
     public function search2(Request $request)
@@ -301,12 +324,14 @@ class MainController extends Controller
        
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
+        $durations = LessonDuration::get();
 
-        return view('filteredLessons',[
+        return view('test/filteredLessons',[
             'lessons' => $lessons,
             'lectors' => [],
             'languages' => $langs,
-            'types' => $types
+            'types' => $types,
+            'durations' => $durations,
         ]);
     }
 
@@ -325,13 +350,15 @@ class MainController extends Controller
         $lectors = Lector::whereIn('id',$languageT)->where('id','!=',18)->where('active',1)->get();
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
+        $durations = LessonDuration::get();
 
         // dd($lessons);
-        return view('filteredLessons',[
+        return view('test/filteredLessons',[
             'lessons' => $lessons,
             'lectors' => $lectors,
             'languages' => $langs,
-            'types' => $types
+            'types' => $types,
+            'durations' => $durations,
         ]);
     }
 

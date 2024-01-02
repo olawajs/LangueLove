@@ -33,6 +33,7 @@ class CreateLectorsTable extends Migration
             $table->longText('style')->nullable();
             $table->longText('levels')->nullable();
             $table->boolean('active')->default(true);
+            $table->longText('yt')->nullable();
             $table->timestamps();
        
         });

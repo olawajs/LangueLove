@@ -186,7 +186,11 @@
                     </div>
                 </div>
             <div class="VidInfoContainer">
-                <iframe class="YTVideo width="560" height="315" src="https://www.youtube.com/embed/jFLFeucqPh0?si=EuO7aroigvszu_c_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                @if($lector->yt != '')
+                    <iframe class="YTVideo" width="560" height="315" src="{{$lector->yt}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                @else
+                    <iframe class="YTVideo" width="560" height="315" src="https://www.youtube.com/embed/jFLFeucqPh0?si=EuO7aroigvszu_c_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                @endif
                     <buton class="LL-button LL-button-primary w-100"  onclick="przejdzDo()">Zobacz kalendarz</buton>
                 <buton class="LL-button LL-button-secondary" onclick="OpenPriceTable()">Zobacz cennik</buton>
                 <!-- <buton class="LL-button LL-button-secondary">Wiadomość</buton> -->
@@ -353,8 +357,8 @@
                 </div>
             @endforeach
         </div>
-        </div>
     </div>
+</div>
     
 </div>
 

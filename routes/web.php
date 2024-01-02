@@ -67,8 +67,7 @@ Route::get('priceList', [App\Http\Controllers\PriceController::class, 'showPrice
 Route::post('search', [App\Http\Controllers\MainController::class, 'search'])->name('search');
 Route::get('priceList/search/{lang}/{type}', [App\Http\Controllers\MainController::class, 'searchPricelist'])->name('searchPricelist');
 
-Route::GET('lesson/{id}', [App\Http\Controllers\LessonController::class, 'showLesson'])->name('showLesson');
-Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLector'])->name('showLector');
+
 Route::GET('activate/{mail}', [App\Http\Controllers\MainController::class, 'activate'])->name('activate');
 Route::GET('generateCode', [App\Http\Controllers\NewsletterController::class, 'generateCode'])->name('generateCode');
 
@@ -109,10 +108,25 @@ Route::get('/email', function () {
 });
 
 // test
-Route::GET('lectorTest/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'showLector']);
-Route::get('/aboutTest', function () {
+
+Route::GET('lesson/{id}', [App\Http\Controllers\LessonController::class, 'showLesson'])->name('showLesson');
+
+// Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLector'])->name('showLector');
+Route::GET('lector/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'showLector'])->name('showLector');
+
+// Route::GET('Testhome', [App\Http\Controllers\MainController::class, 'Testhome']);
+Route::get('/', [App\Http\Controllers\MainController::class, 'Testhome']);
+Route::get('/home', [App\Http\Controllers\MainController::class, 'Testhome'])->name('home');
+
+
+// Route::get('/about', function () {
+//     return view('aboutUs');
+// })->name('about');
+Route::get('/about', function () {
     return view('test/aboutUs');
-})->name('aboutTest');
+})->name('about');
+
+
 Route::get('/regulamin', function () {
     return view('test/regulamin');
 })->name('regulamin');
@@ -122,6 +136,9 @@ Route::get('/polityka', function () {
 Route::get('/FAQ', function () {
     return view('test/FAQ');
 })->name('FAQ');
+Route::get('/nav', function () {
+    return view('layouts/nav');
+})->name('nav');
 
 
 
