@@ -143,10 +143,11 @@
                                    
                                 </div> 
                             </div> 
-                            @endforeach
-                            @if($lector->id == 15)
+                            @if($lector->id == 15 && $loop->index==1)
                                 @php dd('Strona chwilowo niedostępna2');  @endphp
                             @endif
+                            @endforeach
+                           
                         </div>
                         
                         <div class="mobile">
