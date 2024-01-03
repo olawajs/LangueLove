@@ -157,7 +157,9 @@ class AdministratorController extends Controller
         $languageT = LanguageLevel::where('lector_id',$request->id)->pluck('language_id')->toArray();
         $languages = Language::whereIn('id',$languageT)->get();
         // $calendarEvents = CalendarSetup::where('lector_id',$request->id)->get(); // czy potrzebne teraz? tylko widok lektora? i indywidualne zajęcia?
-      
+        if($request->id == 15){
+            dd('Przepraszamy za utrudnienia');
+        }
         if(Auth::check()){
             $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',1)->count();
             $lessonsIndEuC = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',1)->where('priceType',1)->count();
