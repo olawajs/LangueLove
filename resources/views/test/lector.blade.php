@@ -98,10 +98,8 @@
                         <div class="Desktop">
                            
                             @foreach($calendar as $q => $c)
-                            @if($lector->id == 15)
-                                @php dd('Strona chwilowo niedostępna2');  @endphp
-                            @endif
-                            <div id="Week{{$loop->index}}" @if($loop->index > 0)style="display: none" @endif>
+                           
+                            <div id="Week{{$loop->index}}" @if( $loop->index > 0)style="display: none" @endif>
                                 <div class="calendarButtons" >
                                     <div class="weekButtons">
                                         <div class="d-flex" style="gap: 6px;">
@@ -112,6 +110,9 @@
                                             {{$q}}
                                         </div>
                                     </div>
+                                    @if($lector->id == 15)
+                                @php dd('Strona chwilowo niedostępna2');  @endphp
+                            @endif
                                     <button class="btn TodayButton @if($loop->index == 0)LLdisabled @endif  HBorder" onClick="goTo('0','{{$loop->index}}')">dzisiaj</button>
                                 </div>
                                 <div class="weekContainer" >
