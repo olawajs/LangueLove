@@ -96,6 +96,9 @@
                         <div>Zajęcia trwają 55 lub 85 minut. Wybierz godzinę rozpoczęcia zajęć, a w następnym kroku czas trwania.</div>
                     </div>
                         <div class="Desktop">
+                            @if($lector->id == 15)
+                                @php dd('Strona chwilowo niedostępna2');  @endphp
+                            @endif
                             @foreach($calendar as $q => $c)
                             <div id="Week{{$loop->index}}" @if($loop->index > 0)style="display: none" @endif>
                                 <div class="calendarButtons" >
@@ -139,9 +142,7 @@
                             </div> 
                             @endforeach
                         </div>
-                        @if($lector->id == 15)
-                    @php dd('Strona chwilowo niedostępna2');  @endphp
-                @endif
+                        
                         <div class="mobile">
                             @foreach($calendarMobile as $q => $c)
                             <div id="Week{{$loop->index}}M" @if($loop->index > 0)style="display: none" @endif>
