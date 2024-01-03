@@ -88,9 +88,7 @@
                     <div class="LectorText">{!! $lector->style !!}</div>
                 </div>
                 @endif
-                @if($lector->id == 15)
-                    @php dd('Strona chwilowo niedostępna2');  @endphp
-                @endif
+                
                 <div>
                     <h2 class="LectroH2">Kalendarz</h2>
                     <div class="calendarInfo" id="calendarInfo">
@@ -141,6 +139,9 @@
                             </div> 
                             @endforeach
                         </div>
+                        @if($lector->id == 15)
+                    @php dd('Strona chwilowo niedostępna2');  @endphp
+                @endif
                         <div class="mobile">
                             @foreach($calendarMobile as $q => $c)
                             <div id="Week{{$loop->index}}M" @if($loop->index > 0)style="display: none" @endif>
