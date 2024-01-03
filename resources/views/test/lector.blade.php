@@ -123,9 +123,6 @@
                                         </div>
                                         <div class="hoursContainer">
                                             @foreach($d as $k2 => $d2)
-                                            @if($lector->id == 15)
-                                @php dd('Strona chwilowo niedostępna2');  @endphp
-                            @endif
                                                 @if($k2 != 'name' && $k2 != 'shortDate')
                                                     @if(isset($d2['free']) && $d2['free']==1)
                                                         <div class="freeHour HBorder" onclick="OpenHour(`{{$k2}}`,`{{$k}}`,`{{$d['name']}}`,`{{$d2['60']}}`,`{{$d2['90']}}`)">{{$k2}}</div>
@@ -139,6 +136,9 @@
                                                     
                                                 @endif
                                             @endforeach
+                                            @if($lector->id == 15)
+                                @php dd('Strona chwilowo niedostępna2');  @endphp
+                            @endif
                                         </div>
                                     </div>
                                     @endforeach
