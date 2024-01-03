@@ -70,7 +70,6 @@
                         <buton class="LL-button LL-button-secondary MobileLectorButtons" onclick="OpenPriceTable()">Zobacz cennik</buton>
                     </div>
                 </div>
-                @
                 @if($lector->description != '')
                 <div>
                     <h2 class="LectroH2">O lektorze</h2>
@@ -89,7 +88,7 @@
                     <div class="LectorText">{!! $lector->style !!}</div>
                 </div>
                 @endif
-                if($lector->id == 15)
+                @if($lector->id == 15)
                     @php dd('Strona chwilowo niedostępna2');  @endphp
                 @endif
                 <div>
