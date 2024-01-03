@@ -143,7 +143,7 @@
                                    
                                 </div> 
                             </div> 
-                            @if($lector->id == 15 && $loop->index==1)
+                            @if($lector->id == 15 && $loop->index==2)
                                 @php dd('Strona chwilowo niedostępna2');  @endphp
                             @endif
                             @endforeach
