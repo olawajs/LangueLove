@@ -143,9 +143,6 @@
                                    
                                 </div> 
                             </div> 
-                            @if($lector->id == 15 && $loop->index==9)
-                                @php dd('Strona chwilowo niedostępna2');  @endphp
-                            @endif
                             @endforeach
                            
                         </div>
