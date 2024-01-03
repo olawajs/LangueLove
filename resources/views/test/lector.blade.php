@@ -44,6 +44,9 @@
         </span>
         </div>
     @endif
+    @if($lector->id == 15)
+        @php dd('Strona chwilowo niedostępna');  @endphp
+    @endif
     <div class="content" id="content">    
         <div class="d-flex LectorDiv" style="gap:48px;">
             <div class="d-flex flex-column LectorColumn" style="gap:20px;">
