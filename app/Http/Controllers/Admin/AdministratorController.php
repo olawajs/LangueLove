@@ -450,12 +450,12 @@ class AdministratorController extends Controller
                                         ->where('level', 'not like', '%-%')
                                         ->distinct()
                                         ->get();     
-           
+           if($request->id == 15){
+            dd('Przepraszamy za utrudnienia');
+        }   
         // $session_id = Session::get('_token');
         $prices = LectorPrices::where('lector_type_id', $lector->lector_type_id)->get();
-        if($request->id == 15){
-            dd('Przepraszamy za utrudnienia');
-        }
+     
          $id = isset(Auth::user()->id) ? Auth::user()->id : 0;
              return view('test/lector',[
                 'durations' => $duratons,
