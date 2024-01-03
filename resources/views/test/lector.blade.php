@@ -136,12 +136,13 @@
                                                     
                                                 @endif
                                             @endforeach
-                                            @if($lector->id == 15)
-                                @php dd('Strona chwilowo niedostępna2');  @endphp
-                            @endif
+                                           
                                         </div>
                                     </div>
                                     @endforeach
+                                    @if($lector->id == 15)
+                                @php dd('Strona chwilowo niedostępna2');  @endphp
+                            @endif
                                 </div> 
                             </div> 
                             @endforeach
