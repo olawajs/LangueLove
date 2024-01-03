@@ -291,7 +291,7 @@ class AdministratorController extends Controller
             $dateUsed = $dateUsed->addDay();
             $dateUsed = $dateUsed->format('Y-m-d');
         }
-        foreach($calendar_Free as $cF){
+        foreach($calendar_Free as $cF){ 
             
             $start = new Carbon($cF->start);
             $start2 =  new Carbon($cF->start);
