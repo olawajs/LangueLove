@@ -110,13 +110,14 @@
                                             {{$q}}
                                         </div>
                                     </div>
-                                    @if($lector->id == 15)
-                                @php dd('Strona chwilowo niedostępna2');  @endphp
-                            @endif
+                                  
                                     <button class="btn TodayButton @if($loop->index == 0)LLdisabled @endif  HBorder" onClick="goTo('0','{{$loop->index}}')">dzisiaj</button>
                                 </div>
                                 <div class="weekContainer" >
                                     @foreach($c as $k => $d)
+                                    @if($lector->id == 15)
+                                @php dd('Strona chwilowo niedostępna2');  @endphp
+                            @endif
                                     <div class="dayContainer">
                                         <div class="headContainer">
                                             <span>{{$d['name']}}</span>
