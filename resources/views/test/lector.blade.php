@@ -44,9 +44,7 @@
         </span>
         </div>
     @endif
-    @if($lector->id == 15)
-        @php dd('Strona chwilowo niedostępna');  @endphp
-    @endif
+    
     <div class="content" id="content">    
         <div class="d-flex LectorDiv" style="gap:48px;">
             <div class="d-flex flex-column LectorColumn" style="gap:20px;">
@@ -72,7 +70,9 @@
                         <buton class="LL-button LL-button-secondary MobileLectorButtons" onclick="OpenPriceTable()">Zobacz cennik</buton>
                     </div>
                 </div>
-              
+                @if($lector->id == 15)
+                    @php dd('Strona chwilowo niedostępna');  @endphp
+                @endif
                 @if($lector->description != '')
                 <div>
                     <h2 class="LectroH2">O lektorze</h2>
