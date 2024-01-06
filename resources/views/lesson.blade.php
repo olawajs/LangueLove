@@ -15,9 +15,12 @@
         position: fixed;
         background-color: var(--bs-sandy);
         margin: auto;
-        width: 70%;
-        z-index: 2;
+        width: 90%;
+        z-index: 10;
         display: none;
+        padding: 50px 10px;
+        overflow: auto;
+        top: 10px;
     }
     #buyButton{
         width: 100%;
