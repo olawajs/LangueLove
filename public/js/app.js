@@ -1326,3 +1326,5 @@ function changeTypeM(e,id){
 
     e.target.classList.add('PriceTabActive');
 }
+
+// 

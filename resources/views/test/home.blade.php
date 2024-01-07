@@ -860,7 +860,7 @@ nav{
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 <script src="{{ asset('js/owlCarousel/owl.carousel.min.js') }}" defer></script>
 
-<script defer>
+<script>
     let ScreenType = 'D';
 document.addEventListener('DOMContentLoaded', function () {
             var backToTopButton = document.getElementById('back-to-top-btn');

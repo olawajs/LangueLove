@@ -56,16 +56,16 @@
                                 <div class="SearchButton">
                                     <button class="btn" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Język</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langText">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langTextD">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs langInpD" id="lang0D" name="lang[]" value="0" checked> <label for="lang0D">Dowolny</label>
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
+                                                    <input type="checkbox" class="inputs langInpD" name="lang[]" id="lD{{$language->id}}" value="{{$language->id}}"> <label for="lD{{$language->id}}">{{$language->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>                        
@@ -75,16 +75,16 @@
                                 <div class="SearchButton">
                                     <button class="btn" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false"  style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Rodzaj kursu</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeText">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeTextD">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="course" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs typeInpD" id="type0D" name="type[]" value="0" checked> Dowolny
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
+                                                    <input type="checkbox" class="inputs typeInpD" id="tD{{$type->id}}"  name="type[]" value="{{$type->id}}"> <label for="tD{{$type->id}}">{{$type->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>      
@@ -223,19 +223,19 @@
                         @csrf
                         <div style="display: flex;  align-items: flex-start;  gap: 12px;flex-flow: column;">
                             <div class="SearchContainer">
-                                <div class="SearchButton">
+                            <div class="SearchButton">
                                     <button class="btn" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Język</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langText">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langTextM">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs langInpM" id="lang0M" name="lang[]" value="0" checked> <label for="lang0M">Dowolny</label>
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
+                                                    <input type="checkbox" class="inputs langInpM" id="tlM{{$language->id}}" name="lang[]" value="{{$language->id}}"> <label for="tlM{{$language->id}}">{{$language->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>                        
@@ -243,19 +243,19 @@
                                 </div>
                             </div>
                             <div class="SearchContainer">
-                                <div class="SearchButton">
+                            <div class="SearchButton">
                                     <button class="btn" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false"  style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Rodzaj kursu</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeText">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeTextM">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="course" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs typeInpM" id="type0M" name="type[]" value="0" checked> <label for="type0M">Dowolny </label>
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
+                                                    <input type="checkbox" class="inputs typeInpM" name="type[]" id="ttM{{$type->id}}" value="{{$type->id}}"> <label for="ttM{{$type->id}}">{{$type->name}} </label>
                                                 </div>
                                             @endforeach
                                         </div>      
@@ -564,10 +564,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
     $(document).ready(function () {
         
-        $('.langInp').click(function() {
+        $('.langInpD').click(function() {
             check(event,1);
         });
-        $('.typeInp').click(function() {
+        $('.typeInpD').click(function() {
+            check(event,2);
+        });
+        $('.langInpM').click(function() {
+            check(event,1);
+        });
+        $('.typeInpM').click(function() {
             check(event,2);
         });
 
@@ -576,15 +582,16 @@ document.addEventListener('DOMContentLoaded', function () {
             let class1 = '';
             let text = '';
             if(type == 1){
-                id='lang0';
-                class1 = 'langInp';
-                text = 'langText';
+                id='lang0'+ScreenType;
+                class1 = 'langInp'+ScreenType;
+                text = 'langText'+ScreenType;
             }
             if(type == 2){
-                id='type0';
-                class1 = 'typeInp';
-                text = 'typeText';
+                id='type0'+ScreenType;
+                class1 = 'typeInp'+ScreenType;
+                text = 'typeText'+ScreenType;
             }
+            console.log(text);
             let textSpan = document.getElementById(text);
             if(e.target.value == '0'){
                 var anchors = document.getElementsByClassName(class1);
@@ -623,5 +630,15 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('PriceTable'+id).style.display = 'none';
         document.getElementById('container').style.filter = 'blur(0px)';
     // 
+    }
+    go();
+    window.addEventListener('resize', go());
+    function go(){
+        if(document.documentElement.clientWidth > 800){
+            ScreenType = 'D';
+        }
+        else{
+            ScreenType = 'M';
+        }
     }
 </script>
