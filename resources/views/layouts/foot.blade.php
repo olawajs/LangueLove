@@ -55,7 +55,7 @@
         <div>
             <h2 class="whiteH2">
                 <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Adres email" id="newsMail" aria-label="Adres email" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" placeholder="Adres email" id="newsMailM" aria-label="Adres email" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-black" type="button" onclick="SignInN()"><img src="{{asset('images/svg/send.svg')}}"></button>
                 </div>

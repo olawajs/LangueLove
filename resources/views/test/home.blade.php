@@ -170,12 +170,12 @@ nav{
                                 <div class="SearchButton">
                                     <button class="btn" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Język</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langText">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langTextD">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs langInp" id="lang0D" name="lang[]" value="0" checked> Dowolny
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
@@ -189,12 +189,12 @@ nav{
                                 <div class="SearchButton">
                                     <button class="btn" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false"  style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Rodzaj kursu</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeText">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeTextD">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="course" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs typeInp" id="type0D" name="type[]" value="0" checked> Dowolny
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
@@ -523,12 +523,12 @@ nav{
                                 <div class="SearchButton">
                                     <button class="btn" type="button" id="language" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Język</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langText">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="langTextM">Dowolny</span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0" name="lang[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs langInp" id="lang0M" name="lang[]" value="0" checked> Dowolny
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
@@ -543,12 +543,12 @@ nav{
                                 <div class="SearchButton">
                                     <button class="btn" type="button" id="course" data-bs-toggle="dropdown"  aria-expanded="false"  style="width: 100%;  text-align: left;">
                                                 <span class="SearchCat">Rodzaj kursu</span><br>
-                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeText">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
+                                                <div style="display: flex;  justify-content: space-between;"><span class="SearchChosen" id="typeTextM">Dowolny </span><img src="{{asset('images/svg/arrowDown.svg')}}"></div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="course" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs typeInp" id="type0" name="type[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs typeInp" id="type0M" name="type[]" value="0" checked> Dowolny
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
@@ -861,6 +861,7 @@ nav{
 <script src="{{ asset('js/owlCarousel/owl.carousel.min.js') }}" defer></script>
 
 <script>
+    let ScreenType = 'D';
 document.addEventListener('DOMContentLoaded', function () {
             var backToTopButton = document.getElementById('back-to-top-btn');
 
@@ -996,15 +997,16 @@ document.addEventListener('DOMContentLoaded', function () {
             let class1 = '';
             let text = '';
             if(type == 1){
-                id='lang0';
+                id='lang0'+ScreenType;
                 class1 = 'langInp';
-                text = 'langText';
+                text = 'langText'+ScreenType;
             }
             if(type == 2){
-                id='type0';
+                id='type0'+ScreenType;
                 class1 = 'typeInp';
-                text = 'typeText';
+                text = 'typeText'+ScreenType;
             }
+            console.log(id);
             let textSpan = document.getElementById(text);
             if(e.target.value == '0'){
                 var anchors = document.getElementsByClassName(class1);
@@ -1030,5 +1032,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
     })
-
+    go();
+    window.addEventListener('resize', go());
+    function go(){
+        if(document.documentElement.clientWidth > 800){
+            ScreenType = 'D';
+        }
+        else{
+            ScreenType = 'M';
+        }
+    }
 </script>

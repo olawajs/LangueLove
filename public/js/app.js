@@ -1231,6 +1231,9 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 
 function SignInN(){
   let email = document.getElementById('newsMail').value;
+  if(email == ''){
+    email = document.getElementById('newsMailM').value;
+  }
   $.ajax({
             type: "GET",
             url: '../signIn',
