@@ -175,11 +175,11 @@ nav{
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0D" name="lang[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs langInp" id="lang0D" name="lang[]" value="0" checked> <label for="lang0D">Dowolny</label>
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
+                                                    <input type="checkbox" class="inputs langInp" name="lang[]" id="lD{{$language->id}}" value="{{$language->id}}"> <label for="lD{{$language->id}}">{{$language->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>                        
@@ -198,7 +198,7 @@ nav{
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
+                                                    <input type="checkbox" class="inputs typeInp" id="tD{{$type->id}}"  name="type[]" value="{{$type->id}}"> <label for="tD{{$type->id}}">{{$type->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>      
@@ -528,11 +528,11 @@ nav{
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0M" name="lang[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs langInp" id="lang0M" name="lang[]" value="0" checked> <label for="lang0M">Dowolny</label>
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs langInp" name="lang[]" value="{{$language->id}}"> {{$language->name}}
+                                                    <input type="checkbox" class="inputs langInp" id="tlM{{$language->id}}" name="lang[]" value="{{$language->id}}"> <label for="tlM{{$language->id}}">{{$language->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>                        
@@ -548,11 +548,11 @@ nav{
                                     <ul class="dropdown-menu" aria-labelledby="course" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs typeInp" id="type0M" name="type[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs typeInp" id="type0M" name="type[]" value="0" checked> <label for="type0M">Dowolny </label>
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs typeInp" name="type[]" value="{{$type->id}}"> {{$type->name}}
+                                                    <input type="checkbox" class="inputs typeInp" name="type[]" id="ttM{{$type->id}}" value="{{$type->id}}"> <label for="ttM{{$type->id}}">{{$type->name}} </label>
                                                 </div>
                                             @endforeach
                                         </div>      
@@ -1006,7 +1006,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 class1 = 'typeInp';
                 text = 'typeText'+ScreenType;
             }
-            console.log(id);
+            console.log(text);
             let textSpan = document.getElementById(text);
             if(e.target.value == '0'){
                 var anchors = document.getElementsByClassName(class1);
