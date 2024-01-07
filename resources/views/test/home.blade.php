@@ -175,11 +175,11 @@ nav{
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0D" name="lang[]" value="0" checked> <label for="lang0D">Dowolny</label>
+                                                <input type="checkbox" class="inputs langInpD" id="lang0D" name="lang[]" value="0" checked> <label for="lang0D">Dowolny</label>
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs langInp" name="lang[]" id="lD{{$language->id}}" value="{{$language->id}}"> <label for="lD{{$language->id}}">{{$language->name}}</label>
+                                                    <input type="checkbox" class="inputs langInpD" name="lang[]" id="lD{{$language->id}}" value="{{$language->id}}"> <label for="lD{{$language->id}}">{{$language->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>                        
@@ -194,11 +194,11 @@ nav{
                                     <ul class="dropdown-menu" aria-labelledby="course" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs typeInp" id="type0D" name="type[]" value="0" checked> Dowolny
+                                                <input type="checkbox" class="inputs typeInpD" id="type0D" name="type[]" value="0" checked> Dowolny
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs typeInp" id="tD{{$type->id}}"  name="type[]" value="{{$type->id}}"> <label for="tD{{$type->id}}">{{$type->name}}</label>
+                                                    <input type="checkbox" class="inputs typeInpD" id="tD{{$type->id}}"  name="type[]" value="{{$type->id}}"> <label for="tD{{$type->id}}">{{$type->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>      
@@ -528,11 +528,11 @@ nav{
                                     <ul class="dropdown-menu" aria-labelledby="language" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs langInp" id="lang0M" name="lang[]" value="0" checked> <label for="lang0M">Dowolny</label>
+                                                <input type="checkbox" class="inputs langInpM" id="lang0M" name="lang[]" value="0" checked> <label for="lang0M">Dowolny</label>
                                             </div>
                                             @foreach ($languages as $language)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs langInp" id="tlM{{$language->id}}" name="lang[]" value="{{$language->id}}"> <label for="tlM{{$language->id}}">{{$language->name}}</label>
+                                                    <input type="checkbox" class="inputs langInpM" id="tlM{{$language->id}}" name="lang[]" value="{{$language->id}}"> <label for="tlM{{$language->id}}">{{$language->name}}</label>
                                                 </div>
                                             @endforeach
                                         </div>                        
@@ -548,11 +548,11 @@ nav{
                                     <ul class="dropdown-menu" aria-labelledby="course" style="width: min-content">
                                         <div class="row checkRow">
                                             <div class="inputDiv">
-                                                <input type="checkbox" class="inputs typeInp" id="type0M" name="type[]" value="0" checked> <label for="type0M">Dowolny </label>
+                                                <input type="checkbox" class="inputs typeInpM" id="type0M" name="type[]" value="0" checked> <label for="type0M">Dowolny </label>
                                             </div>
                                             @foreach ($types as $type)
                                                 <div class="inputDiv">
-                                                    <input type="checkbox" class="inputs typeInp" name="type[]" id="ttM{{$type->id}}" value="{{$type->id}}"> <label for="ttM{{$type->id}}">{{$type->name}} </label>
+                                                    <input type="checkbox" class="inputs typeInpM" name="type[]" id="ttM{{$type->id}}" value="{{$type->id}}"> <label for="ttM{{$type->id}}">{{$type->name}} </label>
                                                 </div>
                                             @endforeach
                                         </div>      
@@ -985,10 +985,16 @@ document.addEventListener('DOMContentLoaded', function () {
            
         });
 
-        $('.langInp').click(function() {
+        $('.langInpD').click(function() {
             check(event,1);
         });
-        $('.typeInp').click(function() {
+        $('.typeInpD').click(function() {
+            check(event,2);
+        });
+        $('.langInpM').click(function() {
+            check(event,1);
+        });
+        $('.typeInpM').click(function() {
             check(event,2);
         });
 
@@ -998,12 +1004,12 @@ document.addEventListener('DOMContentLoaded', function () {
             let text = '';
             if(type == 1){
                 id='lang0'+ScreenType;
-                class1 = 'langInp';
+                class1 = 'langInp'+ScreenType;
                 text = 'langText'+ScreenType;
             }
             if(type == 2){
                 id='type0'+ScreenType;
-                class1 = 'typeInp';
+                class1 = 'typeInp'+ScreenType;
                 text = 'typeText'+ScreenType;
             }
             console.log(text);
