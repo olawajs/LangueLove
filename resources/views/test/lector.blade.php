@@ -499,7 +499,7 @@
         <div>
             <!-- test -->
 	<div class="container">
-		<div id="1" class="Paymentcard">
+		<div id="P1" class="Paymentcard">
             <div class="PaymentColumn rightLine" style="padding-right: 32px;">
                 <div>
                     <div>
@@ -532,7 +532,7 @@
                 </div>
             </div>
 		</div>
-		<div id="2" class="Paymentcard">
+		<div id="P2" class="Paymentcard">
             <div class="PaymentColumn">
                 <div>
                     <div>
@@ -565,7 +565,7 @@
                 </div>
             </div>
 		</div>
-		<div id="3" class="Paymentcard">
+		<div id="P3" class="Paymentcard">
             <div class="PaymentColumn">
                 <div>
                     <div>
@@ -1297,11 +1297,14 @@
     let ok = true;
     let User = {!! json_encode($User) !!};
     // console.log(User2['id']);
+    
     $(document).ready(function () {
+        
         $(".Paymentcard").each(function(index, value){
             $('.Paymentcard').hide();
         });
-        $('#1').show();
+         
+         console.log('?');
         $(".page-link").on('click', function(){
             
             $(".page-link").each(function(index, value){
@@ -1311,11 +1314,14 @@
             //Hide all cards
             $(".Paymentcard").each(function(index, value){
                 $('.Paymentcard').hide();
-            })
+            });
 
             $(this).parent().addClass("active");
-            var cardId = "#" + $(this)[0].attributes.data.value;
+
+            var cardId = "#P" + $(this)[0].attributes.data.value;
+
             // e.target.attributes.data.value
+            console.log(cardId);
             $(cardId).show();
         });
         $(".PayCard").each(function(index, value){
@@ -1523,32 +1529,34 @@
             let id;
             if (touchendX < touchstartX && Math.abs(roznica)>20){
                 if(now != 3){
-                    cardId = "#" + (parseInt(now) + 1);
+                    cardId = "#P" + (parseInt(now) + 1);
                     id = parseInt(now) + 1;
                 }
                 else {
-                    cardId =  "#" +1;
+                    cardId =  "#P" +1;
                     id = 1;
                 }
             } 
             if (touchendX > touchstartX && Math.abs(roznica)>20) {
                 if(now != 1){
-                    cardId = "#" + (parseInt(now) - 1);
+                    cardId = "#P" + (parseInt(now) - 1);
                     id = parseInt(now)- 1;
                 }
                 else {
-                    cardId =  "#" +3;
+                    cardId =  "#P" +3;
                     id = 3;
                 }
             }
-            $(".page-link").each(function(index, value){
-                $(value).parent().removeClass("active");
-            });
+            // $(".page-link").each(function(index, value){
+            //     $(value).parent().removeClass("active");
+            // });
             $(".Paymentcard").each(function(index, value){
                 $('.Paymentcard').hide();
             });
             // document.getElementById(id).addClass("active");
-            $(cardId).show();
+            // let cardId2 =  "#P"+parseInt(now);
+            // $(cardId2).hide();
+            $('#P'+id).show();
             $(cardId+'B').parent().addClass("active");
         }
         document.addEventListener('touchstart', e => {
@@ -1559,7 +1567,10 @@
         document.addEventListener('touchend', e => {
             touchendX = e.changedTouches[0].screenX;
             roznica = touchstartX - touchendX;
-        checkDirection();
+            if(Math.abs(roznica)>20){
+                checkDirection();
+            }
+            
         });
         function OpenModal(id){
             document.getElementById(id).style.display = 'block';
@@ -1705,6 +1716,7 @@
         less90 = l90;
         dzienNazwa = dzien;
         ZajeciaData = dataZ;
+        $('#P1').show();
         OpenPaymentTable();
     }
     function goTo(week,active){
