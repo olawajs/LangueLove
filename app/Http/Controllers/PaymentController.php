@@ -57,7 +57,7 @@ class PaymentController extends Controller
         'ileFaktura' => 1,
         'ile' => isset($request->ile) ? $request->ile : 1,
         'cert' => isset($request->cert) ? 1 : 0,
-        'zajecia' => isset($request->zajecia) ? 1 : 0,
+        'zajecia' => 1,
         'cykliczne' => isset($request->cykliczne) ? 1 : 0,
         'priceG' => isset($request->price) ? $request->price : 0,
         'lessonI' => $request->lessonI,
@@ -75,7 +75,7 @@ class PaymentController extends Controller
         $language_id = $request->jezyk;
         $duration_id = $request->duration_id;
         $cert = isset($request->cert) ? 1 : 0;
-        $zajecia =  isset($request->zajecia) ? 1 : 0;
+        $zajecia =  1;
         $priceG = isset($request->price) ? $request->price : 0;
         $ile = isset($request->ile) ? $request->ile : 1;
         $type_id = $request->rodzaj;
@@ -93,6 +93,7 @@ class PaymentController extends Controller
                         ->first()
                         ->price; 
                         $kwota = $price*$ile;
+                        // $kwota = 2;
        
        
         }

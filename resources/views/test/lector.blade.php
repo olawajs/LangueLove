@@ -1988,7 +1988,6 @@
                 
     }
     function BuyLesson(){
-
             let durationId = document.getElementById('LessonDuration'+ScreenType).value ;
             let cert = document.getElementById('LessonCertyficate'+ScreenType).value;
             let type = document.getElementById('LessonType'+ScreenType).value;
@@ -2254,6 +2253,8 @@
         })
         .done(function(data) {
             dw = data;
+
+            console.log("Lekcji: "+dw);
         })
         .fail(function() {
             alert( "błąd bądź brak lekcji " );
