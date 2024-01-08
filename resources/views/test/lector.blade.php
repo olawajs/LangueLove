@@ -1547,9 +1547,9 @@
                     id = 3;
                 }
             }
-            // $(".page-link").each(function(index, value){
-            //     $(value).parent().removeClass("active");
-            // });
+            $(".page-link").each(function(index, value){
+                $(value).parent().removeClass("active");
+            });
             $(".Paymentcard").each(function(index, value){
                 $('.Paymentcard').hide();
             });
@@ -1557,7 +1557,7 @@
             // let cardId2 =  "#P"+parseInt(now);
             // $(cardId2).hide();
             $('#P'+id).show();
-            $(cardId+'B').parent().addClass("active");
+            $('#'+id+'B').parent().addClass("active");
         }
         document.addEventListener('touchstart', e => {
             touchstartX = e.changedTouches[0].screenX;
