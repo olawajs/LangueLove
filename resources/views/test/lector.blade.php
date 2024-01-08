@@ -2257,7 +2257,7 @@
             console.log("Lekcji: "+dw);
         })
         .fail(function() {
-            alert( "błąd bądź brak lekcji " );
+            console.log( "błąd bądź brak lekcji " );
         });
     }
 go();
