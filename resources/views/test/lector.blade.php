@@ -1798,6 +1798,12 @@
         });
     }
     function fixSelects(){
+        if(document.documentElement.clientWidth > 800){
+            ScreenType = 'D';
+        }
+        else{
+            ScreenType = 'M';
+        }
         if(ScreenType == 'M'){
             type2 = 'D';
         }else{
