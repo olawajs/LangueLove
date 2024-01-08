@@ -453,7 +453,7 @@ class AdministratorController extends Controller
         
         // $session_id = Session::get('_token');
         $prices = LectorPrices::where('lector_type_id', $lector->lector_type_id)->get();
-     
+        header("Cache-Control: no-cache, no-store, must-revalidate");
          $id = isset(Auth::user()->id) ? Auth::user()->id : 0;
              return view('test/lector',[
                 'durations' => $duratons,
