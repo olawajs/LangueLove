@@ -1297,7 +1297,8 @@
     let ok = true;
     let User = {!! json_encode($User) !!};
     // console.log(User2['id']);
-    
+    go();
+    console.log(ScreenType);
     $(document).ready(function () {
         
         $(".Paymentcard").each(function(index, value){
