@@ -2,6 +2,7 @@
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.css">
+
 <style>
     .content{
         margin-top: 15px;
@@ -1286,7 +1287,7 @@
   @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 
-<script>
+<script  id="1">
     let LessonAmount = {!! json_encode($lessonAmount) !!};
     let Savedhour,less60,less90,dzienNazwa,ZajeciaData,ScreenType;
     let PaymentType = '';
