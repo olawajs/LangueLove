@@ -333,7 +333,6 @@ class PaymentController extends Controller
         if($suma_zamowienia == 0){
             $this->AddLessons(isset($request->LectorType) ? $request->LectorType : 1,$request->packet,$request->typeA,$request->certyficate);
             return view('thankYou');
-            
             exit;
         }
         $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
@@ -673,7 +672,7 @@ class PaymentController extends Controller
             for($i=1; $i<=$pakiet; $i++){
                   $bank = new LessonsBank;
                     $bank->user_id = Auth::user()->id;
-                    $bank->payment_id = session()->get('payment_id') ; 
+                    $bank->payment_id  =$data['payment_id']  ; 
                     $bank->overdue_date = Carbon::now()->addDays(30);
                     $bank->type_id = $data['typeA'];
                     

@@ -56,7 +56,6 @@ class AdministratorController extends Controller
         $lectors = Lector::where('active','1')
                             ->where('id', '!=', 14) // Faustyna
                             ->where('id', '!=', 8) //wera
-                            ->where('id', '!=', 20) //wera
                             ->where('active',1)
                             ->get();
         // $lectors = Lector::where('id','11')->get();
@@ -67,7 +66,7 @@ class AdministratorController extends Controller
                 
                 $today = new Carbon($o->startDate);
               
-                if($today->dayOfWeek != Carbon::SUNDAY){
+                if($today->dayOfWeek != Carbon::SUNDAY && $today->dayOfWeek != Carbon::SATURDAY ){
                     $start = $o->startDate.' 07:00:00';
                     $end = $o->startDate.' 21:00:00';
                     $data=[
