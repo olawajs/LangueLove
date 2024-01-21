@@ -898,6 +898,7 @@ class PaymentController extends Controller
                     $bank->payment_id = session()->get('payment_id') ; 
                     $bank->overdue_date = Carbon::now()->addDays(30);
                     $bank->type_id = $data['typeA'];
+                    $bank->duration = $data['duration_id'];
                     
                     $bank->priceType = $type;
                     $bank->certificat = $data['certyficate'];

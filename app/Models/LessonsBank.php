@@ -14,6 +14,7 @@ class LessonsBank extends Model
         'overdue_date',
         'type_id',
         'priceType',
-        'certificat'
+        'certificat',
+        'duration',
     ];
 }

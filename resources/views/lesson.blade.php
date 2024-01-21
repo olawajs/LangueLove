@@ -126,7 +126,7 @@
                     <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
                     <input type="button" class="btn btn-primary mb-3 close" id="buyButton" value="ANULUJ">
                 </form>
-                    <button class="btn btn-secondary SButton open" @if($usedLessons==0) disabled @endif>Zarezerwuj i zapłać</a>
+                    <button class="btn btn-secondary SButton open" @if($usedLessons==0 || $lesson->start < \Carbon\Carbon::today()) disabled @endif>Zarezerwuj i zapłać</a>
             </div>
     
     </div>
