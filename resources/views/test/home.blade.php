@@ -236,7 +236,7 @@ nav{
                             <p class="card-text-title">{{$f->title}}</p>
                             <div class="card-desc">
                             <div class="d-flex" style="gap: 12px"><img src="{{asset('images/flags/'.App\Models\Language::find($f->language_id)->short.'.svg')}}" style="width: 20px !important">język {{ App\Models\Language::find($f->language_id)->name}}</div>
-                                @foreach (App\Models\CalendarEvent::where('lesson_id',$f->id)->orderBy('start', 'desc')->take(1)->get() as $date)
+                                @foreach (App\Models\CalendarEvent::where('lesson_id',$f->id)->orderBy('start')->take(1)->get() as $date)
                                     <div class="d-flex" style="gap: 12px"><img src="{{asset('images/svg/smallClock.svg')}}" style="width: 20px !important">{{ \Carbon\Carbon::parse($date->start)->locale('pl')->format('d')}} {{ \Carbon\Carbon::parse($date->start)->locale('pl')->shortMonthName}}. {{ \Carbon\Carbon::parse($date->start)->locale('pl')->format('Y, H:i')}}</div>
                                 @endforeach 
                             </div>
