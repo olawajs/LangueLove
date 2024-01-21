@@ -129,6 +129,15 @@ class CalendarController extends Controller
         return redirect()->back();
         // return redirect()->route('getLector', ['id' => $request['id_lector']]);
     }
+    public function DeleteTerm(Request $request){
+        $id = $request->id;
+        if(CalendarSetup::where('id',$id)->delete()){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
     public function GetSetup(Request $request){
         $CS = CalendarSetup::where('lector_id',$request->id)->get();
         $tabSetup = [];

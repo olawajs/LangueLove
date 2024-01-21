@@ -110,8 +110,54 @@ class MainController extends Controller
             return redirect()->route('login');
         }
         $lessons = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->whereNull('use_date')->count();
+        $tabSetupF = [];
+        $tabSetupZ = [];
+        if(Auth::user()->user_type == 3){
+            $lector = Lector::where('id_user',Auth::user()->id)->first();
+            $CS = CalendarSetup::where('lector_id',$lector->id)->where('start','>=',Carbon::today())->get();
+            
+            foreach($CS as $setup){
+                if($setup->type == 1){
+                    $color = 'green';
+                    $title = 'Wolny termin';
+                }
+                if($setup->type == 0){
+                    $color = '#c75470';
+                    $title = 'Lektor niedostępny';
+                }
+                if($setup->type == 1){
+                    $tabSetupF[] = [
+                        'id' => $setup->id,
+                        'title' => $title,
+                        'start' => $setup->start,
+                        'end'  =>$setup->end,
+                        'editable'=> false,
+                        'display'=>'background',
+                        'type' => $setup->type,
+                        'color' => $color
+                    ];
+                }
+                else{
+                    $tabSetupZ[] = [
+                        'id' => $setup->id,
+                        'title' => $title,
+                        'start' => $setup->start,
+                        'end'  =>$setup->end,
+                        'editable'=> false,
+                        'display'=>'background',
+                        'type' => $setup->type,
+                        'color' => $color
+                    ];
+                }
+             
+            }
+        }
+
         return view('myCalendar',[
-            'to_use'=>$lessons
+            'to_use'=>$lessons,
+            'free'=>$tabSetupF,
+            'used'=>$tabSetupZ,
+
         ]);
     }
     public function home()

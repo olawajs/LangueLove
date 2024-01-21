@@ -35,3 +35,4 @@ Route::post('Paymentprice', [App\Http\Controllers\MainController::class, 'Paymen
 Route::post('Packetprice', [App\Http\Controllers\MainController::class, 'Packetprice'])->name('Packetprice');
 Route::post('validTermins', [App\Http\Controllers\MainController::class, 'validTermins'])->name('validTermins');
 Route::post('checkBank', [App\Http\Controllers\MainController::class, 'checkBank'])->name('checkBank');
+Route::post('DeleteTerm', [App\Http\Controllers\CalendarController::class, 'DeleteTerm'])->name('DeleteTerm');

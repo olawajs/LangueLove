@@ -89,6 +89,18 @@ input[type=time] {
   box-shadow: rgb(85, 0, 171) 0px 5px 29px 5px;
   color: white;
 }
+.CalTable{
+    display: flex;
+    justify-content: space-around;
+}
+.tr1, .td1, .th1
+{
+    border: 1px solid #ced4da;
+    padding: 15px;
+}
+.th1, .td1{
+    text-align: center;
+}
 </style>
 <div class="container" id="container">
 
@@ -189,7 +201,53 @@ input[type=time] {
             </div>
     
     </div>
-    
+    @if(Auth::user()->user_type == 3)
+        <div class="CalTable">
+            <table>
+                <tr class="tr1">
+                    <th class="td1" colspan="3">WOLNY TERMIN</td>
+                </tr>
+                <tr class="tr1">
+                    <th class="th1">Start</th>
+                    <th class="th1">Koniec</th>
+                    <th class="th1">Usuń</th>
+                </tr>
+                @forelse($free as $f)
+                    <tr class="tr1">
+                        <td class="td1">{{$f['start']}}</td>
+                        <td class="td1">{{$f['end']}}</td>
+                        <td class="td1"><button class="btn btn-secondary" onClick="deleteTerm({{$f['id']}})">Usuń termin</button></td>
+                    </tr>
+                @empty
+                    <tr class="tr1">
+                        <td class="td1" colspan="3">BRAK</td>
+                    </tr>
+                @endforelse
+
+            </table>
+            <table>
+                <tr class="tr1">
+                    <th class="td1" colspan="3">ZAJĘTY TERMIN</td>
+                </tr>
+                <tr class="tr1">
+                    <th class="th1">Start</th>
+                    <th class="th1">Koniec</th>
+                    <th class="th1">Usuń</th>
+                </tr>
+                @forelse($used as $f)
+                    <tr class="tr1">
+                        <td class="td1">{{$f['start']}}</td>
+                        <td class="td1">{{$f['end']}}</td>
+                        <td class="td1"><button class="btn btn-secondary" onClick="deleteTerm({{$f['id']}})">Usuń termin</button></td>
+                    </tr>
+                @empty
+                    <tr class="tr1">
+                        <td class="td1" colspan="3">BRAK</td>
+                    </tr>
+                @endforelse
+            </table>
+        </div>
+    @endif
 </div>
 
 @endsection
@@ -282,6 +340,30 @@ input[type=time] {
     {
         document.getElementById('infoPOP').style.display = 'none';
         document.getElementById('container').style.filter = 'none';
+    }
+    function deleteTerm(id)
+    {
+        let text = "Czy na pewno chcesz usunąć termin?";
+        if (confirm(text) == true) {
+            $.ajax({
+            type: "POST",
+            url: '../api/DeleteTerm',
+            data: {
+                id: id,
+                },
+            })
+            .done(function( data) {
+                if(data == 1){
+                    location.reload();
+                }
+                else{
+                    alert('error');
+                }
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+        }
     }
 
 </script>
