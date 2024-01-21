@@ -895,7 +895,7 @@ class PaymentController extends Controller
             for($i=1; $i<=$pakiet; $i++){
                   $bank = new LessonsBank;
                     $bank->user_id = $user->id;
-                    $bank->payment_id = session()->get('payment_id') ; 
+                    $bank->payment_id = $data['payment_id']; 
                     $bank->overdue_date = Carbon::now()->addDays(30);
                     $bank->type_id = $data['typeA'];
                     $bank->duration = $data['duration_id'];
