@@ -112,6 +112,7 @@ Route::get('/email', function () {
 Route::GET('lesson/{id}', [App\Http\Controllers\LessonController::class, 'showLesson'])->name('showLesson');
 
 // Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLector'])->name('showLector');
+Route::GET('FixBySession/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'FixBySession'])->name('FixBySession');
 Route::GET('lector/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'showLector'])->name('showLector');
 
 // Route::GET('Testhome', [App\Http\Controllers\MainController::class, 'Testhome']);
