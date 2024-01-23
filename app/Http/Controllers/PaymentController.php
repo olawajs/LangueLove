@@ -300,6 +300,7 @@ class PaymentController extends Controller
             'packet' => $request->packet,
             'typeA' => $request->typeA,
             'certyficate' => $request->certyficate,
+            'duration_id' => $request->duration,
         ];
         $request->session()->put('data', $RequestTab);
         $link = 'https://secure.przelewy24.pl/';
@@ -353,6 +354,7 @@ class PaymentController extends Controller
             $details->P24token = $token;
             $details->session_id = $session_id;
             $details->payment_id = $payment->id;
+            $details->duration_id = $payment->duration_id;
             $details->user_id = Auth::user()->id;
         $details->save();
         return new RedirectResponse($link.'trnRequest/'.$token);
@@ -675,6 +677,7 @@ class PaymentController extends Controller
                     $bank->payment_id  =$data['payment_id']  ; 
                     $bank->overdue_date = Carbon::now()->addDays(30);
                     $bank->type_id = $data['typeA'];
+                    $bank->duration = $data['duration_id'];
                     
                     $bank->priceType = $type;
                     $bank->certificat = $data['certyficate'];

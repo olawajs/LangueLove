@@ -4577,7 +4577,7 @@ textarea.form-control-lg {
   list-style: none;
 }
 
-.page-link {
+.page-link,.page-link {
   position: relative;
   display: block;
   padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
@@ -4589,17 +4589,17 @@ textarea.form-control-lg {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .page-link {
+  .page-link,.page-link2 {
     transition: none;
   }
 }
-.page-link:hover {
+.page-link:hover ,.page-link2:hover {
   z-index: 2;
   color: var(--bs-pagination-hover-color);
   background-color: var(--bs-pagination-hover-bg);
   border-color: var(--bs-pagination-hover-border-color);
 }
-.page-link:focus {
+.page-link:focus, .page-link2:focus {
   z-index: 3;
   color: var(--bs-pagination-focus-color);
   background-color: var(--bs-pagination-focus-bg);
@@ -4618,6 +4618,18 @@ textarea.form-control-lg {
   background-color: var(--bs-pagination-disabled-bg);
   border-color: var(--bs-pagination-disabled-border-color);
 }
+.page-link2.active, .active2 > .page-link2 {
+  z-index: 3;
+  color: var(--bs-pagination-active-color);
+  background-color: var(--bs-pagination-active-bg);
+  border-color: var(--bs-pagination-active-border-color);
+}
+.page-link2.disabled, .disabled > .page-link2 {
+  color: var(--bs-pagination-disabled-color);
+  pointer-events: none;
+  background-color: var(--bs-pagination-disabled-bg);
+  border-color: var(--bs-pagination-disabled-border-color);
+}
 
 .page-item:not(:first-child) .page-link {
   margin-left: -1px;
@@ -4627,6 +4639,18 @@ textarea.form-control-lg {
   border-bottom-left-radius: var(--bs-pagination-border-radius);
 }
 .page-item:last-child .page-link {
+  border-top-right-radius: var(--bs-pagination-border-radius);
+  border-bottom-right-radius: var(--bs-pagination-border-radius);
+}
+
+.page-item:not(:first-child) .page-link2 {
+  margin-left: -1px;
+}
+.page-item:first-child .page-link2 {
+  border-top-left-radius: var(--bs-pagination-border-radius);
+  border-bottom-left-radius: var(--bs-pagination-border-radius);
+}
+.page-item:last-child .page-link2 {
   border-top-right-radius: var(--bs-pagination-border-radius);
   border-bottom-right-radius: var(--bs-pagination-border-radius);
 }
@@ -12646,6 +12670,17 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
+}
+.PacketDiv{
+  padding: 80px;
+  border-radius: 32px;
+  background: var(--langue-love-beige, #FFF8F0);
+  box-shadow: 20px 20px 45px 0px rgba(0, 0, 0, 0.10);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* display: none; */
 }
 .StickDiv{
   /* display: inline-flex; */

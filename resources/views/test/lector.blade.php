@@ -1962,6 +1962,10 @@
                 packet.setAttribute('name','packet');
                 packet.setAttribute('type','hidden');
                 packet.value = packetAmount;
+            let duration = document.createElement('input');
+                duration.setAttribute('name','duration');
+                duration.setAttribute('type','hidden');
+                duration.value = durationId;
             let typeA = document.createElement('input');
                 typeA.setAttribute('name','typeA');
                 typeA.setAttribute('type','hidden');
@@ -1983,6 +1987,7 @@
                 form.appendChild(langDesc);
                 form.appendChild(packet);
                 form.appendChild(typeA);
+                form.appendChild(duration);
                 form.appendChild(certyficate);
 
                 if(name.value == ''){

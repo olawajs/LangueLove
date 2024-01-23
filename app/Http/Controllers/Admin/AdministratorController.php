@@ -174,7 +174,7 @@ class AdministratorController extends Controller
             // typ;typJezyka;certyfikat
             // 1 - ind; 4-para
             $bank = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('priceType',$lector->lector_type_id)->get();
-            $typesN = ['','Ind.','','','W parze'];
+            $typesN = ['','Zajęcia indywidualne','','','Zajęcia w parze'];
             $durN = ['','55min','85min'];
             $cerN = ['','do egzaminu'];
            
