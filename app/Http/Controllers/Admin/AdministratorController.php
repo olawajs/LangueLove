@@ -31,10 +31,7 @@ use App\Mail\StudentMailLessonNotification;
 
 class AdministratorController extends Controller
 {
-    public function FixBySession(Request $request){
-        $id = $request->id;
-        $this->CreateFixedLessons($id);
-    }
+   
     public function GenerateCodes(Request $request){
         for($i=1; $i<120; $i++){
             $result = app('App\Http\Controllers\NewsletterController')->generateCode();

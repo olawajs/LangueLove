@@ -43,7 +43,11 @@ class PaymentController extends Controller
     // $merchant_id = 207228;
     // $crc_code = '53567c4b2d150c3d';
     // $apiKey = 'fba1a0238b6ea8982053bbef3915c12b';
-
+    
+    public function FixBySession(Request $request){
+        $id = $request->id;
+        $this->CreateFixedLessons($id);
+    }
     public function  buyLesson(Request $request){
         $PromoCode = isset($request->PromoCode) ? $request->PromoCode : '';
      $RequestTab = [
