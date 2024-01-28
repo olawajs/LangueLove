@@ -200,8 +200,9 @@ class PaymentController extends Controller
         $type = $l->price_type;
         $type = isset($request->LectorType) ? $request->LectorType : $type;
         $lName = $l->name;
-       
+
          $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
+        
         $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
         $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
 
@@ -282,9 +283,11 @@ class PaymentController extends Controller
                     // return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
                  } catch (\Throwable $th) {
                     //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+                    return 0;
                  }
             Mail::to($lecMail->email)->send(new AcceptTermin());
-            return redirect()->back()->with('success','Lekcja zarezerwowana poprawnie');
+            // return redirect()->back()->with('success','Lekcja zarezerwowana poprawnie');
+            return 1;
             // return Redirect::to('https://languelove.pl/priceList/search/1/1');
     }
     public function  transaction(Request $request)

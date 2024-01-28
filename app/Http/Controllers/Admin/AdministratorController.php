@@ -174,12 +174,13 @@ class AdministratorController extends Controller
 
             // typ;typJezyka;certyfikat
             // 1 - ind; 4-para
-            $bank = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->where('priceType',$lector->lector_type_id)->get();
+            $bank = LessonsBank::where('user_id',Auth::user()->id)->where('overdue_date','>=',Carbon::today())->WhereNull('use_date')->where('priceType',$lector->lector_type_id)->get();
             $typesN = ['','Zajęcia indywidualne','','','Zajęcia w parze'];
-            $durN = ['','55min','85min'];
+            $durN = ['','','55min','85min'];
             $cerN = ['','do egzaminu'];
            
             foreach($bank as $b){
+                $jezyk = Payment::where('id',$b->payment_id)->first();
                 $t = $typesN[$b->type_id];
                 $d = $durN[$b->duration];
                 $c = $cerN[$b->certificat];
@@ -187,9 +188,13 @@ class AdministratorController extends Controller
                 if(!array_key_exists($t,$wykupioneLekcje) 
                 || !array_key_exists($d,$wykupioneLekcje[$t]) 
                 || !array_key_exists($c,$wykupioneLekcje[$t][$d])){
-                    $wykupioneLekcje[$t][$d][$c] = 1;
+                    $wykupioneLekcje[$t][$d][$c]['ile'] = 1;
+                    $wykupioneLekcje[$t][$d][$c]['jezyk'] = $jezyk->id_language;
+                    $wykupioneLekcje[$t][$d][$c]['dlugosc'] = $b->duration;
+                    $wykupioneLekcje[$t][$d][$c]['typ'] = $b->type_id;
+                    $wykupioneLekcje[$t][$d][$c]['cert'] = $b->certificat;
                 }else{
-                    $wykupioneLekcje[$t][$d][$c]++;
+                    $wykupioneLekcje[$t][$d][$c]['ile']++;
                 }
                
             }

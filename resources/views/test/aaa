@@ -35,7 +35,7 @@
     }
     p{
         text-align: justify;
-    }  
+    }
     .page-item2{
         width: 8px;
         height: 8px;
@@ -55,16 +55,10 @@
         #MFewPackets{
             top: calc(100% - 260px) !important;
         }
-        #PLesson{
-            top: calc(100% - 380px) !important;
-        }
-        #ThankYou{
-            top: calc(100% - 260px) !important;
-        }
         .PacketDiv{
             width: 100%;
             padding: 20px;
-            top: calc(100% - 170px);
+            top: calc(100% - 150px);
         }
     }
 </style>
@@ -1313,7 +1307,7 @@
 <!-- Language modal -->
 
   <!-- end LM -->
-  <!-- kilka pakietow modal -->
+<!-- kilka pakietow modal -->
 <div class="StickDiv" id="MFewPackets" style="display:none; top: 50%; padding: 20px">
     <div class='desktop'>
         <div class='d-flex' style="flex-flow: column;">
@@ -1334,7 +1328,7 @@
                 @foreach($lessonAmount as $k => $LA)
                     @foreach($LA as $k2 => $LA2)
                         @foreach($LA2 as $k3 => $LA3)
-                            <button class="btn LL-button LL-button-primary" style="width: 500px" onclick="SetPacket('{{$k}}','{{$k2}}','{{$k3}}',{{$LA3['ile']}},{{$LA3['jezyk']}},{{$LA3['dlugosc']}},{{$LA3['typ']}},{{$LA3['cert']}})">{{$k}} {{$k2}} {{$k3}} (zostało: {{$LA3['ile']}})</button>
+                            <button class="btn LL-button LL-button-primary" style="width: 500px">{{$k}} {{$k2}} {{$k3}} (zostało: {{$LA3}})</button>
                         @endforeach
                     @endforeach
                 @endforeach
@@ -1355,7 +1349,7 @@
                 @foreach($lessonAmount as $k => $LA)
                     @foreach($LA as $k2 => $LA2)
                         @foreach($LA2 as $k3 => $LA3)
-                            <button class="btn LL-button LL-button-primary" style="width: 100%; font-size:12px" onclick="SetPacket('{{$k}}','{{$k2}}','{{$k3}}',{{$LA3['ile']}},{{$LA3['jezyk']}},{{$LA3['dlugosc']}},{{$LA3['typ']}},{{$LA3['cert']}})">{{$k}} {{$k2}} {{$k3}} (zostało: {{$LA3['ile']}})</button>
+                            <button class="btn LL-button LL-button-primary" style="width: 100%; font-size:12px">{{$k}} {{$k2}} {{$k3}} (zostało: {{$LA3}})</button>
                         @endforeach
                     @endforeach
                 @endforeach
@@ -1364,12 +1358,12 @@
     </div> 
 </div>
 <!-- wybór wersji -->
-<div class="PacketDiv" id="PacketDiv" style="display:none;">
+<div class="PacketDiv" id="PacketDiv">
     <div class='desktop'>
         <div class='d-flex' style="flex-flow: column; gap:60px;">
             <div class="DivHead">
                 <span class="HeadText">Szczegóły rezerwacji</span>
-                <button class="btn XButton" onClick="closePacketDiv()">
+                <button class="btn XButton" onClick="closePaymentTable()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
                     </svg>
@@ -1382,11 +1376,11 @@
                 <div class="" style="padding-right: 32px;  border-right: 1px solid var(--langue-love-light-grey);">
                     <div class="PayHead">
                         <div style="min-height: 40px;line-height: 130%">
-                            <span class="UnderText" style="color: #2B2B33;font-size: 20px;">Chcę wykorzystać zajęcia z mojego pakietu</span> 
+                            <span class="UnderText" style="color: #2B2B33;font-size: 20px;">Chcę wykorzystać zajecia z mojego pakietu</span> 
                         </div>
                     </div>
                     <div>
-                        <buton class="LL-button LL-button-primary w-100" onclick="OpenChooseTable()">Wybieram</buton>
+                        <buton class="LL-button LL-button-primary w-100" onclick="MPacketLessons()">Wybieram</buton>
                     </div>
                 </div>
                 <div class="" style="padding-left: 32px;">
@@ -1396,7 +1390,7 @@
                         </div>   
                     </div>
                     <div>
-                        <buton class="LL-button LL-button-primary w-100"  onclick="OpenPaymentTable()">Wybieram</buton>
+                        <buton class="LL-button LL-button-primary w-100"  onclick="openInd()">Wybieram</buton>
                     </div>
                 </div>
             </div>
@@ -1405,7 +1399,7 @@
     <div class='mobile mobileFlex' style="width: 100%;">
         <div class="DivHead">
             <span class="HeadText">Szczegóły rezerwacji</span>
-            <button class="btn XButton" onClick="closePacketDiv()">
+            <button class="btn XButton" onClick="closePaymentTable()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
                 </svg>
@@ -1425,7 +1419,7 @@
                             </div>
                         </div>
                         <div>
-                            <buton class="LL-button LL-button-primary w-100" onclick="OpenChooseTable()">Wybieram</buton>
+                            <buton class="LL-button LL-button-primary w-100" onclick="MPacketLessons()">Wybieram</buton>
                         </div>
                     </div>
                 </div>
@@ -1437,7 +1431,7 @@
                             </div>   
                         </div>
                         <div>
-                            <buton class="LL-button LL-button-primary w-100"  onclick="OpenPaymentTable()">Wybieram</buton>
+                            <buton class="LL-button LL-button-primary w-100"  onclick="openInd()">Wybieram</buton>
                         </div>
                     </div>
                 </div>
@@ -1447,116 +1441,17 @@
                 <div class="page-item2"><a class="page-link2" data="2" id="2C"></a></div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Podsumowanie pakietu -->
-<div class="StickDiv" id="PLesson" style="display: none;">
-    <div class='desktop'>
-        <div class='d-flex' style="flex-flow: column; gap:60px;">
-            <div class="DivHead">
-                <span class="HeadText">Szczegóły rezerwacji</span>
-                <button class="btn XButton" onClick="closeModal('PLesson')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="d-flex" style="flex-flow: column">
-                <div class="container">
-                    <div class="">
-                        <div class="PayInfo" style="gap: 24px;">
-                            <div class="PayLabel">
-                                <div class="PayIcon"><img src="{{asset('images/svg/cap.svg')}}"></div>
-                                <div id="IndNazwa3">Pojedyncze zajęcia</div>
-                            </div>    
-                            <div class="PayLabel">
-                                <div class="PayIcon"><img src="{{asset('images/svg/calendar.svg')}}"></div>
-                                <div><span id="IndData3">01.09.2023</span> (<span id="IndDzien3">piątek</span>), <span id="IndGodz3">09:00 - 9:55</span></div>
-                            </div>    
-                            <div class="PayLabel">
-                                <div class="PayIcon"><img src="/images/lectors/{{$lector->photo}}" style='width:48px; height: 48px; object-fit: cover;'></div>
-                                <div>{{$lector->name}}</div>
-                            </div>     
-                        </div>
-                    </div>
+        <!-- <div>  
+            <div>
+                <div class="pagination pg-red">
+                    <div class="page-item active2"><a class="page-link2" data="1" id="1C"></a></div>
+                    <div class="page-item"><a class="page-link2" data="2" id="2C"></a></div>
                 </div>
             </div>
-            <div class="PaymentButtons">
-                <button class="btn LL-button LL-button-primary" onClick="UseLesson()">Rezerwuj</button>
-                <button class="btn LL-button LL-button-secondary" onClick="przejdzDo()">Zmień termin</button>
-            </div>
-        </div>
+        </div> -->
     </div>
-    <div class='mobile mobileFlex' style="width: 100%;">
-        <div class="DivHead">
-            <span class="HeadText">Szczegóły rezerwacji</span>
-            <button class="btn XButton" onClick="closeModal('PLesson')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
-                </svg>
-            </button>
-        </div>
-        <div class="d-flex" style="flex-flow: column">
-                <div class="container">
-                    <div class="">
-                        <div class="PayInfo" style="gap: 34px;">
-                            <div class="PayLabel">
-                                <div class="PayIcon"><img src="{{asset('images/svg/cap.svg')}}"></div>
-                                <div id="IndNazwaM3">Pojedyncze zajęcia</div>
-                            </div>    
-                            <div class="PayLabel">
-                                <div class="PayIcon"><img src="{{asset('images/svg/calendar.svg')}}"></div>
-                                <div><span id="IndData3M">01.09.2023</span> (<span id="IndDzien3M">piątek</span>), <span id="IndGodz3M">09:00 - 9:55</span></div>
-                            </div>    
-                            <div class="PayLabel">
-                                <div class="PayIcon"><img src="/images/lectors/{{$lector->photo}}" style='width:48px; height: 48px; object-fit: cover;'></div>
-                                <div>{{$lector->name}}</div>
-                            </div>     
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="d-flex" style="gap: 12px; flex-flow: column">
-                <button class="btn LL-button LL-button-primary" onClick="UseLesson()">Rezerwuj</button>
-                <button class="btn LL-button LL-button-secondary" onClick="przejdzDo()">Zmień termin</button>
-            </div>
-    </div> 
 </div>
-<!-- Podziękowanie -->
-<div class="StickDiv" id="ThankYou" style="display: none">
-    <div class='desktop'>
-        <div class='d-flex' style="flex-flow: column; gap:32px;">
-            <div class="DivHead" style="justify-content: end;">
-                <button class="btn XButton" onClick="closeModal('ThankYou')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="d-flex" style="gap: 32px; flex-flow: column;align-items: center;">
-                <div><img src="{{asset('images/svg/pinkCheck.svg')}}"></div>
-                <span class="HeadText" style="font-size: 20px;    text-align: center;">Twoje zajęcia zostały zarezerwowane</span>
-                <button class="btn LL-button LL-button-primary" onClick="przejdzDo()">Zarezerwuj kolejne</button>
-            </div>
-        </div>
-    </div>
-    <div class='mobile mobileFlex' style="width: 100%;">
-        <div class="DivHead" style="justify-content: end;">
-            <button class="btn XButton" onClick="closeModal('ThankYou')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.362686 11.4335L4.68772 7L0.362686 2.56647C0.108271 2.30567 0.108271 1.87892 0.362686 1.61812L1.7504 0.195597C2.00481 -0.065199 2.42113 -0.065199 2.67554 0.195597L7.00058 4.62913L11.3256 0.195597C11.58 -0.065199 12.0195 -0.065199 12.2739 0.195597L13.6385 1.61812C13.8929 1.87892 13.8929 2.30567 13.6385 2.56647L9.31343 7L13.6385 11.4335C13.8929 11.6943 13.8929 12.1448 13.6385 12.4056L12.2739 13.8044C12.0195 14.0652 11.58 14.0652 11.3256 13.8044L7.00058 9.37087L2.67554 13.8044C2.42113 14.0652 2.00481 14.0652 1.7504 13.8044L0.362686 12.4056C0.108271 12.1448 0.108271 11.6943 0.362686 11.4335Z" fill="#2B2B33"/>
-                </svg>
-            </button>
-        </div>      
-        <div>
-            <div class="d-flex" style="gap: 32px; flex-flow: column;align-items: center;">
-                <div><img src="{{asset('images/svg/pinkCheck.svg')}}"></div>
-                <span class="HeadText" style="font-size: 20px;    text-align: center;">Twoje zajęcia zostały zarezerwowane</span>
-                <button class="btn LL-button LL-button-primary" onClick="przejdzDo()">Zarezerwuj kolejne</button>
-            </div>
-    </div> 
-</div>
+
 <div id="FormDiv"></div>
   @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
@@ -1564,19 +1459,16 @@
 <script  id="1">
     let LessonAmount = {!! json_encode($lessonAmount) !!};
     let Savedhour,less60,less90,dzienNazwa,ZajeciaData,ScreenType;
-    let LBjezyk,LBdlugosc,LBtyp,LBcert; //zmienne do pakietów
     let PaymentType = '';
     let packetAmount = 0;
     let nameType = '';
     let kwota = 0;
     let dw = 0;
     let ok = true;
-    let a = 0;
-    let b = 0;
-    let c = 0;
     let User = {!! json_encode($User) !!};
     $("#S1").show();
     go();
+    console.log(ScreenType);
     $(document).ready(function () {
         
         $(".Paymentcard").each(function(index, value){
@@ -1584,7 +1476,8 @@
         });
         $(".Paymentcard2").each(function(index, value){
             $('.Paymentcard2').hide();
-        });         
+        });
+         
         $(".page-link").on('click', function(){
             
             $(".page-link").each(function(index, value){
@@ -1890,6 +1783,7 @@
             $('#S'+id2).show();
             $('#'+id2+'C').parent().addClass("active2");
         }
+        
         document.addEventListener('touchstart', e => {
             touchstartX = e.changedTouches[0].screenX;
             roznica = touchstartX - touchendX;
@@ -1901,7 +1795,9 @@
             if(Math.abs(roznica)>20){
                 checkDirection();
                 checkDirection2();
+                
             }
+            console.log('bbb');
             
         });
         function OpenModal(id){
@@ -1938,7 +1834,6 @@
         document.getElementById('IndDataM').innerText = ZajeciaData;
         document.getElementById('IndDzienM').innerText = dzienNazwa;
         document.getElementById('IndGodzM').innerText = Savedhour;
-
         let test = new Date('2024-01-01 '+Savedhour);
         let test2 = new Date(test);
         test2.setMinutes ( test.getMinutes() + 30 );
@@ -2043,31 +1938,15 @@
         }
             // tu selecty
     }
-    function SetPacket(typ,czas,egzamin,zostalo,jezyk,dlugosc,typZ,cert){
-        LBjezyk =jezyk;
-        LBdlugosc =dlugosc;
-        LBtyp =typZ;
-        LBcert = cert;
-        document.getElementById('IndNazwaM3').innerText ='Pakiet: '+typ+ ' '+czas+' '+egzamin;
-        document.getElementById('IndNazwa3').innerText ='Pakiet: '+typ+ ' '+czas+' '+egzamin;
-        document.getElementById('IndData3').innerText = ZajeciaData;
-        document.getElementById('IndDzien3').innerText = dzienNazwa;
-        document.getElementById('IndGodz3').innerText = Savedhour+'\n +'+(zostalo-1)+' do wykorzystania';
-        document.getElementById('IndData3M').innerText = ZajeciaData;
-        document.getElementById('IndDzien3M').innerText = dzienNazwa;
-        document.getElementById('IndGodz3M').innerText = Savedhour+'\n +'+(zostalo-1)+' do wykorzystania';
-        closeModal('MFewPackets');
-        document.getElementById('PLesson').style.display = 'block';
-        document.getElementById('container').style.filter = 'blur(15px)';
-        window.scrollTo(0, 0);
-    }
     function OpenHour(hour,dataZ,dzien,l60,l90){
         Savedhour = hour;
         less60 = l60;
         less90 = l90;
         dzienNazwa = dzien;
         ZajeciaData = dataZ;
-       
+        let a = 0;
+        let b = 0;
+        let c = 0;
         Object.entries(LessonAmount).forEach(([key, value]) => {
             // console.log(`key is "${key}"`);
             a++;
@@ -2080,28 +1959,17 @@
                 });
             });
         });
-
-        // if(a>1 || b>1 || c>1){
-        //     // alert('Kilka pakietow');
-        //     OpenChooseTable();
-        // }
-        // else 
-        if(a>0 || b>0 || c>0){
-            $('#S1').show();
-            OpenPacketDiv();
+        if(a>1 || b>1 || c>1){
+            alert('Kilka pakietow');
+        }
+        else if(a==1 || b==1 || c==1){
+            alert('Jeden pakiet');
         }
         else{
              $('#P1').show();
             OpenPaymentTable();
         }
-    }
-    function choosePacket(){
-       if(a>1 || b>1 || c>1){
-            OpenChooseTable();
-        }
-        else{
-            
-        }
+       
     }
     function goTo(week,active){
         document.getElementById('Week'+active).style.display = 'none';
@@ -2112,8 +1980,6 @@
         document.getElementById('Week'+week+'M').style.display = 'block';
     }
     function przejdzDo(){
-        closeModal('PLesson');
-        closeModal('ThankYou');
         const element = document.getElementById("calendarInfo");
         element.scrollIntoView();
     }
@@ -2370,81 +2236,10 @@
                 form.appendChild(street);
                 form.appendChild(langDesc);
                 form.appendChild(packet);
+                form.appendChild(packet);
                 form.appendChild(typeA);
-                form.appendChild(duration);
-                form.appendChild(certyficate);
-
-                if(name.value == ''){
-                    alert('Prosimy o wypełnienie pola imię');
-                    document.getElementById('NamePacket'+ScreenType).focus();
-                }
-                else if(city.value == ''){
-                    alert('Prosimy o wypełnienie pola miasto');
-                    document.getElementById('CityPacket'+ScreenType).focus();
-                }
-                else if(postcode.value == ''){
-                    alert('Prosimy o wypełnienie pola kod pocztowy');
-                    document.getElementById('PostCodePacket'+ScreenType).focus();
-                }
-                else if(street.value == ''){
-                    alert('Prosimy o wypełnienie pola ulica');
-                    document.getElementById('AdressPacket'+ScreenType).focus();
-                }
-                else{
-                    document.getElementById('FormDiv').appendChild(form);
-                    form.submit();
-                }
-                
-    }
-    function UseLesson(){
-        $.ajax({
-        type: "POST",
-        url: '../payment/useLessons',
-        data: {
-            data: ZajeciaData, 
-            godzina: Savedhour, 
-            duration_id: LBdlugosc,
-            jezyk: LBjezyk,
-            rodzaj: LBtyp,
-            lectorId: '{{$lector->id}}',
-            cert: LBcert,
-            LectorType: '{{$lector->lector_type_id}}',
-            _token: "{{ csrf_token() }}",
-            },
-        })
-        .done(function(data) {
-           console.log(data);
-           document.getElementById('ThankYou').style.display = 'block';
-           document.getElementById('PLesson').style.display = 'none';
-        })
-        .fail(function() {
-            console.log( "Wystąpił błąd" );
-        });
-
-               
-    }
-    function BuyLesson(){
-            let durationId = document.getElementById('LessonDuration'+ScreenType).value ;
-            let cert = document.getElementById('LessonCertyficate'+ScreenType).value;
-            let type = document.getElementById('LessonType'+ScreenType).value;
-            let languageId = document.getElementById('LessonLanguage'+ScreenType).value;
-
-
-            let form = document.createElement('form');
-                form.setAttribute('method','POST');
-                form.setAttribute('action',"{{ route('buyLesson') }}");
-            let start = document.createElement('input');
-                start.setAttribute('name','data');
-                start.setAttribute('type','hidden');
-                start.value = ZajeciaData;
-            let godzina = document.createElement('input');
-                godzina.setAttribute('name','godzina');
-                godzina.setAttribute('type','hidden');
-                godzina.value = Savedhour;
-            let duration_id = document.createElement('input');
-                duration_id.setAttribute('name','duration_id');
-                duration_id.setAttribute('type','hidden');
-                duration_id.value = durationId;
+           form.appendChild(duration);
+ionId;
             let langDesc = document.createElement('input');
                 langDesc.setAttribute('name','jezyk');
                 langDesc.setAttribute('type','hidden');
@@ -2511,7 +2306,12 @@
                 form.appendChild(street);
                 // alert(dw);
                 
-         
+                if(dw >= 1){
+                    form.setAttribute('action',"{{ route('useLessons') }}");
+                    document.getElementById('FormDiv').appendChild(form);
+                    form.submit();
+                }
+                else{
                      if(name.value == ''){
                         alert('Prosimy o wypełnienie pola imię');
                         document.getElementById('NameInd'+ScreenType).focus();
@@ -2532,6 +2332,7 @@
                         document.getElementById('FormDiv').appendChild(form);
                         form.submit();
                     }    
+                }
 
                
     }

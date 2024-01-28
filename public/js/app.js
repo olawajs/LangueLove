@@ -1276,12 +1276,26 @@ function OpenPriceTable(){
   // 
 }
 function closePriceTable(){
-  document.getElementById('PriceTable').style.display = 'none';
+  document.getElementById('MFewPackets').style.display = 'none';
   document.getElementById('container').style.filter = 'blur(0px)';
   // 
 }
 function OpenPaymentTable(){
+  document.getElementById('PacketDiv').style.display = 'none';
   document.getElementById('PaymentTable').style.display = 'inline-flex';
+  document.getElementById('container').style.filter = 'blur(15px)';
+  window.scrollTo(0, 0);
+  // 
+}
+function OpenChooseTable(){
+  document.getElementById('PacketDiv').style.display = 'none';
+  document.getElementById('MFewPackets').style.display = 'inline-flex';
+  document.getElementById('container').style.filter = 'blur(15px)';
+  window.scrollTo(0, 0);
+  // 
+}
+function OpenPacketDiv(){
+  document.getElementById('PacketDiv').style.display = 'inline-flex';
   document.getElementById('container').style.filter = 'blur(15px)';
   window.scrollTo(0, 0);
   // 
@@ -1289,6 +1303,13 @@ function OpenPaymentTable(){
 function closePaymentTable(){
   document.getElementById('PaymentTable').style.display = 'none';
   document.getElementById('container').style.filter = 'blur(0px)';
+  // 
+}
+function closePacketDiv(){
+  document.getElementById('PacketDiv').style.display = 'none';
+  document.getElementById('container').style.filter = 'blur(0px)';
+  $("#S1").hide();
+  $("#S2").hide();
   // 
 }
 function closeModal(id){
