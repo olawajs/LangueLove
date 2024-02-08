@@ -104,7 +104,7 @@ a:active {
                 <h2 class="middleText" style="text-align: left !important;">Dlaczego warto nas wybrać?</h2>
                 <p>
                     Prowadzimy kursy językowe indywidualne i grupowe oraz webinaria tematyczne. W naszej szkole
-                    językowej online znajdziesz kursy 10 języków obcych.<br></br>
+                    językowej online znajdziesz kursy z wielu języków obcych.<br></br>
                     Mocno wierzymy, że nauka języka jest inwestycją w przyszłość i drogą do odkrywania świata, 
                     a także poszerzania horyzontów.<br><br>
                     Nasze indywidualne i grupowe kursy językowe opierają się na autorskich programach nauki,
@@ -128,7 +128,7 @@ a:active {
         <div class="col-5 TextDisplay">
             <h2 class="middleText">Jak wyglądają zajęcia?</h2>
             <p>
-                Zajęcia trwają <b>60 minut</b> lub <b>90 minut.</b> 
+                Zajęcia trwają <b>55 minut</b> lub <b>85 minut.</b> 
                 Prowadzimy je za pośrednictwem komunikatora Skype. 
                 Nie musisz kupować podręczników, wszystkie materiały otrzymasz online od swojego lektora. 
                 Do każdych zajęć otrzymasz także notatki na dysku.<br><br>
@@ -352,7 +352,7 @@ a:active {
         <div>
                 <p>
                     Prowadzimy kursy językowe indywidualne i grupowe oraz webinaria tematyczne. W naszej szkole
-                    językowej online znajdziesz kursy 10 języków obcych.<br></br>
+                    językowej online znajdziesz kursy z wielu języków obcych.<br></br>
                     Mocno wierzymy, że nauka języka jest inwestycją w przyszłość i drogą do odkrywania świata, 
                     a także poszerzania horyzontów.<br><br>
                     Nasze indywidualne i grupowe kursy językowe opierają się na autorskich programach nauki,
@@ -371,7 +371,7 @@ a:active {
         </div>
         <div>
             <p>
-                Zajęcia trwają <b>60 minut</b> lub <b>90 minut.</b> 
+                Zajęcia trwają <b>55 minut</b> lub <b>85 minut.</b> 
                 Prowadzimy je za pośrednictwem komunikatora Skype. 
                 Nie musisz kupować podręczników, wszystkie materiały otrzymasz online od swojego lektora. 
                 Do każdych zajęć otrzymasz także notatki na dysku.<br><br>

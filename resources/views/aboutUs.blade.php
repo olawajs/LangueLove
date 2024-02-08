@@ -92,7 +92,7 @@ h2{
             <h2>Dlaczego warto nas wybrać?</h2>
                 <p>
                     Prowadzimy kursy językowe indywidualne i grupowe oraz webinaria tematyczne. W naszej szkole
-                    językowej online znajdą Państwo kursy 10 języków obcych. Mocno wierzymy, że nauka języka
+                    językowej online znajdą Państwo kursy z wielu języków obcych. Mocno wierzymy, że nauka języka
                     jest inwestycją w przyszłość i drogą do odkrywania świata, a także poszerzania horyzontów.
                     Nasze indywidualne i grupowe kursy językowe opierają się na autorskich programach nauki,
                     dzięki czemu mają Państwo pewność, że inwestycja przynosi efekty i jest spersonalizowana.
