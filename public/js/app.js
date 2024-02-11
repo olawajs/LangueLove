@@ -1276,9 +1276,25 @@ function OpenPriceTable(){
   // 
 }
 function closePriceTable(){
-  document.getElementById('MFewPackets').style.display = 'none';
+  document.getElementById('PriceTable').style.display = 'none';
   document.getElementById('container').style.filter = 'blur(0px)';
   // 
+}
+function saveCookie(cookie) {
+  localStorage.setItem("cookies", cookie);
+  document.getElementById('cookies').style.display = 'none';
+}
+function checkCookies(){
+ let c = localStorage.getItem("cookies");
+ if(localStorage.getItem("cookies") === null){
+    document.getElementById('cookies').style.display = 'block';
+ }else if(c == 0){
+    document.getElementById('GT').innerText = '';
+    // console.log('cookieUsuniere');
+ }
+ else{
+  // console.log('cookie zostalo');
+ }
 }
 function OpenPaymentTable(){
   document.getElementById('PacketDiv').style.display = 'none';

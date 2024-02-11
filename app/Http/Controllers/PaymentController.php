@@ -84,7 +84,9 @@ class PaymentController extends Controller
         $ile = isset($request->ile) ? $request->ile : 1;
         $type_id = $request->rodzaj;
             $l = Language::where('id',$language_id)->first();
-            $type = $l->price_type;
+            $le = Lector::where('id',$request->lectorId)->first();
+            $type = $le->lector_type_id;
+            // $type = $l->price_type;
             $lName = $l->name;
         if($zajecia == 1){
             $price = $priceG;
@@ -197,7 +199,9 @@ class PaymentController extends Controller
 
         
         $l = Language::where('id',$language_id)->first();
-        $type = $l->price_type;
+        // $type = $l->price_type;
+        $le = Lector::where('id',$lectorId)->first();
+            $type = $le->lector_type_id;
         $type = isset($request->LectorType) ? $request->LectorType : $type;
         $lName = $l->name;
 
@@ -781,7 +785,8 @@ class PaymentController extends Controller
             $priceG =$data['priceG'];
 
             $l = Language::where('id',$language_id)->first();
-            $type = $l->price_type;
+            $le = Lector::where('id',$lectorId)->first();
+            $type = $le->lector_type_id;
             $lName = $l->name;
             if($zajecia == 1){
                 $price = $priceG;
@@ -897,7 +902,8 @@ class PaymentController extends Controller
         {
             $language_id = $data['langDesc'];
             $l = Language::where('id',$language_id)->first();
-            $type = $l->price_type;
+            $le = Lector::where('id',$lectorId)->first();
+            $type = $le->lector_type_id;
             $kwota =  $data['priceG'];
             $desc =  $data['title'];
             $pakiet = $data['packet'];

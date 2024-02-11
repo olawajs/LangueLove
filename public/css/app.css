@@ -12766,6 +12766,9 @@ html {
   background: var(--langue-love-light-purple, #E7E5EC);
 
 }
+.XButton:hover{
+  background-color: #D9D7DD;
+}
 .DivHead{
   display: flex;
   justify-content: space-between;
@@ -12971,6 +12974,15 @@ select option:disabled {
 @media only screen and (max-width: 800px) {
   .Desktop{
     display: none;
+  }
+  .cookies{
+    width: 300px !important;
+    height: 470px !important;
+  }
+  .cookieBottom{
+    flex-flow: column;
+    background-color: white !important;
+    padding: 26px !important;
   }
   .mobile{
     display: unset;
@@ -13377,9 +13389,56 @@ select option:disabled {
   width: 90%;
   height: 90%;
   transform: translate(-50%, -50%);
- 
+ }
+.cookieClose{
+  padding: 26px 26px 0 26px;
+  display: flex;
+  justify-content: end;
+ }
+ .cookieBody{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 0 26px;
+  gap: 7px;
+ }
+ .cookieText{
+  color: #6F6C90;
+  font-size: 12px;
+  text-align: center;
+ }
+ .cookieBottom{
+  background-color: #F7F7FB;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  border-radius: 32px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 12px;
+  padding: 0 26px;
+ }
+ .closeB{
+  width: 24px;
+  height: 24px;
+  padding: 6px;
  }
  
+.cookies{
+  background-color: #fff;
+  width: 500px;
+  height: 350px;
+  border-radius: 32px;
+  position: fixed;
+  bottom: 20px;
+  z-index: 5;
+  left: 20px;
+  box-shadow: 0px 14px 42px 0px #080F340F;
+  display: none;
+}
+
  /*Text*/
  .text-title {
   text-transform: uppercase;
