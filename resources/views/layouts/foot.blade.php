@@ -3,14 +3,14 @@
 <div class="footNewsletter">
     <div class="footHalf">
         <h2 class="whiteH2">Zostań z nami na dłużej!</h2>
-        <p class="footText">Zapisz się do naszego newslettera, aby otrzymać 10% zniżki na zajęcia grupowe i zacznij uczyć się już dziś! Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
+        <p class="footText"> Zapisz się do naszego newslettera, aby otrzymać <b>10% zniżki</b> na Twoje pierwsze zajęcia grupowe!  Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
     </div>
     <div class="footHalf" >
         <div class="footInput">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Adres email" id="newsMail" aria-label="Adres email" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-black" type="button" onclick="SignInN()">Zapisz się</button>
+                    <button class="btn btn-black" style="border-radius: 0 16px 16px 0;" type="button" onclick="SignInN()">Zapisz się</button>
                 </div>
             
             </div>
@@ -50,14 +50,14 @@
             <h2 class="whiteH2">Zostań z nami na dłużej!</h2>
         </div>
         <div>
-            <p class="footText">Zapisz się do naszego newslettera, aby otrzymać 10% zniżki na zajęcia grupowe i zacznij uczyć się już dziś! Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
+            <p class="footText"> Zapisz się do naszego newslettera, aby otrzymać <b>10% zniżki</b> na Twoje pierwsze zajęcia grupowe!  Dla subskrybentów przygotowaliśmy także darmowe porady językowe i priorytetowy dostęp do webinarów!</p>
         </div>
         <div>
             <h2 class="whiteH2">
                 <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Adres email" id="newsMailM" aria-label="Adres email" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-black" type="button" onclick="SignInN()"><img src="{{asset('images/svg/send.svg')}}"></button>
+                    <button class="btn btn-black" style="border-radius: 0 16px 16px 0;" type="button" onclick="SignInN()"><img src="{{asset('images/svg/send.svg')}}"></button>
                 </div>
             </div></h2>
         </div>

@@ -11997,6 +11997,10 @@ line-height: 32px;
   border-radius: 16px;
   background: var(--langue-love-black);
 }
+.btn-black:hover{
+  background: var(--langue-love-dark-grey);
+
+}
 .AboutBox{
   display: flex;
   padding: 40px 40px 41px 40px;

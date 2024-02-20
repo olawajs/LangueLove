@@ -55,7 +55,7 @@
         </div>
        
     </div>
-    <!-- @include('layouts.blackfriday') -->
+    @include('layouts.blackfriday')
     @include('layouts.cookies')
     @include('layouts.foot')
     <!-- Google Tag Manager (noscript) -->
