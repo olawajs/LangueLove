@@ -2317,6 +2317,10 @@
                 desc2.setAttribute('name','desc');
                 desc2.setAttribute('type','hidden');
                 desc2.value = desc;
+            let lectorId = document.createElement('input');
+                lectorId.setAttribute('name','lectorId');
+                lectorId.setAttribute('type','hidden');
+                lectorId.value = '{{$lector->id}}';
             let name = document.createElement('input');
                 name.setAttribute('name','name');
                 name.setAttribute('required','true');
@@ -2366,6 +2370,7 @@
                 form.appendChild(name);
                 form.appendChild(nip);
                 form.appendChild(city);
+                form.appendChild(lectorId);
                 form.appendChild(postcode);
                 form.appendChild(street);
                 form.appendChild(langDesc);

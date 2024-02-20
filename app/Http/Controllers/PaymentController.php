@@ -305,6 +305,7 @@ class PaymentController extends Controller
             'nip' => isset($request->nip) ? $request->nip : '',
             'LectorType' => isset($request->LectorType) ? $request->LectorType : 1,
             'city' => $request->city,
+            'lectorId' => $request->lectorId,
             'postcode' => $request->postcode,
             'street' => $request->street,
             'langDesc' => $request->langDesc,
@@ -358,6 +359,7 @@ class PaymentController extends Controller
             $details->postcode = $request->postcode;
             $details->street = $request->street;
             $details->langDesc = $request->langDesc;
+            $details->lectorId = $request->lectorId;
             $details->packet = $request->packet;
             $details->typeA = $request->typeA;
             $details->street = $request->street;
@@ -365,7 +367,7 @@ class PaymentController extends Controller
             $details->P24token = $token;
             $details->session_id = $session_id;
             $details->payment_id = $payment->id;
-            $details->duration_id = $payment->duration_id;
+            $details->duration_id = $request->duration;
             $details->user_id = Auth::user()->id;
         $details->save();
         return new RedirectResponse($link.'trnRequest/'.$token);
