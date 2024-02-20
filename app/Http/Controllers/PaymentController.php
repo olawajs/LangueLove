@@ -902,7 +902,7 @@ class PaymentController extends Controller
         {
             $language_id = $data['langDesc'];
             $l = Language::where('id',$language_id)->first();
-            $le = Lector::where('id',$lectorId)->first();
+            $le = Lector::where('id',$data['lectorId'])->first();
             $type = $le->lector_type_id;
             $kwota =  $data['priceG'];
             $desc =  $data['title'];
