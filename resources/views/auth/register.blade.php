@@ -99,7 +99,7 @@
                             </div>
 
                             <div class="col-md-6 iconText">
-                                Oświadczam że zapoznałem się z <a href="{{ asset('files/LangueLove Regulamin.pdf') }}" >Regulaminem</a> i <a  href="{{ asset('files/Polityka prywatności LangueLove.pdf') }}">Polityką prywatności</a> oraz <a href="{{ asset('files/LangueLove_regulamin obowiazuje od 02.01.24.pdf') }}">Regulaminem</a> obowiązyjącym od 02.01.2024r
+                                Oświadczam że zapoznałem się z <a href="{{ asset('files/LangueLove Regulamin.pdf') }}" >Regulaminem</a> i <a  href="{{ asset('files/Polityka prywatności LangueLove.pdf') }}">Polityką prywatności</a>
                             </div>
                         </div>
                         <div class="row mb-3">
