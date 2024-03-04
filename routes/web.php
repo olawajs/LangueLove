@@ -38,6 +38,7 @@ Route::get('myAccount', [App\Http\Controllers\MainController::class, 'myAccount'
 Route::get('signIn', [App\Http\Controllers\NewsletterController::class, 'signIn'])->name('signIn'); 
 Route::get('signOff', [App\Http\Controllers\NewsletterController::class, 'signOff'])->name('signOff'); 
 Route::post('checkCode', [App\Http\Controllers\NewsletterController::class, 'checkCode'])->name('checkCode'); 
+Route::post('useCode', [App\Http\Controllers\NewsletterController::class, 'useCode'])->name('useCode'); 
 Route::post('checkPacketCode', [App\Http\Controllers\NewsletterController::class, 'checkPacketCode'])->name('checkPacketCode'); 
 Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
 Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');

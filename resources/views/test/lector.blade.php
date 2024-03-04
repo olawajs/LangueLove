@@ -2384,6 +2384,9 @@
         PriceCheckCykl();
     }
     function BuyPacket(){
+        if(code != ''){
+            UseCode();
+        }
                // packetAmount
             let durationId = document.getElementById('LessonDurationPacket'+ScreenType).value ;
             let cert = document.getElementById('LessonCertyficatePacket'+ScreenType).value;
@@ -2555,7 +2558,28 @@
 
                
     }
+    function UseCode(){
+        $.ajax({
+        type: "POST",
+        url: '../useCode',
+        data: {
+            code: code, 
+            _token: "{{ csrf_token() }}",
+            },
+        })
+        .done(function(data) {
+           console.log('code ok');
+        })
+        .fail(function() {
+            console.log( "Wystąpił błąd" );
+        });
+
+               
+    }
     function BuyLesson(){
+        if(code != ''){
+            UseCode();
+        }
             let durationId = document.getElementById('LessonDuration'+ScreenType).value ;
             let cert = document.getElementById('LessonCertyficate'+ScreenType).value;
             let type = document.getElementById('LessonType'+ScreenType).value;

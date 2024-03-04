@@ -49,6 +49,12 @@ class NewsletterController extends Controller
         }
        
     }
+    public function useCode(Request $request){
+        Code::where('code',$request->code)
+        ->WhereNull('use_date')
+        ->update(['use_date' => Carbon::now() ]);
+       
+    }
     public function checkPacketCode(Request $request){
         $code = Code::where('code',$request->code)
                     ->whereNull('use_date')

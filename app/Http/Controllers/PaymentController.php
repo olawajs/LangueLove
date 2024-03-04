@@ -573,7 +573,7 @@ class PaymentController extends Controller
     
   
     }
-    public static function CreateLessons(){
+    public function CreateLessons(){
         $data = session()->get('data');
         if($data['typPlatnosci'] == 'LEKCJA'){
             $start = $data['start'];
