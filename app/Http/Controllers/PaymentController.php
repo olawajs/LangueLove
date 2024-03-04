@@ -793,7 +793,7 @@ class PaymentController extends Controller
         }
         $payment->save();
     }
-    public static function CreateFixedLessons($id){
+    public function CreateFixedLessons($id){
         $data = PaymentDetails::where('session_id',$id)->first();
         $userId =  $data['user_id'];
         $user = User::where('id',$userId)->first();
