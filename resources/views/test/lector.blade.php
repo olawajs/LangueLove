@@ -712,7 +712,12 @@
                             </div>
                         </div>
                         <div class="AmountDiv">
-                            Cena: <span id="cenaD">99</span> zł
+                            Cena: <span class="oldAmount"></span><span id="cenaD">99</span> zł
+                        </div>
+                        <div class="KodText"></div>
+                        <div class="KodPromocyjny">
+                            <label class="SelectLabel">Kod zniżkowy</label>
+                            <input class="input2" id="RabatCode1" name="RabatCode1" placeholder="wpisz kod" onfocusout="checkCode('RabatCode1',1)">
                         </div>
                     </div>
                 </div>
@@ -811,7 +816,12 @@
                             </div>
                         </div>
                         <div class="AmountDiv">
-                            Cena: <span id="cenaM">99</span> zł
+                            Cena: <span class="oldAmount"></span><span id="cenaM">99</span> zł
+                        </div>
+                        <div class="KodText"></div>
+                        <div class="KodPromocyjny">
+                            <label class="SelectLabel">Kod zniżkowy</label>
+                            <input class="input2" id="RabatCode2" name="RabatCode2" placeholder="wpisz kod" onfocusout="checkCode('RabatCode2',1)">
                         </div>
                     </div>
                 </div>
@@ -926,8 +936,13 @@
                             </div>
                         </div>
                         <div class="AmountDiv">
-                            Cena: <span id="cenaCyklD">99</span> zł
+                            Cena:<span class="oldAmount2"></span><span id="cenaCyklD">99</span> zł
                         </div>
+                        <!-- <div class="KodText2"></div>
+                        <div class="KodPromocyjny2">
+                            <label class="SelectLabel">Kod zniżkowy</label>
+                            <input class="input2" id="RabatCode3" name="RabatCode3" placeholder="wpisz kod" onfocusout="checkCode('RabatCode3',2)">
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -1033,8 +1048,13 @@
                             </div>
                         </div>
                         <div class="AmountDiv">
-                            Cena: <span id="cenaCyklM">99</span> zł
+                            Cena: <span class="oldAmount2"></span><span id="cenaCyklM">99</span> zł
                         </div>
+                        <!-- <div class="KodText2"></div>
+                        <div class="KodPromocyjny2">
+                            <label class="SelectLabel">Kod zniżkowy</label>
+                            <input class="input2" id="RabatCode4" name="RabatCode4" placeholder="wpisz kod" onfocusout="checkCode('RabatCode4',2)">
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -1157,7 +1177,12 @@
                             </div>
                         </div>
                         <div class="AmountDiv">
-                            Cena: <span id="cenaPacketD">99</span> zł
+                            Cena: <span class="oldAmount3"></span><span id="cenaPacketD">99</span> zł
+                        </div>
+                        <div class="KodText3"></div>
+                        <div class="KodPromocyjny3">
+                            <label class="SelectLabel">Kod zniżkowy</label>
+                            <input class="input2" id="RabatCode5" name="RabatCode5" placeholder="wpisz kod" onfocusout="checkPacketCode('RabatCode5')">
                         </div>
                     </div>
                 </div>
@@ -1574,6 +1599,8 @@
     let a = 0;
     let b = 0;
     let c = 0;
+    let useCode = false;
+    let znizka=0; let znizkaTyp=''; code = '';
     let User = {!! json_encode($User) !!};
     $("#S1").show();
     go();
@@ -2130,6 +2157,36 @@
         })
         .done(function( data) {
             kwota = data;
+            if(znizka != 0){
+                var elements = document.getElementsByClassName("oldAmount");
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    element.innerText = kwota+"zł";
+                }
+                
+                if(znizkaTyp == '%'){
+                    kwota =((100 - znizka)* kwota)/100; 
+                }
+                else{
+                    kwota =kwota - znizka;
+                }
+                var elements = document.getElementsByClassName("KodPromocyjny");
+  
+                    for (var i = 0; i < elements.length; i++) {
+                        var element = elements[i];
+                        // Modify specific properties
+                        element.style.display = "none";
+                        // Add more style modifications as needed
+                    }
+                    var elements2 = document.getElementsByClassName("KodText");
+  
+                    for (var i = 0; i < elements2.length; i++) {
+                        var element = elements2[i];
+                        // Modify specific properties
+                        element.innerText = "Twoja cena została obniżona";
+                        // Add more style modifications as needed
+                    }
+            }
             document.getElementById('cenaM').innerText = kwota;
             document.getElementById('cenaD').innerText = kwota;
             fixSelects();
@@ -2151,6 +2208,36 @@
         })
         .done(function(data) {
             kwota = data * document.getElementById('LessonAmountCykl'+ScreenType).value;
+            if(znizka != 0){
+                var elements = document.getElementsByClassName("oldAmount2");
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    element.innerText = kwota+"zł";
+                }
+                
+                if(znizkaTyp == '%'){
+                    kwota =((100 - znizka)* kwota)/100; 
+                }
+                else{
+                    kwota =kwota - znizka;
+                }
+                var elements = document.getElementsByClassName("KodPromocyjny2");
+  
+                    for (var i = 0; i < elements.length; i++) {
+                        var element = elements[i];
+                        // Modify specific properties
+                        element.style.display = "none";
+                        // Add more style modifications as needed
+                    }
+                    var elements2 = document.getElementsByClassName("KodText2");
+  
+                    for (var i = 0; i < elements2.length; i++) {
+                        var element = elements2[i];
+                        // Modify specific properties
+                        element.innerText = "Twoja cena została obniżona";
+                        // Add more style modifications as needed
+                    }
+            }
             document.getElementById('cenaCyklM').innerText = kwota;
             document.getElementById('cenaCyklD').innerText = kwota;
             fixSelectsCykl();
@@ -2173,6 +2260,36 @@
         })
         .done(function(data) {
             kwota = data ;
+            if(znizka != 0){
+                var elements = document.getElementsByClassName("oldAmount3");
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    element.innerText = kwota+"zł";
+                }
+                
+                if(znizkaTyp == '%'){
+                    kwota =((100 - znizka)* kwota)/100; 
+                }
+                else{
+                    kwota =kwota - znizka;
+                }
+                var elements = document.getElementsByClassName("KodPromocyjny3");
+  
+                    for (var i = 0; i < elements.length; i++) {
+                        var element = elements[i];
+                        // Modify specific properties
+                        element.style.display = "none";
+                        // Add more style modifications as needed
+                    }
+                    var elements2 = document.getElementsByClassName("KodText3");
+  
+                    for (var i = 0; i < elements2.length; i++) {
+                        var element = elements2[i];
+                        // Modify specific properties
+                        element.innerText = "Twoja cena została obniżona";
+                        // Add more style modifications as needed
+                    }
+            }
             document.getElementById('cenaPacketM').innerText = kwota;
             document.getElementById('cenaPacketD').innerText = kwota;
             fixSelectsPacket();
@@ -2305,6 +2422,14 @@
             let form = document.createElement('form');
                 form.setAttribute('method','POST');
                 form.setAttribute('action',"{{ route('transaction') }}");
+            let start = document.createElement('input');
+                start.setAttribute('name','data');
+                start.setAttribute('type','hidden');
+                start.value = ZajeciaData;
+            let godzina = document.createElement('input');
+                godzina.setAttribute('name','godzina');
+                godzina.setAttribute('type','hidden');
+                godzina.value = Savedhour;
             let price = document.createElement('input');
                 price.setAttribute('name','price');
                 price.setAttribute('type','hidden');
@@ -2366,6 +2491,8 @@
                 form.innerHTML ='@csrf';
                 form.appendChild(price);
                 form.appendChild(desc2);
+                form.appendChild(start);
+                form.appendChild(godzina);
                 form.appendChild(LectorType);
                 form.appendChild(name);
                 form.appendChild(nip);
@@ -2673,6 +2800,95 @@
                 }
 
       
+    }
+    function checkCode(name,T){
+        event.preventDefault();
+        code = document.getElementById(name).value;
+        let type = document.getElementById('LessonType'+ScreenType).value;
+        console.log('Typ'+type);
+        // alert(code);
+        if(!useCode){
+            useCode = true;
+            $.ajax({
+            type: "POST",
+            url: '../checkCode',
+            data: {
+                code: code,
+                type: type,
+                _token: "{{ csrf_token() }}",
+            },
+            })
+            .done(function( data) {
+                if(data != 0){
+                    console.log(data);
+                    znizka=data.amount; 
+                    znizkaTyp=data.type;
+                    if(T==1){
+                        PriceCheck();
+                    }
+                    if(T==2){
+                        PriceCheckCykl();
+                    }
+                }
+                else{
+                    if(T==1){
+                        var elements2 = document.getElementsByClassName("KodText");
+                    }
+                    if(T==2){
+                        var elements2 = document.getElementsByClassName("KodText2");
+                    }
+                    for (var i = 0; i < elements2.length; i++) {
+                        var element = elements2[i];
+                        element.innerText = "Wprowadzony kod jest błędny bądź został już wykorzystany";
+                        useCode = false;
+                        code = '';
+                    }
+                }
+            })
+            .fail(function() {
+                concole.log( "error" );
+            });
+        }
+    }
+    function checkPacketCode(name){
+        event.preventDefault();
+        code = document.getElementById(name).value;
+        let type = document.getElementById('LessonTypePacket'+ScreenType).value;
+        console.log('packet:'+packetAmount);
+        // alert(code);
+        if(!useCode){
+            useCode = true;
+            $.ajax({
+                type: "POST",
+            url: '../checkPacketCode',
+            data: {
+                code: code,
+                _token: "{{ csrf_token() }}",
+                type: type,
+                amount: packetAmount,
+            },
+            })
+            .done(function( data) {
+                if(data != 0){
+                    console.log(data);
+                    znizka=data.amount; 
+                    znizkaTyp=data.type;
+                    PriceCheckPacket()
+                }
+                else{
+                        var elements2 = document.getElementsByClassName("KodText3");
+                    for (var i = 0; i < elements2.length; i++) {
+                        var element = elements2[i];
+                        element.innerText = "Wprowadzony kod jest błędny bądź został już wykorzystany";
+                        useCode = false;
+                        code = '';
+                    }
+                }
+            })
+            .fail(function() {
+                concole.log( "error" );
+            });
+        }
     }
     function checkLessonAmount(type,priceType,cert){
         $.ajax({

@@ -56,33 +56,12 @@ class NewsletterController extends Controller
                     ->where('packet_amount',$request->amount)
                     ->first();
         if($code){
-            if($code->type == '%'){
-                // dd($code->amount);
-                $wynik = $request->amount - ($request->amount * ($code->amount/100));
-                $code->use_date =  Carbon::now();
-                $code->save();
-                return $wynik;
-            }
-            else
-            {
-                dd('wrong?');
-            }
-          
+            return $code;
         }
         else{
-              return '';
+              return 0;
         }
-        // else{
-        //     $code2 = Code::create([
-        //         'code' => $request->code,
-        //         'email' => Auth::user()->email,
-        //         'lesson_type' => 2,
-        //         'amount' => 1,
-        //         'type' => 'P',
-        //         'use_date' => Carbon::now()
-        //     ]);
-        //     return 1;
-        // }
+
        
     }
     public function signOff(Request $request){

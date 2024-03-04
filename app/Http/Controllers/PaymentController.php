@@ -313,6 +313,8 @@ class PaymentController extends Controller
             'typeA' => $request->typeA,
             'certyficate' => $request->certyficate,
             'duration_id' => $request->duration,
+            'start' => $request->data,
+            'hour' => $request->godzina,
         ];
         $request->session()->put('data', $RequestTab);
         $link = 'https://secure.przelewy24.pl/';
@@ -345,6 +347,16 @@ class PaymentController extends Controller
         $tytul = $request->desc;
         if($suma_zamowienia == 0){
             $this->AddLessons(isset($request->LectorType) ? $request->LectorType : 1,$request->packet,$request->typeA,$request->certyficate);
+            $dane = [
+              'data'=>$request->data,
+              'godzina'=>$request->godzina,
+              'duration_id'=>$request->duration,
+              'jezyk'=>$request->langDesc,
+              'rodzaj'=>$request->typeA,
+              'lectorId'=>$request->lectorId,
+            ];
+            $request2 = new Request($dane);
+            $this->useLessons($request2);
             return view('thankYou');
             exit;
         }
@@ -368,8 +380,11 @@ class PaymentController extends Controller
             $details->session_id = $session_id;
             $details->payment_id = $payment->id;
             $details->duration_id = $request->duration;
+            $details->start = $request->data;
+            $details->hour = $request->godzina;
             $details->user_id = Auth::user()->id;
         $details->save();
+
         return new RedirectResponse($link.'trnRequest/'.$token);
 
     }
@@ -696,6 +711,16 @@ class PaymentController extends Controller
                     $bank->certificat = $data['certyficate'];
                     $bank->save();
             }
+            $dane=[
+                'data'=>$data['start'],
+                'godzina'=>$data['hour'],
+                'duration_id'=>$data['duration_id'],
+                'jezyk'=>$language_id,
+                'rodzaj'=>$data['typeA'],
+                'lectorId'=>$data['lectorId'],
+              ];
+              $request2 = new Request($dane);
+              $this->useLessons($request2);
           
         }
         $api = array();
@@ -922,6 +947,16 @@ class PaymentController extends Controller
                     $bank->certificat = $data['certyficate'];
                     $bank->save();
             }
+            $dane=[
+                'data'=>$data['start'],
+                'godzina'=>$data['hour'],
+                'duration_id'=>$data['duration_id'],
+                'jezyk'=>$language_id,
+                'rodzaj'=>$data['typeA'],
+                'lectorId'=>$data['lectorId'],
+              ];
+              $request2 = new Request($dane);
+              $this->useLessons($request2);
           
         }
         $api = array();
