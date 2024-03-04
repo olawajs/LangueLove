@@ -355,8 +355,8 @@ class PaymentController extends Controller
               'rodzaj'=>$request->typeA,
               'lectorId'=>$request->lectorId,
             ];
-            $request2 = new Request($dane);
-            $this->useLessons($request2);
+            $request = new Request($dane);
+            $this->useLessons($request);
             return view('thankYou');
             exit;
         }
@@ -719,8 +719,8 @@ class PaymentController extends Controller
                 'rodzaj'=>$data['typeA'],
                 'lectorId'=>$data['lectorId'],
               ];
-              $request2 = new Request($dane);
-              $this->useLessons($request2);
+              $request = new Request($dane);
+              $this->useLessons($request);
           
         }
         $api = array();
