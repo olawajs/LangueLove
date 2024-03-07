@@ -269,10 +269,10 @@ class PaymentController extends Controller
         $details->payment_id = $payment->id;
         $details->user_id = Auth::user()->id;
      $details->save();
-     $this->CreateFixedLessons($session_id);
+     $this->CreateFreeLessons($session_id);
         $mail = User::where('id',Auth::user()->id)->first();
         Mail::to($mail->email)->send(new ThankYou());
-
+        return view('thankYou');
         // return new RedirectResponse($link.'trnRequest/'.$token);
 
     }
@@ -981,9 +981,7 @@ class PaymentController extends Controller
                     'dzien' => Carbon::parse( $info->start)->locale('pl')->dayName,
                     'godzina' =>  Carbon::parse($info->start)->format('H:i'),
                    ]; 
-                //    dd($mailData);
-                //    dd($user->email);
-                //    Mail::to($user->email)->send(new ZapisNaZajeciaGrupowe($mailData));
+                   Mail::to($user->email)->send(new ZapisNaZajeciaGrupowe($mailData));
             }
 
             if($zajecia != 1){
@@ -1127,6 +1125,142 @@ class PaymentController extends Controller
             $payment->invoice = "ERROR: ".$result[1];
         }
         $payment->save();
+    }
+    public function CreateFreeLessons($id){
+        $data = PaymentDetails::where('session_id',$id)->first();
+        $userId =  $data['user_id'];
+        $user = User::where('id',$userId)->first();
+        $title = $data['title'];
+        if($data['typPlatnosci'] == 'LEKCJA'){
+            $start = $data['start'];
+            $hour = $data['hour'];
+            $duration_id = $data['duration_id'];
+            $language_id = $data['language_id'];
+            $type_id =$data['type_id'] ;
+            $lectorId = $data['lectorId'];
+            $ileFaktura = $data['ileFaktura'];
+            $cykliczne = $data['cykliczne'];
+            $cert = $data['cert'];
+            $ile = $data['ile'];
+            $zajecia = $data['zajecia'];
+            $priceG =$data['priceG'];
+
+            $l = Language::where('id',$language_id)->first();
+            $le = Lector::where('id',$lectorId)->first();
+            $type = $le->lector_type_id;
+            $lName = $l->name;
+            if($zajecia == 1){
+                $price = $priceG;
+                $kwota = $price;
+            }else{
+                $price = Price::where('type_id',$type_id)
+                            ->where('price_type_id',$type)
+                            ->where('duration_id',$duration_id)
+                            ->where('certification',$cert)
+                            ->first()
+                            ->price; 
+                            $kwota = $price*$ile;
+            }
+
+            $start2 =  date('Y-m-d H:i', strtotime($start.' '.$hour));
+            $dlugosc = LessonDuration::where('id',$duration_id)->first()->duration;
+            $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+            
+            if($zajecia != 1){
+                $lesson = new Lesson;
+                $lesson->type_id = $type_id;
+                $lesson->duration_id = $duration_id;
+                $lesson->amount_of_lessons = $ile;
+                if($type_id == 1){
+                    $studentow = 1;
+                    $desc = 'Lekcja indywidualna z języka '.$lName.'ego';
+                }
+                else{
+                    $studentow = 2;
+                    $desc = 'Lekcja w parze z języka '.$lName.'ego';
+                }
+                $lesson->amount_of_students = $studentow;
+                $lesson->price = $kwota;
+                $lesson->start = $start2;
+                $lesson->lector_id = $lectorId;
+                $lesson->language_id = $language_id;
+                $lesson->title = 'Zajęcia z '.$user->name.' '.$user->surname;
+                $lesson->status = 0;
+                $lesson->certificat = $cert;
+                $lesson->save();
+                $lessonId = $lesson->id;
+                $ileFaktura = $ile;
+                $lecMail = Lector::where('id', $lectorId)->first();
+                try {
+                    $mailData=[
+                     'lector' => $lecMail->name.' ['.$lecMail->email.']',
+                     'user' => $user->name.' '.$user->surname.' ['.$user->email.']',
+                     'date' => $lesson->start,
+                     'language' => 'Język '.$lName
+                    ]; 
+                    Mail::to('kontakt@languelove.pl')->send(new NewLessonInfo($mailData));
+                    // return redirect()->back()->with('success','Wiadomość przesłana poprawnie');
+                 } catch (\Throwable $th) {
+                    //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
+                 }
+                Mail::to($lecMail->email)->send(new AcceptTermin());
+            }else{
+                $lessonId =  $data['lessonId'];
+              
+                $info = CalendarEvent::where('lesson_id',$lessonId)->orderBy('start', 'desc')->first();
+                $lesson = Lesson::where('id', $lessonId)->first();
+                  $desc =  $data['title'];
+                $s = new Carbon($lesson->start);
+                $d = new Carbon($lesson->start);
+                $day = $d->dayOfWeek;
+                $mailData=[
+                    'nazwa' => $title,
+                    'start' => $s->format('Y-m-d'),
+                    'dzien' => Carbon::parse( $info->start)->locale('pl')->dayName,
+                    'godzina' =>  Carbon::parse($info->start)->format('H:i'),
+                   ]; 
+                   Mail::to($user->email)->send(new ZapisNaZajeciaGrupowe($mailData));
+            }
+
+            if($zajecia != 1){
+                for($i=0; $i<$ile; $i++){
+                    $event = new CalendarEvent;
+                    $event->start = $start2;
+                    $event->end = $end;
+                    $event->lector_id = $lectorId;
+                    $event->type = 3;
+                    $event->lesson_id =  $lessonId;
+                    $event->save();
+    
+    
+                    $calendar = new EventUsers;
+                    $calendar->calendar_id = $event->id;
+                    $calendar->user_id = $user->id;
+                    $calendar->comment = '';
+                    $calendar->status = 1;
+                    $calendar->lector_accept = 0;
+                    $calendar->student_accept = 1;
+                    $calendar->save();
+                    
+                    $start2 = date('Y-m-d H:i', strtotime($start2. ' + 1 week'));
+                    $end = date('Y-m-d H:i', strtotime($start2. ' + '.$dlugosc.' minutes'));
+                }
+            }else{
+                $events = CalendarEvent::where('lesson_id',$lessonId)->get();
+                foreach($events as $event){
+    
+                    $calendar = new EventUsers;
+                    $calendar->calendar_id = $event->id;
+                    $calendar->user_id = $user->id;
+                    $calendar->comment = '';
+                    $calendar->status = 3;
+                    $calendar->lector_accept = 0;
+                    $calendar->student_accept = 1;
+                    $calendar->save();
+                }
+                $eventId =  $data['calendarId'];
+            }
+        }
     }
     public static function getToken($kwota,$zamowienie,$session_id){
         
