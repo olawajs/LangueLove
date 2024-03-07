@@ -42,7 +42,7 @@ class LessonController extends Controller
         $languages = Language::whereIn('id',$languageT)->get();
         $calendarEvents = CalendarSetup::where('lector_id',$lesson->lector_id)->get(); // czy potrzebne teraz? tylko widok lektora? i indywidualne zajęcia?
        
-        if($lesson->type_id != 2){
+        if($lesson->type_id != 2 && $lesson->type_id != 3){
 
             if(Auth::check()){
                 $lessonsIndEu = LessonsBank::where('user_id',Auth::user()->id)->whereNull('use_date')->where('overdue_date','>=',Carbon::today())->where('type_id',1)->where('certificat',0)->where('priceType',1)->count();
@@ -88,12 +88,20 @@ class LessonController extends Controller
             ]);
               
         }else{
+            $usedLessons = $lesson->amount_of_students - EventUsers::whereIn('calendar_id',CalendarEvent::where('lesson_id',$lesson->id)->pluck('id')->toArray())->distinct('user_id')->pluck('user_id')->count();
+           if($usedLessons==0 || $lesson->start < Carbon::today()){
+            $a = 0;
+           }
+           else{
+            $a=1;
+           }
              return view('lesson',[
             'lesson' => $lesson,
             'durations' => $duratons,
             'lector' => $lector,
             'calendarLessons' => $calendarLessons,
-              'usedLessons'=>$lesson->amount_of_students - EventUsers::whereIn('calendar_id',CalendarEvent::where('lesson_id',$lesson->id)->pluck('id')->toArray())->distinct('user_id')->pluck('user_id')->count()
+            'usedLessons'=>$lesson->amount_of_students - EventUsers::whereIn('calendar_id',CalendarEvent::where('lesson_id',$lesson->id)->pluck('id')->toArray())->distinct('user_id')->pluck('user_id')->count(),
+            'czy' => $a
             ]);
         }
         

@@ -181,6 +181,101 @@ class PaymentController extends Controller
         return new RedirectResponse($link.'trnRequest/'.$token);
 
     }
+    public function  buyFreeLesson(Request $request){
+        
+     $RequestTab = [
+        'typPlatnosci' => 'LEKCJA',
+        'start' => $request->data,
+        'hour' => $request->godzina,
+        'duration_id' => $request->duration_id,
+        'language_id' => $request->jezyk,
+        'type_id' => $request->rodzaj,
+        'lectorId' => $request->lectorId,
+        'ileFaktura' => 1,
+        'ile' => isset($request->ile) ? $request->ile : 1,
+        'cert' => isset($request->cert) ? 1 : 0,
+        'zajecia' => 1,
+        'cykliczne' => isset($request->cykliczne) ? 1 : 0,
+        'priceG' => isset($request->price) ? $request->price : 0,
+        'lessonI' => $request->lessonI,
+        'title' => $request->title,
+        'calendarId' => $request->calendarId,
+        'lessonId' => $request->lessonId, 
+        'name' => $request->name,
+        'nip' => isset($request->nip) ? $request->nip : '',
+        'city' => $request->city,
+        'postcode' => $request->postcode,
+        'street' => $request->street,
+        ];
+        $request->session()->put('data', $RequestTab);
+       
+        $language_id = $request->jezyk;
+        $duration_id = $request->duration_id;
+        $cert = isset($request->cert) ? 1 : 0;
+        $zajecia =  1;
+        $priceG = 0;
+        $price = 0;
+        $ile = isset($request->ile) ? $request->ile : 1;
+        $type_id = $request->rodzaj;
+            $l = Language::where('id',$language_id)->first();
+            $le = Lector::where('id',$request->lectorId)->first();
+            $type = $le->lector_type_id;
+            // $type = $l->price_type;
+            $lName = $l->name;
+             $desc = 'Webinarium: '.$request->title; 
+    
+        $payment = new Payment;
+        $payment->price = $price;
+        $payment->description =  $desc;
+        $payment->id_language = $language_id;
+        $payment->id_user = Auth::user()->id;
+            $session_id = Session::getId().date('YmdHis');
+            // Session::put('payment_session', $session_id);
+            $request->session()->put('payment_session', $session_id);
+            
+        $payment->session_id = $session_id;
+        $payment->quantity = 1;
+        $payment->status =2;
+
+      $payment->save();
+        Session::put('payment_id',$payment->id);
+        $request->session()->put('payment_id', $payment->id);
+
+        $details = new PaymentDetails;
+        $details->typPlatnosci = 'LEKCJA';
+        $details->start = $request->data;
+        $details->hour = $request->godzina;
+        $details->duration_id = $request->duration_id;
+        $details->language_id = $request->jezyk;
+        $details->type_id = $request->rodzaj;
+        $details->lectorId = $request->lectorId;
+        $details->ileFaktura = 1;
+        $details->ile = isset($request->ile) ? $request->ile : 1;
+        $details->cert = isset($request->cert) ? 1 : 0;
+        $details->zajecia = isset($request->zajecia) ? 1 : 0;
+        $details->cykliczne = isset($request->cykliczne) ? 1 : 0;
+        $details->priceG = isset($request->price) ? $request->price : 0;
+        $details->lessonI = $request->lessonI;
+        $details->title = $desc;
+        $details->calendarId = $request->calendarId;
+        $details->lessonId = $request->lessonId;
+        $details->name = Auth::user()->name;
+        $details->nip = isset($request->nip) ? $request->nip : '';
+        $details->city = ' - ';
+        $details->postcode = ' - ';
+        $details->street = ' - ';
+        $details->P24token = '';
+        $details->session_id = $session_id;
+        $details->payment_id = $payment->id;
+        $details->user_id = Auth::user()->id;
+     $details->save();
+     $this->CreateFixedLessons($session_id);
+        $mail = User::where('id',Auth::user()->id)->first();
+        Mail::to($mail->email)->send(new ThankYou());
+
+        // return new RedirectResponse($link.'trnRequest/'.$token);
+
+    }
     public function  useLessons(Request $request){
         $start = $request->data;
         $hour = $request->godzina;
@@ -797,6 +892,7 @@ class PaymentController extends Controller
         $data = PaymentDetails::where('session_id',$id)->first();
         $userId =  $data['user_id'];
         $user = User::where('id',$userId)->first();
+        $title = $data['title'];
         if($data['typPlatnosci'] == 'LEKCJA'){
             $start = $data['start'];
             $hour = $data['hour'];
@@ -872,19 +968,22 @@ class PaymentController extends Controller
                 Mail::to($lecMail->email)->send(new AcceptTermin());
             }else{
                 $lessonId =  $data['lessonId'];
-                $desc =  $data['title'];
+              
                 $info = CalendarEvent::where('lesson_id',$lessonId)->orderBy('start', 'desc')->first();
                 $lesson = Lesson::where('id', $lessonId)->first();
+                  $desc =  $data['title'];
                 $s = new Carbon($lesson->start);
                 $d = new Carbon($lesson->start);
                 $day = $d->dayOfWeek;
                 $mailData=[
-                    'nazwa' => $desc,
+                    'nazwa' => $title,
                     'start' => $s->format('Y-m-d'),
                     'dzien' => Carbon::parse( $info->start)->locale('pl')->dayName,
                     'godzina' =>  Carbon::parse($info->start)->format('H:i'),
                    ]; 
-                   Mail::to($user->email)->send(new ZapisNaZajeciaGrupowe($mailData));
+                //    dd($mailData);
+                //    dd($user->email);
+                //    Mail::to($user->email)->send(new ZapisNaZajeciaGrupowe($mailData));
             }
 
             if($zajecia != 1){

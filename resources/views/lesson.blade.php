@@ -126,7 +126,29 @@
                     <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
                     <input type="button" class="btn btn-primary mb-3 close" id="buyButton" value="ANULUJ">
                 </form>
-                    <button class="btn btn-secondary SButton open" @if($usedLessons==0 || $lesson->start < \Carbon\Carbon::today()) disabled @endif>Zarezerwuj i zapłać</a>
+                <form class="floatForm" id="buyFreeForm" method='POST' action="{{ route('buyFreeLesson') }}">
+                @csrf
+                    <input type="hidden" name="duration_id" value="{{$lesson->duration_id}}">
+                    <input type="hidden" name="jezyk" value="{{$lesson->language_id}}">
+                    <input type="hidden" name="rodzaj" value="{{$lesson->type_id}}">
+                    <input type="hidden" name="lectorId" value="{{$lector->id}}">
+                    <input type="hidden" name="ile" value="{{$lesson->amount_of_lessons}}">
+                    <input type="hidden" name="zajecia" value="1">
+                    <input type="hidden" name="price" id="price" value="{{$lesson->price*$lesson->amount_of_lessons}}">
+                    <input type="hidden" name="lessonId" value="{{$lesson->id}}">
+                    <input type="hidden" name="title" value="{{$lesson->title}}">
+                    <input type="hidden" name="PromoCode" id="PromoCode" value="">
+                    <button class="btn btn-secondary  mb-3" id="buyButton" type="submit">ZAPŁAĆ TERAZ</button>
+                    <input type="button" class="btn btn-primary mb-3 close" id="buyButton" value="ANULUJ">
+                </form>
+                    <button class="btn btn-secondary SButton open" @if($czy == 0) disabled @endif >
+                        @if($lesson->price*$lesson->amount_of_lessons == 0)
+                            Zapisz się!
+                        @else
+                            Zarezerwuj i zapłać
+                        @endif
+                   
+                    </button>
             </div>
     
     </div>
@@ -137,6 +159,7 @@
 
 <script>
     let useCode = false;
+    let amount = '{{$lesson->price*$lesson->amount_of_lessons}}';
     $(document).ready(function () {
         
         $('.langInp').click(function() {
@@ -150,7 +173,12 @@
             if(!AuthUser){
                 window.location.href = "{{ route('login')}}";
             }else{
-                document.getElementById('buyForm').style.display="block";
+                if(amount !=0){
+                    document.getElementById('buyForm').style.display="block";
+                }else{
+                    document.getElementById('buyFreeForm').submit();
+                }
+                
             }
         });
         $('.typeInp').click(function() {

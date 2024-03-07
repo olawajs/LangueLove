@@ -10,6 +10,5 @@ Jeśli w międzyczasie pojawią się pytania, napisz do nas na kontakt@languelov
 Życzymy owocnej nauki! 😊 <br>
 Zespół LangueLove
 
-<!-- {{$mailData['nazwa']}} -->
 
 @endcomponent
