@@ -272,7 +272,9 @@ class PaymentController extends Controller
      $this->CreateFreeLessons($session_id);
         $mail = User::where('id',Auth::user()->id)->first();
         Mail::to($mail->email)->send(new ThankYou());
-        return view('thankYou');
+        return view('thankYou',[
+            'type'=>$request->rodzaj
+        ]);
         // return new RedirectResponse($link.'trnRequest/'.$token);
 
     }

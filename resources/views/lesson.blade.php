@@ -45,7 +45,7 @@
                        
                     </div> 
                     <div>
-                        <h5><b>Terminy zajęć: </b></h5>
+                        <h5><b>@if($lesson->type_id == 3) Termin webinaru: @else  Terminy zajęć: @endif </b></h5>
                         @foreach ($calendarLessons as $date)
                             <div class="SdateDiv">{{ \Carbon\Carbon::parse($date->start)->locale('pl')->dayName}} {{ \Carbon\Carbon::parse($date->start)->format('d.m')}} godz. {{ \Carbon\Carbon::parse($date->start)->format('H:i')}}</div>
                         @endforeach

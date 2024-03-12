@@ -148,7 +148,7 @@
                         <div class="piggySearch">
                            <img src="{{asset('images/svg/piggy.svg')}}"> {{$lesson->price * $lesson->amount_of_lessons}} pln
                         </div>
-                        <a class="LL-button LL-button-primary" href="{{ route('showLesson',$lesson->id) }}">Zobacz kurs</a>
+                        <a class="LL-button LL-button-primary" href="{{ route('showLesson',$lesson->id) }}">@if($lesson->type_id == 3) Zobacz webinar @else Zobacz kurs @endif</a>
                     </div>  
                 </div>
                 
@@ -322,7 +322,7 @@
                     <div class="piggySearch" style="width: 100%;">
                         <img src="{{asset('images/svg/piggy.svg')}}"> {{$lesson->price * $lesson->amount_of_lessons}} pln
                     </div>
-                    <a class="LL-button LL-button-primary" href="{{ route('showLesson',$lesson->id) }}">Zobacz kurs</a>
+                    <a class="LL-button LL-button-primary" href="{{ route('showLesson',$lesson->id) }}">@if($lesson->type_id == 3) Zobacz webinar @else Zobacz kurs @endif </a>
 
                 </div>
                 

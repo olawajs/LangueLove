@@ -2794,12 +2794,7 @@
                 form.appendChild(street);
                 
                 
-                if(dw >= ile.value){
-                    form.setAttribute('action',"{{ route('useLessons') }}");
-                    document.getElementById('FormDiv').appendChild(form);
-                    form.submit();
-                }
-                else{
+            
                     if(name.value == ''){
                         alert('Prosimy o wypełnienie pola imię');
                         document.getElementById('NameCykl'+ScreenType).focus();
@@ -2820,9 +2815,7 @@
                         document.getElementById('FormDiv').appendChild(form);
                         form.submit();
                     }
-                    
-                }
-
+       
       
     }
     function checkCode(name,T){
