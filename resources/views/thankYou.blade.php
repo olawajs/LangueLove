@@ -25,7 +25,7 @@
         <p>Dziękujemy za zapisz na nasz webinar! Już nie możemy się doczekać! </p>
       @else
       <p>Dziękujemy za zakup lekcji w naszej szkole! Już nie możemy się doczekać! </p>
-      @end
+      @endif
         <p>Terminy swoich zajęć możesz sprawdzić w kalendarzu na stronie swojego konta. Tam też znajdziesz linki do zajęć na Skype. Owocnej pracy! </p>
         <p>Zespół LangueLove 💜</p>
       </div>
