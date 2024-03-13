@@ -13,6 +13,7 @@ use App\Models\PriceType;
 use App\Models\LessonDuration;
 use App\Models\LessonType;
 use App\Models\LanguageLevel;
+use App\Models\Lesson;
 use App\Models\Price;
 use App\Models\DiscountPacket;
 use App\Models\CalendarEvent;
@@ -136,6 +137,7 @@ class AdministratorController extends Controller
                     'uczenMail' => $l->uEmail,
                 ];
             }
+            $web = Lesson::where('type_id',3)->where('active',1)->get();
 
             $packets[$l->id]['dataDo']=$l->overdue_date;
             $packets[$l->id]['terminyUzycia'][]=$l->use_date;
@@ -147,7 +149,22 @@ class AdministratorController extends Controller
             'payments'=> $payments,
             'users'=> $users,
             'packets'=> $packets,
+            'webinar'=> $web,
         ]);
+    }
+    public function getPeople(Request $request){
+        $id= $request->id;
+        $calendar =  DB::table('calendar_events')
+        ->join('event_users', 'event_users.calendar_id', '=', 'calendar_events.id')
+        ->join('users', 'users.id', '=', 'event_users.user_id')
+        ->select(
+            'users.name',
+            'users.email'
+            )
+        ->where('calendar_events.lesson_id',$id)
+        ->groupBy('email')->groupBy('name')
+        ->get();
+        return $calendar;
     }
     public function showLector(Request $request){
        

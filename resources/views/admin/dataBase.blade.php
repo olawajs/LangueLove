@@ -25,6 +25,9 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="packets-tab" data-bs-toggle="tab" data-bs-target="#packets-tab-pane" type="button" role="tab" aria-controls="packets-tab-pane" aria-selected="false">Pakiety</button>
   </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="webinar-tab" data-bs-toggle="tab" data-bs-target="#webinar-tab-pane" type="button" role="tab" aria-controls="webinar-tab-pane" aria-selected="false">Webinary</button>
+  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -160,7 +163,37 @@
             </table>
     </div>
   </div>
+  <div class="tab-pane fade" id="webinar-tab-pane" role="tabpanel" aria-labelledby="webinar-tab" tabindex="0">
+    <div class="CalDiv">
+        <h2 class="text-center">Webinary</h2>
+            <table id="webinar">
+                <thead>
+                    <th>Tytuł</th>
+                    <th>Data</th>
+                    <th>Link</th>
+                    <th>Zapisani</th>
+                </thead>
+                <tbody>
+                    @foreach($webinar as $n)
+                    <tr>
+                        <td>{{$n['title']}}</td>
+                        <td>{{$n['start']}}</td>
+                        <td>{{$n['skype']}}</td>
+                        <td>
+                            <button class="btn btn-black" onClick="showPeople({{$n['id']}})">Osoby zapisane</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+    </div>
+  </div>
 </div>
+
+</div>
+<div>
+    <div></div>
+    <div id="osoby"></div>
 
 </div>
 @endsection
@@ -189,6 +222,28 @@
         let table5 = $('#packets').DataTable({
             order: [[1, 'desc']]
         });
+        let table6 = $('#webinar').DataTable({
+            order: [[1, 'desc']]
+        });
     });
-
+function showPeople(id){
+    $.ajax({
+        type: "GET",
+        url: '../admin/getPeople',
+        data: {
+            id: id, 
+            },
+        })
+        .done(function(data) {
+            let html = '';
+            for (const element of data) {
+                html+=element.name+': '+element.email+'\n';
+            }
+            console.log(html);
+            alert(html);
+        })
+        .fail(function() {
+            alert( "error" );
+        });
+}
 </script>
