@@ -454,7 +454,9 @@ class PaymentController extends Controller
             ];
             $request = new Request($dane);
             $this->useLessons($request);
-            return view('thankYou');
+            return view('thankYou',[
+                'type'=>$request->typeA
+            ]);
             exit;
         }
         $token = $this->getToken($suma_zamowienia,$tytul,$session_id);
@@ -574,7 +576,9 @@ class PaymentController extends Controller
             $mail = User::where('id',$payment->id_user)->first();
             Mail::to($mail->email)->send(new ThankYou());
            
-            return view('thankYou');
+            // return view('thankYou',[
+            //     'type'=>$request->rodzaj
+            // ]);
         }else{
             $payment->status = 3;
             $payment->save();
@@ -659,8 +663,10 @@ class PaymentController extends Controller
                 //  return redirect()->back()->with('error','UPS...Coś poszło nie tak');
              }
            
-           
-            return view('thankYou');
+             $type = PaymentDetails::where('session_id',$session_id)->first();
+             return view('thankYou',[
+                'type'=>$type->type_id
+            ]);
         }else{
             $payment->status = 3;
             $payment->save();

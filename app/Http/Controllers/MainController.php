@@ -192,7 +192,7 @@ class MainController extends Controller
              $langs = Language::where('active',1)->get();
             $types = LessonType::where('active',1)->get();
             $lectors = Lector::where('id','!=',18)->where('active',1)->get();
-            $grupy = Lesson::where('type_id',2)->where('active',1)->orderBy('id','DESC')->take(4)->get();
+            $grupy = Lesson::where('active',1)->where('type_id',2)->orwhere('type_id',3)->orderBy('id','DESC')->take(4)->get();
             return view('test/home',[
                 'languages' => $langs,
                 'types' => $types,

@@ -224,7 +224,7 @@ nav{
         <div class="row justify-content-center AboutDiv" id="metody">
             <div>
                 <h3 class="smallHeadText">NIE PRZEGAP</h3>
-                <h2 class="bigHeadText" style="text-align: center;">Zajęcia grupowe</h2>
+                <h2 class="bigHeadText" style="text-align: center;">Zajęcia grupowe i webinary</h2>
             </div>
             <div class="AboutBoxes" style="justify-content: space-between;">
             @foreach($grupy as $f)
@@ -581,7 +581,7 @@ nav{
             <div class="row justify-content-center">
                 <div class="homeHeads">
                     <h3 class="smallHeadText">NIE PRZEGAP</h3>
-                    <h2 class="middleText" style="text-align: left !important;">Zajęcia grupowe</h2>
+                    <h2 class="middleText" style="text-align: left !important;">Zajęcia grupowe i webinary</h2>
                 </div>
                 
                 <div class="owl-carousel" id="carousel3">
