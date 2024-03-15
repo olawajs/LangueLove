@@ -40,8 +40,8 @@ Route::get('signOff', [App\Http\Controllers\NewsletterController::class, 'signOf
 Route::post('checkCode', [App\Http\Controllers\NewsletterController::class, 'checkCode'])->name('checkCode'); 
 Route::post('useCode', [App\Http\Controllers\NewsletterController::class, 'useCode'])->name('useCode'); 
 Route::post('checkPacketCode', [App\Http\Controllers\NewsletterController::class, 'checkPacketCode'])->name('checkPacketCode'); 
-Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
-Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
+// Route::get('/', [App\Http\Controllers\MainController::class, 'home']);
+// Route::get('/home', [App\Http\Controllers\MainController::class, 'home'])->name('home');
 Route::post('sendConsultation', [App\Http\Controllers\MainController::class, 'sendConsultationMail'])->name('sendConsultation'); 
 Route::post('sendCompany', [App\Http\Controllers\MainController::class, 'sendCompanyMail'])->name('sendCompany'); 
 Route::get('consultation', [App\Http\Controllers\MainController::class, 'showForm'])->name('consultation'); 

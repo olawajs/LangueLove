@@ -1333,6 +1333,7 @@ function closeModal(id){
   document.getElementById('container').style.filter = 'blur(0px)';
   // 
 }
+
 function changeType(e,id){
   let active = e.target.attributes.data.value;
     document.getElementById('B'+id).classList.remove('PriceTabActive');
@@ -1362,6 +1363,46 @@ function changeTypeM(e,id){
     }
 
     e.target.classList.add('PriceTabActive');
+}
+
+function check(e,type,ScreenType) {
+  let id ='';
+  let class1 = '';
+  let text = '';
+  if(type == 1){
+      id='lang0'+ScreenType;
+      class1 = 'langInp'+ScreenType;
+      text = 'langText'+ScreenType;
+  }
+  if(type == 2){
+      id='type0'+ScreenType;
+      class1 = 'typeInp'+ScreenType;
+      text = 'typeText'+ScreenType;
+  }
+  
+  let textSpan = document.getElementById(text);
+  if(e.target.value == '0'){
+      var anchors = document.getElementsByClassName(class1);
+      for(var i = 0; i < anchors.length; i++) {
+          var anchor = anchors[i];
+          anchor.checked = false;
+      }
+      e.target.checked = true;
+      textSpan.innerText = 'Dowolny';
+  }
+  else{
+      document.getElementById(id).checked = false;
+      if(textSpan.innerText == 'Dowolny'){
+          textSpan.innerText =  e.target.parentElement.innerText;
+      }else{
+          if(!textSpan.innerText.includes("i więcej")){
+              textSpan.innerText += ' i więcej';
+          }
+          
+      }
+         
+  }
+
 }
 
 // 

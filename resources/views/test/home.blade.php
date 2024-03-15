@@ -985,59 +985,23 @@ document.addEventListener('DOMContentLoaded', function () {
            
         });
 
-        $('.langInpD').click(function() {
-            check(event,1);
+               $('.langInpD').click(function() {
+            check(event,1,ScreenType);
         });
         $('.typeInpD').click(function() {
-            check(event,2);
+            check(event,2,ScreenType);
         });
         $('.langInpM').click(function() {
-            check(event,1);
+            check(event,1,ScreenType);
         });
         $('.typeInpM').click(function() {
-            check(event,2);
+            check(event,2,ScreenType);
         });
+})
+ 
 
-        function check(e,type) {
-            let id ='';
-            let class1 = '';
-            let text = '';
-            if(type == 1){
-                id='lang0'+ScreenType;
-                class1 = 'langInp'+ScreenType;
-                text = 'langText'+ScreenType;
-            }
-            if(type == 2){
-                id='type0'+ScreenType;
-                class1 = 'typeInp'+ScreenType;
-                text = 'typeText'+ScreenType;
-            }
-            console.log(text);
-            let textSpan = document.getElementById(text);
-            if(e.target.value == '0'){
-                var anchors = document.getElementsByClassName(class1);
-                for(var i = 0; i < anchors.length; i++) {
-                    var anchor = anchors[i];
-                    anchor.checked = false;
-                }
-                e.target.checked = true;
-                textSpan.innerText = 'Dowolny';
-            }
-            else{
-                document.getElementById(id).checked = false;
-                if(textSpan.innerText == 'Dowolny'){
-                    textSpan.innerText =  e.target.parentElement.innerText;
-                }else{
-                    if(!textSpan.innerText.includes("i więcej")){
-                        textSpan.innerText += ' i więcej';
-                    }
-                    
-                }
-                   
-            }
 
-        }
-    })
+    
     go();
     window.addEventListener('resize', go());
     function go(){

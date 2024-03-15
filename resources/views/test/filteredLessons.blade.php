@@ -545,6 +545,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
 
 <script>
+    let ScreenType = 'D';
 document.addEventListener('DOMContentLoaded', function () {
   const textContainers = document.querySelectorAll('.text-container');
 
@@ -562,61 +563,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-    $(document).ready(function () {
-        
-        $('.langInpD').click(function() {
-            check(event,1);
+$(document).ready(function () {
+    go();
+           $('.langInpD').click(function() {
+            check(event,1,ScreenType);
         });
         $('.typeInpD').click(function() {
-            check(event,2);
+            check(event,2,ScreenType);
         });
         $('.langInpM').click(function() {
-            check(event,1);
+            check(event,1,ScreenType);
         });
         $('.typeInpM').click(function() {
-            check(event,2);
+            check(event,2,ScreenType);
         });
 
-        function check(e,type) {
-            let id ='';
-            let class1 = '';
-            let text = '';
-            if(type == 1){
-                id='lang0'+ScreenType;
-                class1 = 'langInp'+ScreenType;
-                text = 'langText'+ScreenType;
-            }
-            if(type == 2){
-                id='type0'+ScreenType;
-                class1 = 'typeInp'+ScreenType;
-                text = 'typeText'+ScreenType;
-            }
-            console.log(text);
-            let textSpan = document.getElementById(text);
-            if(e.target.value == '0'){
-                var anchors = document.getElementsByClassName(class1);
-                for(var i = 0; i < anchors.length; i++) {
-                    var anchor = anchors[i];
-                    anchor.checked = false;
-                }
-                e.target.checked = true;
-                textSpan.innerText = 'Dowolny';
-            }
-            else{
-                document.getElementById(id).checked = false;
-                if(textSpan.innerText == 'Dowolny'){
-                    textSpan.innerText =  e.target.parentElement.innerText;
-                }else{
-                    if(!textSpan.innerText.includes("i więcej")){
-                        textSpan.innerText += ' i więcej';
-                    }
-                    
-                }
-                   
-            }
-
-        }
-    })
+});
+        
+ 
+       
     function OpenPriceTableId(e,id){
         // console.log(event.target.offsetTop)
         document.getElementById('PriceTable'+id).style.display = 'inline-flex';
@@ -631,7 +596,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('container').style.filter = 'blur(0px)';
     // 
     }
-    go();
+    
     window.addEventListener('resize', go());
     function go(){
         if(document.documentElement.clientWidth > 800){
