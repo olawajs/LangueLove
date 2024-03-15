@@ -985,16 +985,20 @@ document.addEventListener('DOMContentLoaded', function () {
            
         });
 
-               $('.langInpD').click(function() {
+        $('.langInpD').click(function() {
+            go();
             check(event,1,ScreenType);
         });
         $('.typeInpD').click(function() {
+            go();
             check(event,2,ScreenType);
         });
         $('.langInpM').click(function() {
+            go();
             check(event,1,ScreenType);
         });
         $('.typeInpM').click(function() {
+            go();
             check(event,2,ScreenType);
         });
 })
