@@ -130,15 +130,13 @@ line-height: 24px; /* 150% */
 
     <div id="section1" class="content">
         <div class="accordion-item">
-          <div class="accordion-header">Jak mogę zapisać się na kurs?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
+          <div class="accordion-header">Jak mogę zapisać się na zajęcia?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
-            <p>Na kurs możesz zapisać się zakładając konto na naszej stronie (możesz
+            <p>Na zajęcia możesz zapisać się zakładając konto na naszej stronie (możesz
               też wybrać logowanie przez Gmail), następnie wyszukaj zajęcia w naszej
               wyszukiwarce na stronie głównej i zaznacz w kalendarzu odpowiadający
               Ci dzień i godzinę. Nie zapomnij o wyborze pomiędzy pojedynczymi
-              zajęciami, a zajęciami cyklicznymi. Możesz też wykupić pakiet - dzięki
-              temu masz pewność, że dany termin będzie zarezerwowany wyłącznie
-              dla Ciebie.
+              zajęciami, pakietem a zajęciami cyklicznymi.
               Jeśli masz problem z dokonaniem zapisu przez naszą stronę internetową,
               możesz się z nami skontaktować pod numerem telefonu <b>+48 516632063</b>
               lub wysłać nam wiadomość na adres e-mail: <b>kontakt@languelove.pl</b></p>
@@ -151,8 +149,8 @@ line-height: 24px; /* 150% */
             <p>Na zajęcia indywidualne i w parach możesz zapisać się w dowolnej chwili i
               najpóźniej na 12 godzin przed ich rozpoczęciem. Twój zapis zostanie
               następnie zaakceptowany przez lektora. Jeśli chodzi o zajęcia grupowe -
-              ostatni dzień zapisów jest ustalany dla każdego kursu indywidualnie, taką
-              informację znajdziesz w opisie grupy, którą wybrałeś.</p>
+              zapisy są możliwe dopóki są dostępne miejsca w grupie. 
+              Informacje o dostępności miejsc znajdują się w opisie kursu.</p>
           </div>
         </div>
 
@@ -160,8 +158,8 @@ line-height: 24px; /* 150% */
           <div class="accordion-header">Ile osób jest w grupie?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
             <p>Prowadzimy <b>tylko</b> małe grupy. Liczą one od 4 do 6 osób. Warunkiem
-              utworzenia grupy jest zebranie odpowiedniej liczby Kursantów. Jeśli
-              grupa się nie utworzy, będziesz mógł wybrać pomiędzy zwrotem
+              utworzenia grupy jest zebranie minimalnej liczby Kursantów. Jeśli
+              grupa się nie utworzy, będzie możliwość wybrania pomiędzy zwrotem
               pieniędzy, a wykorzystaniem środków na inny kurs lub zajęcia
               indywidualne.</p>
           </div>
@@ -170,12 +168,12 @@ line-height: 24px; /* 150% */
          <div class="accordion-item">
           <div class="accordion-header">Kiedy otrzymam informacje o starcie kursu?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
-            <p>E-mail o starcie kursu grupowe dotrze do Ciebie nie później niż 3 dni
+            <p>E-mail o starcie kursu grupowego dotrze do Ciebie nie później niż 3 dni
               przed jego planowaną datą rozpoczęcia. Pamiętaj, że może trafić do
               folderu OFERTY lub SPAM. Prosimy więc o dokładne sprawdzenie tych
               folderów. Jeśli jednak nie otrzymałaś/eś od nas maila, skontaktuj się z
               nami pod adresem: <b>kontakt@languelove.pl</b>. Natomiast o dacie
-              rozpoczęcia zajęć indywidualnych lub grupowych decydujesz ty.
+              rozpoczęcia zajęć indywidualnych decydujesz ty.
               Skorzystaj z kalendarza i wybierz godzinę, która Ci najbardziej odpowiada.</p>
           </div>
         </div>
@@ -186,9 +184,9 @@ line-height: 24px; /* 150% */
             <p>Metody nauczania są dobierane indywidualnie do każdego Kursanta i
               zależą od poziomu języka,, poruszanych zagadnień oraz osobistych
               preferencji i predyspozycji Kursanta.</p>
-            <p>Najczęściej na naszych zajęciach będziesz miał do czynienia z
+            <p>Najczęściej na naszych zajęciach będziesz miał/a do czynienia z
               połączeniem metody naturalnej, komunikatywnej oraz zanurzeniem w
-              języku. Lektorzy (jeśli poziom na to pozwoli) komunikują się z tobą w
+              języku. Lektorzy (jeśli poziom na to pozwala) komunikują się z tobą w
               języku docelowym i angażują w rozmowę. Nie zabraknie również
               elementów kulturowych dotyczących kraju/krajów, w których używa się
               języka, którego się uczysz oraz materiałów multimedialnych, które
@@ -213,7 +211,8 @@ line-height: 24px; /* 150% */
          <div class="accordion-item">
           <div class="accordion-header">Ile trwają zajęcia?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
-            <p>Możesz wybrać czas trwania zajęć indywidualnych i w parze: 60 lub 90 minut. Zajęcia grupowe zawsze trwają 90 minut.</p>
+            <p>Możesz wybrać czas trwania zajęć indywidualnych i w parze: 55 lub 85 minut. 
+            Informacje o długości zajęć grupowych znajdują się w opisie konkretnego kursu grupowego.</p>
           </div>
         </div>
 
@@ -221,9 +220,8 @@ line-height: 24px; /* 150% */
           <div class="accordion-header">Czy zajęcia mogą odbywać się stacjonarnie?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
             <p>Nie, prowadzimy tylko zajęcia online. Dzięki temu oszczędzasz czas, a
-              nauka jest przyjemniejsza dzięki wykorzystaniu nowych technologii. Za
-              pomocą zajęć online umożliwiamy również kontakt z native speakerami z
-              różnych krajów.</p>
+              nauka jest przyjemniejsza dzięki wykorzystaniu nowych technologii. 
+              Dzięki zajęciom online masz również możliwość kontaktu z native speakerami z różnych krajów.</p>
           </div>
         </div>
 
@@ -231,8 +229,7 @@ line-height: 24px; /* 150% */
           <div class="accordion-header">Czy oferujecie zajęcia z native speakerem?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
             <p>Tak, w naszej ofercie znajdziesz zarówno zajęcia z lektorami
-              polskojęzycznymi jak i native speakerami. Poznaj bliżej naszych lektorów
-              w sekcji “lektorzy”..</p>
+              polskojęzycznymi jak i native speakerami.</p>
           </div>
         </div>
 
@@ -249,9 +246,7 @@ line-height: 24px; /* 150% */
          <div class="accordion-item">
           <div class="accordion-header">Czy mogę zmienić lektora jeśli wykupiłam/em pakiet?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
-            <p>Tak, pakiet wykupuje się na liczbę zajęć i możesz wykorzystać go również
-              na różne języki. Pamiętaj jednak, że w przypadku chęci wykorzystania
-              pakietu u różnych lektorów należy zaznaczyć opcję “pojedyncze zajęcia”.</p>
+            <p>Zakupiony pakiet będzie przypisany do konkretnego lektora.</p>
           </div>
         </div>
 
@@ -259,7 +254,7 @@ line-height: 24px; /* 150% */
           <div class="accordion-header">W jakich godzinach prowadzone są zajęcia?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
             <p>Zajęcia prowadzimy od poniedziałku do piątku od 7:00 do 22:00.
-              Niektórzy lektorzy są dostępni również w soboty i niedziele.</p>
+              Niektórzy lektorzy są dostępni również w soboty.</p>
           </div>
         </div>
 
@@ -277,9 +272,8 @@ line-height: 24px; /* 150% */
         <div class="accordion-item">
           <div class="accordion-header">Chciał(a)bym uczestniczyć w zajęciach grupowych, ale nie wiem jaki jest mój poziom.<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
-            <p>Zachęcamy Cię do wypełnienia formularzu kontaktowego, aby umówić
-              się na darmową konsultację z lektorem, na którym sprawdzi on Twój
-              poziom i porozmawia o Twoich potrzebach językowych.</p>
+            <p>Zachęcamy do umówienia się na darmową konsultację poprzez link: https://languelove.pl/consultation 
+              <br>Dostaniesz mailowo odpowiedź zwrotną z propozycją terminów konsultacji.</p>
           </div>
         </div>
 
@@ -294,14 +288,6 @@ line-height: 24px; /* 150% */
             <p>W przypadku zajęć w parach, płatność wykonuje jedna osoba z pary.
               Osoba ta jest odpowiedzialna za uregulowanie opłaty za zajęcia oraz za
               ustalanie terminu zajęć.</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header">Lektor nie ma wolnych terminów, a ja wykupiłam/em pakiet. Co mam zrobić?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
-          <div class="accordion-content">
-            <p>Spokojnie, w ramach pakietu możesz umówić się na zajęcia do innego
-              lektora lub wykorzystać je na naukę innego języka (z innym lektorem).</p>
           </div>
         </div>
 
@@ -321,14 +307,18 @@ line-height: 24px; /* 150% */
           <div class="accordion-content">
             <p>Tak. Informacje na temat tego, który lektor może Cię nauczyć danego
                 języka specjalistycznego znajdziesz przy opisie każdego lektora.</p>
+                <p> Możesz również umówić się na darmową konsultację, by porozmawiać 
+                  o szczegółach zajęć: https://languelove.pl/consultation
+                </p>
           </div>
         </div>
 
         <div class="accordion-item">
           <div class="accordion-header">Czy na koniec kursu otrzymam certyfikat?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
-            <p>Jeśli chcesz otrzymać certyfikat ukończenia kursu, możesz się do nas
-              zgłosić na <b>kontakt@languelove.pl</b></p>
+            <p>Tak, po każdym kursie grupowym otrzymasz certyfikat. 
+              Jeśli chcesz otrzymać certyfikat ukończenia kursu indywidualnego
+               możesz napisać do nas maila na adres <b>kontakt@languelove.pl</b></p>
           </div>
         </div>
 
@@ -352,18 +342,16 @@ line-height: 24px; /* 150% */
           <div class="accordion-content">
             <p>Tak, oczywiście! Jeśli nie wiesz, jaki jest Twój poziom, możesz skorzystać z
                 bezpłatnej konsultacji. W naszej szkole języków obcych online oferujemy
-                bezpłatną konsultację dla wszystkich naszych potencjalnych uczniów. W
-                trakcie konsultacji będziesz miał/a okazję porozmawiać z jednym z
+                bezpłatną konsultację dla wszystkich naszych przyszłych uczniów.
+                Na konsultację możesz umówić się tutaj: https://languelove.pl/consultation </p>
+                <p>W trakcie konsultacji będziesz miał/a okazję porozmawiać z jednym z
                 naszych lektorów i omówić swoje cele, potrzeby i oczekiwania dotyczące
                 nauki języka obcego. Lektor odpowie na wszystkie Twoje pytania i
                 pomoże Ci wybrać odpowiedni program nauczania.</p>
             <p>Konsultacja jest również idealną okazją, aby poznać naszą metodę
               nauczania, platformę Skype i lektora, zanim zdecydujesz się zakupić nasz
-              kurs. Możesz zapisać się na bezpłatną konsultację poprzez formularz
-              kontaktowy na naszej stronie internetowej lub wysłać do nas e-maila.
-              Skontaktujemy się z Tobą, aby umówić się na dogodny termin konsultacji
-              online. Zapraszamy do skorzystania z bezpłatnej konsultacji i rozpoczęcia
-              swojej przygody z nauką języka obcego w naszej szkole!</p>
+              kurs.Zapraszamy do skorzystania z bezpłatnej konsultacji 
+              i rozpoczęcia swojej przygody z nauką języka obcego w naszej szkole!</p>
           </div>
         </div>
 
@@ -391,20 +379,11 @@ line-height: 24px; /* 150% */
         <div class="accordion-item">
           <div class="accordion-header">Jak mogę wykorzystać voucher?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
           <div class="accordion-content">
-            <p>Jeśli posiadasz voucher na kurs językowy, możesz zrealizować go poprzez
-              kontakt mailowy z naszą szkołą języków obcych online. Prześlij nam na
-              adres e-mailowy, który znajdziesz na voucherze, informacje dotyczące
-              Twojego imienia i nazwiska oraz daty ważności vouchera.</p>
-            <p>Skontaktujemy się z Tobą i przedstawimy Ci kursy dostępne w ramach
-              vouchera, a także zaproponujemy dogodny termin zajęć. W przypadku
-              wyboru kursu indywidualnego, będziemy potrzebować dodatkowych
-              informacji na temat Twojego poziomu językowego i celów nauki, aby
-              dopasować program nauczania do Twoich potrzeb. Po potwierdzeniu
-              wyboru kursu i terminów zajęć, przekażemy Ci wszelkie niezbędne
-              informacje dotyczące dostępu do platformy Skype oraz instrukcje
-              dotyczące realizacji vouchera. Zapewniamy pełne wsparcie w realizacji
-              vouchera i jesteśmy dostępne, aby odpowiedzieć na wszystkie Twoje
-              pytania i pomóc Ci w rozpoczęciu kursu językowego.</p>
+            <p>.Załóż konto na naszej stronie, następnie wybierz lektora,
+               kliknij w termin w kalendarzu i wybierz zajęcia na które opiewa Twój pakiet.
+                Zobaczysz miejsce do wpisania kodu.
+               Na voucherze znajdziesz Twój indywidualny kod, wpisz go a następnie zajęcia zostaną dodane do Twojego konta Kursanta.
+               </p>
           </div>
         </div>
     </div>
@@ -413,8 +392,8 @@ line-height: 24px; /* 150% */
       <div class="accordion-item">
         <div class="accordion-header">Ile kosztuje kurs?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
         <div class="accordion-content">
-          <p>Ceny za zajęcia w naszej szkole znajdują się w sekcji “Cennik”. Ceny te
-              zależą od rodzaju zajęć oraz ilości godzin.</p>
+          <p>Cennik zajęć indywidualnych i w parach znajdziesz na podstronie każdego lektora. 
+            Natomiast cena kursów grupowych jest dostępna w opisie każdego kursu.</p>
         </div>
       </div>
 
@@ -439,10 +418,10 @@ line-height: 24px; /* 150% */
       <div class="accordion-item">
         <div class="accordion-header">Czy mogę zapłacić za lekcje w innej walucie niż złotówki?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
         <div class="accordion-content">
-          <p>Tak. Jeśli chcesz zapłacić za kurs w innej walucie, skontaktuj się z nami
-            pod numerem telefonu +48 516632063 lub wysłać nam wiadomość na
-            adres e-mail: <b>kontakt@languelove.pl</b>, poinformujemy Cię jak dokonać
-            opłaty w innej walucie.</p>
+          <p>Tak. Możliwa jest płatność w euro. 
+            Jeśli chcesz zapłacić za kurs w euro, skontaktuj się z nami
+            pod numerem telefonu +48 516632063 lub wysślij nam wiadomość na
+            adres e-mail: <b>kontakt@languelove.pl</b>, poinformujemy Cię jak dokonać opłaty.</p>
         </div>
       </div>
 
@@ -459,7 +438,8 @@ line-height: 24px; /* 150% */
         <div class="accordion-header">Jakie formy płatności akceptujecie?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
         <div class="accordion-content">
           <p>Płatności są realizowane za pomocą systemu Przelewy24. Będziesz mógł
-            wybrać pomiędzy płatnością BLIK a przelewem online z Twojego banku.</p>
+            wybrać pomiędzy płatnością BLIK a przelewem online z Twojego banku.
+            Możliwy jest również tradycyjny przelew.</p>
         </div>
       </div>
 
@@ -467,7 +447,8 @@ line-height: 24px; /* 150% */
         <div class="accordion-header">Jak mogę uzyskać zniżkę na naukę?<span class="icon"><img src="{{asset('images/svg/plus.svg')}}"></span></div>
         <div class="accordion-content">
           <p>Śledź nas na Instagramie lub Facebooku lub zapisz się poniżej do naszego
-            Newslettera, aby dostawać informacje o zniżkach.</p>
+            Newslettera, aby dostawać informacje o zniżkach.
+            Po zapisaniu się do newslettera dostaniesz jednorazowy kod zniżkowy 10% na kurs grupowy.</p>
         </div>
       </div>
 
@@ -500,7 +481,7 @@ line-height: 24px; /* 150% */
           <p>W przypadku zajęć grupowych i w parach otrzymasz nagranie lekcji (za
               zgodą grupy) lub wiadomość e-mail od lektorki, w której opisze Ci
               wszystko, co zostało zrobione na zajęciach i wyśle materiały. W przypadku
-              zajęć indywidualnych- pamiętaj o możliwości odwołania zajęć do 24
+              zajęć indywidualnych i w parze pamiętaj o możliwości odwołania zajęć do 24
               godzin przed ich rozpoczęciem.</p>
         </div>
       </div>
@@ -603,7 +584,7 @@ line-height: 24px; /* 150% */
         <div class="accordion-content">
           <p>Nie jest to konieczne, ale, zalecamy używanie słuchawek podczas lekcji
             online. Używanie słuchawek pozwoli na wyraźne i klarowne słyszenie
-            nauczyciela oraz innych uczestników lekcji, a jednocześnie zminimalizuje
+            nauczyciela oraz innych uczestników lekcji, a jednocześnie minimalizuje
             hałas otoczenia, który może wpływać na jakość dźwięku. Dodatkowo,
             używanie słuchawek pozwoli na uniknięcie zakłóceń dźwiękowych z
             innych urządzeń w pobliżu, które mogą wpłynąć na jakość dźwięku
@@ -618,7 +599,7 @@ line-height: 24px; /* 150% */
           <p>Aby zapewnić odpowiednią jakość dźwięku podczas lekcji online, warto wziąć pod uwagę kilka czynników:</p>
           <p>1. Użyj słuchawek - używanie słuchawek pozwoli na wyraźne i
               klarowne słyszenie nauczyciela oraz innych uczestników lekcji, a
-              jednocześnie zminimalizuje hałas otoczenia, który może wpływać
+              jednocześnie minimalizuje hałas otoczenia, który może wpływać
               na jakość dźwięku.</p>
           <p>2. Wybierz ciche miejsce - wybierz ciche miejsce do przeprowadzenia
               lekcji online, aby zminimalizować hałas otoczenia. Upewnij się, że w
