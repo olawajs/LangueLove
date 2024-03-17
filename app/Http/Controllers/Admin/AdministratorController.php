@@ -34,13 +34,13 @@ class AdministratorController extends Controller
 {
    
     public function GenerateCodes(Request $request){
-        for($i=1; $i<120; $i++){
+        for($i=1; $i<=30; $i++){
             $result = app('App\Http\Controllers\NewsletterController')->generateCode();
             $code = Code::create([
                 'code' => $result,
                 'email' => '',
                 'lesson_type' => 2,
-                'amount' => 20,
+                'amount' => 10,
                 'type' => '%'
             ]);
             echo $result.'<br>';  

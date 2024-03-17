@@ -119,11 +119,11 @@
                         </div>
                         <div>
                            <b>Czas trwania: </b>    
-                            @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->take(1)->get() as $date)
+                            @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('id', 'asc')->take(1)->get() as $date)
                                 {{ \Carbon\Carbon::parse($date->start)->format('d.m')}}
                             @endforeach 
                              - 
-                             @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'asc')->take(1)->get() as $date)
+                             @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('id', 'desc')->take(1)->get() as $date)
                                {{ \Carbon\Carbon::parse($date->start)->format('d.m')}}
                             @endforeach 
                         </div>
@@ -293,11 +293,11 @@
                     <div>
                         <div>
                             <b>Czas trwania: </b>    
-                                @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'asc')->take(1)->get() as $date)
+                                @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('id', 'asc')->take(1)->get() as $date)
                                     {{ \Carbon\Carbon::parse($date->start)->format('d.m')}}
                                 @endforeach 
                                 - 
-                                @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('start', 'desc')->take(1)->get() as $date)
+                                @foreach (App\Models\CalendarEvent::where('lesson_id',$lesson->id)->orderBy('id', 'desc')->take(1)->get() as $date)
                                 {{ \Carbon\Carbon::parse($date->start)->format('d.m')}}
                                 @endforeach 
                         </div>
