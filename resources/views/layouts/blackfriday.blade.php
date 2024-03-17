@@ -134,7 +134,7 @@
         <div class="komB">
             <div style="font-size: 26px" class="KomHead">
             Zapisz się do naszego newslettera, 
-aby             otrzymać <span class="pink">10% zniżki</span> na Twoje pierwsze zajęcia grupowe! Zapisy ruszają już <span class="pink">17.03</span>!</span>
+aby             otrzymać <span class="pink">10% zniżki</span> na Twoje pierwsze zajęcia grupowe! Zapisy już ruszyły!</span>
             </div>
             <div style="font-size: 16px;">
                 Dla subskrybentów przygotowaliśmy także <span class="violet">darmowe porady językowe i priorytetowy dostęp</span> do webinarów!

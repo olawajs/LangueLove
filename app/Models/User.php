@@ -24,7 +24,8 @@ class User extends Authenticatable
         'google_id',
         'type',
         'active',
-        'confirmed'
+        'confirmed',
+        'img'
     ];
 
     /**

@@ -35,6 +35,7 @@ Route::get('/thankYou', function () {
 Route::post('/payment/useLessons', [App\Http\Controllers\PaymentController::class, 'useLessons'])->name('useLessons'); 
 Route::get('myCalendar', [App\Http\Controllers\MainController::class, 'myCalendar'])->name('myCalendar'); 
 Route::get('myAccount', [App\Http\Controllers\MainController::class, 'myAccount'])->name('myAccount'); 
+
 Route::get('signIn', [App\Http\Controllers\NewsletterController::class, 'signIn'])->name('signIn'); 
 Route::get('signOff', [App\Http\Controllers\NewsletterController::class, 'signOff'])->name('signOff'); 
 Route::post('checkCode', [App\Http\Controllers\NewsletterController::class, 'checkCode'])->name('checkCode'); 
@@ -144,6 +145,9 @@ Route::get('/nav', function () {
     return view('layouts/nav');
 })->name('nav');
 
+
+Route::get('myProfile', [App\Http\Controllers\MainController::class, 'myProfile'])->name('myProfile'); 
+Route::post('savePhoto', [App\Http\Controllers\MainController::class, 'savePhoto'])->name('savePhoto'); 
 
 
 //czasowe maile

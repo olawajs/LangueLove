@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('google_id')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('img')->nullable();
             $table->integer('user_type')->default(2);
             $table->boolean('active')->default(1);
             $table->boolean('newsletter')->default(0);

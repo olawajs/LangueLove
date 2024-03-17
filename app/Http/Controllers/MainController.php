@@ -73,6 +73,32 @@ class MainController extends Controller
         ]);
     }
 
+    public function myProfile(){
+        $user = User::where('id', Auth::user()->id);
+        $newsletter = Newsletter::where('email',Auth::user()->email)->count();
+        return view('myProfile',[
+            'user'=>$user,
+            'newsletter'=>$newsletter
+        ]);
+    }
+    public function savePhoto(Request $request){
+        if($request->file('file')->getSize()>5000000){
+            return $request->file('file')->getSize();
+        }
+        else if($request->file('file')->extension() != 'jpg' && $request->file('file')->extension() != 'png' ){
+            return -1;
+        }
+        else{
+             $imageName = Auth::user()->name.'_'.Auth::user()->id.'.'.$request->file('file')->extension(); 
+            $user = User::where('id', Auth::user()->id)->first();
+            $image = $request->file('file')->move('images/users/', $imageName);
+            $user->img = $image;
+            $user->save();
+            return $imageName;
+        }
+       
+    }
+
     public function sendConsultationMail(Request $request)
     {
         try {
@@ -192,7 +218,7 @@ class MainController extends Controller
              $langs = Language::where('active',1)->get();
             $types = LessonType::where('active',1)->get();
             $lectors = Lector::where('id','!=',18)->where('active',1)->get();
-            $grupy = Lesson::where('active',1)->where('type_id',2)->orwhere('type_id',3)->orderBy('id','DESC')->take(4)->get();
+            $grupy = Lesson::where('active',1)->where('type_id',2)->orwhere('type_id',3)->where('active',1)->orderBy('id','DESC')->take(4)->get();
             return view('test/home',[
                 'languages' => $langs,
                 'types' => $types,
