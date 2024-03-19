@@ -74,7 +74,8 @@ class MainController extends Controller
     }
 
     public function myProfile(){
-        $user = User::where('id', Auth::user()->id);
+        $user = User::where('id', Auth::user()->id)->first();
+        // dd($user);
         $newsletter = Newsletter::where('email',Auth::user()->email)->count();
         return view('myProfile',[
             'user'=>$user,
@@ -397,10 +398,11 @@ class MainController extends Controller
         $langs = Language::where('active',1)->get();
         $types = LessonType::where('active',1)->get();
         $durations = LessonDuration::get();
+        $lectors = Lector::where('id',0);
 
         return view('test/filteredLessons',[
             'lessons' => $lessons,
-            'lectors' => [],
+            'lectors' => $lectors,
             'languages' => $langs,
             'types' => $types,
             'durations' => $durations,

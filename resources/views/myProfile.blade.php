@@ -58,10 +58,11 @@
           <form name="photo" id="imageUploadForm" enctype="multipart/form-data" class="input-div">
           @csrf
             <input class="input2" name="file" id="fileInput" type="file">
-            <img style="width: 125px; height: 125px" src="{{ asset('images/fileInput.svg') }}" id="fileDisplayArea" class="" alt="">
+            <img style="width: 125px; height: 125px" @if($user->img == '') src="{{ asset('images/fileInput.svg') }}" @else src="{{$user->img}}" @endif id="fileDisplayArea" class="" alt="">
+            <img style="position: absolute;  right: 0;  bottom: 0;" src="{{ asset('images/camera.svg') }}" class="" alt="">
           </form>
           <div style="width: 100%;  display: flex;  align-items: center;">
-            <b style="white-space: nowrap;">Imię i nazwisko: </b><input class="input" id="name" name="name">
+            <b style="white-space: nowrap;">Imię i nazwisko: </b><input class="input" id="name" name="name" value="{{$user->name}}">
           </div>
           <div>
             <button class="clearButton">Zmień</button>
@@ -162,7 +163,7 @@
               }else{
                 console.log("success");
                 console.log(data);
-                let link = `{{ asset('images/users/${data}') }}`;
+                let link = `images/users/${data}?`+ new Date().getTime();
                 $("#fileDisplayArea").attr("src",link);
               }
                 

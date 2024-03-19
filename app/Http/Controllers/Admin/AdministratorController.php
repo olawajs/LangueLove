@@ -525,7 +525,7 @@ class AdministratorController extends Controller
                     
         $lectors=[];
         
-        foreach($lessons as $lesson){
+        foreach($lessons as $lesson){ 
             // Maile do uczniów
             $godzina = new Carbon($lesson->start);
             $lektor = $lesson->Emaillektor;
