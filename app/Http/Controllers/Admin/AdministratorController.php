@@ -530,7 +530,7 @@ class AdministratorController extends Controller
             $godzina = new Carbon($lesson->start);
             $lektor = $lesson->Emaillektor;
             $lectors[$lektor][$godzina->format('H:i')]= $lesson->title;
-            if($lesson->type_id == 2){
+            if($lesson->type_id == 2 || $lesson->type_id == 3){
                 $s = $lesson->skype2;
             } else{
                 $s = $lesson->skype;
