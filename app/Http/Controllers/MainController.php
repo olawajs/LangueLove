@@ -99,6 +99,18 @@ class MainController extends Controller
         }
        
     }
+    public function changeName(Request $request){
+
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->name = $request->name;
+            if($user->save()){
+                return 1;
+            }else{
+                return 0;
+            }
+            
+       
+    }
 
     public function sendConsultationMail(Request $request)
     {

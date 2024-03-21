@@ -569,6 +569,7 @@ class PaymentController extends Controller
         ));
 
         $response2 = json_decode(curl_exec($curl2));
+        // dd($response2);
         if($response2->data->status == 'success'){
             $payment->status = 2;
             $payment->save();

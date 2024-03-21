@@ -518,11 +518,10 @@ class AdministratorController extends Controller
                         'lessons.skype as skype2',
                     )
                     ->whereBetween('calendar_events.start', [$start, $end])
+                    ->where('lessons.type_id','!=',3)
                     ->orderby('calendar_events.start')
                     ->get();
 
-        // dd($lessons);
-                    
         $lectors=[];
         
         foreach($lessons as $lesson){ 

@@ -18,7 +18,6 @@
   cursor: pointer !important;
 }
 
-
 </style>
 <div class="container">
   <div class="accordion row ">
@@ -65,7 +64,15 @@
             <b style="white-space: nowrap;">Imię i nazwisko: </b><input class="input" id="name" name="name" value="{{$user->name}}">
           </div>
           <div>
-            <button class="clearButton">Zmień</button>
+            <button class="clearButton" onClick="changeName()">Zmień</button>
+          </div>
+        </div>
+        <div class="bubbleCard">
+          <div>
+            <b>{{$user->email}}</b>
+          </div>
+          <div>
+
           </div>
         </div>
       </div>
@@ -128,7 +135,28 @@
     event.target.innerText = 'Zapisz się do newslettera';
     event.target.setAttribute('onclick','SignIn(event)');
   }
-
+  function changeName() {
+    $.ajax({
+            type:'GET',
+            url: '../changeName',
+            data: {
+                name: document.getElementById('name').value, 
+            },
+            success:function(data){
+                if(data == 0){
+                  alert('Wystąpił błąd, prosimy spróbować później');
+                }
+                else{
+                  console.log('zmieniono');
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+  }
+  
   function showContent(sectionId) {
       // Ukryj wszystkie sekcje
       var sections = document.querySelectorAll('.content');

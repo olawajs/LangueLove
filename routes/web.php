@@ -148,6 +148,7 @@ Route::get('/nav', function () {
 
 Route::get('myProfile', [App\Http\Controllers\MainController::class, 'myProfile'])->name('myProfile'); 
 Route::post('savePhoto', [App\Http\Controllers\MainController::class, 'savePhoto'])->name('savePhoto'); 
+Route::get('changeName', [App\Http\Controllers\MainController::class, 'changeName'])->name('changeName'); 
 
 
 //czasowe maile
