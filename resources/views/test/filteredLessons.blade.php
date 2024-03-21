@@ -207,7 +207,7 @@
 </div>
 
 <div id="container" class="mobile">
-    <div class="container" style = "position: sticky;  top: 0;">
+    <div class="container" style = "position: sticky; top: -140px;">
     <div class="row justify-content-center">
         <div class="filteredInputs" style="padding: 20px 16px;">
             <div class="SearchBox">

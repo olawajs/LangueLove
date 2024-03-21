@@ -13661,6 +13661,9 @@ line-height: 24px; /* 150% */
   .custom-radio2 label {
   font-size: 10px;
   }
+  .DivButtons{
+    gap: 16px;
+  }
 }
 
 /* // flags */
