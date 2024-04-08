@@ -29,10 +29,35 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LectorMailLessonNotification;
 use App\Mail\StudentMailLessonNotification;
+use App\Mail\Podsumowanie;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Http;
 
 class AdministratorController extends Controller
 {
-   
+    public function sendMail(){
+        
+        //   Mail::to('olawjs@gmail.com')->send(new Podsumowanie());
+        //   Mail::to('aleksandrawajs@interia.pl')->send(new Podsumowanie());
+
+        //   Mail::to('aleksandrawajs@interia.pl')->send(new Podsumowanie());
+        $response = Http::get('http://127.0.0.1:8000/email2');
+            $html = $response->body();
+            $dom = new \DOMDocument();
+            $dom->loadHTML($html);
+            
+            // Or using string manipulation
+            // Example: Extract title from HTML
+            preg_match("/<title>(.*?)<\/title>/i", $html, $matches);
+            $title = $matches[1];
+            $url = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://example.com&screenshot=true';
+$response = Http::get($url);
+$screenshot = $response->json()['lighthouseResult']['audits']['final-screenshot']['details']['data'];
+// Save the screenshot to a file
+// file_put_contents('screenshot.png', base64_decode($screenshot));
+dd($screenshot);
+
+   }
     public function GenerateCodes(Request $request){
         for($i=1; $i<=30; $i++){
             $result = app('App\Http\Controllers\NewsletterController')->generateCode();

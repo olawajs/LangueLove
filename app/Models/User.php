@@ -25,6 +25,7 @@ class User extends Authenticatable
         'type',
         'active',
         'confirmed',
+        'phone',
         'img'
     ];
 

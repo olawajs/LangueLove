@@ -17,7 +17,43 @@
   height: 100%;
   cursor: pointer !important;
 }
-
+.line{
+  border-bottom: 1px solid var(--langue-love-light-grey);
+  width: 100%;
+}
+.widthSpace{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.BubbleContainer{
+  display: flex;
+  flex-flow: column;
+  gap: 24px;
+}
+.PhoneInfo{
+  cursor: pointer;
+}
+#phoneInfoText{
+  color: var(--LangueLove-dark-grey, #969696);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.profilePic{
+  width: 125px; 
+  height: 125px;
+}
+@media only screen and (max-width: 800px) {
+  .col-8{
+    width:100%;
+  }
+  .profilePic{
+    width: 80px; 
+    height: 80px;
+  }
+}
 </style>
 <div class="container">
   <div class="accordion row ">
@@ -52,29 +88,73 @@
       <div id="section1" class="content col-8">1    </div>
       <div id="section2" class="content hidden col-8">2    </div>
       <div id="section3" class="content hidden col-8">3    </div>
-      <div id="section4" name="ustawienia" class="content hidden col-8">
-        <div class="bubbleCard">
-          <form name="photo" id="imageUploadForm" enctype="multipart/form-data" class="input-div">
-          @csrf
-            <input class="input2" name="file" id="fileInput" type="file">
-            <img style="width: 125px; height: 125px" @if($user->img == '') src="{{ asset('images/fileInput.svg') }}" @else src="{{$user->img}}" @endif id="fileDisplayArea" class="" alt="">
-            <img style="position: absolute;  right: 0;  bottom: 0;" src="{{ asset('images/camera.svg') }}" class="" alt="">
-          </form>
-          <div style="width: 100%;  display: flex;  align-items: center;">
-            <b style="white-space: nowrap;">Imię i nazwisko: </b><input class="input" id="name" name="name" value="{{$user->name}}">
-          </div>
-          <div>
-            <button class="clearButton" onClick="changeName()">Zmień</button>
-          </div>
-        </div>
-        <div class="bubbleCard">
-          <div>
-            <b>{{$user->email}}</b>
-          </div>
-          <div>
+      <div id="section4" name="ustawienia" class="content hidden col-8 ">
+        <div class="BubbleContainer">
 
+          <div class="bubbleCard">
+            <form name="photo" id="imageUploadForm" enctype="multipart/form-data" class="input-div">
+            @csrf
+              <input class="input2" name="file" id="fileInput" type="file">
+              <img  class="profilePic" @if($user->img == '') src="{{ asset('images/fileInput.svg') }}" @else src="{{$user->img}}" @endif id="fileDisplayArea" alt="">
+              <img style="position: absolute;  right: 0;  bottom: 0;" src="{{ asset('images/camera.svg') }}" class="" alt="">
+            </form>
+            <div style="width: 100%;  display: flex;  align-items: center;">
+              <b style="white-space: nowrap;">Imię i nazwisko: </b><input class="input" id="name" name="name" value="{{$user->name}}">
+            </div>
+            <div>
+              <button class="clearButton" onClick="changeName()">Zmień</button>
+            </div>
+          </div>
+
+          <div class="bubbleCard" style="flex-flow: column; align-items: flex-start;">
+            <div>
+              <b>{{$user->email}}</b>
+            </div>
+            <div class="line"></div>
+            <div class="widthSpace">
+              <div>
+                <b>@if($user->phone == '') brak numeru @else {{$user->phone}} @endif</b>
+                <div id="phoneInfoText"></div>
+              </div>
+              <div style="display: flex; gap: 16px">
+                <img style="" src="{{ asset('images/svg/info.svg') }}" class="PhoneInfo" onClick="showInfo()" alt="">
+                <button class="clearButton" onClick="">Zmień</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bubbleCard" style="flex-flow: column; align-items: flex-start;">
+            <div class="widthSpace">
+              <div>
+                <b>Języki, których się uczysz</b>
+              </div>
+              <div style="display: flex; gap: 16px">
+                <button class="clearButton" onClick="">Dodaj język</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bubbleCard" style="flex-flow: column; align-items: flex-start;">
+            <div>
+              <b>Twoje cele językowe</b>
+            </div>
+            <div style="width:100%; ">
+              <textarea style="height: 60px" class="input" placeholder="Opisz swoje cele językowe, dzięki czemu będziemy mogli jak najlepiej dostosować zajęcia do Twoich potrzeb"></textarea>
+            </div>
+          </div>
+
+          <div class="bubbleCard" style="flex-flow: column; align-items: flex-start;">
+            <div class="widthSpace">
+              <div>
+                <b>Usuń konto</b>
+              </div>
+              <div style="display: flex; gap: 16px">
+                <a class="LL-button LL-button-primary2"  href="{{ route('deleteAccount') }}">Usuń konto</a>
+              </div>
+            </div>
           </div>
         </div>
+        
       </div>
       <div id="section5" class="content hidden col-8">5    </div>
 
@@ -157,6 +237,9 @@
         });
   }
   
+  function showInfo() {
+    document.getElementById('phoneInfoText').innerHTML='Podanie Twojego nr telefonu jest opcjonalne. W każdej chwili możesz go usunąć. <br>Jeśli chcesz usunąć nr telefonu, kliknij w przycisk “Zmień”, a następnie w oknie, które się pojawi, kliknij “usuń mój nr telefonu”.';
+  }
   function showContent(sectionId) {
       // Ukryj wszystkie sekcje
       var sections = document.querySelectorAll('.content');

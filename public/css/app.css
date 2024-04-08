@@ -12988,6 +12988,9 @@ select option:disabled {
   .Desktop{
     display: none;
   }
+  .menuRadio2{
+    display: none !important;
+  }
   .cookies{
     width: 300px !important;
     height: 470px !important;

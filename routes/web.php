@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
+use App\Mail\Podsumowanie;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -110,6 +111,11 @@ Route::get('/email', function () {
     // Mail::to('olawjs@gmail.com')->send(new WelcomeMail());
     return new WelcomeMail();
 });
+Route::get('/email2', function () {
+    // Mail::to('olawjs@gmail.com')->send(new WelcomeMail());
+    return new Podsumowanie();
+});
+
 
 // test
 
@@ -118,6 +124,7 @@ Route::GET('lesson/{id}', [App\Http\Controllers\LessonController::class, 'showLe
 // Route::GET('lector/{id}', [App\Http\Controllers\LessonController::class, 'showLector'])->name('showLector');
 Route::GET('FixBySession/{id}', [App\Http\Controllers\PaymentController::class, 'FixBySession'])->name('FixBySession');
 Route::GET('lector/{id}', [App\Http\Controllers\Admin\AdministratorController::class, 'showLector'])->name('showLector');
+Route::GET('sendMail', [App\Http\Controllers\Admin\AdministratorController::class, 'sendMail'])->name('sendMail');
 
 // Route::GET('Testhome', [App\Http\Controllers\MainController::class, 'Testhome']);
 Route::get('/', [App\Http\Controllers\MainController::class, 'Testhome']);
