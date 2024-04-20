@@ -131,10 +131,10 @@
         <button class="btn komZam" onClick="CloseLF()">x</button>
     </div>
     <div class="komunikatBody">
-        <div class="komB">
+        <!-- <div class="komB">
             <div style="font-size: 26px" class="KomHead">
             Zapisz się do naszego newslettera, 
-aby             otrzymać <span class="pink">10% zniżki</span> na Twoje pierwsze zajęcia grupowe! Zapisy już ruszyły!</span>
+                aby otrzymać <span class="pink">10% zniżki</span> na Twoje pierwsze zajęcia grupowe! Zapisy już ruszyły!</span>
             </div>
             <div style="font-size: 16px;">
                 Dla subskrybentów przygotowaliśmy także <span class="violet">darmowe porady językowe i priorytetowy dostęp</span> do webinarów!
@@ -144,6 +144,18 @@ aby             otrzymać <span class="pink">10% zniżki</span> na Twoje pierwsz
                 <div class="input-group-append">
                     <button class="btn" style="background-color: #3C0079;border-radius: 0 15px 15px 0; color: white" type="button" onclick="SignInN2()">Zapisz się</button>
                 </div>
+            </div>
+        </div> -->
+        <div class="komB">
+            <div style="font-size: 26px" class="KomHead">
+            Sprawdź jaki tryb nauki będzie dla Ciebie najlepszy. Wypełnij już teraz krótki formularz i <span class="pink">umów się na darmową konsultację </span>
+                <br>z doświadczoną lektorką :)
+            </div>
+            <div style="font-size: 16px;">
+                    Kliknij w przycisk poniżej
+            </div>
+            <div >
+            <a href="/consultation" class="LL-button LL-button-primary" style="width: 100%">Darmowa konsultacja</a>
             </div>
         </div>
        
