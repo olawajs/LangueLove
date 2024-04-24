@@ -13,9 +13,17 @@
         <td style="width: 50%;"><img src="{{ $message->embed(public_path('images/mail/p1.png')) }}" style="width: 100%;"  alt="Panel 1"></td>
         <td style="width: 25%;"></td>
     </tr>
-    <tr style="background-image: url('https://languelove.pl/images/mail/p2.png'); height: 727px">
+    <tr>
         <td style="width: 25%;"></td>
-        <td style="width: 50%;">test 1</td>
+        <td style="background-image: url('https://languelove.pl/images/mail/p2.png'); height:700px; background-repeat: no-repeat; background-size: 100%;" >
+            <table>
+                <tr>
+                    <td>ASFD</td>
+                    <td>XCBB</td>
+                    <td>RYTY</td>
+                </tr>
+            </table>
+        </td>
         <td style="width: 25%;"></td>
     </tr>
  

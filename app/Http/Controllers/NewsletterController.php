@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Newsletter as NW;
 use Auth;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 
 class NewsletterController extends Controller
 {
@@ -73,13 +74,39 @@ class NewsletterController extends Controller
     public function signOff(Request $request){
         $email = $request->email;
         $res = NW::where('email',$email)->delete();
+        $apiKey = 'uxoyxqmxffsx492qr4gshcp997wcqf4j';
+        $url = "https://api.getresponse.com/v3/contacts?query[email]={$email}";
+        
+        $client = new Client([
+            'headers' => [
+                'X-Auth-Token' => "api-key {$apiKey}",
+                'Content-Type' => 'application/json'
+            ]
+        ]);
+        
+        try {
+            $response = $client->request('GET', $url);
+            if ($response->getStatusCode() === 200) {
+                $contactData = json_decode($response->getBody(), true);
+              
+                foreach($contactData as $c){
+                        $t = $c['contactId'];
+                      $url2 = "https://api.getresponse.com/v3/contacts/{$t}";
+                      $response = $client->request('DELETE', $url2);
+                }
+            } else {
+                return response()->json(['error' => 'Error occurred while fetching contact'], $response->getStatusCode());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
         return 1;
     }
     public function signIn(Request $request){
         $code = $this->generateCode();
+        $c = 0;
         $email = $request->email;
         if($doesExist = NW::where('email',$email)->first()) {
-           
         }
         else{
             if($doesExist = Code::where('email',$email)->where('lesson_type',2)->first()) {
@@ -96,9 +123,31 @@ class NewsletterController extends Controller
                     'email' => $email,
                     'code_id' => $code2->id,
                 ]);
+                $c = $code2->id;
                 $mail = $this->sendMail($code,$email); 
             }
-           
+            $newsletter = NW::create([
+                'email' => $email,
+                'code_id' => $c,
+            ]);
+            $campaignId = '5mEk1';
+            $apiKey = 'uxoyxqmxffsx492qr4gshcp997wcqf4j';
+            $url = "https://api.getresponse.com/v3/contacts";
+            
+            $client = new Client([
+                'headers' => [
+                    'X-Auth-Token' => "api-key {$apiKey}",
+                    'Content-Type' => 'application/json'
+                ]
+            ]);
+            $response = $client->request('POST', $url, [
+                'json' => [
+                    'email' => $email,
+                    'campaign' => [
+                        'campaignId' => $campaignId
+                    ]
+                ]
+            ]);
         }
        return 1;
     }
