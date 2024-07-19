@@ -60,7 +60,7 @@ class PaymentController extends Controller
         'lectorId' => $request->lectorId,
         'ileFaktura' => 1,
         'ile' => isset($request->ile) ? $request->ile : 1,
-        'cert' => isset($request->cert) ? 1 : 0,
+        'cert' => $request->cert,
         'zajecia' => 1,
         'cykliczne' => isset($request->cykliczne) ? 1 : 0,
         'priceG' => isset($request->price) ? $request->price : 0,
